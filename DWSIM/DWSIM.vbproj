@@ -3022,6 +3022,8 @@
     <None Include="Resources\box_important_80px.png" />
     <None Include="Resources\box_important_48px.png" />
     <None Include="Resources\birthday_cake_48px.png" />
+    <None Include="Resources\backwards_48px.png" />
+    <None Include="Resources\advance_48px.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />

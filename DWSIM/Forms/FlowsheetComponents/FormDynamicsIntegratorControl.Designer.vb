@@ -33,6 +33,8 @@ Partial Class FormDynamicsIntegratorControl
         Me.btnStop = New System.Windows.Forms.Button()
         Me.btnRun = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnStepBackwards = New System.Windows.Forms.Button()
+        Me.btnStepForward = New System.Windows.Forms.Button()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.btnLiveChart = New System.Windows.Forms.Button()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
@@ -106,6 +108,22 @@ Partial Class FormDynamicsIntegratorControl
         Me.ToolTip1.SetToolTip(Me.btnRun, resources.GetString("btnRun.ToolTip"))
         Me.btnRun.UseVisualStyleBackColor = True
         '
+        'btnStepBackwards
+        '
+        resources.ApplyResources(Me.btnStepBackwards, "btnStepBackwards")
+        Me.btnStepBackwards.BackgroundImage = Global.DWSIM.My.Resources.Resources.backwards_48px
+        Me.btnStepBackwards.Name = "btnStepBackwards"
+        Me.ToolTip1.SetToolTip(Me.btnStepBackwards, resources.GetString("btnStepBackwards.ToolTip"))
+        Me.btnStepBackwards.UseVisualStyleBackColor = True
+        '
+        'btnStepForward
+        '
+        resources.ApplyResources(Me.btnStepForward, "btnStepForward")
+        Me.btnStepForward.BackgroundImage = Global.DWSIM.My.Resources.Resources.advance_48px
+        Me.btnStepForward.Name = "btnStepForward"
+        Me.ToolTip1.SetToolTip(Me.btnStepForward, resources.GetString("btnStepForward.ToolTip"))
+        Me.btnStepForward.UseVisualStyleBackColor = True
+        '
         'ProgressBar1
         '
         resources.ApplyResources(Me.ProgressBar1, "ProgressBar1")
@@ -147,6 +165,8 @@ Partial Class FormDynamicsIntegratorControl
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.btnStepForward)
+        Me.Controls.Add(Me.btnStepBackwards)
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.btnLiveChart)
         Me.Controls.Add(Me.btnRealtime)
@@ -190,4 +210,6 @@ Partial Class FormDynamicsIntegratorControl
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents btnStepBackwards As Button
+    Friend WithEvents btnStepForward As Button
 End Class
