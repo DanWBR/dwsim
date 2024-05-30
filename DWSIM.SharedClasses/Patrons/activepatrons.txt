@@ -8,35 +8,38 @@
 🌟 Alberto Marzi
 🌟 Bernhard Seyfang
 🌟 Bryan Evans
-🌟 Cameron Paul Ward
+🌟 Cameron Ward
 🌟 Casey Houston
 🌟 Christian Hornhofer
 🌟 Domenico Marchese
 🌟 Fernando Lino
+🌟 Gawayne Escalona
 🌟 George Brindle
 🌟 Gerry Agnew
 🌟 Gregory Marks
 🌟 Helena Thogersen
 🌟 Henk Fikkert
 🌟 H-Tec Systems GmbH
-🌟 Izabela Mendes Alves
+🌟 Izabela Alves
 🌟 Javier Fontalvo
 🌟 Jens Greimeier
 🌟 José Marques
 🌟 Justin Parrot
 🌟 Leonard Seed
-🌟 Lorenzo Giuseppe Montani
+🌟 Lorenzo Montani
 🌟 Marcos Guimarães
 🌟 Martin Heiser
 🌟 Michael Papantoniou
 🌟 Michael Saucier
 🌟 Nicholas Canabarro
 🌟 Nicolas Spogis
+🌟 Pablo Jimenez
 🌟 Pawel Zjezdzalka
 🌟 Richard Huntington
 🌟 Roland Berger
 🌟 Ronald J. Dunbar
 🌟 Ronald Visness
+🌟 Rubens Oliveira
 🌟 Ryan Smith
 🌟 Simone Vidille
 🌟 Tech-Rudra
@@ -50,7 +53,7 @@ Andrew Dickson
 Antony Loane
 Bednarz Marc
 Bruce Bishkin
-Carlos Eduardo Pantoja
+Carlos Pantoja
 Christian Jordan
 Christian Pedersen
 CollectiveObjective
@@ -59,8 +62,10 @@ David Whitlock
 Denislav Zdravkov
 Doug Palfreyman
 Eugenio León
+Fabiano Scheufele
 Fernando Almeida
 Frans Le Roux
+Gabriel Álvares
 Gabriel Carvalho
 Guenther Holzer
 Harry Levinson
@@ -74,21 +79,26 @@ Leandro Favaretto
 Les Waymont
 Lewis Estall
 Luca Finardi
+Maša Novaković
 Marcos Silva
 Masahiro Sakai
 Mohan Vaze
 Nathan Schuh
+Peter Nordquist
 Petroconsulting LLC
 Protherm Systems
 Rainer Scheuring
-Renato Corrêa Arrieche
+Rashad Ahmadov
+Renato Arrieche
 Robert Gerard
 Robert Gulotty
 Rupert Easter
 Ryszard Sadowski
-Satinder Singh Virdi
+Satinder Virdi
 Shubham Wankhede
+SP&POS Engenharia
 Tetsuo Fuchino
 Thomas Baur
 Tibor Lányi
+Vladislav Živanović
 Will Flores

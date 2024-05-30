@@ -816,7 +816,7 @@ Public Class EditingForm_Column
             fr2 = New ReportViewer()
             fr2.HideOnClose = True
         End If
-        fr2.TextBox1.Text = SimObject.ColumnSolverConvergenceReport
+        fr2.TextBox1.Text = SimObject.ColumnSolverConvergenceReport.Replace(vbCr, vbCrLf).Replace(vbLf, vbCrLf)
         fr2.Text = SimObject.GraphicObject.Tag + ": Convergence Report"
         fr2.TabText = SimObject.GraphicObject.Tag + ": Convergence Report"
         fr2.TextBox1.DeselectAll()
@@ -834,7 +834,7 @@ Public Class EditingForm_Column
             fr = New ReportViewer()
             fr.HideOnClose = True
         End If
-        fr.TextBox1.Text = SimObject.ColumnPropertiesProfile
+        fr.TextBox1.Text = SimObject.ColumnPropertiesProfile.Replace(vbCr, vbCrLf).Replace(vbLf, vbCrLf)
         fr.Text = SimObject.GraphicObject.Tag + ": Properties Profile"
         fr.TabText = SimObject.GraphicObject.Tag + ": Properties Profile"
         fr.TextBox1.DeselectAll()

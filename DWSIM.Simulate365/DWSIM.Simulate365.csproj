@@ -137,6 +137,7 @@
     <Compile Include="MsGraphUserProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\FileDownloadService.cs" />
     <Compile Include="Services\FileManagementService.cs" />
     <Compile Include="Services\FilePickerService.cs" />
     <Compile Include="Services\FileUploaderService.cs" />
