@@ -7,6 +7,8 @@ Public Class FormConfigurePropertyTable
 
     Private loaded As Boolean = False
 
+    Private MasterList As New List(Of ListViewItem)
+
     Private Sub FormSelectProperties_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
@@ -26,8 +28,9 @@ Public Class FormConfigurePropertyTable
     End Sub
 
     Private Sub lvObjects_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles lvObjects.ItemSelectionChanged
+
         If e.IsSelected Then
-            lvProps.Items.Clear()
+            MasterList.Clear()
             For Each item In Table.Flowsheet.SimulationObjects(e.Item.Tag).GetProperties(PropertyType.ALL)
                 Dim lvi = New ListViewItem(Table.Flowsheet.GetTranslatedString(item))
                 lvi.Tag = item
@@ -36,9 +39,12 @@ Public Class FormConfigurePropertyTable
                         lvi.Checked = True
                     End If
                 End If
-                lvProps.Items.Add(lvi)
+                MasterList.Add(lvi)
             Next
         End If
+
+        FilterList("")
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
@@ -98,6 +104,26 @@ Public Class FormConfigurePropertyTable
         ColumnHeader1.Width = lvObjects.Width - 15
         ColumnHeader2.Width = lvProps.Width - 15
         FormMain.TranslateFormFunction?.Invoke(Me)
+
+    End Sub
+
+    Private Sub tbSearch_TextChanged(sender As Object, e As EventArgs) Handles tbSearch.TextChanged
+
+        FilterList(tbSearch.Text)
+
+    End Sub
+
+    Public Sub FilterList(searchterms As String)
+
+        lvProps.Items.Clear()
+
+        For Each item In MasterList.Where(Function(lvi)
+                                              Dim words = lvi.Text.ToLower().Trim().Split(" ").ToList()
+                                              Dim terms = searchterms.ToLower().Trim().Split(" ").ToList()
+                                              Return terms.All(Function(w) lvi.Text.ToLower().Contains(w))
+                                          End Function)
+            lvProps.Items.Add(item)
+        Next
 
     End Sub
 

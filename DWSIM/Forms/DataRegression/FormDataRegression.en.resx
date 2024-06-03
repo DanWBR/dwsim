@@ -122,7 +122,7 @@
     <value>791, 499</value>
   </data>
   <data name="graph2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>609, 517</value>
+    <value>791, 499</value>
   </data>
   <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 22</value>
@@ -170,7 +170,7 @@
     <value>222, 158</value>
   </data>
   <data name="gridstats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>609, 517</value>
+    <value>791, 499</value>
   </data>
   <data name="tbRegResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>551, 107</value>
@@ -395,10 +395,10 @@
     <value>797, 505</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 523</value>
+    <value>797, 505</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 523</value>
+    <value>797, 505</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Data</value>
@@ -1849,10 +1849,6 @@
         AAAAAAAAAAAAAAAAAAD8PzV78A8AAMADAACAAcADgAGAAQAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAIAB
         AACAAYABwAOAAeAHwAP4HwAE
 </value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Data Regression</value>

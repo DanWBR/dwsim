@@ -47,6 +47,8 @@ Partial Class FormConfigureMasterTable
         Me.Button6 = New System.Windows.Forms.Button()
         Me.nupFS = New System.Windows.Forms.NumericUpDown()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.tbSearch = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         CType(Me.nupLines, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nupFS, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -58,9 +60,9 @@ Partial Class FormConfigureMasterTable
         '
         'cbObjectType
         '
-        resources.ApplyResources(Me.cbObjectType, "cbObjectType")
         Me.cbObjectType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbObjectType.FormattingEnabled = True
+        resources.ApplyResources(Me.cbObjectType, "cbObjectType")
         Me.cbObjectType.Name = "cbObjectType"
         '
         'Label2
@@ -70,11 +72,11 @@ Partial Class FormConfigureMasterTable
         '
         'lvProps
         '
-        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.CheckBoxes = True
         Me.lvProps.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
         Me.lvProps.FullRowSelect = True
         Me.lvProps.HideSelection = False
+        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.Name = "lvProps"
         Me.lvProps.UseCompatibleStateImageBehavior = False
         Me.lvProps.View = System.Windows.Forms.View.Details
@@ -90,18 +92,18 @@ Partial Class FormConfigureMasterTable
         '
         'cbOrderBy
         '
-        resources.ApplyResources(Me.cbOrderBy, "cbOrderBy")
         Me.cbOrderBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOrderBy.FormattingEnabled = True
+        resources.ApplyResources(Me.cbOrderBy, "cbOrderBy")
         Me.cbOrderBy.Name = "cbOrderBy"
         '
         'lvObjects
         '
-        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.CheckBoxes = True
         Me.lvObjects.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
         Me.lvObjects.FullRowSelect = True
         Me.lvObjects.HideSelection = False
+        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.MultiSelect = False
         Me.lvObjects.Name = "lvObjects"
         Me.lvObjects.ShowGroups = False
@@ -201,10 +203,22 @@ Partial Class FormConfigureMasterTable
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
         '
+        'tbSearch
+        '
+        resources.ApplyResources(Me.tbSearch, "tbSearch")
+        Me.tbSearch.Name = "tbSearch"
+        '
+        'Label7
+        '
+        resources.ApplyResources(Me.Label7, "Label7")
+        Me.Label7.Name = "Label7"
+        '
         'FormConfigureMasterTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.tbSearch)
+        Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.nupFS)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Button6)
@@ -259,4 +273,6 @@ Partial Class FormConfigureMasterTable
     Friend WithEvents Button6 As Button
     Friend WithEvents nupFS As NumericUpDown
     Friend WithEvents Label6 As Label
+    Friend WithEvents tbSearch As TextBox
+    Friend WithEvents Label7 As Label
 End Class
