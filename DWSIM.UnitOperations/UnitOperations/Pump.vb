@@ -270,7 +270,7 @@ Namespace UnitOperations
 
         Public Property HeatDuty As Double
             Get
-                Return DeltaQ
+                Return DeltaQ.GetValueOrDefault()
             End Get
             Set(value As Double)
                 DeltaQ = value
@@ -279,7 +279,7 @@ Namespace UnitOperations
 
         Public Property PressureIncrease As Double
             Get
-                Return DeltaP
+                Return DeltaP.GetValueOrDefault()
             End Get
             Set(value As Double)
                 DeltaP = value
@@ -288,7 +288,7 @@ Namespace UnitOperations
 
         Public Property TemperatureChange As Double
             Get
-                Return DeltaT
+                Return DeltaT.GetValueOrDefault()
             End Get
             Set(value As Double)
                 DeltaT = value

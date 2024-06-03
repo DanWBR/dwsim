@@ -542,6 +542,8 @@ Public Class FlowsheetSurface_SkiaSharp
             End If
         Next
 
+        Flowsheet.UpdateObjectListPanel()
+
     End Sub
 
     Public Function CloneObject(gobj As GraphicObject) As GraphicObject
@@ -2689,6 +2691,8 @@ Public Class FlowsheetSurface_SkiaSharp
             Catch ex As Exception
             End Try
         End If
+
+        Flowsheet.UpdateObjectListPanel()
 
         Return gObj.Name
 
