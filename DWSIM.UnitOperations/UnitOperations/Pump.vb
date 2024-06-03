@@ -237,6 +237,64 @@ Namespace UnitOperations
 
         Public Property PumpCurveSet As New PumpOps.CurveSet
 
+        'proxy properties
+
+        Public Overrides Function GetCalculationModes() As String()
+
+            Dim modes As New List(Of String)
+
+            For Each tstEnum As CalculationMode In System.Enum.GetValues(GetType(CalculationMode))
+                modes.Add(String.Format("Name: {0}  Value: {1}", tstEnum.ToString, CInt(tstEnum).ToString()))
+            Next
+
+            Return modes.ToArray()
+
+        End Function
+
+        Public Overrides Function SetCalculationMode(modeID As Integer) As Object
+
+            Me.CalcMode = modeID
+
+            Return CalcMode.ToString()
+
+        End Function
+
+        Public Property Efficiency As Double
+            Get
+                Return Eficiencia.GetValueOrDefault()
+            End Get
+            Set(value As Double)
+                Eficiencia = value
+            End Set
+        End Property
+
+        Public Property HeatDuty As Double
+            Get
+                Return DeltaQ
+            End Get
+            Set(value As Double)
+                DeltaQ = value
+            End Set
+        End Property
+
+        Public Property PressureIncrease As Double
+            Get
+                Return DeltaP
+            End Get
+            Set(value As Double)
+                DeltaP = value
+            End Set
+        End Property
+
+        Public Property TemperatureChange As Double
+            Get
+                Return DeltaT
+            End Get
+            Set(value As Double)
+                DeltaT = value
+            End Set
+        End Property
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New Pump()
             obj.LoadData(Me.SaveData)

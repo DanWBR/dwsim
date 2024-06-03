@@ -54,6 +54,18 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overridable Function SetCalculationMode(modeID As Integer)
+
+            Return "Calculation Mode change through this function not supported by this Unit Operation"
+
+        End Function
+
+        Public Overridable Function GetCalculationModes() As String()
+
+            Return New String() {"Getting Calculation Modes through this function not supported by this Unit Operation"}
+
+        End Function
+
         Public Overrides Sub CheckDirtyStatus()
 
             If LastSolutionInputSnapshot <> "" Then
