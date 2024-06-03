@@ -11,7 +11,7 @@ Public Class KDBParser
 
         Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
-        Dim website As String = "http://www.cheric.org/research/kdb/hcprop/listcmp.php?componentsearch=" + HttpUtility.UrlEncode(searchstring)
+        Dim website As String = "https://www.cheric.org/research/kdb/hcprop/listcmp.php?componentsearch=" + HttpUtility.UrlEncode(searchstring)
 
         Dim siteUri As Uri = New Uri(website)
         Dim proxyUri As Uri = Net.WebRequest.GetSystemWebProxy.GetProxy(siteUri)

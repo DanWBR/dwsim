@@ -2532,7 +2532,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                     .Symbol.Size = 5
                                 Case 3
                                     .Line.IsVisible = True
-                                    .Line.IsSmooth = True
+                                    .Line.IsSmooth = False
                                     .Color = Color.Red
                                     .Symbol.IsVisible = False
                                 Case 4
@@ -2593,7 +2593,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                     .Symbol.Size = 5
                                 Case 3
                                     .Line.IsVisible = True
-                                    .Line.IsSmooth = True
+                                    .Line.IsSmooth = False
                                     .Color = Color.Red
                                     .Symbol.IsVisible = False
                                 Case 4

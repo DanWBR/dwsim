@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 158</value>
+  <data name="graph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>791, 499</value>
   </data>
-  <data name="gridstats.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="graph2.Size" type="System.Drawing.Size, System.Drawing">
     <value>609, 517</value>
   </data>
   <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
@@ -166,26 +166,29 @@
   <data name="ToolStripMenuItem7.Text" xml:space="preserve">
     <value>Generate Points (PRSV2-VL)</value>
   </data>
+  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 158</value>
+  </data>
+  <data name="gridstats.Size" type="System.Drawing.Size, System.Drawing">
+    <value>609, 517</value>
+  </data>
+  <data name="tbRegResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>551, 107</value>
+  </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>494, 611</value>
+    <value>6, 540</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 126</value>
+    <value>557, 126</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Regression Results</value>
-  </data>
-  <data name="tbRegResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>374, 107</value>
   </data>
   <data name="btnDoReg.Location" type="System.Drawing.Point, System.Drawing">
     <value>135, 621</value>
   </data>
   <data name="btnDoReg.Text" xml:space="preserve">
     <value>Run Regression</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Regression Information</value>
   </data>
   <data name="btnTransfere.Text" xml:space="preserve">
     <value>-&gt; Initial Parameters</value>
@@ -340,8 +343,8 @@
   <data name="LabelWithDivider2.Text" xml:space="preserve">
     <value>Experimental Data</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Information</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Regression Information</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -355,8 +358,20 @@
   <data name="Label10.Text" xml:space="preserve">
     <value>Title</value>
   </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="tbParam.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 84</value>
+  </data>
+  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 100</value>
+  </data>
+  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 23</value>
+  </data>
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>880, 611</value>
+    <value>569, 540</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 126</value>
@@ -364,8 +379,11 @@
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Latest Parameters</value>
   </data>
-  <data name="tbParam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 107</value>
+  <data name="SalvarEmBancoDeDadosXMLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 22</value>
+  </data>
+  <data name="SalvarEmBancoDeDadosXMLToolStripMenuItem.Text" xml:space="preserve">
+    <value>Save/Add to XML Database</value>
   </data>
   <data name="ParâmetrosDeInteraçãoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 20</value>
@@ -373,20 +391,11 @@
   <data name="ParâmetrosDeInteraçãoToolStripMenuItem.Text" xml:space="preserve">
     <value>Interaction Parameters</value>
   </data>
-  <data name="SalvarEmBancoDeDadosXMLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 22</value>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>797, 505</value>
   </data>
-  <data name="SalvarEmBancoDeDadosXMLToolStripMenuItem.Text" xml:space="preserve">
-    <value>Save/Add to XML Database</value>
-  </data>
-  <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>XML Files|*xml</value>
-  </data>
-  <data name="SaveFileDialog1.Title" xml:space="preserve">
-    <value>Save/Add Interaction Parameter Set to XML Database</value>
-  </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>623, 549</value>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>615, 523</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
     <value>615, 523</value>
@@ -394,8 +403,8 @@
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Data</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>805, 531</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1840,6 +1849,10 @@
         AAAAAAAAAAAAAAAAAAD8PzV78A8AAMADAACAAcADgAGAAQAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAIAB
         AACAAYABwAOAAeAHwAP4HwAE
 </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Data Regression</value>
