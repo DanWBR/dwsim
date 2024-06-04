@@ -34,15 +34,17 @@ Partial Class FormConfigurePropertyTable
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbSearch = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'lvProps
         '
+        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.CheckBoxes = True
         Me.lvProps.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
         Me.lvProps.FullRowSelect = True
         Me.lvProps.HideSelection = False
-        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.Name = "lvProps"
         Me.lvProps.UseCompatibleStateImageBehavior = False
         Me.lvProps.View = System.Windows.Forms.View.Details
@@ -53,10 +55,10 @@ Partial Class FormConfigurePropertyTable
         '
         'lvObjects
         '
+        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
         Me.lvObjects.FullRowSelect = True
         Me.lvObjects.HideSelection = False
-        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.MultiSelect = False
         Me.lvObjects.Name = "lvObjects"
         Me.lvObjects.ShowGroups = False
@@ -106,10 +108,25 @@ Partial Class FormConfigurePropertyTable
         resources.ApplyResources(Me.tbSearch, "tbSearch")
         Me.tbSearch.Name = "tbSearch"
         '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
+        '
+        'ComboBox1
+        '
+        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {resources.GetString("ComboBox1.Items"), resources.GetString("ComboBox1.Items1"), resources.GetString("ComboBox1.Items2"), resources.GetString("ComboBox1.Items3"), resources.GetString("ComboBox1.Items4")})
+        Me.ComboBox1.Name = "ComboBox1"
+        '
         'FormConfigurePropertyTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.tbSearch)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button3)
@@ -136,4 +153,6 @@ Partial Class FormConfigurePropertyTable
     Friend WithEvents Button3 As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents tbSearch As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents ComboBox1 As ComboBox
 End Class

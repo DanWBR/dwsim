@@ -152,8 +152,8 @@
   <data name="Button3.Text" xml:space="preserve">
     <value>Clear Selection</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 360</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure Property Table</value>

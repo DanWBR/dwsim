@@ -23,6 +23,8 @@ Public Class FormConfigurePropertyTable
         lvObjects.Sorting = SortOrder.Ascending
         lvObjects.Sort()
 
+        ComboBox1.SelectedIndex = Table.SortingMode
+
         loaded = True
 
     End Sub
@@ -53,20 +55,23 @@ Public Class FormConfigurePropertyTable
 
     Private Sub lvProps_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles lvProps.ItemChecked
 
-        If loaded Then
-            If Not Table.VisibleProperties.ContainsKey(lvObjects.SelectedItems(0).Tag) Then
-                Table.VisibleProperties.Add(lvObjects.SelectedItems(0).Tag, New List(Of String))
-            End If
+        If loaded And lvObjects.SelectedItems.Count > 0 Then
+            Try
+                If Not Table.VisibleProperties.ContainsKey(lvObjects.SelectedItems(0).Tag) Then
+                    Table.VisibleProperties.Add(lvObjects.SelectedItems(0).Tag, New List(Of String))
+                End If
+                If e.Item.Checked Then
+                    If Not Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Contains(e.Item.Tag) Then
+                        Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Add(e.Item.Tag)
+                    End If
+                Else
+                    If Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Contains(e.Item.Tag) Then
+                        Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Remove(e.Item.Tag)
+                    End If
+                End If
+            Catch ex As Exception
 
-            If e.Item.Checked Then
-                If Not Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Contains(e.Item.Tag) Then
-                    Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Add(e.Item.Tag)
-                End If
-            Else
-                If Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Contains(e.Item.Tag) Then
-                    Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Remove(e.Item.Tag)
-                End If
-            End If
+            End Try
         End If
 
     End Sub
@@ -127,4 +132,7 @@ Public Class FormConfigurePropertyTable
 
     End Sub
 
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        Table.SortingMode = ComboBox1.SelectedIndex
+    End Sub
 End Class
