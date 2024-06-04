@@ -17,14 +17,9 @@ Public Class FormObjectList
         Next
 
         OutlookGrid1.GroupTemplate.Column = OutlookGrid1.Columns(2)
+        OutlookGrid1.GroupTemplate.Height = 30 * Settings.DpiScale
 
         OutlookGrid1.Sort(OutlookGrid1.Columns(2), ComponentModel.ListSortDirection.Ascending)
-
-    End Sub
-
-    Private Sub FormObjectList_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
-        UpdateData()
 
     End Sub
 
@@ -71,4 +66,48 @@ Public Class FormObjectList
             End Try
         End If
     End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+
+        Dim ogc1 = OutlookGrid1
+
+        ogc1.SuspendLayout()
+
+        Try
+
+            ogc1.ClearSelection()
+
+            If TextBox1.Text = "" Then
+                For Each r As DataGridViewRow In ogc1.Rows
+                    r.Selected = False
+                    r.Visible = True
+                Next
+                ogc1.FirstDisplayedScrollingRowIndex = 0
+            Else
+                For Each r As DataGridViewRow In ogc1.Rows
+                    If Not r.Cells(1).Value Is Nothing Then
+                        If r.Cells(1).Value.ToString.ToLower.Contains(TextBox1.Text.ToLower) Then
+                            r.Visible = True
+                            If r.Cells(1).Value.ToString.ToLower.Equals(TextBox1.Text.ToLower) Then
+                                r.Selected = True
+                            End If
+                        Else
+                            r.Visible = False
+                        End If
+                    End If
+                Next
+                If ogc1.SelectedRows.Count > 0 Then
+                    ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
+                End If
+            End If
+
+        Catch ex As Exception
+
+        End Try
+
+        ogc1.ResumeLayout()
+        ogc1.ExpandAll()
+
+    End Sub
+
 End Class

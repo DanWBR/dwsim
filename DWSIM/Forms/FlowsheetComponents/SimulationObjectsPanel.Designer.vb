@@ -58,8 +58,13 @@ Partial Class SimulationObjectsPanel
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -330,12 +335,33 @@ Partial Class SimulationObjectsPanel
         Me.Label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Label1.Name = "Label1"
         '
+        'TabControl1
+        '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        '
+        'TabPage1
+        '
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.BackColor = System.Drawing.Color.White
+        Me.TabPage1.Controls.Add(Me.TableLayoutPanel1)
+        Me.TabPage1.Name = "TabPage1"
+        '
+        'TabPage2
+        '
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.BackColor = System.Drawing.Color.White
+        Me.TabPage2.Name = "TabPage2"
+        '
         'SimulationObjectsPanel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.White
-        Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Panel1)
         Me.DoubleBuffered = True
         Me.Name = "SimulationObjectsPanel"
@@ -343,8 +369,10 @@ Partial Class SimulationObjectsPanel
         Me.TableLayoutPanel1.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
@@ -381,4 +409,7 @@ Partial Class SimulationObjectsPanel
     Friend WithEvents Panel1 As Panel
     Public WithEvents Button1 As Button
     Friend WithEvents Label1 As Label
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
 End Class

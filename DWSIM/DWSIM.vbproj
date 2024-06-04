@@ -657,7 +657,7 @@
       <DependentUpon>FormObjectList.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FlowsheetComponents\FormObjectList.vb">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\FlowsheetComponents\SimulationObjectsPanel.Designer.vb">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
