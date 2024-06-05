@@ -2566,9 +2566,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         'azeotrope
                         T = Flash_PV_Azeotrope_Temperature(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                         If V = 0 Then
-                            Vy = Vx.Clone
+                            Vy = Vx.Clone()
                         Else
-                            Vx = Vy.Clone
+                            Vx = Vy.Clone()
                         End If
                         Exit Do
                     Else
@@ -2584,7 +2584,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                             Dim bmin As New Brent
 
-                            Dim interp = MathNet.Numerics.Interpolate.Linear(xvals.ToArray(), fvals.ToArray())
+                            Dim interp = Interpolate.CubicSpline(xvals.ToArray(), fvals.ToArray())
 
                             T = bmin.BrentOpt2(xvals.Min, xvals.Max, 500, 0.01, 100,
                                             Function(tval)
@@ -3041,7 +3041,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             CalculatingAzeotrope = True
 
             For Each item In dx
-                If Math.Abs(item - xaz) > 0.01 Then
+                If Math.Abs(xaz - item) > 0.05 Then
                     Try
                         T.Add(Flash_PV(New Double() {item, 1 - item}, P, V, T0, PP, ReuseKI, PrevKi)(4))
                         T0 = T.Last
