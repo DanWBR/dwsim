@@ -2263,7 +2263,10 @@ Namespace UnitOperations
 
         Public Sub SetInitialTemperatureEstimates(values As Double())
 
+            If values.Count <> NumberOfStages Then Throw New Exception(String.Format("value vector needs to have {0} elements", NumberOfStages))
+
             UseTemperatureEstimates = True
+            InitialEstimates.StageTemps.Clear()
             For Each v In values
                 InitialEstimates.StageTemps.Add(New Parameter() With {.Value = v, .ParamType = Parameter.ParameterType.Fixed})
             Next
@@ -2272,7 +2275,10 @@ Namespace UnitOperations
 
         Public Sub SetInitialLiquidMolarFlowEstimates(values As Double())
 
+            If values.Count <> NumberOfStages Then Throw New Exception(String.Format("value vector needs to have {0} elements", NumberOfStages))
+
             UseLiquidFlowEstimates = True
+            InitialEstimates.LiqMolarFlows.Clear()
             For Each v In values
                 InitialEstimates.LiqMolarFlows.Add(New Parameter() With {.Value = v, .ParamType = Parameter.ParameterType.Fixed})
             Next
@@ -2281,7 +2287,10 @@ Namespace UnitOperations
 
         Public Sub SetInitialVaporMolarFlowEstimates(values As Double())
 
+            If values.Count <> NumberOfStages Then Throw New Exception(String.Format("value vector needs to have {0} elements", NumberOfStages))
+
             UseVaporFlowEstimates = True
+            InitialEstimates.VapMolarFlows.Clear()
             For Each v In values
                 InitialEstimates.VapMolarFlows.Add(New Parameter() With {.Value = v, .ParamType = Parameter.ParameterType.Fixed})
             Next
@@ -2289,6 +2298,11 @@ Namespace UnitOperations
         End Sub
 
         Public Sub SetInitialMolarCompositionEstimates(liqmolarfracs As Double()(), vapmolarfracs As Double()())
+
+            If liqmolarfracs.Count <> NumberOfStages Then Throw New Exception(String.Format("liquid molar fraction value vectors needs to have {0} elements", NumberOfStages))
+            If liqmolarfracs(0).Count <> FlowSheet.SelectedCompounds.Count Then Throw New Exception(String.Format("liquid composition vectors needs to have {0} elements", FlowSheet.SelectedCompounds.Count))
+            If vapmolarfracs.Count <> NumberOfStages Then Throw New Exception(String.Format("vapor molar fraction value vectors needs to have {0} elements", NumberOfStages))
+            If vapmolarfracs(0).Count <> FlowSheet.SelectedCompounds.Count Then Throw New Exception(String.Format("vapor composition vectors needs to have {0} elements", FlowSheet.SelectedCompounds.Count))
 
             UseCompositionEstimates = True
             For i = 0 To liqmolarfracs.Count - 1
