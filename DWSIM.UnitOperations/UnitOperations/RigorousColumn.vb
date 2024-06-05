@@ -2255,6 +2255,61 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Sub ResetInitialEstimates()
+
+            InitialEstimates = New InitialEstimates()
+
+        End Sub
+
+        Public Sub SetInitialTemperatureEstimates(values As Double())
+
+            UseTemperatureEstimates = True
+            For Each v In values
+                InitialEstimates.StageTemps.Add(New Parameter() With {.Value = v, .ParamType = Parameter.ParameterType.Fixed})
+            Next
+
+        End Sub
+
+        Public Sub SetInitialLiquidMolarFlowEstimates(values As Double())
+
+            UseLiquidFlowEstimates = True
+            For Each v In values
+                InitialEstimates.LiqMolarFlows.Add(New Parameter() With {.Value = v, .ParamType = Parameter.ParameterType.Fixed})
+            Next
+
+        End Sub
+
+        Public Sub SetInitialVaporMolarFlowEstimates(values As Double())
+
+            UseVaporFlowEstimates = True
+            For Each v In values
+                InitialEstimates.VapMolarFlows.Add(New Parameter() With {.Value = v, .ParamType = Parameter.ParameterType.Fixed})
+            Next
+
+        End Sub
+
+        Public Sub SetInitialMolarCompositionEstimates(liqmolarfracs As Double()(), vapmolarfracs As Double()())
+
+            UseCompositionEstimates = True
+            For i = 0 To liqmolarfracs.Count - 1
+                Dim d As New Dictionary(Of String, Parameter)
+                Dim j = 0
+                For Each cp As BaseClasses.ConstantProperties In FlowSheet.SelectedCompounds.Values
+                    d.Add(cp.Name, New Parameter With {.Value = liqmolarfracs(i)(j)})
+                    j += 1
+                Next
+                InitialEstimates.LiqCompositions.Add(d)
+                Dim d2 As New Dictionary(Of String, Parameter)
+                j = 0
+                For Each cp As BaseClasses.ConstantProperties In FlowSheet.SelectedCompounds.Values
+                    d2.Add(cp.Name, New Parameter With {.Value = vapmolarfracs(i)(j)})
+                    j += 1
+                Next
+                InitialEstimates.VapCompositions.Add(d2)
+            Next
+
+        End Sub
+
         Public Function RebuildEstimates() As InitialEstimates
 
             Dim iest As New InitialEstimates
