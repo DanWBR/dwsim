@@ -4852,10 +4852,8 @@ Label_00CC:
 
         RaiseEvent ToolOpened("View General Settings", New EventArgs())
 
-        If Settings.DpiScale > 1.0 Then
-            Me.SettingsPanel.Width = 500 * Settings.DpiScale
-        End If
-        Me.SettingsPanel.Visible = True
+        SettingsPanel.Width = 500 * Settings.DpiScale
+        SettingsPanel.Visible = True
 
     End Sub
 
