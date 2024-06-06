@@ -27,6 +27,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public SimObjPanel As SimulationObjectsPanel
 
+    Public FormObjects As New FormObjectList
+
     Public FlowsheetSurface As Drawing.SkiaSharp.GraphicsSurface
 
     Public FControl As FlowsheetSurfaceControl
@@ -136,6 +138,10 @@ Public Class FlowsheetSurface_SkiaSharp
                     SimObjPanel.Label1.Visible = True
                 End If
             End Sub
+
+        FormObjects.Dock = DockStyle.Fill
+
+        SimObjPanel.TabControl1.TabPages(1).Controls.Add(FormObjects)
 
         SplitContainerVertical.Panel2.Controls.Add(SimObjPanel)
 
@@ -3421,6 +3427,9 @@ Public Class FlowsheetSurface_SkiaSharp
         TSTBZoom.Text = Format(Flowsheet.FormSurface.FlowsheetSurface.Zoom, "#%")
 
         SplitContainerVertical.SplitterDistance = SplitContainerVertical.Width - 350 * Settings.DpiScale
+
+        FormObjects.Flowsheet = Flowsheet
+        FormObjects.UpdateData()
 
         FormMain.TranslateFormFunction?.Invoke(Me)
 

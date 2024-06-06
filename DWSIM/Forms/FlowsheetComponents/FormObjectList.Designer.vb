@@ -1,7 +1,7 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class FormObjectList
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits UserControl
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -138,19 +138,12 @@ Partial Class FormObjectList
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(430, 588)
-        Me.CloseButton = False
-        Me.CloseButtonVisible = False
         Me.Controls.Add(Me.OutlookGrid1)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label1)
-        Me.DockAreas = CType(((WeifenLuo.WinFormsUI.Docking.DockAreas.Float Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft) _
-            Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight), WeifenLuo.WinFormsUI.Docking.DockAreas)
         Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormObjectList"
-        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
-        Me.TabText = "Object List"
         Me.Text = "Object List"
         CType(Me.OutlookGrid1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

@@ -2792,8 +2792,6 @@ Public Class FormMain
 
             form.FormFilesExplorer.Flowsheet = form
 
-            form.FormObjects.Flowsheet = form
-
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -2809,7 +2807,6 @@ Public Class FormMain
             form.FormCharts.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
             form.FormScript1.DockPanel = Nothing
-            form.FormObjects.DockPanel = Nothing
 
             If Not DWSIM.App.IsRunningOnMono Then
                 If Not My.Computer.Keyboard.ShiftKeyDown Then
@@ -2841,7 +2838,6 @@ Public Class FormMain
                 form.FormDynamics?.Show(form.dckPanel)
                 form.FormFilesExplorer?.Show(form.dckPanel)
                 form.FormScript1?.Show(form.dckPanel)
-                form.FormObjects?.Show(form.dckPanel)
 #If LINUX = False Then
                 'form.FormIPyConsole?.Show(form.dckPanel)
 #End If
@@ -3379,8 +3375,6 @@ Public Class FormMain
 
             form.FormFilesExplorer.Flowsheet = form
 
-            form.FormObjects.Flowsheet = form
-
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -3396,7 +3390,6 @@ Public Class FormMain
             form.FormDynamics.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
             form.FormScript1.DockPanel = Nothing
-            form.FormObjects.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
                 Dim myfile As String = SharedClasses.Utility.GetTempFileName()
@@ -3423,7 +3416,6 @@ Public Class FormMain
                 form.FormFilesExplorer.Show(form.dckPanel)
                 'form.FormIPyConsole.Show(form.dckPanel)
                 form.FormScript1.Show(form.dckPanel)
-                form.FormObjects.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
             Catch ex As Exception

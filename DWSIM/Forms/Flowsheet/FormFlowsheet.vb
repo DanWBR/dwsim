@@ -95,7 +95,6 @@ Public Class FormFlowsheet
     Public FormIntegratorControls As New FormDynamicsIntegratorControl
     Public FormFilesExplorer As New FormFileExplorer
     'Public FormIPyConsole As New FormInteractiveIronPythonConsole
-    Public FormObjects As New FormObjectList
 
     Public FormScript1 As New FormScript
 
@@ -249,7 +248,6 @@ Public Class FormFlowsheet
         'FormIPyConsole.Flowsheet = Me
         FormWatch.Flowsheet = Me
         FormScript1.fc = Me
-        FormObjects.Flowsheet = Me
 
         Me.COObjTSMI.Checked = Me.Options.FlowsheetShowCOReportsWindow
         Me.varpaneltsmi.Checked = Me.Options.FlowsheetShowWatchWindow
@@ -339,7 +337,6 @@ Public Class FormFlowsheet
             FormFilesExplorer.DockPanel = Nothing
             'FormIPyConsole.DockPanel = Nothing
             FormScript1.DockPanel = Nothing
-            FormObjects.DockPanel = Nothing
 
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
             dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
@@ -354,7 +351,6 @@ Public Class FormFlowsheet
             FormCharts.Show(FormSurface.Pane, Nothing)
             FormFilesExplorer.Show(dckPanel)
             FormScript1.Show(FormSurface.Pane, Nothing)
-            FormObjects.Show(dckPanel)
 
             FormSurface.Activate()
 
@@ -5733,7 +5729,7 @@ Public Class FormFlowsheet
 
     Public Sub UpdateObjectListPanel()
 
-        FormObjects.UpdateData()
+        FormSurface.FormObjects.UpdateData()
 
     End Sub
 
