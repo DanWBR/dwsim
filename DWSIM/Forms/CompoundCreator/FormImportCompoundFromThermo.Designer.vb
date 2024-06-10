@@ -41,13 +41,13 @@ Partial Class FormImportCompoundFromThermo
         Me.tbQueryMatch = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.WizardPage4 = New AeroWizard.WizardPage()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.tbImportAs = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.dgResults = New System.Windows.Forms.DataGridView()
         Me.Column2 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.WizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -257,6 +257,16 @@ Partial Class FormImportCompoundFromThermo
         Me.WizardPage4.TabIndex = 3
         Me.WizardPage4.Text = "Review Collected Data and Import Compound"
         '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.Location = New System.Drawing.Point(578, 317)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(109, 23)
+        Me.Button1.TabIndex = 10
+        Me.Button1.Text = "Export to JSON"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'tbImportAs
         '
         Me.tbImportAs.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
@@ -318,15 +328,6 @@ Partial Class FormImportCompoundFromThermo
         Me.Label6.Size = New System.Drawing.Size(677, 74)
         Me.Label6.TabIndex = 4
         Me.Label6.Text = resources.GetString("Label6.Text")
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(578, 317)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(109, 23)
-        Me.Button1.TabIndex = 10
-        Me.Button1.Text = "Export to JSON"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'FormImportCompoundFromThermo
         '

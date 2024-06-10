@@ -77,7 +77,9 @@ Public Class FormImportCompoundDataChemeo
                                                         btnNext.Enabled = False
                                                     End If
                                                 Else
-                                                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundOnlineSourceError"), DWSIM.App.GetLocalString("Erro"))
+                                                    MessageBox.Show(String.Format("{0} [{1}]", DWSIM.App.GetLocalString("CompoundOnlineSourceError"),
+                                                                    ExceptionProcessing.ExceptionParser.GetFirstException(t.Exception).Message,
+                                                                    DWSIM.App.GetLocalString("Erro")))
                                                 End If
                                             End Sub)
                                End Sub)
@@ -126,7 +128,9 @@ Public Class FormImportCompoundDataChemeo
                                                     compound = t.Result
                                                     AddPropertiesToGrid()
                                                 Else
-                                                    MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
+                                                    MessageBox.Show(String.Format("{0} [{1}]", DWSIM.App.GetLocalString("CompoundOnlineSourceError"),
+                                                        ExceptionProcessing.ExceptionParser.GetFirstException(t.Exception).Message,
+                                                        DWSIM.App.GetLocalString("Erro")))
                                                 End If
 
                                             End Sub)

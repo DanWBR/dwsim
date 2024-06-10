@@ -846,7 +846,6 @@ Partial Class FormSimulWizard
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ControlBox = False
         Me.Controls.Add(Me.StepWizardControl1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormSimulWizard"

@@ -28,6 +28,8 @@ Public Class FormImportCompoundFromThermo
 
         Try
 
+            compdata = Nothing
+
             Dim result = searcher.SearchCompound(searchtext)
 
             tbQueryMatch.Text = result(0)
@@ -54,10 +56,10 @@ Public Class FormImportCompoundFromThermo
 
             If compdata IsNot Nothing Then
 
-                Try
-                    DDBStructureParser.GetData(DDBStructureParser.GetID(compdata.CAS_Number))
-                Catch ex As Exception
-                End Try
+                'Try
+                '    DDBStructureParser.GetData(DDBStructureParser.GetID(compdata.CAS_Number))
+                'Catch ex As Exception
+                'End Try
 
                 AddPropertiesToGrid()
 

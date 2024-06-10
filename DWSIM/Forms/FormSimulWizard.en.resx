@@ -130,20 +130,25 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Welcome to the simulation configuration wizard.
 
+In the next pages you will be able to add compounds, property packages, set the system of units and configure specific parameters for a new simulation.
+
 Click "Next" to continue.</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Button5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
   </data>
   <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 340</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtAdded.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="txtAdded.Location" type="System.Drawing.Point, System.Drawing">
     <value>127, 369</value>
   </data>
   <data name="txtAdded.Size" type="System.Drawing.Size, System.Drawing">
     <value>578, 23</value>
+  </data>
+  <data name="Label6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 373</value>
@@ -154,6 +159,9 @@ Click "Next" to continue.</value>
   <data name="Label6.Text" xml:space="preserve">
     <value>Added Compounds</value>
   </data>
+  <data name="Button4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
     <value>433, 339</value>
   </data>
@@ -163,11 +171,17 @@ Click "Next" to continue.</value>
   <data name="Button4.Text" xml:space="preserve">
     <value>Add from Other Sources &gt;</value>
   </data>
+  <data name="txtSearch.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
   <data name="txtSearch.Location" type="System.Drawing.Point, System.Drawing">
     <value>63, 339</value>
   </data>
   <data name="txtSearch.Size" type="System.Drawing.Size, System.Drawing">
     <value>336, 23</value>
+  </data>
+  <data name="btnInfoLeft.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnInfoLeft.AutoSize" type="System.Boolean, mscorlib">
@@ -188,6 +202,9 @@ Click "Next" to continue.</value>
   <data name="Label2.Text" xml:space="preserve">
     <value>Select the compounds that you want to add to the simulation. Use the textbox to search and select a compound in the list. Click "Next" to continue.</value>
   </data>
+  <data name="Label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 343</value>
   </data>
@@ -196,6 +213,9 @@ Click "Next" to continue.</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="ogc1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="colAdd.HeaderText" xml:space="preserve">
     <value>Added</value>
@@ -215,8 +235,14 @@ Click "Next" to continue.</value>
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
     <value>338, 217</value>
   </data>
+  <data name="PictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>253, 346</value>
+  </data>
+  <data name="Label10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>272, 350</value>
@@ -227,6 +253,9 @@ Click "Next" to continue.</value>
   <data name="Label10.Text" xml:space="preserve">
     <value>,  but you can use all available packages without restrictions.</value>
   </data>
+  <data name="Label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 350</value>
   </data>
@@ -235,6 +264,9 @@ Click "Next" to continue.</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Recommended packages are marked with a</value>
+  </data>
+  <data name="FlowLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 20</value>
@@ -278,6 +310,9 @@ Click "Next" to continue.</value>
   <data name="Button8.Text" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="GroupBox6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
   <data name="cbPPFilter.Location" type="System.Drawing.Point, System.Drawing">
     <value>74, 19</value>
   </data>
@@ -287,11 +322,17 @@ Click "Next" to continue.</value>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 21</value>
   </data>
+  <data name="DataGridViewPP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
   <data name="Column6.ToolTipText" xml:space="preserve">
     <value>Recommended</value>
   </data>
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Type</value>
+  </data>
+  <data name="DataGridViewPP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="DataGridViewPP.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 48</value>
@@ -301,6 +342,9 @@ Click "Next" to continue.</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Available Property Packages</value>
+  </data>
+  <data name="GroupBox12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="Column16.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -317,17 +361,29 @@ Click "Next" to continue.</value>
   <data name="GroupBox12.Text" xml:space="preserve">
     <value>Added Property Packages</value>
   </data>
+  <data name="Label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>703, 33</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Select and Add the Property Packages that you want to use in your simulation. The first on the list will be used by default by all flowsheet objects. Click "Next" to continue.</value>
   </data>
+  <data name="WizardPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>719, 407</value>
+  </data>
   <data name="WizardPage3.Text" xml:space="preserve">
     <value>Property Packages</value>
   </data>
+  <data name="WizardPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>719, 407</value>
+  </data>
   <data name="WizardPage2.Text" xml:space="preserve">
     <value>Compounds</value>
+  </data>
+  <data name="WizardPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>719, 407</value>
   </data>
   <data name="WizardPage1.Text" xml:space="preserve">
     <value>Introduction</value>
@@ -337,6 +393,9 @@ Click "Next" to continue.</value>
   </data>
   <data name="btnCloneUnits.Text" xml:space="preserve">
     <value>Clone</value>
+  </data>
+  <data name="DataGridView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -360,17 +419,44 @@ Click "Next" to continue.</value>
     <value>Select the desired System of Units for your simulation. You can change individual units by selecting a custom system (other than SI, CGS or ENG). 
 Click "Finish" to exit the wizard and start designing the simulation model.</value>
   </data>
+  <data name="WizardPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>719, 407</value>
+  </data>
   <data name="WizardPage5.Text" xml:space="preserve">
     <value>System of Units</value>
   </data>
+  <data name="Label18.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>663, 50</value>
+  </data>
+  <data name="Label17.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>663, 50</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>DWSIM can skip calculations of flowsheet objects if none of its input parameters (including inlet streams) have changed since the last successful calculation. This feature is disabled by default. You can change it later in Edit &gt; Simulation Settings &gt; Behavior.</value>
+  </data>
+  <data name="Label13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="chkEnableFailSafeFlash.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="chkActivateSmartObjectSolving.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="chkDoubleClickToOpenEditors.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="WizardPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>719, 407</value>
+  </data>
+  <data name="PictureBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="PictureBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>370, 15</value>
@@ -424,6 +510,12 @@ You can enable or disable this feature later in the 'Simulation Settings' &gt; '
   </data>
   <data name="chkEnableUndoRedo.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
+  </data>
+  <data name="WizardPage6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>719, 407</value>
+  </data>
+  <data name="StepWizardControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>917, 562</value>
   </data>
   <data name="StepWizardControl1.Title" xml:space="preserve">
     <value>Simulation Configuration Wizard</value>
@@ -1325,5 +1417,8 @@ You can enable or disable this feature later in the 'Simulation Settings' &gt; '
   </data>
   <data name="cmsAddComps.Size" type="System.Drawing.Size, System.Drawing">
     <value>331, 136</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>917, 562</value>
   </data>
 </root>

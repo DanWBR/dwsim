@@ -117,11 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TableLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -625,11 +628,14 @@
   <data name="PanelOther.WrapContents" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="TableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
   <data name="TableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 1796</value>
+    <value>321, 1828</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>310, 3</value>

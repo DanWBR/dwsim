@@ -61,6 +61,8 @@ Public Class FormSimulWizard
 
         Init()
 
+        If My.Computer.Screen.WorkingArea.Height < 800 * Settings.DpiScale Then Height = 500 * Settings.DpiScale
+
         FormMain.TranslateFormFunction?.Invoke(Me)
 
     End Sub
