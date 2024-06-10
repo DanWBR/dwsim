@@ -85,6 +85,10 @@ Public Class FormDataRegression
 
         FormMain.TranslateFormFunction?.Invoke(Me)
 
+        Dim scale = Settings.DpiScale
+
+        btnSearchKDB.Image = New Bitmap(btnSearchKDB.Image, New Size(150.0 / 25.0 * btnSearchKDB.Height * 0.7, btnSearchKDB.Height * 0.7))
+
     End Sub
 
     Private Sub FormDataRegression_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -4252,6 +4256,16 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Dim swap, replace As Boolean
         swap = False
         replace = False
+
+        If cbCompound1.SelectedItem Is Nothing Then
+            MessageBox.Show("Please select Compound 1.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If cbCompound2.SelectedItem Is Nothing Then
+            MessageBox.Show("Please select Compound 2.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
 
         comp1 = cbCompound1.SelectedItem.ToString
         comp2 = cbCompound2.SelectedItem.ToString
