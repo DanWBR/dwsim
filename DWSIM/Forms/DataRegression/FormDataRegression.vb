@@ -4292,7 +4292,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                             End If
                                         Else
                                             fresult.Close()
-                                            MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
+                                            MessageBox.Show(ExceptionProcessing.ExceptionParser.GetFirstException(t.Exception).Message, DWSIM.App.GetLocalString("Erro"))
                                         End If
                                     End Sub)
                        End Sub)

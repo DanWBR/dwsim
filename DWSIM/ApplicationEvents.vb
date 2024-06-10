@@ -115,6 +115,13 @@ Namespace My
 
             End If
 
+            System.Net.ServicePointManager.ServerCertificateValidationCallback =
+            New Net.Security.RemoteCertificateValidationCallback(Function(o, c, ch, ssl)
+                                                                     Return True
+                                                                 End Function)
+
+            System.Net.ServicePointManager.CheckCertificateRevocationList = False
+
         End Sub
 
         Private Shared Function LoadFromExtensionsFolder(ByVal sender As Object, ByVal args As ResolveEventArgs) As Assembly
