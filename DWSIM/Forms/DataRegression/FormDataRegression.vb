@@ -87,7 +87,9 @@ Public Class FormDataRegression
 
         Dim scale = Settings.DpiScale
 
-        btnSearchKDB.Image = New Bitmap(btnSearchKDB.Image, New Size(150.0 / 25.0 * btnSearchKDB.Height * 0.7, btnSearchKDB.Height * 0.7))
+        If scale > 1.0 Then
+            btnSearchKDB.Image = New Bitmap(My.Resources.cheric_big, New Size(150.0 / 25.0 * btnSearchKDB.Height * 0.7, btnSearchKDB.Height * 0.7))
+        End If
 
     End Sub
 
