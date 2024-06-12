@@ -77,6 +77,8 @@ Public Class FormFlowsheet
 
     Public Property WatchItems As List(Of IWatchItem) = New List(Of IWatchItem) Implements IFlowsheet.WatchItems
 
+    Public FrmWizard As FormSimulWizard
+
     Public FrmStSim1 As New FormSimulSettings
     Public FrmPCBulk As New FormPCBulk
     Public FrmReport As New FormReportConfig
@@ -276,6 +278,10 @@ Public Class FormFlowsheet
         My.Application.ActiveSimulation = Me
 
         If Not Me.m_IsLoadedFromFile Then
+
+            If Not DoNotOpenSimulationWizard Then
+                FrmWizard = New FormSimulWizard()
+            End If
 
             Dim sacase As New SharedClasses.Flowsheet.Optimization.SensitivityAnalysisCase
             sacase.name = "SACase0"
@@ -607,7 +613,7 @@ Public Class FormFlowsheet
 
             If Not DoNotOpenSimulationWizard Then
                 If Not DWSIM.App.IsRunningOnMono Then
-                    Dim fw As New FormSimulWizard
+                    Dim fw = FrmWizard
                     With fw
                         .CurrentFlowsheet = Me
                         .StartPosition = FormStartPosition.CenterScreen
