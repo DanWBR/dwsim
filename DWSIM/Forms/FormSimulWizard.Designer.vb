@@ -34,14 +34,9 @@ Partial Class FormSimulWizard
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.WizardPage2 = New AeroWizard.WizardPage()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.txtAdded = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.btnInfoLeft = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.ogc1 = New System.Windows.Forms.DataGridView()
         Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colAdd = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -51,6 +46,12 @@ Partial Class FormSimulWizard
         Me.colFormula = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.txtAdded = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.btnInfoLeft = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.WizardPage3 = New AeroWizard.WizardPage()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -118,6 +119,7 @@ Partial Class FormSimulWizard
         CType(Me.StepWizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage1.SuspendLayout()
         Me.WizardPage2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         CType(Me.ogc1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage3.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -173,18 +175,31 @@ Partial Class FormSimulWizard
         'WizardPage2
         '
         resources.ApplyResources(Me.WizardPage2, "WizardPage2")
-        Me.WizardPage2.Controls.Add(Me.Button5)
-        Me.WizardPage2.Controls.Add(Me.txtAdded)
-        Me.WizardPage2.Controls.Add(Me.Label6)
-        Me.WizardPage2.Controls.Add(Me.Button4)
-        Me.WizardPage2.Controls.Add(Me.txtSearch)
-        Me.WizardPage2.Controls.Add(Me.btnInfoLeft)
-        Me.WizardPage2.Controls.Add(Me.Label2)
-        Me.WizardPage2.Controls.Add(Me.Label3)
-        Me.WizardPage2.Controls.Add(Me.ogc1)
+        Me.WizardPage2.Controls.Add(Me.Panel1)
         Me.WizardPage2.Name = "WizardPage2"
         Me.WizardPage2.NextPage = Me.WizardPage3
         Me.ToolTip1.SetToolTip(Me.WizardPage2, resources.GetString("WizardPage2.ToolTip"))
+        '
+        'Panel1
+        '
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Button5)
+        Me.Panel1.Controls.Add(Me.ogc1)
+        Me.Panel1.Controls.Add(Me.txtAdded)
+        Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.Add(Me.Label6)
+        Me.Panel1.Controls.Add(Me.btnInfoLeft)
+        Me.Panel1.Controls.Add(Me.Button4)
+        Me.Panel1.Controls.Add(Me.txtSearch)
+        Me.Panel1.Name = "Panel1"
+        Me.ToolTip1.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip"))
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'Button5
         '
@@ -193,56 +208,6 @@ Partial Class FormSimulWizard
         Me.Button5.Name = "Button5"
         Me.ToolTip1.SetToolTip(Me.Button5, resources.GetString("Button5.ToolTip"))
         Me.Button5.UseVisualStyleBackColor = True
-        '
-        'txtAdded
-        '
-        resources.ApplyResources(Me.txtAdded, "txtAdded")
-        Me.txtAdded.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtAdded.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtAdded.Name = "txtAdded"
-        Me.txtAdded.ReadOnly = True
-        Me.ToolTip1.SetToolTip(Me.txtAdded, resources.GetString("txtAdded.ToolTip"))
-        '
-        'Label6
-        '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.Name = "Label6"
-        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
-        '
-        'Button4
-        '
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.Name = "Button4"
-        Me.ToolTip1.SetToolTip(Me.Button4, resources.GetString("Button4.ToolTip"))
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'txtSearch
-        '
-        resources.ApplyResources(Me.txtSearch, "txtSearch")
-        Me.txtSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.txtSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.txtSearch.Name = "txtSearch"
-        Me.ToolTip1.SetToolTip(Me.txtSearch, resources.GetString("txtSearch.ToolTip"))
-        '
-        'btnInfoLeft
-        '
-        resources.ApplyResources(Me.btnInfoLeft, "btnInfoLeft")
-        Me.btnInfoLeft.Image = Global.DWSIM.My.Resources.Resources.information
-        Me.btnInfoLeft.Name = "btnInfoLeft"
-        Me.ToolTip1.SetToolTip(Me.btnInfoLeft, resources.GetString("btnInfoLeft.ToolTip"))
-        Me.btnInfoLeft.UseVisualStyleBackColor = True
-        '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
-        '
-        'Label3
-        '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'ogc1
         '
@@ -324,6 +289,50 @@ Partial Class FormSimulWizard
         Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.Column5.TrueValue = "True"
+        '
+        'txtAdded
+        '
+        resources.ApplyResources(Me.txtAdded, "txtAdded")
+        Me.txtAdded.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtAdded.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtAdded.Name = "txtAdded"
+        Me.txtAdded.ReadOnly = True
+        Me.ToolTip1.SetToolTip(Me.txtAdded, resources.GetString("txtAdded.ToolTip"))
+        '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
+        '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
+        '
+        'btnInfoLeft
+        '
+        resources.ApplyResources(Me.btnInfoLeft, "btnInfoLeft")
+        Me.btnInfoLeft.Image = Global.DWSIM.My.Resources.Resources.information
+        Me.btnInfoLeft.Name = "btnInfoLeft"
+        Me.ToolTip1.SetToolTip(Me.btnInfoLeft, resources.GetString("btnInfoLeft.ToolTip"))
+        Me.btnInfoLeft.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.Name = "Button4"
+        Me.ToolTip1.SetToolTip(Me.Button4, resources.GetString("Button4.ToolTip"))
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'txtSearch
+        '
+        resources.ApplyResources(Me.txtSearch, "txtSearch")
+        Me.txtSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.txtSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.txtSearch.Name = "txtSearch"
+        Me.ToolTip1.SetToolTip(Me.txtSearch, resources.GetString("txtSearch.ToolTip"))
         '
         'WizardPage3
         '
@@ -853,7 +862,8 @@ Partial Class FormSimulWizard
         CType(Me.StepWizardControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WizardPage1.ResumeLayout(False)
         Me.WizardPage2.ResumeLayout(False)
-        Me.WizardPage2.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         CType(Me.ogc1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WizardPage3.ResumeLayout(False)
         Me.WizardPage3.PerformLayout()
@@ -879,7 +889,6 @@ Partial Class FormSimulWizard
     End Sub
     Friend WithEvents WizardPage1 As AeroWizard.WizardPage
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents WizardPage2 As AeroWizard.WizardPage
     Friend WithEvents WizardPage3 As AeroWizard.WizardPage
     Friend WithEvents WizardPage5 As AeroWizard.WizardPage
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -963,4 +972,6 @@ Partial Class FormSimulWizard
     Friend WithEvents Label19 As Label
     Friend WithEvents chkEnableUndoRedo As CheckBox
     Friend WithEvents PictureBox2 As PictureBox
+    Public WithEvents Panel1 As Panel
+    Public WithEvents WizardPage2 As AeroWizard.WizardPage
 End Class

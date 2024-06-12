@@ -121,10 +121,10 @@
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>825, 355</value>
+  <data name="&gt;&gt;chkShowDynProps.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="GroupBox16.Size" type="System.Drawing.Size, System.Drawing">
     <value>846, 111</value>
   </data>
@@ -293,7 +293,7 @@
     <value>Column3</value>
   </data>
   <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>813, 271</value>
+    <value>833, 280</value>
   </data>
   <data name="chkUsePassword.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -451,8 +451,8 @@
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="chkSkipEqCalcs.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
+    <value>GroupBoxComps</value>
   </data>
   <data name="Label8.ToolTip" xml:space="preserve">
     <value />
@@ -480,9 +480,6 @@
   </data>
   <data name="ComboBox3.Items" xml:space="preserve">
     <value>F</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnDeletePP.Text" xml:space="preserve">
     <value>Excluir</value>
@@ -536,7 +533,7 @@
     <value>194, 234</value>
   </data>
   <data name="&gt;&gt;cbOrderCompoundsBy.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="ComboBox2.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -567,12 +564,12 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABg
-        MAAAAk1TRnQBSQFMAgEBCgEAAWQBDwFwAQ8BEAEAARABAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        MAAAAk1TRnQBSQFMAgEBCgEAAYABDwGMAQ8BEAEAARABAAT/ASEBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEgBgABMC4ABAEDOwFkAWUCUwH0AbICgQH/Aa8CgQH/AWICSAH2AUICQQFzIAADLQFG
         A1kBvgFbAloBxAMxAU0DYQHrAQABgQEAAf8DAwEEpAADKQE9AWUCXAHnAbICgQH/AcsBqwGJAf8B0QG0
         AZUB/wG7AY4BgQH/AbUBhwGBAf8BqwKBAf8DYQHrAy0BRhAAAx4BKwNSAaUDgAH+AY8BzQHrAf8BgQG3
-        AeIB/wGBAY4ByAH/A1wB+AGBAaEBgQH/A10BzAMFAQaYAAMPARQDBgEIAoABaQH+AdUBuwGfAf8B1gG7
-        AZ4B/wHTAbgBnAH/AdEBswGUAf8BtwGJAYEB/wG6AY4BgQH/AbgBjQGBAf8BsgKBAf8CgAFgAf4IAAMR
+        AeIB/wGBAY4ByAH/A1wB+AGBAaEBgQH/A10BzAMFAQaYAAMPARQDBgEIAoABagH+AdUBuwGfAf8B1gG7
+        AZ4B/wHTAbgBnAH/AdEBswGUAf8BtwGJAYEB/wG6AY4BgQH/AbgBjQGBAf8BsgKBAf8CgAFhAf4IAAMR
         ARYDSQGFA1kB7wGCAcQB5QH/AQABmAGBAf8BAAGSAYEB/wEAAZABgQH/AQABjAGBAf8BgQGfAYEB/wGB
         AcEBlgH/AYEBowGBAf8BYQJcAdYDBgEHiAAEAQM7AWMBZQJTAfQBgQGiAYEB/wGBAaEBgQH/AbECgQH/
         AeEBzQG4Af8B2AHAAaUB/wHYAcABpwH/AdQBugGdAf8BuAGMAYEB/wG3AYoBgQH/AbgBjQGBAf8BugGO
@@ -581,26 +578,26 @@
         AT0BZQJcAecBgQGjAYEB/wGTAcABmQH/AZ4BxwGkAf8BgQGsAYEB/wGvAoEB/wHjAdABvAH/AdoBwwGr
         Af8B0wG4AZ4B/wHHAaMBgQH/AcEBmAGBAf8BtgGJAYEB/wG3AYoBgQH/AboBjgGBAf8BsQKBAf8DWQG7
         AYEBvQHcAf8BvwHlAfYB/wHbAfYC/wHBAe4C/wGlAeUC/wEAAZ8BgQH/AZQBzQGtAf8BgQG6AY4B/wGB
-        AbgBiQH/AYEBtgGFAf8BgQGzAYEB/wGBAbUBggH/AYMBwgGYAf8BgQGgAYEB/wKAAVQB/oAAAoABfgH+
+        AbgBiQH/AYEBtgGFAf8BgQGzAYEB/wGBAbUBggH/AYMBwgGYAf8BgQGgAYEB/wKAAVUB/oAAAoABfwH+
         AakBzQGvAf8BpgHMAawB/wGiAckBqQH/AZkBxQGfAf8BgQGpAYEB/wGuAoEB/wHcAcgBsAH/Ab8BnwGB
         Af8BuAGNAYEB/wHRAbMBjwH/AdEBswGPAf8BuwGQAYEB/wG8AZEBgQH/AbcBigGBAf8BsQKBAf8BagJB
         AfkB5wH7Af4B/wHdAfYC/wHBAe8C/wG3AesC/wGrAegC/wGBAaMBgQH/AZYBzgGwAf8BlAHNAa0B/wGR
         AcsBqgH/AZABywGoAf8BgQG8AZAB/wGKAccBoQH/AYEBpQGBAf8BAAGIAYEB/wNcAfiAAAGBAaEBgQH/
         AcAB2gHFAf8BrQHQAbMB/wGrAc4BsQH/AZ4ByAGmAf8BgQGqAYEB/wGVAoEB/wKBAcgB/wKBAeMB/wKB
-        AeAB/wKBAcgB/wGQAYEBhAH/AbsBkAGBAf8B0QGzAY8B/wHGAaIBgQH/AoABYgH+AV4CWAHwAeIB9gH8
+        AeAB/wKBAcgB/wGQAYEBhAH/AbsBkAGBAf8B0QGzAY8B/wHGAaIBgQH/AoABYwH+AV4CWQHwAeIB9gH8
         Af8B1AHzAv8ByQHwAv8BvgHtAv8BswHqAv8BgQGlAYEB/wGBAaQBgQH/AQABogGBAf8BAAGeAYEB/wGB
-        Aa8BgQH/AZEBywGqAf8BgQGrAYEB/wEAAY8BgQH/AYMBxQHrAf8BXgJYAfCAAAGBAaABgQH/AcUB3gHJ
+        Aa8BgQH/AZEBywGqAf8BgQGrAYEB/wEAAY8BgQH/AYMBxQHrAf8BXgJZAfCAAAGBAaABgQH/AcUB3gHJ
         Af8BtAHUAbkB/wGkAckBqgH/AYEBqwGaAf8CgQHDAf8CgQHgAf8CgQHrAf8CkwH0Af8CgQHqAf8CgQHk
-        Af8CgQHcAf8CgQG+Af8BpgGJAYEB/wHBAZoBgQH/A1wByAFeAlgB8AHiAfYB/AH/AdcB9AL/Ac4B8gL/
+        Af8CgQHcAf8CgQG+Af8BpgGJAYEB/wHBAZoBgQH/A1wByAFeAlkB8AHiAfYB/AH/AdcB9AL/Ac4B8gL/
         AcgB7wL/AboB6wL/AZIB2wH7Af8BgQHBAfEB/wGBAcIB+QH/AYEBvQHwAf8BAAGiAYEB/wGBAbMBgQH/
-        AQABmAGBAf8BgQGxAeYB/wGIAcoB7gH/AV4CWAHwgAABgQGfAYEB/wG5AdYBvgH/AYcBugGPAf8BgQGs
+        AQABmAGBAf8BgQGxAeYB/wGIAcoB7gH/AV4CWQHwgAABgQGfAYEB/wG5AdYBvgH/AYcBugGPAf8BgQGs
         AYEB/wKBAdwB/wKBAesB/wGYAZYB9AH/ApEB8wH/AYkBigHwAf8CgQHnAf8CgQHpAf8CgQHoAf8CgQHk
-        Af8BgAFnAYAB/gMsAUMDCAEKAV4CWAHwAeIB9gH9Af8B2gH0Av8B1QHzAv8BvQHrAv8BiQHVAfcB/wGB
+        Af8BgAFoAYAB/gMsAUMDCAEKAV4CWQHwAeIB9gH9Af8B2gH0Av8B1QHzAv8BvQHrAv8BiQHVAfcB/wGB
         AckB9QH/AYEBtAHpAf8BjQHaAfsB/wGMAdwC/wGBAaYBgQH/AQABnwGBAf8BgQG/AegB/wGBAbsB6AH/
-        AYwB0AHwAf8BXgJYAfCAAAKAAX4B/gGGAboBjwH/AZkBxgGiAf8BgQGtAYEB/wKBAeIB/wG0AbEB+QH/
+        AYwB0AHwAf8BXgJZAfCAAAKAAX8B/gGGAboBjwH/AZkBxgGiAf8BgQGtAYEB/wKBAeIB/wG0AbEB+QH/
         AZcBlgH0Af8CkwH0Af8BjAGNAfAB/wKBAegB/wKBAecB/wKBAegB/wKBAekB/wKBAeIB/wMhATAEAAFe
-        AlgB8AHiAfgB/QH/AdQB8wL/AbAB5AH6Af8BhgHPAfEB/wGBAdAB9QH/AYEB0AH1Af8BgQGxAeQB/wGw
-        AeQB+gH/AbYB6QL/AZsB4QL/AYEB1gH+Af8BgQG9AfUB/wGBAbUB6QH/AZAB1QHxAf8BXgJYAfCAAANc
+        AlkB8AHiAfgB/QH/AdQB8wL/AbAB5AH6Af8BhgHPAfEB/wGBAdAB9QH/AYEB0AH1Af8BgQGxAeQB/wGw
+        AeQB+gH/AbYB6QL/AZsB4QL/AYEB1gH+Af8BgQG9AfUB/wGBAbUB6QH/AZAB1QHxAf8BXgJZAfCAAANc
         AcgBgQG0AYUB/wGBAa8BgQH/AYEBqwGBAf8CgQHhAf8BtAGxAfkB/wGVAZYB9QH/AoEB6wH/AoEB7AH/
         AoEB7AH/AoEB5QH/AoEB5wH/AoEB6QH/AoEB4gH/AyEBMAQAAV8CIwH7AeEB+AH+Af8BzQHrAfkB/wGS
         AdIB7QH/AYQBzAHrAf8BgQG/AeUB/wGBAbEB2wH/AYEBlAHIAf8BzgHsAfoB/wHZAfUC/wG5AeoC/wGV
@@ -608,20 +605,20 @@
         AqIB9AH/AoEB7AH/AoEB6gH/AZcBkwH3Af8BlwGTAfcB/wKBAekB/wKBAeoB/wKBAecB/wKBAeIB/wMh
         ATAEAAFRAlABnwOAAf4BpQHZAe0B/wHSAesB9QH/Ab4B3gHtAf8BlQHJAd4B/wGJAcMB2wH/AYEBuAHW
         Af8BgQG5Ad0B/wGQAdcB9QH/AYEBzwH1Af8BnQHbAfgB/wGqAeMB+gH/AYQBygHsAf8BgQGmAdUB/wNT
-        AaaQAAGAAW0BgAH+AoEB8gH/AZcBkwH3Af8CgQHpAf8CgQHjAf8CgQHjAf8CgQHpAf8BlwGTAfcB/wKB
-        AfIB/wGAAWkBgAH+AxsBJggAAy0BRgFaAlcBwgGBAcYB4AH/AdEB7gH3Af8B9gP/AfAB/gL/AcsB7QH7
+        AaaQAAGAAW4BgAH+AoEB8gH/AZcBkwH3Af8CgQHpAf8CgQHjAf8CgQHjAf8CgQHpAf8BlwGTAfcB/wKB
+        AfIB/wGAAWoBgAH+AxsBJggAAy0BRgFaAlcBwgGBAcYB4AH/AdEB7gH3Af8B9gP/AfAB/gL/AcsB7QH7
         Af8BgQGtAdoB/wGLAdcB9wH/AaoB4QH5Af8BlQHWAfIB/wGBAbIB2wH/A1wByAMxAU2UAANcAcgCgQHs
         Af8CgQHrAf8CgQHpAf8CgQHwAf8CgQHwAf8CgQHpAf8CgQHrAf8CgQHsAf8DXAHIEAADBAEFAzsBZQNg
         AdsBkgHPAeUB/wHmAfgB/AH/AeMB9gH+Af8BrwHdAfIB/wGyAeQB9wH/AYEBwAHhAf8DYAHgAz8BbAMH
         AQmYAAMIAQoDKAE7AzgBWwKBAeMB/wKBAeIB/wKBAeIB/wKBAeMB/wM5AV4DKAE7AwgBChgAAxEBFgNI
-        AYQDWQHvAZwB1QHqAf8BiAHMAecB/wFgAlUB8wNLAYwDEwEa6AADHgErA1UBrwFYAlcBvAMiATGwAAMT
+        AYQDWQHvAZwB1QHqAf8BiAHMAecB/wFgAlYB8wNLAYwDEwEa6AADHgErA1UBrwFYAlcBvAMiATGwAAMT
         ARoDMwFSAzkBXwMmATkEAiwAAy0BRgNZAb4BWwJaAcQDMQFNHAADFQEdAyQBNAMlATYDJQE2AyUBNgMl
         ATYDJQE2AyUBNgMlATYDJQE2AyUBNgMlATYDIwEzAxUBHRAAAyUBN0AAAzYBWQGBAgAB/wHCAZYBhwH/
         AeQB0wHNAf8B5wHbAdcB/wHZAb4BtQH/AZoCgQH/A1oBxwMEAQUcAAMeASsDUgGlA4AB/gGPAc0B6wH/
-        AYEBtwHiAf8BgQGOAcgB/wNVAawDIgExFAADJAE0AVoCTAH1AagCQAH9A/wB/wP8Af8D/AH/A/wB/wP8
-        Af8D/AH/A/wB/wP8Af8BqAJAAf0BYAJVAfMDIwEzEAADXwHVAWMCWgHpAwkBDDQAA1oBxwHUAbABowH/
+        AYEBtwHiAf8BgQGOAcgB/wNVAawDIgExFAADJAE0AVoCTQH1AagCQAH9A/wB/wP8Af8D/AH/A/wB/wP8
+        Af8D/AH/A/wB/wP8Af8BqAJAAf0BYAJWAfMDIwEzEAADXwHVAWMCWgHpAwkBDDQAA1oBxwHUAbABowH/
         AewB8AHyAf8D6gH/A+sB/wPqAf8D6gH/AekC6gH/Ae4B8QHyAf8BhgGBAQAB/wMdASgQAAMRARYDSQGF
-        A1kB7wGCAcQB5QH/AcwB9AL/AcQB7wL/AYsB0gHxAf8BigHOAfAB/wGBAaQB1wH/AWACVQHzA0sBjQMU
+        A1kB7wGCAcQB5QH/AcwB9AL/AcQB7wL/AYsB0gHxAf8BigHOAfAB/wGBAaQB1wH/AWACVgHzA0sBjQMU
         ARsIAAQBAyUBNgOAAf4D/AH/A/wB/wP8Af8D/AH/A/wB/wP8Af8D/AH/A/wB/wP8Af8D/AH/AagCQAH9
         AyUBNhAAAwkBDAGBAa4B3wH/AYEBqwHeAf8DSgGKLAADVgG1AeQB0wHNAf8D6QH/A+wB/wPtAf8D7gH/
         A+4B/wPuAf8D7QH/A+oB/wHsAfIB9AH/AZICgQH/AwkBDAQAAwUBBgM7AWUDYAHbAYEBwAHgAf8BxwHu
@@ -637,28 +634,28 @@
         AbcB6wL/AasB6AL/AaQB5AL/AZYB4QH+Af8BgQHGAesB/wGBAb0B6QH/AYEBtAHmAf8BgQGpAeIB/wGB
         AZ8B3gH/AYEBtgHmAf8BgwHEAe4B/wNcAfgEAQMlATYD/AH/A/wB/wPWAf8D0wH/A88B/wPNAf8DywH/
         A8gB/wPIAf8DxgH/A/gB/wP8Af8DJQE2BAEUAAFaAlkBwAGBAcwB7gH/AYMB0gHyAf8BgQHOAfEB/wGB
-        AbYB5AH/AWUCXAHxAxIBFxQAAZ8CgQH/AeoB7AHtAf8D7AH/A/AB/wP0Af8D9wH/A/kB/wP6Af8D+AH/
-        A/UB/wPyAf8D7gH/A+sB/wHmAd4B2gH/A0UBfAFeAlgB8AHiAfYB/AH/AdQB8wL/AckB8AL/Ab4B7QL/
+        AbYB5AH/AWUCXgHxAxIBFxQAAZ8CgQH/AeoB7AHtAf8D7AH/A/AB/wP0Af8D9wH/A/kB/wP6Af8D+AH/
+        A/UB/wPyAf8D7gH/A+sB/wHmAd4B2gH/A0UBfAFeAlkB8AHiAfYB/AH/AdQB8wL/AckB8AL/Ab4B7QL/
         AbMB6gL/Aa0B5wL/AYEB2QH+Af8BgQHHAe8B/wGBAcQB6gH/AYEBvgHoAf8BgQG1AeYB/wGBAasB4wH/
-        AYEBpwHhAf8BgwHFAewB/wFeAlgB8AQBAyUBNgP8Af8D/AH/A/wB/wP8Af8D/AH/A/wB/wP8Af8D+wH/
-        A/kB/wP5Af8D+AH/A/wB/wMlATYEAQFeAlgB8ANcAfgDXAH4A1wB+ANcAfgDXAH4AYYB1wHzAf8BgQG2
+        AYEBpwHhAf8BgwHFAewB/wFeAlkB8AQBAyUBNgP8Af8D/AH/A/wB/wP8Af8D/AH/A/wB/wP8Af8D+wH/
+        A/kB/wP5Af8D+AH/A/wB/wMlATYEAQFeAlkB8ANcAfgDXAH4A1wB+ANcAfgDXAH4AYYB1wHzAf8BgQG2
         AesB/wGBAbwB7AH/AYEBzgHxAf8BgQG5AeYB/wGBAagB3QH/A1ABnRAAAcUCgQH/A/AB/wHyAfQB9wH/
         AfMB9QH3Af8D9AH/A/gB/wH9Af4G/wP6Af8D9wH/AfMC9AH/AfEB9QH3Af8D7AH/AesB7gHvAf8DWAG4
-        AV4CWAHwAeIB9gH8Af8B1wH0Av8BzgHyAv8ByAHvAv8BugHrAv8BkgHbAfsB/wGBAcEB8QH/AYEBwgH5
-        Af8BgQG9AfAB/wGBAcUB7AH/AYEBvQHpAf8BgQG1AeYB/wGBAbEB5gH/AYgBygHuAf8BXgJYAfAEAQMl
+        AV4CWQHwAeIB9gH8Af8B1wH0Av8BzgHyAv8ByAHvAv8BugHrAv8BkgHbAfsB/wGBAcEB8QH/AYEBwgH5
+        Af8BgQG9AfAB/wGBAcUB7AH/AYEBvQHpAf8BgQG1AeYB/wGBAbEB5gH/AYgBygHuAf8BXgJZAfAEAQMl
         ATYD/AH/A/wB/wPOAf8DygH/A8YB/wPDAf8DwAH/A70B/wO8Af8DugH/A/YB/wP8Af8DJQE2BAEBYwJa
         AekBgQHaAfIB/wGTAeYB+AH/AZEB4wH3Af8BjQHgAfYB/wGKAdwB9QH/AYoB2wH1Af8BiAHXAfQB/wGE
-        AdMB8gH/AYEBzwHxAf8BgQHMAfAB/wGBAckB7wH/AYEBtAHjAf8BWgJMAfUDGQEjCAABywKBAf8B7gHl
+        AdMB8gH/AYEBzwHxAf8BgQHMAfAB/wGBAckB7wH/AYEBtAHjAf8BWgJNAfUDGQEjCAABywKBAf8B7gHl
         AdwB/wHWAYgBgQH/AdoBmQGBAf8B+AH5AfMB/wH8Af0B/AH/AeQBrQGBAf8B2wGKAYEB/wHvAdsByQH/
-        AfkB/AH+Af8BzAGKAYEB/wG9AoEB/wHPAZ0BhgH/AesB7wHxAf8DWAG3AV4CWAHwAeIB9gH9Af8B2gH0
+        AfkB/AH+Af8BzAGKAYEB/wG9AoEB/wHPAZ0BhgH/AesB7wHxAf8DWAG3AV4CWQHwAeIB9gH9Af8B2gH0
         Av8B1QHzAv8BvQHrAv8BiQHVAfcB/wGBAckB9QH/AYEBtAHpAf8BjQHaAfsB/wGMAdwC/wGBAcQB+QH/
-        AYEBtgHsAf8BgQG/AegB/wGBAbsB6AH/AYwB0AHwAf8BXgJYAfAEAQMlATYD/AH/A/wB/wP8Af8D/AH/
+        AYEBtgHsAf8BgQG/AegB/wGBAbsB6AH/AYwB0AHwAf8BXgJZAfAEAQMlATYD/AH/A/wB/wP8Af8D/AH/
         A/wB/wP8Af8D+wH/A/gB/wP2Af8D8wH/A/IB/wP8Af8DJQE2BAEDJQE3AYEBzQHsAf8BmAHpAfkB/wGB
         AdUB8wH/AYEBzwHxAf8BgQHKAfAB/wGBAcIB7gH/AYkB2QH0Af8DgAH+A1wB+ANcAfgDXAH4A1wB+ANc
         AfgBYwJaAekIAAG6AoEB/wHPAoEB/wHVAYgBgQH/AdkBlwGBAf8B2QGZAYEB/wHiAbABgQH/AeMBrgGB
-        Af8B6QHFAYEB/wHgAaoBgQH/AeIBugGRAf8BwQKBAf8BuwKBAf8BtQKBAf8B1QG1AagB/wNDAXYBXgJY
+        Af8B6QHFAYEB/wHgAaoBgQH/AeIBugGRAf8BwQKBAf8BuwKBAf8BtQKBAf8B1QG1AagB/wNDAXYBXgJZ
         AfAB4gH4Af0B/wHUAfMC/wGwAeQB+gH/AYYBzwHxAf8BgQHQAfUB/wGBAdAB9QH/AYEBsQHkAf8BsAHk
-        AfoB/wG2AekC/wGbAeEC/wGBAdYB/gH/AYEBvQH1Af8BgQG1AekB/wGQAdUB8QH/AV4CWAHwBAEDJQE2
+        AfoB/wG2AekC/wGbAeEC/wGBAdYB/gH/AYEBvQH1Af8BgQG1AekB/wGQAdUB8QH/AV4CWQHwBAEDJQE2
         A/wB/wP8Af8DxwH/A8IB/wO+Af8DuAH/A7QB/wOxAf8DrgH/A6wB/wPtAf8D/AH/AyUBNgQBBAABZQJT
         AfQBgQHhAfUB/wGOAeYB+AH/AYEB0gHzAf8BgQHNAfEB/wGBAccB7wH/AYwB3AH1Af8BgQHGAeoB/wNC
         AXQcAAFhAl8B2gHTAoEB/wHUAYIBgQH/AdcBjwGBAf8B2wGbAYEB/wHZAZgBgQH/Af0D/wH5AvoB/wHs
@@ -682,20 +679,20 @@
         Af8BywKBAf8DDwETEAADBAEFAzsBZQNgAdsBkgHPAeUB/wHmAfgB/AH/AeMB9gH+Af8BrwHdAfIB/wGy
         AeQB9wH/AYEBwAHhAf8DYAHgAz8BbAMHAQkMAAMlATYBqAJAAf0D9AH/A/UB/wP1Af8D9QH/A/EB/wPv
         Af8D6QH/A/wB/wPnAf8BTQJMAZEDGAEgBAIQAANAAf0BmgHtAfoB/wGZAesB+QH/AZcB6AH5Af8BlAHl
-        AfgB/wGRAeIB9wH/AY4B3wH2Af8BiwHbAfUB/wGBAccB6wH/AWACVQHzHAADKAE8AbYCgQH/AdoCgQH/
+        AfgB/wGRAeIB9wH/AY4B3wH2Af8BiwHbAfUB/wGBAccB6wH/AWACVgHzHAADKAE8AbYCgQH/AdoCgQH/
         AdQCgQH/AdkBiQGBAf8B1wKBAf8B1AKBAf8BWQJXAbkgAAMRARYDSAGEA1kB7wGcAdUB6gH/AYgBzAHn
-        Af8BYAJVAfMDSwGMAxMBGhQAAyMBMwFeAlgB8AGoAkAB/QP8Af8D/AH/A/wB/wP8Af8D/AH/A/wB/wP4
+        Af8BYAJWAfMDSwGMAxMBGhQAAyMBMwFeAlkB8AGoAkAB/QP8Af8D/AH/A/wB/wP8Af8D/AH/A/wB/wP4
         Af8BTQJMAZEDGAEgBAIUAANRAaIBgQHMAesB/wGBAcsB6gH/AYEByQHpAf8BgQHHAekB/wGBAcQB6AH/
         AYEBwgHnAf8BgQHAAeYB/wGBAb0B5QH/AYEBuwHkAf8DYgHhIAAEAQMkATQDLAFDAxUBHDAAAx4BKwNV
         Aa8BWAJXAbwDIgExHAADFQEcAyMBMwMlATYDJQE2AyUBNgMlATYDJQE2AyUBNgMlATYDJQE2AxgBIAQC
         XAABbQJRAfcBXwIjAfsBXwIjAfsDWQHBAxkBIiAABAEDBgEHAw8BFAMZASMDIAEtAyEBMAMhATADIQEw
         AyEBMAMgAS0DGQEjAw8BFAMGAQcEARwAAxEBFgMwAUwDOAFbAyQBNAQBZAABXwIjAfsBlAHHAfkB/wGR
-        AckB+QH/AYEBhQHJAf8BYAJVAfMDIQEvHAADCQEMAyABLgM2AVcDQwF2A0oBiQFMAksBjwFMAksBjwFM
-        AksBjwFMAksBjwNKAYkDQwF2AzUBVgMgAS0DCQELFAADMwFSAYABcAFUAf4BAAGfAYEB/wEAAa8BgQH/
-        AQABsAGBAf8BAAGoAYEB/wEAAYUBgQH/AVwCWQHDAwMBBBwAAxkBIwNGAX0DYAHbAWACVQHzAWACVQHz
+        AckB+QH/AYEBhQHJAf8BYAJWAfMDIQEvHAADCQEMAyABLgM2AVcDQwF2A0oBiQFMAksBjwFMAksBjwFM
+        AksBjwFMAksBjwNKAYkDQwF2AzUBVgMgAS0DCQELFAADMwFSAYABcQFVAf4BAAGfAYEB/wEAAa8BgQH/
+        AQABsAGBAf8BAAGoAYEB/wEAAYUBgQH/AVwCWQHDAwMBBBwAAxkBIwNGAX0DYAHbAWACVgHzAWACVgHz
         A2AB2wNGAX0DGQEjIAABgQGJAaoB/wHgAfIC/wGBAZoB2AH/AQABgQG+Af8BgQGYAcUB/wFlAl8B5QMf
         ASwYAAMhAS8DVQGsAWUCXAHnAaMBgQEAAf8BugGBAQAB/wHEAYEBAAH/Ac4BigEAAf8B0wGUAQAB/wHW
-        AZ0BgQH/AWICXQHuAWACXQHUA1IBpQM9AWkDGAEgEAADWwHFAQABqQGBAf8BAAGrAYEB/wGBAa4BgQH/
+        AZ0BgQH/AWICXgHuAWACXQHUA1IBpQM9AWkDGAEgEAADWwHFAQABqQGBAf8BAAGrAYEB/wGBAa4BgQH/
         AYEBsAGBAf8BgQGxAYEB/wGBAbABgQH/AQABrQGBAf8BAAGvAYEB/wEAAoEB/wMaASQUAAM0AVMDYQHm
         AbICgQH/AdUBtwGTAf8B2wHDAaYB/wHaAcMBpgH/AdIBtAGQAf8BqwKBAf8DYQHmAzQBUxwAAzsBYwGB
         AbYB1QH/AZABtwHRAf8BgQHJAeQB/wGBAd8B9QH/AYEB0AHtAf8BYwJaAekDGQEiFAABZQJfAeUBmwKB
@@ -729,40 +726,40 @@
         Af8B/AH0AfsB/wEAAakBgQH/AYEBvAGBAf8BgQGyAYEB/wEAAasBgQH/A1YBtQQAAWICSAH2AeMBxwGv
         Af8B0AGiAYEB/wHFAZkBgQH/AcQBlwGBAf8BxAGWAYEB/wHuAeAB1AH/AfsB9wH0Af8BvwGQAYEB/wG+
         AY8BgQH/Ab4BjwGBAf8BvgGSAYEB/wHfAcYBqgH/AWICSAH2BAADAgEDBAAEAQQAAwIBAwM7AWMBagJB
-        AfkBYQJfAdoBXQJbAcoBXgJYAfABgQHTAeoB/wGyAeMB+QH/AYsBwAHnAf8BrgHTAfYB/wHEAeAB/AH/
+        AfkBYQJfAdoBXQJbAcoBXgJZAfABgQHTAeoB/wGyAeMB+QH/AYsBwAHnAf8BrgHTAfYB/wHEAeAB/AH/
         AW0CUQH3CAADKwFCAWICWQHvAWUCUwH0A10BzwFeAlsB0wFfAlsB0ANdAdEBZQJdAewDYAHbA0kBhQMX
         AR8DAgEDDAABgQG8AYEB/wGBAc4BmAH/AYEB0wGjAf8BgQHUAakB/wH+AfQB+wH/AYEB5QG8Af8BgQHj
         AbkB/wGHAeUBtAH/AdoB7gHkAf8BgQHSAZsB/wEAAakBgQH/AYEBvAGBAf8BgQGyAYEB/wEAAaoBgQH/
         A1YBtgQAAWICSAH2AeQByQGwAf8B0AGjAYEB/wHMAZ0BgQH/AccBmgGBAf8BxQGYAYEH/wH+Af8BwwGW
         AYEB/wHBAZQBgQH/AcIBlAGBAf8BwwGYAYEB/wHfAcUBqwH/AWICSAH2BAABVwJVAbQBXwJbAdgDSgGL
-        BAIDLQFGA1kBwQOAAf4BXgJYAfADNAFTA0IBdANcAfgBgQG+AecB/wG0AdIB8AH/AeUB8wL/AawB0gHv
+        BAIDLQFGA1kBwQOAAf4BXgJZAfADNAFTA0IBdANcAfgBgQG+AecB/wG0AdIB8AH/AeUB8wL/AawB0gHv
         Af8DYAHoDAADWAG6A1wB+ANaAb8BWAJXAbwDVQGuAVwCWwHNA2AB2wFcAlsBzQMnAToDCQELEQABrwGB
         Af8BgQHNAZcB/wGBAdIBoQH/AYEB1QGkAf8B/gH0AfsB/wGBAeABtwH/AYEB4wG6Af8BgQHjAbgB/wHR
         Ae8B6gH/AQABzgGOAf8BAAGpAYEB/wGBAbgBgQH/AYEBsQGBAf8BAAGpAYEB/wFCAkEBcwQAA2AB2wHg
         AbwBnwH/AdsBswGTAf8BzwGgAYEB/wHNAZ4BgQH/AcsBnAGBAf8B3QG/AaMB/wHdAb8BogH/AcUBmQGB
-        Af8BxQGZAYEB/wHEAZgBgQH/AdEBqwGFAf8B2AG6AZcB/wNgAdsEAAMvAUkBYgJdAe4DTgGWAw8EFAEb
+        Af8BxQGZAYEB/wHEAZgBgQH/AdEBqwGFAf8B2AG6AZcB/wNgAdsEAAMvAUkBYgJeAe4DTgGWAw8EFAEb
         A1YBsANiAeEDYAHgAU0CTAGRAzUBVgNhAeYDRgF+AYEBpQHYAf8BhQGxAdsB/wGBAZ0B0AH/AzkBXgwA
         AysBQgFiAlkB7wNgAeABXwJbAdgBXwJdAc4DXwHVAWMCWgHpAz4BawMZASIEARAAA14B0gGBAc0BlQH/
         AYEB0AGdAf8BgQHSAaEB/wGBAd4BtQH/AYEB3AG1Af8BgQHeAbcB/wGBAd8BtgH/AYEB3wG2Af8BgQHV
         AawB/wGBAdoBuAH/AYEB0wGkAf8BgQG5AYEB/wEAAawBgQH/AwcBCQQAA0YBfgHNAZwBgQH/AecBywG0
         Af8B1AGlAYEB/wHQAaABgQH/Ac8BngGBAf8B+wH4AfUB/wH7AfgB9QH/AcsBngGBAf8BywGdAYEB/wHN
         AaEBgQH/Ad8BwAGlAf8BuQGKAYEB/wNGAX4IAANAAW8BZQJdAewBWQJXAbkDVgGwAWUCXQHsA1YBswM/
-        AWwBZQJcAfEDWwHFA2AB2wMiATEgAAFXAlUBtAj/AWMCWgHpAVoCWAG9AVwCWQHGAy0BRgMTARkUAAMP
+        AWwBZQJeAfEDWwHFA2AB2wMiATEgAAFXAlUBtAj/AWMCWgHpAVoCWAG9AVwCWQHGAy0BRgMTARkUAAMP
         ARMBgQHOAY8B/wGBAc0BlQH/Af4B9AH7Af8B/gH0AfsB/wH+AfQB+wH/Af4B9AH7Af8B/gH0AfsB/wH+
         AfQB+wH/Af4B9AH7Af8B/gH0AfsB/wGBAdABnAH/AYEBzQGVAf8BZQJcAecIAAMZASIBZQJfAeUB2QGy
         AYwB/wHmAcoBswH/AdYBqQGBAf8B0QGlAYEB/wHiAcQBqAH/AeEBwwGoAf8B0AGiAYEB/wHRAaQBgQH/
         Ad0BvQGiAf8B0AGsAYUB/wFlAl8B5QMZASIIAAMJAQsDWAG6A2EB6wM0AVQDWQHBAVcCVQG0AzUBVQNi
-        AeEB5wGuAYEB/wFeAlgB8ANKAYscAAQCAVkCVwG5CP8BWgJMAfUDWwHFAVgCVwG8AzIBTwMUARsYAANR
+        AeEB5wGuAYEB/wFeAlkB8ANKAYscAAQCAVkCVwG5CP8BWgJNAfUDWwHFAVgCVwG8AzIBTwMUARsYAANR
         AaIBgQHOAZUB/wGBAc4BmAH/AYEB0AGcAf8BgQHTAaAB/wGBAdMBowH/AYEB1AGlAf8BgQHUAaAB/wGB
         AdIBnwH/AYEBzwGaAf8BgQHMAZUB/wGBAcYBhwH/EAADNAFTAWUCUwH0AdkBsgGMAf8B5gHNAbgB/wHg
         AboBnQH/AdcBqwGFAf8B1gGpAYIB/wHZAbMBkQH/AeEBwgGrAf8B1AGuAYYB/wFlAlMB9AM0AVMQAAMm
         ATgDXQHRAUICQQFzA1IBowNSAaMDKwFCA0cBggNKAYkDSgGJA0kBhRwAAwYBBwFcAlsBzQj/AWcCWgHy
         AVwCWQHGA10ByQM9AWkDGQEiHAADVgGzAYEB0wGbAf8BgQHMAZUB/wGBAc8BmQH/AYEB0AGcAf8BgQHQ
         AZwB/wGBAc8BmwH/AYEBzQGYAf8BgQHMAZMB/wGBAcYBiQH/Aw4BEhQAAzQBUwNhAeYB0AGgAYEB/wHg
-        Ab8BoAH/AeMBxQGuAf8B4wHFAa4B/wHfAbwBnwH/AcgBlwGBAf8DYQHmAzQBUxgAA0QBeAFlAlwB8QNd
+        Ab8BoAH/AeMBxQGuAf8B4wHFAa4B/wHfAbwBnwH/AcgBlwGBAf8DYQHmAzQBUxgAA0QBeAFlAl4B8QNd
         AeoDUQGeAwcBCSwAAyUBNwFlAl8B5QHBAYQBgQH/Aa4BgQEAAf8BrgGBAQAB/wFlAlMB9AFhAl0B3AM2
         AVkDFgEeIAADJgE4A0AB/QGBAdcBoAH/AYEB0gGaAf8BgQHRAZkB/wGBAdUBnQH/AYEB0AGZAf8DVgG1
-        IAADGQEjA0YBfQNgAdsBYAJVAfMBYAJVAfMDYAHbA0YBfQMZASMYAAMGAQgDSwGNA2EB6wFnAloB8gFe
+        IAADGQEjA0YBfQNgAdsBYAJWAfMBYAJWAfMDYAHbA0YBfQMZASMYAAMGAQgDSwGNA2EB6wFnAloB8gFe
         AlsB0wM8AWYsAAMrAUIBZQJcAecBWAJXAbwBUQJQAZwDTwGZA10BzAFhAlsB5AMWAR4DCAEKLAADIQEw
         AyoBPwMTARlYAAFCAU0BPgcAAT4DAAEoAwABQAMAATADAAEBAQABAQUAAYABARYAA/8BAAH+AQMB/AEH
         BAAB/AEAAfABAwQAAfABAAHAAQEEAAGAMAABAQcAAQEHAAEBBgAB8AEBAYABAQQAAfABAwHAAQMEAAHw
@@ -812,6 +809,9 @@
   <data name="chkMSShowW.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 17</value>
   </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>843, 336</value>
+  </data>
   <data name="TabPage3.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -819,7 +819,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbOrderCompoundsBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 21</value>
+    <value>433, 21</value>
   </data>
   <data name="btnDeletePP.ToolTip" xml:space="preserve">
     <value />
@@ -881,11 +881,14 @@
   <data name="Column10.Width" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
-    <value>TabPage1</value>
+  <data name="chkMSShowW.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
+  </data>
+  <data name="Button5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;chkMSShowE.Name" xml:space="preserve">
     <value>chkMSShowE</value>
@@ -1005,7 +1008,7 @@
     <value />
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>445, 326</value>
+    <value>446, 322</value>
   </data>
   <data name="Label28.ToolTip" xml:space="preserve">
     <value />
@@ -1124,8 +1127,8 @@
   <data name="KryptonButton15.Text" xml:space="preserve">
     <value>Criar Novo...</value>
   </data>
-  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>Opções</value>
@@ -1187,8 +1190,8 @@
   <data name="chkShowFloatingTables.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="btnConfigPP.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
   <data name="&gt;&gt;tsmiViewComp.Name" xml:space="preserve">
     <value>tsmiViewComp</value>
@@ -1232,9 +1235,6 @@
   <data name="chkIncludeFlowsheetMessagesInFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 17</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="&gt;&gt;Column4.Name" xml:space="preserve">
     <value>Column4</value>
   </data>
@@ -1266,7 +1266,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txtSearch.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>Panel1</value>
   </data>
   <data name="&gt;&gt;GroupBox14.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1275,7 +1275,7 @@
     <value>True</value>
   </data>
   <data name="&gt;&gt;ogc1.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;chkShowAnchoredPropertyLists.Parent" xml:space="preserve">
     <value>GroupBox14</value>
@@ -1309,6 +1309,9 @@
   </data>
   <data name="&gt;&gt;Label30.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GroupBoxComps.Name" xml:space="preserve">
+    <value>GroupBoxComps</value>
   </data>
   <data name="&gt;&gt;chkSkipEqCalcs.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1353,7 +1356,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 297</value>
+    <value>7, 293</value>
   </data>
   <data name="&gt;&gt;btnSelectAll.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -1485,7 +1488,7 @@
     <value>Button5</value>
   </data>
   <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>Panel1</value>
   </data>
   <data name="PanelUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>857, 454</value>
@@ -1501,6 +1504,9 @@
   </data>
   <data name="Label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;GroupBoxComps.Parent" xml:space="preserve">
+    <value>TabPage1</value>
   </data>
   <data name="&gt;&gt;ListBox4.Name" xml:space="preserve">
     <value>ListBox4</value>
@@ -1530,7 +1536,7 @@
     <value />
   </data>
   <data name="txtSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>719, 20</value>
+    <value>767, 20</value>
   </data>
   <data name="&gt;&gt;btnSelectAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1542,7 +1548,7 @@
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Label19.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>Panel1</value>
   </data>
   <data name="&gt;&gt;Button4.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -1574,9 +1580,6 @@
   <data name="Button5.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
   </data>
-  <data name="chkMSShowW.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
   <data name="PanelPP.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
@@ -1588,6 +1591,9 @@
   </data>
   <data name="&gt;&gt;Label18.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="KryptonButton15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="ComboBox2.ToolTip" xml:space="preserve">
     <value />
@@ -1625,11 +1631,8 @@
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 13</value>
   </data>
-  <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
-    <value>Descrição</value>
-  </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 26</value>
+    <value>75, 26</value>
   </data>
   <data name="btnConfigPP.Location" type="System.Drawing.Point, System.Drawing">
     <value>366, 16</value>
@@ -1639,6 +1642,9 @@
   </data>
   <data name="&gt;&gt;ListBox4.Parent" xml:space="preserve">
     <value>GroupBox9</value>
+  </data>
+  <data name="Button13.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
   </data>
   <data name="colName.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -1663,9 +1669,6 @@
   </data>
   <data name="&gt;&gt;chkMSSHowM.Name" xml:space="preserve">
     <value>chkMSSHowM</value>
-  </data>
-  <data name="ComboBox1.Items11" xml:space="preserve">
-    <value>R</value>
   </data>
   <data name="chkMSSHowM.Text" xml:space="preserve">
     <value>Exibir Vazão Molar</value>
@@ -1730,9 +1733,6 @@
   <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="btnConfigPP.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
   <data name="chkForceObjectCalculation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1775,6 +1775,9 @@
   <data name="Label17.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="Button6.Text" xml:space="preserve">
+    <value>thermo</value>
+  </data>
   <data name="ComboBox1.Items16" xml:space="preserve">
     <value>E4</value>
   </data>
@@ -1796,6 +1799,9 @@
   <data name="&gt;&gt;chkESShowE.Name" xml:space="preserve">
     <value>chkESShowE</value>
   </data>
+  <data name="Button3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="KryptonButton15.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -1810,9 +1816,6 @@
   </data>
   <data name="KryptonButton18.Location" type="System.Drawing.Point, System.Drawing">
     <value>242, 16</value>
-  </data>
-  <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1874,20 +1877,20 @@
   <data name="Label18.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;btnClearSelection.Parent" xml:space="preserve">
-    <value>GroupBox14</value>
+  <data name="&gt;&gt;chkForceObjectCalculation.Name" xml:space="preserve">
+    <value>chkForceObjectCalculation</value>
+  </data>
+  <data name="GroupBoxComps.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="TBtit.Location" type="System.Drawing.Point, System.Drawing">
     <value>74, 28</value>
   </data>
   <data name="btnInfoLeft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 319</value>
+    <value>7, 315</value>
   </data>
   <data name="KryptonButton23.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 25</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="&gt;&gt;TabPage2.Name" xml:space="preserve">
     <value>TabPage2</value>
@@ -1967,8 +1970,8 @@
   <data name="tbPassword.Location" type="System.Drawing.Point, System.Drawing">
     <value>140, 414</value>
   </data>
-  <data name="Button5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox13.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
   <data name="&gt;&gt;lblsla.Name" xml:space="preserve">
     <value>lblsla</value>
@@ -1986,7 +1989,7 @@
     <value>Frações Mássicas</value>
   </data>
   <data name="&gt;&gt;Button6.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;Label10.Parent" xml:space="preserve">
     <value>GroupBox16</value>
@@ -2019,7 +2022,7 @@
     <value>GroupBox14</value>
   </data>
   <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>797, 293</value>
+    <value>1586, 296</value>
   </data>
   <data name="&gt;&gt;ImageList1.Name" xml:space="preserve">
     <value>ImageList1</value>
@@ -2076,7 +2079,7 @@
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Button13.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>Panel1</value>
   </data>
   <data name="KryptonButton4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2086,6 +2089,9 @@
   </data>
   <data name="btnCopyPP.Location" type="System.Drawing.Point, System.Drawing">
     <value>366, 61</value>
+  </data>
+  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnClearSelection.Location" type="System.Drawing.Point, System.Drawing">
     <value>440, 104</value>
@@ -2128,6 +2134,9 @@
   </data>
   <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
+    <value>TabControl1</value>
   </data>
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2228,9 +2237,6 @@
   <data name="&gt;&gt;chkShowMSTemp.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;chkDisplayFloatingTableCompoundAmounts.Name" xml:space="preserve">
-    <value>chkDisplayFloatingTableCompoundAmounts</value>
-  </data>
   <data name="&gt;&gt;chkMSShowV.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
@@ -2256,13 +2262,13 @@
     <value>False</value>
   </data>
   <data name="txtSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 294</value>
+    <value>73, 290</value>
   </data>
   <data name="btnCloneSI.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Button5.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>GroupBoxComps</value>
   </data>
   <data name="&gt;&gt;cbObjectType.Name" xml:space="preserve">
     <value>cbObjectType</value>
@@ -2290,9 +2296,6 @@
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Unidade</value>
-  </data>
-  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
-    <value>ComboBox1</value>
   </data>
   <data name="KryptonButton15.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 16</value>
@@ -2408,8 +2411,8 @@
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="cbOrderCompoundsBy.Items9" xml:space="preserve">
-    <value>Tag (Ascendente)</value>
+  <data name="GroupBoxComps.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
   </data>
   <data name="Button6.ToolTip" xml:space="preserve">
     <value />
@@ -2589,7 +2592,7 @@
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;cbOrderCompoundsBy.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>Panel1</value>
   </data>
   <data name="Button13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -2637,7 +2640,7 @@
     <value>251, 446</value>
   </data>
   <data name="Button13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 319</value>
+    <value>124, 315</value>
   </data>
   <data name="KryptonButton4.ToolTip" xml:space="preserve">
     <value />
@@ -2650,6 +2653,12 @@
   </data>
   <data name="&gt;&gt;PanelUnits.Name" xml:space="preserve">
     <value>PanelUnits</value>
+  </data>
+  <data name="TBaut.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;Button6.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
     <value>12</value>
@@ -2693,7 +2702,7 @@
   <data name="TBtit.Size" type="System.Drawing.Size, System.Drawing">
     <value>777, 20</value>
   </data>
-  <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
+  <data name="chkSkipEqCalcs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="GroupBox7.Text" xml:space="preserve">
@@ -2769,7 +2778,7 @@
     <value>Label9</value>
   </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;Label13.Parent" xml:space="preserve">
     <value>GroupBox4</value>
@@ -2843,6 +2852,9 @@
   <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="GroupBoxComps.Text" xml:space="preserve">
+    <value>Componentes</value>
+  </data>
   <data name="&gt;&gt;ListBox3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -2895,7 +2907,7 @@
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;btnInfoLeft.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="KryptonButton22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2966,9 +2978,6 @@
   <data name="&gt;&gt;GroupBox6.Parent" xml:space="preserve">
     <value>PanelPP</value>
   </data>
-  <data name="&gt;&gt;chkForceObjectCalculation.Name" xml:space="preserve">
-    <value>chkForceObjectCalculation</value>
-  </data>
   <data name="chkDisplayFloatingTableCompoundAmounts.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
@@ -3026,14 +3035,11 @@
   <data name="chkMSShowE.Text" xml:space="preserve">
     <value>Exibir Fluxo Energético</value>
   </data>
-  <data name="ListBox3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;chkShowMSPressure.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;Button5.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;GroupBox4.Parent" xml:space="preserve">
     <value>TabPage7</value>
@@ -3098,6 +3104,9 @@
   <data name="ComboBox3.Items17" xml:space="preserve">
     <value>E6</value>
   </data>
+  <data name="cbOrderCompoundsBy.Items9" xml:space="preserve">
+    <value>Tag (Ascendente)</value>
+  </data>
   <data name="KryptonButton2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -3118,6 +3127,9 @@
   </data>
   <data name="Label17.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
+  </data>
+  <data name="GroupBoxComps.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;Label28.Name" xml:space="preserve">
     <value>Label28</value>
@@ -3189,7 +3201,7 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ogc1.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>Panel1</value>
   </data>
   <data name="cbDefaultFloatingTableCompoundAmountBasis.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -3232,9 +3244,6 @@
   </data>
   <data name="Label2.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="GroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="Button5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -3296,8 +3305,8 @@
   <data name="&gt;&gt;cbDefaultFloatingTableCompoundAmountBasis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TBaut.ToolTip" xml:space="preserve">
-    <value />
+  <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>Descrição</value>
   </data>
   <data name="&gt;&gt;ContextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3321,7 +3330,7 @@
     <value>280, 17</value>
   </data>
   <data name="ogc1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 16</value>
+    <value>7, 3</value>
   </data>
   <data name="Label16.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3363,7 +3372,10 @@
     <value>Bottom, Left</value>
   </data>
   <data name="&gt;&gt;btnInfoLeft.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>Panel1</value>
+  </data>
+  <data name="GroupBoxComps.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;Column11.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3371,8 +3383,8 @@
   <data name="btnInfoLeft.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 26</value>
   </data>
-  <data name="&gt;&gt;KryptonButton18.Name" xml:space="preserve">
-    <value>KryptonButton18</value>
+  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
+    <value>ComboBox1</value>
   </data>
   <data name="ComboBox1.Items" xml:space="preserve">
     <value>F</value>
@@ -3382,9 +3394,6 @@
   </data>
   <data name="&gt;&gt;txtSearch.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkShowDynProps.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbForcePhase.Items3" xml:space="preserve">
     <value>Forçar Fase Sólida</value>
@@ -3469,9 +3478,6 @@
   </data>
   <data name="chkShowFloatingTables.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="GroupBox13.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
   </data>
   <data name="&gt;&gt;cbSpecCalcMode.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -3560,6 +3566,9 @@
   <data name="&gt;&gt;ComboBox3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="GroupBoxComps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>849, 355</value>
+  </data>
   <data name="&gt;&gt;GroupBox4.Name" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
@@ -3594,7 +3603,7 @@
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 319</value>
+    <value>284, 315</value>
   </data>
   <data name="GroupBox11.Text" xml:space="preserve">
     <value>Exibir Propriedades em Tempo Real</value>
@@ -3653,6 +3662,9 @@
   <data name="TBtit.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;GroupBoxComps.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;KryptonButton3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -3665,7 +3677,13 @@
   <data name="&gt;&gt;Column4.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;GroupBoxComps.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="KryptonButton5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ListBox3.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
@@ -3782,9 +3800,6 @@
   <data name="&gt;&gt;lblsla.Parent" xml:space="preserve">
     <value>GroupBox14</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Componentes</value>
-  </data>
   <data name="KryptonButton4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -3801,7 +3816,7 @@
     <value>TabControl1</value>
   </data>
   <data name="&gt;&gt;txtSearch.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;chkIncludeFlowsheetMessagesInFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3912,7 +3927,7 @@
     <value>1</value>
   </data>
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="Label27.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -3965,11 +3980,8 @@
   <data name="ContextMenuStrip1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 6</value>
-  </data>
   <data name="cbOrderCompoundsBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>515, 322</value>
+    <value>516, 318</value>
   </data>
   <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -4034,6 +4046,9 @@
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
+  <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cbForcePhase.Items" xml:space="preserve">
     <value>Não Forçar</value>
   </data>
@@ -4055,8 +4070,8 @@
   <data name="chkMSShowV.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 17</value>
   </data>
-  <data name="Button13.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
+  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="&gt;&gt;TBaut.Parent" xml:space="preserve">
     <value>GroupBox3</value>
@@ -4148,14 +4163,14 @@
   <data name="&gt;&gt;ComboBox2.Name" xml:space="preserve">
     <value>ComboBox2</value>
   </data>
-  <data name="GroupBox2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;Label13.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbForcePhase.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
   </data>
   <data name="LinkLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4178,8 +4193,8 @@
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
     <value>408, 405</value>
   </data>
-  <data name="Button3.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;chkShowMSPressure.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="DataGridView1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -4229,11 +4244,11 @@
   <data name="ComboBox1.Items10" xml:space="preserve">
     <value>N6</value>
   </data>
-  <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
-    <value>TabControl1</value>
+  <data name="ComboBox1.Items11" xml:space="preserve">
+    <value>R</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>Panel1</value>
   </data>
   <data name="ComboBox1.Items17" xml:space="preserve">
     <value>E6</value>
@@ -4298,8 +4313,11 @@
   <data name="&gt;&gt;KryptonButton23.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="&gt;&gt;Button13.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;chkShowFloatingTables.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4307,8 +4325,8 @@
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>GroupBox16</value>
   </data>
-  <data name="KryptonButton15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ListBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 16</value>
@@ -4350,10 +4368,13 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>8</value>
   </data>
   <data name="chkMSShowE.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
+  </data>
+  <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
   </data>
   <data name="&gt;&gt;tbMassBalTol.Parent" xml:space="preserve">
     <value>GroupBox15</value>
@@ -4362,7 +4383,7 @@
     <value>GroupBox10</value>
   </data>
   <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+    <value>Panel1</value>
   </data>
   <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
     <value>420, 19</value>
@@ -4389,7 +4410,7 @@
     <value>11</value>
   </data>
   <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 350</value>
+    <value>365, 308</value>
   </data>
   <data name="&gt;&gt;tsmiReplace.Name" xml:space="preserve">
     <value>tsmiReplace</value>
@@ -4484,17 +4505,26 @@
   <data name="GroupBox7.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
+  <data name="&gt;&gt;btnClearSelection.Parent" xml:space="preserve">
+    <value>GroupBox14</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
+  </data>
+  <data name="Panel1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;GroupBox18.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="&gt;&gt;Button6.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="&gt;&gt;chkDisplayFloatingTableCompoundAmounts.Name" xml:space="preserve">
+    <value>chkDisplayFloatingTableCompoundAmounts</value>
   </data>
   <data name="PanelPP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;KryptonButton18.Name" xml:space="preserve">
+    <value>KryptonButton18</value>
   </data>
   <data name="DataGridViewPP.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
