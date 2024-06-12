@@ -43,6 +43,8 @@ Public Class FormSimulWizard
     Public Shared WizardFinished2 As Action(Of StepWizardControl, IFlowsheet)
     Public Shared WizardFinished3 As Action(Of StepWizardControl, IFlowsheet)
 
+    Public Shared PostInitAction As Action(Of FormSimulWizard, IFlowsheet)
+
     Private Sub FormConfigWizard_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
         AddMorePages?.Invoke(StepWizardControl1, CurrentFlowsheet)
@@ -64,6 +66,8 @@ Public Class FormSimulWizard
         If My.Computer.Screen.WorkingArea.Height < 800 * Settings.DpiScale Then Height = 550 * Settings.DpiScale
 
         FormMain.TranslateFormFunction?.Invoke(Me)
+
+        PostInitAction?.Invoke(Me, CurrentFlowsheet)
 
     End Sub
 

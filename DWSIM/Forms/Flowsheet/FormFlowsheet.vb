@@ -77,8 +77,6 @@ Public Class FormFlowsheet
 
     Public Property WatchItems As List(Of IWatchItem) = New List(Of IWatchItem) Implements IFlowsheet.WatchItems
 
-    Public FrmWizard As FormSimulWizard
-
     Public FrmStSim1 As New FormSimulSettings
     Public FrmPCBulk As New FormPCBulk
     Public FrmReport As New FormReportConfig
@@ -278,10 +276,6 @@ Public Class FormFlowsheet
         My.Application.ActiveSimulation = Me
 
         If Not Me.m_IsLoadedFromFile Then
-
-            If Not DoNotOpenSimulationWizard Then
-                FrmWizard = New FormSimulWizard()
-            End If
 
             Dim sacase As New SharedClasses.Flowsheet.Optimization.SensitivityAnalysisCase
             sacase.name = "SACase0"
@@ -613,7 +607,7 @@ Public Class FormFlowsheet
 
             If Not DoNotOpenSimulationWizard Then
                 If Not DWSIM.App.IsRunningOnMono Then
-                    Dim fw = FrmWizard
+                    Dim fw = New FormSimulWizard()
                     With fw
                         .CurrentFlowsheet = Me
                         .StartPosition = FormStartPosition.CenterScreen
@@ -658,12 +652,6 @@ Public Class FormFlowsheet
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
             My.Application.MainWindowForm.CloseAllToolstripMenuItem.Enabled = True
         End If
-
-        'WriteToLog(DWSIM.App.GetLocalTipString("FLSH003"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
-        'WriteToLog(DWSIM.App.GetLocalTipString("FLSH001"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
-        'WriteToLog(DWSIM.App.GetLocalTipString("FLSH002"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
-        'WriteToLog(DWSIM.App.GetLocalTipString("FLSH005"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
-        'WriteToLog(DWSIM.App.GetLocalTipString("FLSH008"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
 
         FormSurface.FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
         FormSurface.FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList

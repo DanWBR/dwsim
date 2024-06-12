@@ -608,7 +608,9 @@
     <Compile Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurfaceControl.designer.vb">
       <DependentUpon>FlowsheetSurfaceControl.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurfaceControl.vb" />
+    <Compile Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurfaceControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurface_SkiaSharp.designer.vb">
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
     </Compile>
