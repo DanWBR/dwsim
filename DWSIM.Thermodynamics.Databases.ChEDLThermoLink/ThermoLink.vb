@@ -173,10 +173,12 @@ Public Class ChEDLThermoParser
                 comp.Vapor_Pressure_TMIN = Tmin
                 comp.Vapor_Pressure_TMAX = Tb
 
+                Dim ycalc = TrangeL.Select(Function(x) comp.GetVaporPressure(x)).ToList()
+
                 comp.Comments += vbCrLf
                 comp.Comments += "Vapor Pressure regression residual = " + r_fit.ToString(ci) + vbCrLf
                 comp.Comments += "Regressed Data Table" + vbCrLf
-                comp.Comments += GetTable(TrangeL, Pvap, "T (K)", "Pvap (Pa)")
+                comp.Comments += GetTable(TrangeL, Pvap, ycalc, "T (K)", "Pvap (Pa)")
 
             Catch ex As Exception
 
@@ -216,10 +218,12 @@ Public Class ChEDLThermoParser
                 comp.Ideal_Gas_Heat_Capacity_Const_D = fitcoeffs(3)
                 comp.Ideal_Gas_Heat_Capacity_Const_E = fitcoeffs(4)
 
+                Dim ycalc = TrangeL.Select(Function(x) comp.GetIdealGasHeatCapacity(x)).ToList()
+
                 comp.Comments += vbCrLf
                 comp.Comments += "Ideal Gas Heat Capacity regression residual = " + r_fit.ToString(ci) + vbCrLf
                 comp.Comments += "Regressed Data Table" + vbCrLf
-                comp.Comments += GetTable(TrangeV, CpIG, "T (K)", "Cp (kJ/kg.K)")
+                comp.Comments += GetTable(TrangeV, CpIG, ycalc, "T (K)", "Cp (kJ/kg.K)")
 
             Catch ex As Exception
 
@@ -263,10 +267,12 @@ Public Class ChEDLThermoParser
                     comp.Liquid_Heat_Capacity_Tmin = Tmin
                     comp.Liquid_Heat_Capacity_Tmax = Tb
 
+                    Dim ycalc = TrangeL.Select(Function(x) comp.GetLiquidHeatCapacity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Liquid Heat Capacity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeL, CpL, "T (K)", "Cp (kJ/kg.K)")
+                    comp.Comments += GetTable(TrangeL, CpL, ycalc, "T (K)", "Cp (kJ/kg.K)")
 
                 Else
 
@@ -320,10 +326,12 @@ Public Class ChEDLThermoParser
                     comp.Solid_Heat_Capacity_Tmin = Tmin * 0.5
                     comp.Solid_Heat_Capacity_Tmax = Tmin
 
+                    Dim ycalc = TrangeS.Select(Function(x) comp.GetSolidHeatCapacity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Solid Heat Capacity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeS, CpS, "T (K)", "Cp (kJ/kg.K)")
+                    comp.Comments += GetTable(TrangeS, CpS, ycalc, "T (K)", "Cp (kJ/kg.K)")
 
                 Else
 
@@ -378,10 +386,12 @@ Public Class ChEDLThermoParser
                     comp.Solid_Density_Tmin = Tmin * 0.5
                     comp.Solid_Density_Tmax = Tmin
 
+                    Dim ycalc = TrangeS.Select(Function(x) comp.GetSolidDensity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Solid Density regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeS, DensS, "T (K)", "rhoS (kg/m3)")
+                    comp.Comments += GetTable(TrangeS, DensS, ycalc, "T (K)", "rhoS (kg/m3)")
 
                 Else
 
@@ -435,10 +445,12 @@ Public Class ChEDLThermoParser
                     comp.Liquid_Density_Tmin = Tmin
                     comp.Liquid_Density_Tmax = Tb
 
+                    Dim ycalc = TrangeL.Select(Function(x) comp.GetLiquidDensity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Liquid Density regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeL, DensL, "T (K)", "rhoL (kg/m3)")
+                    comp.Comments += GetTable(TrangeL, DensL, ycalc, "T (K)", "rhoL (kg/m3)")
 
                 Else
 
@@ -490,10 +502,12 @@ Public Class ChEDLThermoParser
                     comp.Liquid_Viscosity_Const_D = fitcoeffs(3)
                     comp.Liquid_Viscosity_Const_E = fitcoeffs(4)
 
+                    Dim ycalc = TrangeL.Select(Function(x) comp.GetLiquidViscosity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Liquid Viscosity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeL, ViscL, "T (K)", "muL (Pa.s)")
+                    comp.Comments += GetTable(TrangeL, ViscL, ycalc, "T (K)", "muL (Pa.s)")
 
                 Else
 
@@ -547,10 +561,12 @@ Public Class ChEDLThermoParser
                     comp.Vapor_Viscosity_Tmin = Tb
                     comp.Vapor_Viscosity_Tmax = Tmax
 
+                    Dim ycalc = TrangeV.Select(Function(x) comp.GetVaporViscosity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Vapor Viscosity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeV, ViscV, "T (K)", "muV (Pa.s)")
+                    comp.Comments += GetTable(TrangeV, ViscV, ycalc, "T (K)", "muV (Pa.s)")
 
                 Else
 
@@ -602,10 +618,12 @@ Public Class ChEDLThermoParser
                     comp.Liquid_Thermal_Conductivity_Const_D = fitcoeffs(3)
                     comp.Liquid_Thermal_Conductivity_Const_E = fitcoeffs(4)
 
+                    Dim ycalc = TrangeL.Select(Function(x) comp.GetLiquidThermalConductivity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Liquid Thermal Conductivity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeL, TCL, "T (K)", "TCL (W/m.K)")
+                    comp.Comments += GetTable(TrangeL, TCL, ycalc, "T (K)", "TCL (W/m.K)")
 
                 Else
 
@@ -656,10 +674,12 @@ Public Class ChEDLThermoParser
                     comp.Vapor_Thermal_Conductivity_Const_D = fitcoeffs(3)
                     comp.Vapor_Thermal_Conductivity_Const_E = fitcoeffs(4)
 
+                    Dim ycalc = TrangeV.Select(Function(x) comp.GetVaporThermalConductivity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Vapor Thermal Conductivity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeV, TCV, "T (K)", "TCV (W/m.K)")
+                    comp.Comments += GetTable(TrangeV, TCV, ycalc, "T (K)", "TCV (W/m.K)")
 
                 Else
 
@@ -711,10 +731,12 @@ Public Class ChEDLThermoParser
                     comp.HVap_D = fitcoeffs(3)
                     comp.HVap_E = fitcoeffs(4)
 
+                    Dim ycalc = TrangeL.Select(Function(x) comp.GetEnthalpyOfVaporization(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Enthalpy of Vaporization regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeL, Hvap, "T (K)", "Hvap (kJ/kg.K)")
+                    comp.Comments += GetTable(TrangeL, Hvap, ycalc, "T (K)", "Hvap (kJ/kg.K)")
 
                 Else
 
@@ -766,10 +788,12 @@ Public Class ChEDLThermoParser
                     comp.Surface_Tension_Const_D = fitcoeffs(3)
                     comp.Surface_Tension_Const_E = fitcoeffs(4)
 
+                    Dim ycalc = TrangeL.Select(Function(x) comp.GetLiquidSurfaceTension(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Surface Tension regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeL, SurfT, "T (K)", "sigma (N/m)")
+                    comp.Comments += GetTable(TrangeL, SurfT, ycalc, "T (K)", "sigma (N/m)")
 
                 Else
 
@@ -791,20 +815,19 @@ Public Class ChEDLThermoParser
 
     End Function
 
-    Private Shared Function GetTable(x As List(Of Double), y As List(Of Double), xlabel As String, ylabel As String) As String
+    Private Shared Function GetTable(x As List(Of Double), y As List(Of Double), ycalc As List(Of Double), xlabel As String, ylabel As String) As String
 
         Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
-        Dim i As Integer = 0
-
         Dim sb As New System.Text.StringBuilder()
 
-        sb.AppendLine(xlabel.PadRight(40) + ylabel)
+        sb.AppendLine(xlabel.PadRight(25) + (ylabel + " (exp)").PadRight(25) + (ylabel + " (calc)").PadRight(25) + "err (%)")
         For i = 0 To x.Count - 1
-            sb.AppendLine(x(i).ToString(ci).PadRight(40) + y(i).ToString(ci))
+            Dim err1 = (y(i) - ycalc(i)) / y(i) * 100.0
+            sb.AppendLine(x(i).ToString(ci).PadRight(25) + y(i).ToString(ci).PadRight(25) + ycalc(i).ToString(ci).PadRight(25) + err1.ToString(ci))
         Next
 
-        Return sb.ToString
+        Return sb.ToString()
 
     End Function
 
