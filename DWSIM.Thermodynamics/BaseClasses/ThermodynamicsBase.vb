@@ -1781,7 +1781,7 @@ Namespace BaseClasses
                     message = "Calculated using Experimental/Regressed data."
                     result = A + B * T + C * T ^ 2 + D * T ^ 3
                     Return result / Molar_Weight * 4.1868 'kJ/kg.K
-                ElseIf db = "ChemSep" Or db = "ChEDL Thermo" Or db = "User" Then
+                ElseIf db = "ChemSep" Or db = "User" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = IdealgasCpEquation
                     Dim mw As Double = Molar_Weight

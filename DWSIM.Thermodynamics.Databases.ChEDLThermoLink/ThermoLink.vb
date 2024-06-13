@@ -143,23 +143,25 @@ Public Class ChEDLThermoParser
 
             Try
 
+                Dim tvals = New List(Of Double)
                 For Each item In TrangeL
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         Pvap.Add(value)
+                        tvals.Add(item)
                     End If
                 Next
 
                 comp.VaporPressureEquation = 101
 
-                coeffs(0) = 25
-                coeffs(1) = 2000
-                coeffs(2) = -5.245
-                coeffs(3) = 0.0#
-                coeffs(4) = 0.0#
+                coeffs(0) = 74.555
+                coeffs(1) = -7295.59
+                coeffs(2) = -7.44245
+                coeffs(3) = 0.0000042881
+                coeffs(4) = 2.0#
 
-                obj = lmfit.GetCoeffs(TrangeL.ToArray, Pvap.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Pvap, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                obj = lmfit.GetCoeffs(tvals.ToArray, Pvap.ToArray, coeffs.Clone, LMFit.FitType.Pvap, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 fitcoeffs = obj(0)
                 r_fit = obj(2)
                 n_fit = obj(3)
@@ -173,12 +175,12 @@ Public Class ChEDLThermoParser
                 comp.Vapor_Pressure_TMIN = Tmin
                 comp.Vapor_Pressure_TMAX = Tb
 
-                Dim ycalc = TrangeL.Select(Function(x) comp.GetVaporPressure(x)).ToList()
+                Dim ycalc = tvals.Select(Function(x) comp.GetVaporPressure(x)).ToList()
 
                 comp.Comments += vbCrLf
                 comp.Comments += "Vapor Pressure regression residual = " + r_fit.ToString(ci) + vbCrLf
                 comp.Comments += "Regressed Data Table" + vbCrLf
-                comp.Comments += GetTable(TrangeL, Pvap, ycalc, "T (K)", "Pvap (Pa)")
+                comp.Comments += GetTable(tvals, Pvap, ycalc, "T (K)", "Pvap (Pa)")
 
             Catch ex As Exception
 
@@ -191,23 +193,26 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.heat_capacity")
                 calculator = instance.HeatCapacityGas(CASRN:=CAS, extrapolation:="interp1d")
 
+                Dim tvals = New List(Of Double)
+
                 For Each item In TrangeV
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         CpIG.Add(value / comp.Molar_Weight)
+                        tvals.Add(item)
                     End If
                 Next
 
                 comp.IdealgasCpEquation = 5
 
                 coeffs(0) = 1.0
-                coeffs(1) = 0.0249
-                coeffs(2) = 0.000253
-                coeffs(3) = -0.000000384
-                coeffs(4) = 0.000000000129
+                coeffs(1) = 0.000000249
+                coeffs(2) = 0.00000000253
+                coeffs(3) = 0.0
+                coeffs(4) = 0.0
 
-                obj = lmfit.GetCoeffs(TrangeV.ToArray, CpIG.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                obj = lmfit.GetCoeffs(tvals.ToArray, CpIG.ToArray, coeffs.Clone, LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 fitcoeffs = obj(0)
                 r_fit = obj(2)
                 n_fit = obj(3)
@@ -218,12 +223,12 @@ Public Class ChEDLThermoParser
                 comp.Ideal_Gas_Heat_Capacity_Const_D = fitcoeffs(3)
                 comp.Ideal_Gas_Heat_Capacity_Const_E = fitcoeffs(4)
 
-                Dim ycalc = TrangeL.Select(Function(x) comp.GetIdealGasHeatCapacity(x)).ToList()
+                Dim ycalc = tvals.Select(Function(x) comp.GetIdealGasHeatCapacity(x)).ToList()
 
                 comp.Comments += vbCrLf
                 comp.Comments += "Ideal Gas Heat Capacity regression residual = " + r_fit.ToString(ci) + vbCrLf
                 comp.Comments += "Regressed Data Table" + vbCrLf
-                comp.Comments += GetTable(TrangeV, CpIG, ycalc, "T (K)", "Cp (kJ/kg.K)")
+                comp.Comments += GetTable(tvals, CpIG, ycalc, "T (K)", "Cp (kJ/kg.K)")
 
             Catch ex As Exception
 
