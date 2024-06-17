@@ -182,6 +182,14 @@ Public Class ChEDLThermoParser
                 comp.Comments += "Regressed Data Table" + vbCrLf
                 comp.Comments += GetTable(tvals, Pvap, ycalc, "T (K)", "Pvap (Pa)")
 
+                comp.Vapor_Pressure_Regression_Fit = r_fit
+                comp.Vapor_Pressure_Tabular_Data.XData = tvals
+                comp.Vapor_Pressure_Tabular_Data.YData = Pvap
+                comp.Vapor_Pressure_Tabular_Data.XName = "Temperature"
+                comp.Vapor_Pressure_Tabular_Data.YName = "Vapor Pressure"
+                comp.Vapor_Pressure_Tabular_Data.XUnit = "K"
+                comp.Vapor_Pressure_Tabular_Data.YUnit = "Pa"
+
             Catch ex As Exception
 
             End Try
@@ -229,6 +237,14 @@ Public Class ChEDLThermoParser
                 comp.Comments += "Ideal Gas Heat Capacity regression residual = " + r_fit.ToString(ci) + vbCrLf
                 comp.Comments += "Regressed Data Table" + vbCrLf
                 comp.Comments += GetTable(tvals, CpIG, ycalc, "T (K)", "Cp (kJ/kg.K)")
+
+                comp.Ideal_Gas_Heat_Capacity_Regression_Fit = r_fit
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.XData = tvals
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.YData = CpIG
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.XName = "Temperature"
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.YName = "Heat Capacity"
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.XUnit = "K"
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.YUnit = "kJ/[kg.K]"
 
             Catch ex As Exception
 
@@ -278,6 +294,14 @@ Public Class ChEDLThermoParser
                     comp.Comments += "Liquid Heat Capacity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
                     comp.Comments += GetTable(TrangeL, CpL, ycalc, "T (K)", "Cp (kJ/kg.K)")
+
+                    comp.Liquid_Heat_Capacity_Regression_Fit = r_fit
+                    comp.Liquid_Heat_Capacity_Tabular_Data.XData = TrangeL
+                    comp.Liquid_Heat_Capacity_Tabular_Data.YData = CpL
+                    comp.Liquid_Heat_Capacity_Tabular_Data.XName = "Temperature"
+                    comp.Liquid_Heat_Capacity_Tabular_Data.YName = "Heat Capacity"
+                    comp.Liquid_Heat_Capacity_Tabular_Data.XUnit = "K"
+                    comp.Liquid_Heat_Capacity_Tabular_Data.YUnit = "kJ/[kg.K]"
 
                 Else
 
@@ -337,6 +361,14 @@ Public Class ChEDLThermoParser
                     comp.Comments += "Solid Heat Capacity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
                     comp.Comments += GetTable(TrangeS, CpS, ycalc, "T (K)", "Cp (kJ/kg.K)")
+
+                    comp.Solid_Heat_Capacity_Regression_Fit = r_fit
+                    comp.Solid_Heat_Capacity_Tabular_Data.XData = TrangeS
+                    comp.Liquid_Heat_Capacity_Tabular_Data.YData = CpS
+                    comp.Solid_Heat_Capacity_Tabular_Data.XName = "Temperature"
+                    comp.Solid_Heat_Capacity_Tabular_Data.YName = "Heat Capacity"
+                    comp.Solid_Heat_Capacity_Tabular_Data.XUnit = "K"
+                    comp.Solid_Heat_Capacity_Tabular_Data.YUnit = "kJ/[kg.K]"
 
                 Else
 
@@ -398,6 +430,14 @@ Public Class ChEDLThermoParser
                     comp.Comments += "Regressed Data Table" + vbCrLf
                     comp.Comments += GetTable(TrangeS, DensS, ycalc, "T (K)", "rhoS (kg/m3)")
 
+                    comp.Solid_Density_Regression_Fit = r_fit
+                    comp.Solid_Density_Tabular_Data.XData = TrangeS
+                    comp.Solid_Density_Tabular_Data.YData = DensS
+                    comp.Solid_Density_Tabular_Data.XName = "Temperature"
+                    comp.Solid_Density_Tabular_Data.YName = "Density"
+                    comp.Solid_Density_Tabular_Data.XUnit = "K"
+                    comp.Solid_Density_Tabular_Data.YUnit = "kg/m3"
+
                 Else
 
                     comp.Comments += vbCrLf
@@ -457,6 +497,14 @@ Public Class ChEDLThermoParser
                     comp.Comments += "Regressed Data Table" + vbCrLf
                     comp.Comments += GetTable(TrangeL, DensL, ycalc, "T (K)", "rhoL (kg/m3)")
 
+                    comp.Liquid_Density_Regression_Fit = r_fit
+                    comp.Liquid_Density_Tabular_Data.XData = TrangeL
+                    comp.Liquid_Density_Tabular_Data.YData = DensL
+                    comp.Liquid_Density_Tabular_Data.XName = "Temperature"
+                    comp.Liquid_Density_Tabular_Data.YName = "Density"
+                    comp.Liquid_Density_Tabular_Data.XUnit = "K"
+                    comp.Liquid_Density_Tabular_Data.YUnit = "kg/m3"
+
                 Else
 
                     comp.Comments += vbCrLf
@@ -513,6 +561,14 @@ Public Class ChEDLThermoParser
                     comp.Comments += "Liquid Viscosity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
                     comp.Comments += GetTable(TrangeL, ViscL, ycalc, "T (K)", "muL (Pa.s)")
+
+                    comp.Liquid_Viscosity_Regression_Fit = r_fit
+                    comp.Liquid_Viscosity_Tabular_Data.XData = TrangeL
+                    comp.Liquid_Viscosity_Tabular_Data.YData = ViscL
+                    comp.Liquid_Viscosity_Tabular_Data.XName = "Temperature"
+                    comp.Liquid_Viscosity_Tabular_Data.YName = "Viscosity"
+                    comp.Liquid_Viscosity_Tabular_Data.XUnit = "K"
+                    comp.Liquid_Viscosity_Tabular_Data.YUnit = "Pa.s"
 
                 Else
 
@@ -573,6 +629,14 @@ Public Class ChEDLThermoParser
                     comp.Comments += "Regressed Data Table" + vbCrLf
                     comp.Comments += GetTable(TrangeV, ViscV, ycalc, "T (K)", "muV (Pa.s)")
 
+                    comp.Vapor_Viscosity_Regression_Fit = r_fit
+                    comp.Vapor_Viscosity_Tabular_Data.XData = TrangeV
+                    comp.Vapor_Viscosity_Tabular_Data.YData = ViscV
+                    comp.Vapor_Viscosity_Tabular_Data.XName = "Temperature"
+                    comp.Vapor_Viscosity_Tabular_Data.YName = "Viscosity"
+                    comp.Vapor_Viscosity_Tabular_Data.XUnit = "K"
+                    comp.Vapor_Viscosity_Tabular_Data.YUnit = "Pa.s"
+
                 Else
 
                     comp.Comments += vbCrLf
@@ -630,6 +694,14 @@ Public Class ChEDLThermoParser
                     comp.Comments += "Regressed Data Table" + vbCrLf
                     comp.Comments += GetTable(TrangeL, TCL, ycalc, "T (K)", "TCL (W/m.K)")
 
+                    comp.Liquid_Thermal_Conductivity_Regression_Fit = r_fit
+                    comp.Liquid_Thermal_Conductivity_Tabular_Data.XData = TrangeL
+                    comp.Liquid_Thermal_Conductivity_Tabular_Data.YData = TCL
+                    comp.Liquid_Thermal_Conductivity_Tabular_Data.XName = "Temperature"
+                    comp.Liquid_Thermal_Conductivity_Tabular_Data.YName = "Thermal Conductivity"
+                    comp.Liquid_Thermal_Conductivity_Tabular_Data.XUnit = "K"
+                    comp.Liquid_Thermal_Conductivity_Tabular_Data.YUnit = "W/m.K"
+
                 Else
 
                     comp.Comments += vbCrLf
@@ -685,6 +757,14 @@ Public Class ChEDLThermoParser
                     comp.Comments += "Vapor Thermal Conductivity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
                     comp.Comments += GetTable(TrangeV, TCV, ycalc, "T (K)", "TCV (W/m.K)")
+
+                    comp.Vapor_Thermal_Conductivity_Regression_Fit = r_fit
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.XData = TrangeV
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.YData = TCV
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.XName = "Temperature"
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.YName = "Thermal Conductivity"
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.XUnit = "K"
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.YUnit = "W/m.K"
 
                 Else
 
@@ -743,6 +823,14 @@ Public Class ChEDLThermoParser
                     comp.Comments += "Regressed Data Table" + vbCrLf
                     comp.Comments += GetTable(TrangeL, Hvap, ycalc, "T (K)", "Hvap (kJ/kg.K)")
 
+                    comp.Enthalpy_Of_Vaporization_Regression_Fit = r_fit
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.XData = TrangeL
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.YData = Hvap
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.XName = "Temperature"
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.YName = "Enthalpy"
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.XUnit = "K"
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.YUnit = "kJ/[kg.K]"
+
                 Else
 
                     comp.Comments += vbCrLf
@@ -799,6 +887,14 @@ Public Class ChEDLThermoParser
                     comp.Comments += "Surface Tension regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
                     comp.Comments += GetTable(TrangeL, SurfT, ycalc, "T (K)", "sigma (N/m)")
+
+                    comp.Surface_Tension_Regression_Fit = r_fit
+                    comp.Surface_Tension_Tabular_Data.XData = TrangeL
+                    comp.Surface_Tension_Tabular_Data.YData = SurfT
+                    comp.Surface_Tension_Tabular_Data.XName = "Temperature"
+                    comp.Surface_Tension_Tabular_Data.YName = "Surface Tension"
+                    comp.Surface_Tension_Tabular_Data.XUnit = "K"
+                    comp.Surface_Tension_Tabular_Data.YUnit = "N/m"
 
                 Else
 

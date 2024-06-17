@@ -146,6 +146,7 @@
     <Compile Include="ISimulationObject.vb" />
     <Compile Include="ISplashScreen.vb" />
     <Compile Include="ISwitch.vb" />
+    <Compile Include="ITabularData.vb" />
     <Compile Include="IUndoRedoAction.vb" />
     <Compile Include="IUnitOperation.vb" />
     <Compile Include="IUnitsOfMeasure.vb" />

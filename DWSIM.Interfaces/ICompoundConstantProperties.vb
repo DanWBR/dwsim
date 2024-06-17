@@ -201,6 +201,10 @@
     ''' <returns></returns>
     Property Vapor_Pressure_TMAX As Double
 
+    Property Vapor_Pressure_Regression_Fit As Double
+
+    Property Vapor_Pressure_Tabular_Data As ITabularData
+
     ''' <summary>
     ''' Ideal gas heat capacity equation A constant
     ''' </summary>
@@ -231,6 +235,10 @@
     ''' <returns></returns>
     Property Ideal_Gas_Heat_Capacity_Const_E As Double
 
+    Property Ideal_Gas_Heat_Capacity_Regression_Fit As Double
+
+    Property Ideal_Gas_Heat_Capacity_Tabular_Data As ITabularData
+
     ''' <summary>
     ''' Liquid viscosity equation A constant
     ''' </summary>
@@ -260,6 +268,10 @@
     ''' </summary>
     ''' <returns></returns>
     Property Liquid_Viscosity_Const_E As Double
+
+    Property Liquid_Viscosity_Regression_Fit As Double
+
+    Property Liquid_Viscosity_Tabular_Data As ITabularData
 
     ''' <summary>
     ''' Liquid density equation A constant
@@ -303,6 +315,10 @@
     ''' <returns></returns>
     Property Liquid_Density_Tmax As Double
 
+    Property Liquid_Density_Regression_Fit As Double
+
+    Property Liquid_Density_Tabular_Data As ITabularData
+
     ''' <summary>
     ''' Liquid heat capacity equation A constant
     ''' </summary>
@@ -344,6 +360,10 @@
     ''' </summary>
     ''' <returns></returns>
     Property Liquid_Heat_Capacity_Tmax As Double
+
+    Property Liquid_Heat_Capacity_Regression_Fit As Double
+
+    Property Liquid_Heat_Capacity_Tabular_Data As ITabularData
 
     ''' <summary>
     ''' Liquid thermal conductivity equation A constant
@@ -387,6 +407,10 @@
     ''' <returns></returns>
     Property Liquid_Thermal_Conductivity_Tmax As Double
 
+    Property Liquid_Thermal_Conductivity_Regression_Fit As Double
+
+    Property Liquid_Thermal_Conductivity_Tabular_Data As ITabularData
+
     ''' <summary>
     ''' Vapor thermal conductivity equation A constant
     ''' </summary>
@@ -428,6 +452,10 @@
     ''' </summary>
     ''' <returns></returns>
     Property Vapor_Thermal_Conductivity_Tmax As Double
+
+    Property Vapor_Thermal_Conductivity_Regression_Fit As Double
+
+    Property Vapor_Thermal_Conductivity_Tabular_Data As ITabularData
 
     ''' <summary>
     ''' Vapor viscosity equation A constant
@@ -471,6 +499,10 @@
     ''' <returns></returns>
     Property Vapor_Viscosity_Tmax As Double
 
+    Property Vapor_Viscosity_Regression_Fit As Double
+
+    Property Vapor_Viscosity_Tabular_Data As ITabularData
+
     ''' <summary>
     ''' Solid density equation A constant
     ''' </summary>
@@ -512,6 +544,10 @@
     ''' </summary>
     ''' <returns></returns>
     Property Solid_Density_Tmax As Double
+
+    Property Solid_Density_Regression_Fit As Double
+
+    Property Solid_Density_Tabular_Data As ITabularData
 
     ''' <summary>
     ''' Surface tension equation A constant
@@ -555,6 +591,10 @@
     ''' <returns></returns>
     Property Surface_Tension_Tmax As Double
 
+    Property Surface_Tension_Regression_Fit As Double
+
+    Property Surface_Tension_Tabular_Data As ITabularData
+
     ''' <summary>
     ''' Solid heat capacity equation A constant
     ''' </summary>
@@ -596,6 +636,10 @@
     ''' </summary>
     ''' <returns></returns>
     Property Solid_Heat_Capacity_Tmax As Double
+
+    Property Solid_Heat_Capacity_Regression_Fit As Double
+
+    Property Solid_Heat_Capacity_Tabular_Data As ITabularData
 
     ''' <summary>
     ''' Normal boiling point in K
@@ -662,6 +706,10 @@
     ''' </summary>
     ''' <returns></returns>
     Property HVap_TMAX As Double
+
+    Property Enthalpy_Of_Vaporization_Regression_Fit As Double
+
+    Property Enthalpy_Of_Vaporization_Tabular_Data As ITabularData
 
     ''' <summary>
     ''' UNIQUAC R parameter
