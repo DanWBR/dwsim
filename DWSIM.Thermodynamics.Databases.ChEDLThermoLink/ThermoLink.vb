@@ -185,7 +185,7 @@ Public Class ChEDLThermoParser
                 comp.Comments += GetTable(tvals, Pvap, ycalc, "T (K)", "Pvap (Pa)")
 
                 comp.Vapor_Pressure_Regression_Fit = r_fit
-                comp.Vapor_Pressure_Tabular_Data.XData = tvals
+                comp.Vapor_Pressure_Tabular_Data.XData = tvals.ToList()
                 comp.Vapor_Pressure_Tabular_Data.YData = Pvap
                 comp.Vapor_Pressure_Tabular_Data.XName = "Temperature"
                 comp.Vapor_Pressure_Tabular_Data.YName = "Vapor Pressure"
