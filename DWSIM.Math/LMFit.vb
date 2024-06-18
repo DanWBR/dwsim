@@ -457,6 +457,119 @@
 
         End Sub
 
+        'Generic Function Implementation
+
+        Private FunctionPointer As Func(Of Double(), Double, Double)
+
+        Public Function GetCoeffs(x As Double(), y As Double(), inest As Double(),
+                             epsg As Double, maxits As Integer, fp As Func(Of Double(), Double, Double)) As Object
+
+            Dim lmsolve As New MathEx.LM.levenbergmarquardt()
+
+            FunctionPointer = fp
+
+            lmsolve.DefineFuncGradDelegate(AddressOf fgeneric)
+
+            Dim newc(UBound(inest) + 1) As Double
+            Dim i As Integer = 1
+            Do
+                newc(i) = inest(i - 1)
+                i = i + 1
+            Loop Until i = UBound(inest) + 2
+
+            _x = x
+            _y = y
+
+            Dim info As Integer = 56
+
+            its = 0
+            lmsolve.levenbergmarquardtminimize(inest.Length, _x.Length, newc, epsg, epsg, epsg, maxits, info)
+
+            Dim coeffs(UBound(inest)) As Double
+
+            i = 0
+            Do
+                coeffs(i) = newc(i + 1)
+                i = i + 1
+            Loop Until i = UBound(inest) + 1
+
+            Dim ycalc = _x.Select(Function(xval) FunctionPointer.Invoke(newc, xval)).ToList()
+
+            Dim ymean = y.Sum / y.Count
+            Dim SST = y.Select(Function(yval) (yval - ymean) ^ 2).Sum
+
+            Dim errors As New List(Of Double)
+            Dim errors2 As New List(Of Double)
+            For i = 0 To y.Count - 1
+                errors.Add((y(i) - ycalc(i)) / y(i) * 100.0)
+                errors2.Add((y(i) - ycalc(i)) ^ 2)
+            Next
+
+            Dim R2 = 1.0 - errors2.Sum / SST
+
+            Return New Object() {coeffs, info, sum, its, ycalc, errors, R2}
+
+        End Function
+
+        Public Sub fgeneric(ByRef x As Double(), ByRef fvec As Double(), ByRef fjac As Double(,), ByRef iflag As Integer)
+
+            If Double.IsNaN(x(1)) Or Double.IsNegativeInfinity(x(1)) Or Double.IsPositiveInfinity(x(1)) Then iflag = -1
+            If Double.IsNaN(fvec(1)) Or Double.IsNegativeInfinity(fvec(1)) Or Double.IsPositiveInfinity(fvec(1)) Then iflag = -1
+
+            sum = 0.0#
+            Dim i As Integer
+            If iflag = 1 Then
+                i = 1
+                Do
+                    fvec(i) = -_y(i - 1) + FunctionPointer.Invoke(x, _x(i - 1))
+                    sum += (fvec(i)) ^ 2
+                    i = i + 1
+                Loop Until i = UBound(_y) + 2
+            ElseIf iflag = 2 Then
+                i = 1
+                Do
+                    Dim grad = FunctionGradient(x, _x(i - 1))
+                    For j = 1 To x.Length - 1
+                        fjac(i, j) = grad(j)
+                    Next
+                    i = i + 1
+                Loop Until i = UBound(_y) + 2
+            End If
+
+            its += 1
+
+        End Sub
+
+        Private Function FunctionGradient(ByVal x() As Double, xval As Double) As Double()
+
+            Dim epsilon As Double = 0.1
+
+            Dim f1, f2 As Double
+            Dim g(x.Length - 1), x1(x.Length - 1), x2(x.Length - 1) As Double
+            Dim j, k As Integer
+
+            For j = 1 To x.Length - 1
+                For k = 1 To x.Length - 1
+                    x1(k) = x(k)
+                    x2(k) = x(k)
+                Next
+                If x(j) <> 0.0# Then
+                    x1(j) = x(j) * (1.0# + epsilon)
+                    x2(j) = x(j) * (1.0# - epsilon)
+                Else
+                    x1(j) = x(j) + epsilon
+                    x2(j) = x(j) - epsilon
+                End If
+                f1 = FunctionPointer.Invoke(x1, xval)
+                f2 = FunctionPointer.Invoke(x2, xval)
+                g(j) = (f2 - f1) / (x2(j) - x1(j))
+            Next
+
+            Return g
+
+        End Function
+
+
     End Class
 
 End Namespace

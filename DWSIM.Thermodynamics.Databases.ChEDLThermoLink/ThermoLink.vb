@@ -161,16 +161,7 @@ Public Class ChEDLThermoParser
                 coeffs(3) = 0.0000042881
                 coeffs(4) = 2.0#
 
-                'obj = lmfit.GetCoeffs(tvals.ToArray, Pvap.ToArray, coeffs.Clone, LMFit.FitType.Pvap, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
-                'fitcoeffs = obj(0)
-                'r_fit = obj(2)
-                'n_fit = obj(3)
-
-                obj = lmfit.GetCoeffs(tvals.ToArray, Pvap.ToArray, coeffs.Clone, 0.00000001, 10000,
-                                      Function(c, x)
-                                          Dim val = PropertyPackages.PropertyPackage.CalcCSTDepProp(101, c(1), c(2), c(3), c(4), c(5), x, 0)
-                                          Return val
-                                      End Function)
+                obj = lmfit.GetCoeffs(tvals.ToArray, Pvap.ToArray, coeffs.Clone, LMFit.FitType.Pvap, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 fitcoeffs = obj(0)
                 r_fit = obj(2)
                 n_fit = obj(3)
