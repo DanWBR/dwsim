@@ -1513,7 +1513,7 @@ namespace DWSIM.UI.Shared
             });
             model.LegendFontSize = 11;
             model.LegendPlacement = OxyPlot.LegendPlacement.Outside;
-            model.LegendOrientation = OxyPlot.LegendOrientation.Vertical;
+            model.LegendOrientation = OxyPlot.LegendOrientation.Horizontal;
             model.LegendPosition = OxyPlot.LegendPosition.BottomCenter;
             model.TitleHorizontalAlignment = OxyPlot.TitleHorizontalAlignment.CenteredWithinView;
             model.AddLineSeries(x, y, ytitle);
