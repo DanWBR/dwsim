@@ -145,6 +145,7 @@ Public Class ChEDLThermoParser
 
             Try
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
@@ -202,6 +203,7 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.heat_capacity")
                 calculator = instance.HeatCapacityGas(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeV
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
@@ -238,7 +240,7 @@ Public Class ChEDLThermoParser
                 comp.Comments += GetTable(tvals, CpIG, ycalc, "T (K)", "Cp (kJ/kg.K)")
 
                 comp.Ideal_Gas_Heat_Capacity_Regression_Fit = r_fit
-                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.XData = tvals
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.XData = tvals.ToList()
                 comp.Ideal_Gas_Heat_Capacity_Tabular_Data.YData = CpIG
                 comp.Ideal_Gas_Heat_Capacity_Tabular_Data.XName = "Temperature"
                 comp.Ideal_Gas_Heat_Capacity_Tabular_Data.YName = "Heat Capacity"
@@ -255,6 +257,7 @@ Public Class ChEDLThermoParser
 
                 calculator = instance.HeatCapacityLiquid(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
@@ -296,7 +299,7 @@ Public Class ChEDLThermoParser
                     comp.Comments += GetTable(tvals, CpL, ycalc, "T (K)", "Cp (kJ/kg.K)")
 
                     comp.Liquid_Heat_Capacity_Regression_Fit = r_fit
-                    comp.Liquid_Heat_Capacity_Tabular_Data.XData = tvals
+                    comp.Liquid_Heat_Capacity_Tabular_Data.XData = tvals.ToList()
                     comp.Liquid_Heat_Capacity_Tabular_Data.YData = CpL
                     comp.Liquid_Heat_Capacity_Tabular_Data.XName = "Temperature"
                     comp.Liquid_Heat_Capacity_Tabular_Data.YName = "Heat Capacity"
@@ -323,6 +326,7 @@ Public Class ChEDLThermoParser
 
                 calculator = instance.HeatCapacitySolid(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeS
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
@@ -364,7 +368,7 @@ Public Class ChEDLThermoParser
                     comp.Comments += GetTable(tvals, CpS, ycalc, "T (K)", "Cp (kJ/kg.K)")
 
                     comp.Solid_Heat_Capacity_Regression_Fit = r_fit
-                    comp.Solid_Heat_Capacity_Tabular_Data.XData = tvals
+                    comp.Solid_Heat_Capacity_Tabular_Data.XData = tvals.ToList()
                     comp.Liquid_Heat_Capacity_Tabular_Data.YData = CpS
                     comp.Solid_Heat_Capacity_Tabular_Data.XName = "Temperature"
                     comp.Solid_Heat_Capacity_Tabular_Data.YName = "Heat Capacity"
@@ -392,6 +396,7 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.volume")
                 calculator = instance.VolumeSolid(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeS
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
@@ -433,7 +438,7 @@ Public Class ChEDLThermoParser
                     comp.Comments += GetTable(tvals, DensS, ycalc, "T (K)", "rhoS (kg/m3)")
 
                     comp.Solid_Density_Regression_Fit = r_fit
-                    comp.Solid_Density_Tabular_Data.XData = tvals
+                    comp.Solid_Density_Tabular_Data.XData = tvals.ToList()
                     comp.Solid_Density_Tabular_Data.YData = DensS
                     comp.Solid_Density_Tabular_Data.XName = "Temperature"
                     comp.Solid_Density_Tabular_Data.YName = "Density"
@@ -460,6 +465,7 @@ Public Class ChEDLThermoParser
 
                 calculator = instance.VolumeLiquid(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.TP_or_T_dependent_property(item.ToPython(), 101325.0F.ToPython())
                     If p IsNot Nothing Then
@@ -501,7 +507,7 @@ Public Class ChEDLThermoParser
                     comp.Comments += GetTable(tvals, DensL, ycalc, "T (K)", "rhoL (kg/m3)")
 
                     comp.Liquid_Density_Regression_Fit = r_fit
-                    comp.Liquid_Density_Tabular_Data.XData = tvals
+                    comp.Liquid_Density_Tabular_Data.XData = tvals.ToList()
                     comp.Liquid_Density_Tabular_Data.YData = DensL
                     comp.Liquid_Density_Tabular_Data.XName = "Temperature"
                     comp.Liquid_Density_Tabular_Data.YName = "Density"
@@ -529,6 +535,7 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.viscosity")
                 calculator = instance.ViscosityLiquid(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.TP_or_T_dependent_property(item.ToPython(), 101325.0F.ToPython())
                     If p IsNot Nothing Then
@@ -567,7 +574,7 @@ Public Class ChEDLThermoParser
                     comp.Comments += GetTable(tvals, ViscL, ycalc, "T (K)", "muL (Pa.s)")
 
                     comp.Liquid_Viscosity_Regression_Fit = r_fit
-                    comp.Liquid_Viscosity_Tabular_Data.XData = tvals
+                    comp.Liquid_Viscosity_Tabular_Data.XData = tvals.ToList()
                     comp.Liquid_Viscosity_Tabular_Data.YData = ViscL
                     comp.Liquid_Viscosity_Tabular_Data.XName = "Temperature"
                     comp.Liquid_Viscosity_Tabular_Data.YName = "Viscosity"
@@ -594,6 +601,7 @@ Public Class ChEDLThermoParser
 
                 calculator = instance.ViscosityGas(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeV
                     Dim p = calculator.TP_or_T_dependent_property(item.ToPython(), 101325.0F.ToPython())
                     If p IsNot Nothing Then
@@ -635,7 +643,7 @@ Public Class ChEDLThermoParser
                     comp.Comments += GetTable(tvals, ViscV, ycalc, "T (K)", "muV (Pa.s)")
 
                     comp.Vapor_Viscosity_Regression_Fit = r_fit
-                    comp.Vapor_Viscosity_Tabular_Data.XData = tvals
+                    comp.Vapor_Viscosity_Tabular_Data.XData = tvals.ToList()
                     comp.Vapor_Viscosity_Tabular_Data.YData = ViscV
                     comp.Vapor_Viscosity_Tabular_Data.XName = "Temperature"
                     comp.Vapor_Viscosity_Tabular_Data.YName = "Viscosity"
@@ -663,6 +671,7 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.thermal_conductivity")
                 calculator = instance.ThermalConductivityLiquid(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.TP_or_T_dependent_property(item.ToPython(), 101325.0F.ToPython())
                     If p IsNot Nothing Then
@@ -728,6 +737,7 @@ Public Class ChEDLThermoParser
 
                 calculator = instance.ThermalConductivityGas(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeV
                     Dim p = calculator.TP_or_T_dependent_property(item.ToPython(), 101325.0F.ToPython())
                     If p IsNot Nothing Then
@@ -766,7 +776,7 @@ Public Class ChEDLThermoParser
                     comp.Comments += GetTable(tvals, TCV, ycalc, "T (K)", "TCV (W/m.K)")
 
                     comp.Vapor_Thermal_Conductivity_Regression_Fit = r_fit
-                    comp.Vapor_Thermal_Conductivity_Tabular_Data.XData = tvals
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.XData = tvals.ToList()
                     comp.Vapor_Thermal_Conductivity_Tabular_Data.YData = TCV
                     comp.Vapor_Thermal_Conductivity_Tabular_Data.XName = "Temperature"
                     comp.Vapor_Thermal_Conductivity_Tabular_Data.YName = "Thermal Conductivity"
@@ -794,6 +804,7 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.phase_change")
                 calculator = instance.EnthalpyVaporization(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
@@ -832,7 +843,7 @@ Public Class ChEDLThermoParser
                     comp.Comments += GetTable(tvals, Hvap, ycalc, "T (K)", "Hvap (kJ/kg.K)")
 
                     comp.Enthalpy_Of_Vaporization_Regression_Fit = r_fit
-                    comp.Enthalpy_Of_Vaporization_Tabular_Data.XData = tvals
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.XData = tvals.ToList()
                     comp.Enthalpy_Of_Vaporization_Tabular_Data.YData = Hvap
                     comp.Enthalpy_Of_Vaporization_Tabular_Data.XName = "Temperature"
                     comp.Enthalpy_Of_Vaporization_Tabular_Data.YName = "Enthalpy"
@@ -860,6 +871,7 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.interface")
                 calculator = instance.SurfaceTension(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
@@ -898,7 +910,7 @@ Public Class ChEDLThermoParser
                     comp.Comments += GetTable(tvals, SurfT, ycalc, "T (K)", "sigma (N/m)")
 
                     comp.Surface_Tension_Regression_Fit = r_fit
-                    comp.Surface_Tension_Tabular_Data.XData = tvals
+                    comp.Surface_Tension_Tabular_Data.XData = tvals.ToList()
                     comp.Surface_Tension_Tabular_Data.YData = SurfT
                     comp.Surface_Tension_Tabular_Data.XName = "Temperature"
                     comp.Surface_Tension_Tabular_Data.YName = "Surface Tension"
