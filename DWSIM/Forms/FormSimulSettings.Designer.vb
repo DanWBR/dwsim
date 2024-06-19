@@ -1578,7 +1578,7 @@ Partial Class FormSimulSettings
     Public WithEvents Button6 As Button
     Friend WithEvents Label19 As Label
     Friend WithEvents Column11 As DataGridViewTextBoxColumn
-    Friend WithEvents colAdd As DataGridViewCheckBoxColumn
+    Public WithEvents colAdd As DataGridViewCheckBoxColumn
     Friend WithEvents colName As DataGridViewTextBoxColumn
     Friend WithEvents colTag As DataGridViewTextBoxColumn
     Friend WithEvents casno As DataGridViewTextBoxColumn

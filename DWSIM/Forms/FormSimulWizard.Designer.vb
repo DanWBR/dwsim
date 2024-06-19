@@ -935,7 +935,7 @@ Partial Class FormSimulWizard
     Friend WithEvents rbNoFlash As RadioButton
     Friend WithEvents rbVLLE As RadioButton
     Friend WithEvents Column11 As DataGridViewTextBoxColumn
-    Friend WithEvents colAdd As DataGridViewCheckBoxColumn
+    Public WithEvents colAdd As DataGridViewCheckBoxColumn
     Friend WithEvents colName As DataGridViewTextBoxColumn
     Friend WithEvents colCAS As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
