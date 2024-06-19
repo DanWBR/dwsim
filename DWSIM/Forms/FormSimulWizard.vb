@@ -982,7 +982,7 @@ Public Class FormSimulWizard
 
     End Sub
 
-    Private Sub UpdateAddedList()
+    Public Sub UpdateAddedList()
 
         Dim added As String = ""
         For Each c In CurrentFlowsheet.Options.SelectedComponents.Values
