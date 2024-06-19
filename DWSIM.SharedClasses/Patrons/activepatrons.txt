@@ -27,6 +27,7 @@
 🌟 Justin Parrot
 🌟 Leonard Seed
 🌟 Lorenzo Montani
+🌟 Magnus Carlsen
 🌟 Marcos Guimarães
 🌟 Martin Heiser
 🌟 Michael Papantoniou
@@ -95,7 +96,7 @@ Rupert Easter
 Ryszard Sadowski
 Satinder Virdi
 Shubham Wankhede
-SP&POS Engenharia
+SP&&POS Engenharia
 Tetsuo Fuchino
 Thomas Baur
 Tibor Lányi
