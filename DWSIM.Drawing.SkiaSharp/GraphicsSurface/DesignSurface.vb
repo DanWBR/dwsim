@@ -512,7 +512,7 @@ Public Class GraphicsSurface
 
                         End If
 
-                        If dobj.Owner?.GetFlowsheet.DynamicMode Then
+                        If dobj.Owner IsNot Nothing AndAlso dobj.Owner.GetFlowsheet() IsNot Nothing AndAlso dobj.Owner.GetFlowsheet.DynamicMode Then
 
                             If dobj.ObjectType = ObjectType.MaterialStream Then
 
@@ -533,7 +533,7 @@ Public Class GraphicsSurface
 
                             End If
 
-                            End If
+                        End If
 
 
                     End If
