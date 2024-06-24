@@ -448,7 +448,7 @@
     <value>&amp;Modo Dinâmico</value>
   </data>
   <data name="TSMIAddUtility.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="TSMIAddUtility.Text" xml:space="preserve">
     <value>Adicionar Utilitário</value>

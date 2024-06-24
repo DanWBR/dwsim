@@ -169,7 +169,4 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
-  </data>
 </root>

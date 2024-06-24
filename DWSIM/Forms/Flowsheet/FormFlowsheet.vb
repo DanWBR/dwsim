@@ -1557,6 +1557,16 @@ Public Class FormFlowsheet
                     .Tag = attchu
                 End With
                 AddHandler tsmi.Click, AddressOf UtilitiesTSMIHandler
+                AddHandler DirectCast(attchu, AttachedUtilityClass).FormClosed,
+                    Sub(s2, e2)
+                        Try
+                            UIThread(Sub()
+                                         UtilitiesTSMI.DropDownItems.Remove(tsmi)
+                                         Application.DoEvents()
+                                     End Sub)
+                        Catch ex As Exception
+                        End Try
+                    End Sub
                 UtilitiesTSMI.DropDownItems.Add(tsmi)
             Next
         Next
@@ -1569,7 +1579,10 @@ Public Class FormFlowsheet
         If f.Visible Then
             f.Select()
         Else
-            DisplayForm(f)
+            Try
+                DisplayForm(f)
+            Catch ex As Exception
+            End Try
         End If
 
     End Sub
