@@ -301,7 +301,7 @@ namespace DWSIM.UI.Desktop.Editors
                         var comp = Newtonsoft.Json.JsonConvert.DeserializeObject<Thermodynamics.BaseClasses.ConstantProperties>(System.IO.File.ReadAllText(fn));
                         if (!flowsheet.SelectedCompounds.ContainsKey(comp.Name))
                         {
-                            flowsheet.AvailableCompounds.Add(comp.Name, comp);
+                            if (!flowsheet.AvailableCompounds.ContainsKey(comp.Name)) flowsheet.AvailableCompounds.Add(comp.Name, comp);
                             flowsheet.SelectedCompounds.Add(comp.Name, comp);
                             foreach (var obj in flowsheet.SimulationObjects.Values.Where((x) => (x is Thermodynamics.Streams.MaterialStream)))
                             {
