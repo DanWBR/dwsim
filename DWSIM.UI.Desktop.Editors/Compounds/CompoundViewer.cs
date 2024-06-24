@@ -15,6 +15,7 @@ using DWSIM.UI.Shared;
 
 using cv = DWSIM.SharedClasses.SystemsOfUnits.Converter;
 using DWSIM.Thermodynamics.Streams;
+using System.IO;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -719,6 +720,29 @@ namespace DWSIM.UI.Desktop.Editors
 
         }
 
+
+        public void ExportToJSON(DynamicLayout layout)
+        {
+            layout.CreateAndAddLabelAndButtonRow("Export Compound to JSON File", "Export to JSON", null, (arg1, arg2) =>
+            {
+                var dialog = new SaveFileDialog();
+                dialog.Title = "Save Compound to JSON File";
+                dialog.Filters.Add(new FileFilter("JSON File", new[] { ".json" }));
+                dialog.CurrentFilterIndex = 0;
+                if (dialog.ShowDialog(layout) == DialogResult.Ok)
+                {
+                    try
+                    {
+                        File.WriteAllText(dialog.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(compound, Newtonsoft.Json.Formatting.Indented));
+                        flowsheet.ShowMessage("Compound '" + compound.Name + "' successfully saved to JSON file.", IFlowsheet.MessageType.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        flowsheet.ShowMessage("Error saving compound to JSON file: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                    }
+                }
+            });
+        }
 
     }
 }
