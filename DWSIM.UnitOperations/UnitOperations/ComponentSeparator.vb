@@ -301,6 +301,7 @@ Namespace UnitOperations
             Next
             specstr.Phases(0).Properties.molarflow = summ
             specstr.Phases(0).Properties.massflow = sumw
+            specstr.DefinedFlow = FlowSpec.Mass
             For Each sb As Compound In specstr.Phases(0).Compounds.Values
                 If summ <> 0.0# Then sb.MoleFraction = sb.MolarFlow.GetValueOrDefault / summ Else sb.MoleFraction = 0.0#
                 If sumw <> 0.0# Then sb.MassFraction = sb.MassFlow.GetValueOrDefault / sumw Else sb.MassFraction = 0.0#
@@ -313,6 +314,7 @@ Namespace UnitOperations
             Next
             otherstr.Phases(0).Properties.molarflow = summ
             otherstr.Phases(0).Properties.massflow = sumw
+            otherstr.DefinedFlow = FlowSpec.Mass
             For Each sb As Compound In otherstr.Phases(0).Compounds.Values
                 If summ <> 0.0# Then sb.MoleFraction = sb.MolarFlow.GetValueOrDefault / summ Else sb.MoleFraction = 0.0#
                 If sumw <> 0.0# Then sb.MassFraction = sb.MassFlow.GetValueOrDefault / sumw Else sb.MassFraction = 0.0#
