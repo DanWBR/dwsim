@@ -474,8 +474,13 @@ Public Class FormMain
 
         If Me.MdiChildren.Length > 0 And Not Me.CancelClosing Then
             Me.CancelClosing = False
-            Dim ms As MsgBoxResult = MessageBox.Show(DWSIM.App.GetLocalString("Existemsimulaesabert"), DWSIM.App.GetLocalString("Ateno"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If ms = MsgBoxResult.No Then e.Cancel = True
+            If Not IsPro Then
+                Dim ms As MsgBoxResult = MessageBox.Show(DWSIM.App.GetLocalString("Existemsimulaesabert"), DWSIM.App.GetLocalString("Ateno"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                If ms = MsgBoxResult.No Then e.Cancel = True
+            Else
+                Dim ms As MsgBoxResult = MessageBox.Show("There are opened windows, are you sure you want to close DWSIM Pro?", "DWSIM Pro", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                If ms = MsgBoxResult.No Then e.Cancel = True
+            End If
         End If
 
         If Not e.Cancel Then
