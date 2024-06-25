@@ -181,9 +181,6 @@
   <data name="cbExternalSolver.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 21</value>
   </data>
-  <data name="LabelExternalSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 147</value>
-  </data>
   <data name="LabelExternalSolver.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 13</value>
   </data>
@@ -194,74 +191,17 @@
   <data name="GroupBoxParameters.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 210</value>
+  <data name="cbInternalSolver.Location" type="System.Drawing.Point, System.Drawing">
+    <value>163, 116</value>
   </data>
-  <data name="TabPage5.Text" xml:space="preserve">
-    <value>General</value>
+  <data name="cbInternalSolver.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 21</value>
   </data>
-  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 210</value>
+  <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
   </data>
-  <data name="TabPage6.Text" xml:space="preserve">
-    <value>Dimensions</value>
-  </data>
-  <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 210</value>
-  </data>
-  <data name="TabPage7.Text" xml:space="preserve">
-    <value>Catalyst Info</value>
-  </data>
-  <data name="TabPage8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 210</value>
-  </data>
-  <data name="TabPage8.Text" xml:space="preserve">
-    <value>Annotations</value>
-  </data>
-  <data name="cbSlurryVisc.Items1" xml:space="preserve">
-    <value>Yoshida et al</value>
-  </data>
-  <data name="cbSlurryVisc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>181, 84</value>
-  </data>
-  <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 88</value>
-  </data>
-  <data name="lblPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>321, 57</value>
-  </data>
-  <data name="tbUserDefDP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 54</value>
-  </data>
-  <data name="chkUseUserDefDP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 58</value>
-  </data>
-  <data name="chkUseUserDefDP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 17</value>
-  </data>
-  <data name="chkUseUserDefDP.Text" xml:space="preserve">
-    <value>Constant Linear Pressure Drop</value>
-  </data>
-  <data name="TextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 25</value>
-  </data>
-  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 28</value>
-  </data>
-  <data name="TabPage9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 210</value>
-  </data>
-  <data name="TabPage9.Text" xml:space="preserve">
-    <value>Advanced</value>
-  </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 236</value>
-  </data>
-  <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 255</value>
-  </data>
-  <data name="GroupBoxParameters.Text" xml:space="preserve">
-    <value>Calculation Parameters</value>
+  <data name="Label22.Text" xml:space="preserve">
+    <value>Internal Solver</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 24</value>
@@ -322,6 +262,45 @@
   </data>
   <data name="tbOutletTemperature.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 20</value>
+  </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>373, 210</value>
+  </data>
+  <data name="TabPage5.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>373, 210</value>
+  </data>
+  <data name="TabPage6.Text" xml:space="preserve">
+    <value>Dimensions</value>
+  </data>
+  <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>373, 210</value>
+  </data>
+  <data name="TabPage7.Text" xml:space="preserve">
+    <value>Catalyst Info</value>
+  </data>
+  <data name="TabPage8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>373, 210</value>
+  </data>
+  <data name="TabPage8.Text" xml:space="preserve">
+    <value>Annotations</value>
+  </data>
+  <data name="TabPage9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>373, 210</value>
+  </data>
+  <data name="TabPage9.Text" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>381, 236</value>
+  </data>
+  <data name="GroupBoxParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 255</value>
+  </data>
+  <data name="GroupBoxParameters.Text" xml:space="preserve">
+    <value>Calculation Parameters</value>
   </data>
   <data name="nupNT.Location" type="System.Drawing.Point, System.Drawing">
     <value>226, 126</value>
@@ -436,6 +415,36 @@
   </data>
   <data name="tbCatDiam.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 20</value>
+  </data>
+  <data name="cbSlurryVisc.Items1" xml:space="preserve">
+    <value>Yoshida et al</value>
+  </data>
+  <data name="cbSlurryVisc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>181, 84</value>
+  </data>
+  <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 88</value>
+  </data>
+  <data name="lblPDrop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>321, 57</value>
+  </data>
+  <data name="tbUserDefDP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 54</value>
+  </data>
+  <data name="chkUseUserDefDP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 58</value>
+  </data>
+  <data name="chkUseUserDefDP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 17</value>
+  </data>
+  <data name="chkUseUserDefDP.Text" xml:space="preserve">
+    <value>Constant Linear Pressure Drop</value>
+  </data>
+  <data name="TextBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 25</value>
+  </data>
+  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 28</value>
   </data>
   <data name="GroupBoxConnections.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>

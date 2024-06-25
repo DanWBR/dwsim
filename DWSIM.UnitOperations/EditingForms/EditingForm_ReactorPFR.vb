@@ -142,6 +142,8 @@ Public Class EditingForm_ReactorPFR
                     cbCalcMode.SelectedIndex = 3
             End Select
 
+            cbInternalSolver.SelectedIndex = SimObject.InternalSolver
+
             tbOutletTemperature.Text = su.Converter.ConvertFromSI(units.temperature, .OutletTemperature).ToString(nf)
             tbVol.Text = su.Converter.ConvertFromSI(units.volume, .Volume).ToString(nf)
             tbLength.Text = su.Converter.ConvertFromSI(units.distance, .Length).ToString(nf)
@@ -869,6 +871,12 @@ Public Class EditingForm_ReactorPFR
     Private Sub cbSlurryVisc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSlurryVisc.SelectedIndexChanged
 
         SimObject.SlurryViscosityMode = cbSlurryVisc.SelectedIndex
+
+    End Sub
+
+    Private Sub cbInternalSolver_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbInternalSolver.SelectedIndexChanged
+
+        SimObject.InternalSolver = cbInternalSolver.SelectedIndex
 
     End Sub
 
