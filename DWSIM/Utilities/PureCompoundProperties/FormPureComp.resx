@@ -312,6 +312,9 @@
   <data name="&gt;&gt;ComboBox1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn28.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn28</value>
+  </data>
   <data name="FaTabStripItemLIQTCOND.Size" type="System.Drawing.Size, System.Drawing">
     <value>910, 529</value>
   </data>
@@ -420,8 +423,8 @@
   <data name="Button3.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="FaTabStripItem6.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn21.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -659,9 +662,6 @@
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
-  </data>
-  <data name="GridProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>906, 410</value>
   </data>
   <data name="tbSMILES.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1581,9 +1581,6 @@
   <data name="GraphVisc.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
-  </data>
   <data name="TextBoxComments.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -1701,9 +1698,6 @@
   <data name="SaveFileDialog2.Filter" xml:space="preserve">
     <value>Arquivos XLSX|*.xlsx</value>
   </data>
-  <data name="&gt;&gt;chkEnableEdit.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
   <data name="FaTabStripSolid.Size" type="System.Drawing.Size, System.Drawing">
     <value>934, 550</value>
   </data>
@@ -1745,6 +1739,9 @@
   </data>
   <data name="&gt;&gt;GraphCpSolid.Parent" xml:space="preserve">
     <value>FaTabStripItemCPSOLID</value>
+  </data>
+  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
   </data>
   <data name="GraphSurfT.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 8.25pt</value>
@@ -1877,6 +1874,9 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Propriedades</value>
+  </data>
+  <data name="FaTabStripItem6.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;GraphLiqDens.Parent" xml:space="preserve">
     <value>FaTabStripItemLIQDENS</value>
@@ -2067,8 +2067,8 @@
   <data name="DataGridViewTextBoxColumn31.HeaderText" xml:space="preserve">
     <value>T2</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn28.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn28</value>
+  <data name="GridProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>906, 410</value>
   </data>
   <data name="&gt;&gt;DataTableVapour.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2112,8 +2112,8 @@
   <data name="GraphVisc.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="&gt;&gt;chkEnableEdit.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="GraphLiqThermCond.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 8.25pt</value>
