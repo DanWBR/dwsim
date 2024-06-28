@@ -15,6 +15,8 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
 
@@ -39,6 +41,7 @@ Public Class FormOptions
             Button7.Enabled = False
             btnDownPy.Enabled = False
             tbPythonPath.Enabled = False
+            FaTabStrip1.TabPages.Remove(TabUserDatasets)
         End If
 
         Me.chkEnableParallelCalcs.Checked = My.Settings.EnableParallelProcessing
@@ -50,6 +53,8 @@ Public Class FormOptions
         Me.KryptonCheckBox6.Checked = My.Settings.BackupActivated
         Me.KryptonTextBox1.Text = My.Settings.BackupFolder
         Me.TrackBar1.Value = My.Settings.BackupInterval
+
+        chkoverrjson.Checked = My.Settings.ReplaceJSONUserCompounds
 
         Me.chkIgnoreCompConstData.Checked = My.Settings.IgnoreCompoundPropertiesOnLoad
 
@@ -155,7 +160,7 @@ Public Class FormOptions
 
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
         'add user component database
-        If Me.OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        If Me.OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             Dim path = Me.OpenFileDialog1.FileName
             Try
                 Dim componentes As ConstantProperties()
@@ -187,7 +192,7 @@ Public Class FormOptions
     End Sub
     Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
         'Add interaction parameter user database
-        If Me.OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        If Me.OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Dim path = Me.OpenFileDialog1.FileName
 
             If Not My.Settings.UserInteractionsDatabases.Contains(path) Then
@@ -260,6 +265,22 @@ Public Class FormOptions
             Me.dgvdb.Rows(Me.dgvdb.Rows.Count - 1).Cells(3).ToolTipText = DWSIM.App.GetLocalString("Selado")
             Me.dgvdb.Rows(Me.dgvdb.Rows.Count - 1).Cells(4).ToolTipText = DWSIM.App.GetLocalString("Selado")
         End If
+
+        For Each cpath In My.Settings.UserCompounds
+            If cpath.StartsWith("//Simulate 365 Dashboard") Then
+                Using fileStream As Stream = Simulate365.Services.FileDownloadService.GetFileBySimulatePath(cpath)
+                    If fileStream IsNot Nothing Then
+                        dgjsonfiles.Rows.Add(New Object() {dgjsonfiles.Rows.Count + 1, cpath, My.Resources.icons8_cancel})
+                        dgjsonfiles.Rows(dgjsonfiles.Rows.Count - 1).Cells(2).ToolTipText = DWSIM.App.GetLocalString("Remove")
+                    End If
+                End Using
+            Else
+                If File.Exists(cpath) Then
+                    dgjsonfiles.Rows.Add(New Object() {dgjsonfiles.Rows.Count + 1, cpath, My.Resources.icons8_cancel})
+                    dgjsonfiles.Rows(dgjsonfiles.Rows.Count - 1).Cells(2).ToolTipText = DWSIM.App.GetLocalString("Remove")
+                End If
+            End If
+        Next
 
         'chemsep database
         If My.Application.MainWindowForm.loadedCSDB Then
@@ -347,7 +368,7 @@ Public Class FormOptions
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        If MessageBox.Show(DWSIM.App.GetLocalString("AreYouSure"), "DWSIM", MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
+        If MessageBox.Show(DWSIM.App.GetLocalString("AreYouSure"), "DWSIM", MessageBoxButtons.YesNo) = DialogResult.Yes Then
             If Directory.Exists(My.Settings.BackupFolder) Then
                 Try
                     For Each f As String In Directory.GetFiles(My.Settings.BackupFolder, "*.dw*")
@@ -476,7 +497,7 @@ Public Class FormOptions
     End Sub
 
     Private Sub btnClearDir_Click(sender As Object, e As EventArgs) Handles btnClearDir.Click
-        If MessageBox.Show(DWSIM.App.GetLocalString("AreYouSure"), "DWSIM", MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
+        If MessageBox.Show(DWSIM.App.GetLocalString("AreYouSure"), "DWSIM", MessageBoxButtons.YesNo) = DialogResult.Yes Then
             Dim configdir = tbConfigDir.Text
             If Directory.Exists(configdir) Then
                 Try
@@ -500,5 +521,60 @@ Public Class FormOptions
 
     Private Sub btnDownPy_Click(sender As Object, e As EventArgs) Handles btnDownPy.Click
         Process.Start("https://winpython.github.io/")
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        FormMain.AnalyticsProvider?.RegisterEvent("Importing Compounds from JSON Files", "", Nothing)
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON file", "*.json")})
+        If openedFile IsNot Nothing Then
+            Try
+                Dim c = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(openedFile.ReadAllText())
+                If chkoverrjson.Checked Then
+                    If Not My.Application.MainWindowForm.AvailableComponents.ContainsKey(c.Name) Then
+                        My.Application.MainWindowForm.AvailableComponents.Add(c.Name, c)
+                    Else
+                        My.Application.MainWindowForm.AvailableComponents(c.Name) = c
+                    End If
+                Else
+                    If Not My.Application.MainWindowForm.AvailableComponents.ContainsKey(c.Name) Then
+                        My.Application.MainWindowForm.AvailableComponents.Add(c.Name, c)
+                    End If
+                End If
+                If Not My.Settings.UserCompounds.Contains(openedFile.FullPath) Then
+                    My.Settings.UserCompounds.Add(openedFile.FullPath)
+                    dgjsonfiles.Rows.Add(New Object() {dgjsonfiles.Rows.Count + 1, openedFile.FullPath, My.Resources.icons8_cancel})
+                    dgjsonfiles.Rows(dgjsonfiles.Rows.Count - 1).Cells(2).ToolTipText = DWSIM.App.GetLocalString("Remove")
+                    My.Settings.Save()
+                    MessageBox.Show("File successfully added to the list.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("The selected file is already on the list.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                End If
+            Catch ex As Exception
+                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ": " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
+    Private Sub chkoverrjson_CheckedChanged(sender As Object, e As EventArgs) Handles chkoverrjson.CheckedChanged
+
+        My.Settings.ReplaceJSONUserCompounds = chkoverrjson.Checked
+
+    End Sub
+
+    Private Sub dgjsonfiles_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgjsonfiles.CellContentClick
+        'remove component
+        If e.ColumnIndex = 2 Then
+            Dim result = MessageBox.Show("Remove file " & dgjsonfiles.Rows(e.RowIndex).Cells(1).Value & " from list?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+            If result = DialogResult.Yes Then
+                My.Settings.UserCompounds.Remove(Me.dgjsonfiles.Rows(e.RowIndex).Cells(1).Value)
+                Me.dgjsonfiles.Rows.RemoveAt(e.RowIndex)
+                My.Settings.Save()
+                MessageBox.Show("File successfully removed from list.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        End If
     End Sub
 End Class

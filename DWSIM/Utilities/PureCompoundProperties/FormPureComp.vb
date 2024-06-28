@@ -64,6 +64,8 @@ Public Class FormPureComp
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
+        TextBoxComments.Font = New Font("Consolas", 9, GraphicsUnit.Point)
+
         If FormMain.IsPro Then
             Button2.Enabled = False
             Button3.Enabled = False

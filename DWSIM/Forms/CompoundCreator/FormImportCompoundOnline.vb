@@ -96,7 +96,7 @@ Public Class FormImportCompoundOnline
                                                     btnNext.Enabled = True
                                                 Else
                                                     btnNext.Enabled = False
-                                                    Dim msg = t.Exception.InnerException.Message
+                                                    Dim msg = ExceptionProcessing.ExceptionParser.GetFirstException(t.Exception).Message
                                                     If msg.Length > 1000 Then
                                                         MessageBox.Show(msg.Substring(0, 1000), DWSIM.App.GetLocalString("Erro"))
                                                     Else
@@ -175,8 +175,7 @@ Public Class FormImportCompoundOnline
                                                                                  End If
                                                                                  Me.Enabled = True
                                                                                  btnNext.Enabled = False
-
-                                                                                 Dim msg = tsk.Exception.InnerException.Message
+                                                                                 Dim msg = ExceptionProcessing.ExceptionParser.GetFirstException(tsk.Exception).Message
                                                                                  If msg.Length > 1000 Then
                                                                                      MessageBox.Show(msg.Substring(0, 1000), DWSIM.App.GetLocalString("Erro"))
                                                                                  Else

@@ -124,21 +124,17 @@
   <data name="tsbDockingDocument.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 25</value>
   </data>
-  <data name="&gt;&gt;tsbDockingLeftAutoHide.Name" xml:space="preserve">
-    <value>tsbDockingLeftAutoHide</value>
+  <data name="&gt;&gt;PanelUtility.Name" xml:space="preserve">
+    <value>PanelUtility</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tbName.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="chkAutoUpdate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 97</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>PanelHeader</value>
   </data>
-  <data name="&gt;&gt;tbAttachedTo.Parent" xml:space="preserve">
-    <value>PanelHeader</value>
-  </data>
-  <data name="tsbDockingTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 25</value>
+  <data name="tsbDockingDocument.Text" xml:space="preserve">
+    <value>Documento</value>
   </data>
   <data name="&gt;&gt;ToolStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -146,27 +142,24 @@
   <data name="chkAutoUpdate.Text" xml:space="preserve">
     <value>Atualizar automaticamente</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Utility</value>
+  <data name="&gt;&gt;tsbDockingFloat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PanelHeader.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="tsbDockingTop.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ToolStrip1.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="&gt;&gt;PanelUtility.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tsbDockingFloat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 25</value>
-  </data>
   <data name="tsbClose.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;chkAutoUpdate.Parent" xml:space="preserve">
     <value>PanelHeader</value>
@@ -177,20 +170,20 @@
   <data name="&gt;&gt;tbName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ToolStripLabel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tbName.Name" xml:space="preserve">
     <value>tbName</value>
   </data>
-  <data name="PanelHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;tsbDockingLeft.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsbDockingLeft.Text" xml:space="preserve">
     <value>Esquerda</value>
   </data>
-  <data name="PanelUtility.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;tsbDockingRightAutoHide.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tsbDockingRightAutoHide.Name" xml:space="preserve">
     <value>tsbDockingRightAutoHide</value>
@@ -204,9 +197,6 @@
   <data name="tsbDockingRightAutoHide.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 25</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>807, 502</value>
-  </data>
   <data name="tsbDockingTop.Text" xml:space="preserve">
     <value>Topo</value>
   </data>
@@ -216,8 +206,11 @@
   <data name="&gt;&gt;chkAutoUpdate.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsbDockingRight.Name" xml:space="preserve">
-    <value>tsbDockingRight</value>
+  <data name="PanelHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>807, 124</value>
+  </data>
+  <data name="tsbDockingRight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
   </data>
   <data name="chkAutoUpdate.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -234,12 +227,16 @@
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="tsbDockingFloat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
+  </data>
+  <data name="tsbDockingDocument.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="tsbDockingRight.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="chkAutoUpdate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -264,17 +261,17 @@
   <data name="tsbDockingBottom.Text" xml:space="preserve">
     <value>Fundo</value>
   </data>
-  <data name="&gt;&gt;tsbDockingRightAutoHide.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 41</value>
+  </data>
+  <data name="tsbDockingLeftAutoHide.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
   </data>
   <data name="&gt;&gt;tbName.Parent" xml:space="preserve">
     <value>PanelHeader</value>
   </data>
-  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>807, 28</value>
@@ -282,11 +279,14 @@
   <data name="tbName.Size" type="System.Drawing.Size, System.Drawing">
     <value>711, 20</value>
   </data>
-  <data name="tsbDockingDocument.Text" xml:space="preserve">
-    <value>Documento</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Utility</value>
   </data>
   <data name="&gt;&gt;ToolStrip1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="tsbDockingRightAutoHide.Text" xml:space="preserve">
+    <value>Direita Auto-Ocultar</value>
   </data>
   <data name="&gt;&gt;tsbDockingFloat.Name" xml:space="preserve">
     <value>tsbDockingFloat</value>
@@ -297,8 +297,8 @@
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
   </data>
-  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="PanelUtility.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="PanelUtility.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 124</value>
@@ -315,8 +315,8 @@
   <data name="&gt;&gt;PanelHeader.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>AttachedUtilityClass</value>
+  <data name="tsbDockingFloat.Text" xml:space="preserve">
+    <value>Janela Flutuante</value>
   </data>
   <data name="&gt;&gt;ToolStrip1.Parent" xml:space="preserve">
     <value>PanelHeader</value>
@@ -324,17 +324,14 @@
   <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="PanelUtility.Size" type="System.Drawing.Size, System.Drawing">
-    <value>807, 378</value>
-  </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Associado a</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Nome</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>807, 502</value>
   </data>
   <data name="tsbDockingLeft.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -345,8 +342,8 @@
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
   </data>
-  <data name="PanelUtility.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -363,11 +360,8 @@
   <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
     <value>ToolStrip1</value>
   </data>
-  <data name="&gt;&gt;tsbDockingLeft.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tsbDockingRightAutoHide.Text" xml:space="preserve">
-    <value>Direita Auto-Ocultar</value>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tbAttachedTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>711, 20</value>
@@ -384,20 +378,23 @@
   <data name="&gt;&gt;tsbDockingLeft.Name" xml:space="preserve">
     <value>tsbDockingLeft</value>
   </data>
+  <data name="PanelUtility.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>800, 370</value>
+  </data>
   <data name="tsbClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 25</value>
   </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tsbDockingFloat.Text" xml:space="preserve">
-    <value>Janela Flutuante</value>
+  <data name="PanelUtility.Size" type="System.Drawing.Size, System.Drawing">
+    <value>807, 378</value>
   </data>
   <data name="tbName.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;tsbDockingBottom.Name" xml:space="preserve">
-    <value>tsbDockingBottom</value>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="&gt;&gt;tbAttachedTo.Name" xml:space="preserve">
+    <value>tbAttachedTo</value>
   </data>
   <data name="tbAttachedTo.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -405,11 +402,8 @@
   <data name="&gt;&gt;tbAttachedTo.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;tsbDockingRight.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsbClose.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>AttachedUtilityClass</value>
   </data>
   <data name="tsbDockingBottom.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 25</value>
@@ -417,8 +411,8 @@
   <data name="ToolStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 0, 5, 0</value>
   </data>
-  <data name="PanelHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>807, 124</value>
+  <data name="PanelUtility.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;tsbDockingBottom.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -426,29 +420,29 @@
   <data name="&gt;&gt;tsbClose.Name" xml:space="preserve">
     <value>tsbClose</value>
   </data>
-  <data name="&gt;&gt;PanelUtility.Name" xml:space="preserve">
-    <value>PanelUtility</value>
-  </data>
-  <data name="tsbDockingLeftAutoHide.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="tsbDockingTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
   </data>
   <data name="PanelUtility.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="tsbDockingDocument.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="&gt;&gt;tsbDockingRight.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PanelHeader.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="tsbDockingLeftAutoHide.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 25</value>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkAutoUpdate.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="tsbDockingLeftAutoHide.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>PanelHeader</value>
@@ -465,6 +459,9 @@
   <data name="&gt;&gt;tsbDockingTop.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="tbAttachedTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -474,32 +471,35 @@
   <data name="&gt;&gt;tsbDockingTop.Name" xml:space="preserve">
     <value>tsbDockingTop</value>
   </data>
-  <data name="&gt;&gt;tsbDockingFloat.Type" xml:space="preserve">
+  <data name="&gt;&gt;tsbClose.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="PanelUtility.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>800, 370</value>
+  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;tbAttachedTo.Name" xml:space="preserve">
-    <value>tbAttachedTo</value>
+  <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="tsbDockingRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 25</value>
+  <data name="&gt;&gt;tbAttachedTo.Parent" xml:space="preserve">
+    <value>PanelHeader</value>
   </data>
-  <data name="&gt;&gt;ToolStripLabel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tbName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingBottom.Name" xml:space="preserve">
+    <value>tsbDockingBottom</value>
   </data>
   <data name="&gt;&gt;tsbDockingDocument.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tbAttachedTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="chkAutoUpdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 97</value>
+  <data name="PanelHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;tsbDockingRight.Name" xml:space="preserve">
+    <value>tsbDockingRight</value>
   </data>
   <data name="tsbClose.Text" xml:space="preserve">
     <value>Fechar</value>
@@ -507,8 +507,8 @@
   <data name="&gt;&gt;chkAutoUpdate.Name" xml:space="preserve">
     <value>chkAutoUpdate</value>
   </data>
-  <data name="&gt;&gt;PanelHeader.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;tsbDockingLeftAutoHide.Name" xml:space="preserve">
+    <value>tsbDockingLeftAutoHide</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -32,6 +32,7 @@ Imports System.Dynamic
 Imports System.Text.RegularExpressions
 Imports Mages.Core.EngineExtensions
 Imports Mages.Core.FunctionExtensions
+Imports DWSIM.SharedClasses
 
 Namespace BaseClasses
 
@@ -1781,7 +1782,7 @@ Namespace BaseClasses
                     message = "Calculated using Experimental/Regressed data."
                     result = A + B * T + C * T ^ 2 + D * T ^ 3
                     Return result / Molar_Weight * 4.1868 'kJ/kg.K
-                ElseIf db = "ChemSep" Or db = "ChEDL Thermo" Or db = "User" Then
+                ElseIf db = "ChemSep" Or db = "User" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = IdealgasCpEquation
                     Dim mw As Double = Molar_Weight
@@ -2607,6 +2608,54 @@ Namespace BaseClasses
         Public Property IsSolid As Boolean = False Implements ICompoundConstantProperties.IsSolid
 
         Public Property ChemSepFamily As Integer = 1000 Implements ICompoundConstantProperties.ChemSepFamily
+
+        Public Property Vapor_Pressure_Regression_Fit As Double = 0.0 Implements ICompoundConstantProperties.Vapor_Pressure_Regression_Fit
+
+        Public Property Vapor_Pressure_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Vapor_Pressure_Tabular_Data
+
+        Public Property Ideal_Gas_Heat_Capacity_Regression_Fit As Double = 0.0 Implements ICompoundConstantProperties.Ideal_Gas_Heat_Capacity_Regression_Fit
+
+        Public Property Ideal_Gas_Heat_Capacity_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Ideal_Gas_Heat_Capacity_Tabular_Data
+
+        Public Property Liquid_Viscosity_Regression_Fit As Double = 0.0 Implements ICompoundConstantProperties.Liquid_Viscosity_Regression_Fit
+
+        Public Property Liquid_Viscosity_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Liquid_Viscosity_Tabular_Data
+
+        Public Property Liquid_Density_Regression_Fit As Double = 0.0 Implements ICompoundConstantProperties.Liquid_Density_Regression_Fit
+
+        Public Property Liquid_Density_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Liquid_Density_Tabular_Data
+
+        Public Property Liquid_Heat_Capacity_Regression_Fit As Double = 0.0 Implements ICompoundConstantProperties.Liquid_Heat_Capacity_Regression_Fit
+
+        Public Property Liquid_Heat_Capacity_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Liquid_Heat_Capacity_Tabular_Data
+
+        Public Property Liquid_Thermal_Conductivity_Regression_Fit As Double = 0.0 Implements ICompoundConstantProperties.Liquid_Thermal_Conductivity_Regression_Fit
+
+        Public Property Liquid_Thermal_Conductivity_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Liquid_Thermal_Conductivity_Tabular_Data
+
+        Public Property Vapor_Thermal_Conductivity_Regression_Fit As Double = 0.0 Implements ICompoundConstantProperties.Vapor_Thermal_Conductivity_Regression_Fit
+
+        Public Property Vapor_Thermal_Conductivity_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Vapor_Thermal_Conductivity_Tabular_Data
+
+        Public Property Vapor_Viscosity_Regression_Fit As Double = 0.0 Implements ICompoundConstantProperties.Vapor_Viscosity_Regression_Fit
+
+        Public Property Vapor_Viscosity_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Vapor_Viscosity_Tabular_Data
+
+        Public Property Solid_Density_Regression_Fit As Double = 0.0 Implements ICompoundConstantProperties.Solid_Density_Regression_Fit
+
+        Public Property Solid_Density_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Solid_Density_Tabular_Data
+
+        Public Property Surface_Tension_Regression_Fit As Double = 0.0 Implements ICompoundConstantProperties.Surface_Tension_Regression_Fit
+
+        Public Property Surface_Tension_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Surface_Tension_Tabular_Data
+
+        Public Property Solid_Heat_Capacity_Regression_Fit As Double = 0.0 Implements ICompoundConstantProperties.Solid_Heat_Capacity_Regression_Fit
+
+        Public Property Solid_Heat_Capacity_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Solid_Heat_Capacity_Tabular_Data
+
+        Public Property Enthalpy_Of_Vaporization_Regression_Fit As Double = 0.0 Implements ICompoundConstantProperties.Enthalpy_Of_Vaporization_Regression_Fit
+
+        Public Property Enthalpy_Of_Vaporization_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Enthalpy_Of_Vaporization_Tabular_Data
 
         Public Sub ExportToXLSX(filepath As String) Implements ICompoundConstantProperties.ExportToXLSX
 

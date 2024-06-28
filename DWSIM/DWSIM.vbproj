@@ -653,6 +653,12 @@
     <Compile Include="Forms\FlowsheetComponents\FormNewSpreadsheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormObjectList.Designer.vb">
+      <DependentUpon>FormObjectList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormObjectList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\FlowsheetComponents\SimulationObjectsPanel.Designer.vb">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
     </Compile>
@@ -1345,6 +1351,9 @@
     <EmbeddedResource Include="Forms\FlowsheetComponents\FormNewSpreadsheet.resx">
       <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormObjectList.resx">
+      <DependentUpon>FormObjectList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetComponents\SimulationObjectsPanel.de.resx">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
     </EmbeddedResource>
@@ -1716,6 +1725,10 @@
     <ProjectReference Include="..\DWSIM.Controls.IronPythonConsole\DWSIM.Controls.IronPythonConsole.csproj">
       <Project>{8a19eaa5-44c5-41ec-a908-7f41792cf18b}</Project>
       <Name>DWSIM.Controls.IronPythonConsole</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Controls.OutlookGrid\DWSIM.Controls.OutlookGrid.csproj">
+      <Project>{e0d167f9-af5e-40eb-b646-34a6328745de}</Project>
+      <Name>DWSIM.Controls.OutlookGrid</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Controls.PythonConsoleControl\DWSIM.Controls.IronPythonConsoleControl.csproj">
       <Project>{f1152d68-346b-4f48-8db7-be67b5cb1f49}</Project>
@@ -3022,6 +3035,8 @@
     <None Include="Resources\box_important_80px.png" />
     <None Include="Resources\box_important_48px.png" />
     <None Include="Resources\birthday_cake_48px.png" />
+    <None Include="Resources\backwards_48px.png" />
+    <None Include="Resources\advance_48px.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -3045,6 +3060,7 @@
     <None Include="Resources\close_96px.png" />
     <None Include="Resources\collaboration_female_male_48px.png" />
     <None Include="Resources\checkmark_48px.png" />
+    <None Include="Resources\collapse_arrow_48px.png" />
     <Content Include="Resources\control_equalizer_blue.png" />
     <None Include="Resources\cut.png" />
     <None Include="Resources\ddbsearch.jpg" />
@@ -3089,6 +3105,7 @@
     <None Include="Resources\fossee.png" />
     <None Include="Resources\file_80px.png" />
     <None Include="Resources\Excel 2013.png" />
+    <None Include="Resources\expand_arrow_48px.png" />
     <Content Include="Resources\fr.png" />
     <None Include="Resources\green_down.png" />
     <None Include="Resources\orifice.png" />

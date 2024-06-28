@@ -8,6 +8,13 @@ using System.IO;
 using System.Reflection;
 using DWSIM.SharedClassesCSharp.FilePicker.Windows;
 using DWSIM.GlobalSettings;
+using System.Linq;
+using DWSIM.Interfaces.Enums;
+using Org.BouncyCastle.Utilities.Collections;
+using System.Runtime.InteropServices.ComTypes;
+using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+using System.Collections.ObjectModel;
 
 namespace DWSIM.Automation
 {
@@ -242,6 +249,7 @@ namespace DWSIM.Automation
             AppDomain currentDomain = AppDomain.CurrentDomain;
             currentDomain.AssemblyResolve += new ResolveEventHandler(LoadAssembly);
             FlowsheetBase.FlowsheetBase.AddPropPacks();
+            LoadExtenders();
         }
 
         [DispId(0)]
@@ -388,7 +396,8 @@ namespace DWSIM.Automation
             {
                 return LoadFlowsheet(filepath, null);
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 Logging.Logger.LogError("Automation Error (LoadFlowsheet)", ex);
                 throw ex;
             }
@@ -411,7 +420,7 @@ namespace DWSIM.Automation
         {
             try
             {
-                GlobalSettings.Settings.SolverTimeoutSeconds = timeout_seconds;
+                Settings.SolverTimeoutSeconds = timeout_seconds;
                 return CalculateFlowsheet4(flowsheet);
             }
             catch (Exception ex)
@@ -420,6 +429,65 @@ namespace DWSIM.Automation
                 throw ex;
             }
         }
+
+        private List<Assembly> LoadExtenderDLLs()
+        {
+            List<Assembly> extenderdlls = new List<Assembly>();
+            if (Directory.Exists(SharedClasses.Utility.GetExtendersRootDirectory()))
+            {
+                DirectoryInfo dinfo = new DirectoryInfo(SharedClasses.Utility.GetExtendersRootDirectory());
+                FileInfo[] files = dinfo.GetFiles("*Extensions*.dll");
+                if (!(files == null))
+                {
+                    foreach (FileInfo fi in files)
+                    {
+                        extenderdlls.Add(Assembly.LoadFrom(fi.FullName));
+                    }
+                }
+            }
+            return extenderdlls;
+        }
+
+        List<IExtenderCollection> GetExtenders(List<Assembly> alist)
+        {
+            List<Type> availableTypes = new List<Type>();
+            foreach (var currentAssembly in alist)
+            {
+                try
+                {
+                    availableTypes.AddRange(currentAssembly.GetExportedTypes());
+                }
+                catch
+                { }
+            }
+            var extList = availableTypes.FindAll(t => t.GetInterfaces().Contains(typeof(IExtenderCollection)));
+            return extList.ConvertAll(t => (IExtenderCollection)Activator.CreateInstance(t));
+        }
+
+        void LoadExtenders()
+        {
+
+            List<IExtenderCollection> extlist = GetExtenders(LoadExtenderDLLs());
+
+            foreach (var extender in extlist)
+            {
+                try
+                {
+                    if (extender.Level == ExtenderLevel.MainWindow)
+                    {
+                        foreach (var item in extender.Collection)
+                        {
+                            item.SetMainWindow(null);
+                            item.Run();
+                        }
+                    } }
+                catch (Exception ex)
+                {
+                    Logging.Logger.LogError("Extender Initialization", ex);
+                }
+            }
+        }
+
     }
 
 }

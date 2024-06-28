@@ -126,6 +126,7 @@ Partial Class FormDataRegression
         Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.tbParam = New System.Windows.Forms.TextBox()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ParâmetrosDeInteraçãoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalvarEmBancoDeDadosXMLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -133,7 +134,8 @@ Partial Class FormDataRegression
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.gridstats, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -148,6 +150,7 @@ Partial Class FormDataRegression
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'graph
@@ -510,6 +513,7 @@ Partial Class FormDataRegression
         Me.chkIdealVaporPhase.Checked = True
         Me.chkIdealVaporPhase.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkIdealVaporPhase.Name = "chkIdealVaporPhase"
+        Me.ToolTip1.SetToolTip(Me.chkIdealVaporPhase, resources.GetString("chkIdealVaporPhase.ToolTip"))
         Me.chkIdealVaporPhase.UseVisualStyleBackColor = True
         '
         'Button2
@@ -829,6 +833,12 @@ Partial Class FormDataRegression
         Me.tbParam.Name = "tbParam"
         Me.tbParam.ReadOnly = True
         '
+        'Button4
+        '
+        resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.Name = "Button4"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'MenuStrip1
         '
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ParâmetrosDeInteraçãoToolStripMenuItem})
@@ -879,22 +889,23 @@ Partial Class FormDataRegression
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'Button4
+        'Panel2
         '
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.Name = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.Panel2, "Panel2")
+        Me.Panel2.Controls.Add(Me.GroupBox1)
+        Me.Panel2.Controls.Add(Me.GroupBox3)
+        Me.Panel2.Controls.Add(Me.TabControl1)
+        Me.Panel2.Name = "Panel2"
         '
         'FormDataRegression
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.Controls.Add(Me.TabControl1)
-        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.MenuStrip1)
-        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox4)
+        Me.DoubleBuffered = True
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FormDataRegression"
         Me.Tag = ""
@@ -917,6 +928,7 @@ Partial Class FormDataRegression
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1025,4 +1037,6 @@ Partial Class FormDataRegression
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents Button4 As Button
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

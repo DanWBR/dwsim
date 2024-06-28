@@ -474,8 +474,13 @@ Public Class FormMain
 
         If Me.MdiChildren.Length > 0 And Not Me.CancelClosing Then
             Me.CancelClosing = False
-            Dim ms As MsgBoxResult = MessageBox.Show(DWSIM.App.GetLocalString("Existemsimulaesabert"), DWSIM.App.GetLocalString("Ateno"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If ms = MsgBoxResult.No Then e.Cancel = True
+            If Not IsPro Then
+                Dim ms As MsgBoxResult = MessageBox.Show(DWSIM.App.GetLocalString("Existemsimulaesabert"), DWSIM.App.GetLocalString("Ateno"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                If ms = MsgBoxResult.No Then e.Cancel = True
+            Else
+                Dim ms As MsgBoxResult = MessageBox.Show("There are opened windows, are you sure you want to close DWSIM Pro?", "DWSIM Pro", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                If ms = MsgBoxResult.No Then e.Cancel = True
+            End If
         End If
 
         If Not e.Cancel Then
@@ -1337,10 +1342,35 @@ Public Class FormMain
     End Sub
 
     Public Sub LoadAdditionalCompounds()
+
         Dim comps = UserDB.LoadAdditionalCompounds()
+
+        If My.Settings.UserCompounds Is Nothing Then My.Settings.UserCompounds = New Specialized.StringCollection()
+
+        For Each cpath In My.Settings.UserCompounds
+            Try
+                Dim comp As ConstantProperties = Nothing
+                If cpath.StartsWith("//Simulate 365 Dashboard") Then
+                    Using fileStream As Stream = FileDownloadService.GetFileBySimulatePath(cpath)
+                        Using reader As New StreamReader(fileStream)
+                            Dim contents = reader.ReadToEnd()
+                            comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(contents)
+                        End Using
+                    End Using
+                Else
+                    comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(cpath))
+                End If
+                comp.CurrentDB = "User"
+                comp.OriginalDB = "User"
+                comps.Add(comp)
+            Catch ex As Exception
+            End Try
+        Next
+
         For Each cp As BaseClasses.ConstantProperties In comps
             If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
         Next
+
     End Sub
 
     Public Sub LoadFoodPropCompounds()
@@ -4832,10 +4862,8 @@ Label_00CC:
 
         RaiseEvent ToolOpened("View General Settings", New EventArgs())
 
-        If Settings.DpiScale > 1.0 Then
-            Me.SettingsPanel.Width = 500 * Settings.DpiScale
-        End If
-        Me.SettingsPanel.Visible = True
+        SettingsPanel.Width = 500 * Settings.DpiScale
+        SettingsPanel.Visible = True
 
     End Sub
 

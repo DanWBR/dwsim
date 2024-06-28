@@ -872,10 +872,9 @@ Partial Class FormFlowsheet
         '
         Me.pbSolver.ActiveSegmentColour = System.Drawing.Color.SteelBlue
         Me.pbSolver.AutoIncrementFrequency = 50.0R
-        Me.pbSolver.BehindTransistionSegmentIsActive = False
         resources.ApplyResources(Me.pbSolver, "pbSolver")
         Me.pbSolver.Name = "pbSolver"
-        Me.pbSolver.TransistionSegment = 0
+        Me.pbSolver.TransistionSegment = 5
         Me.pbSolver.TransistionSegmentColour = System.Drawing.Color.LightSkyBlue
         '
         'btnOpenLogPanel

@@ -85,6 +85,12 @@ Public Class FormDataRegression
 
         FormMain.TranslateFormFunction?.Invoke(Me)
 
+        Dim scale = Settings.DpiScale
+
+        If scale > 1.0 Then
+            btnSearchKDB.Image = New Bitmap(My.Resources.cheric_big, New Size(150.0 / 25.0 * btnSearchKDB.Height * 0.7, btnSearchKDB.Height * 0.7))
+        End If
+
     End Sub
 
     Private Sub FormDataRegression_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -2532,7 +2538,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                     .Symbol.Size = 5
                                 Case 3
                                     .Line.IsVisible = True
-                                    .Line.IsSmooth = True
+                                    .Line.IsSmooth = False
                                     .Color = Color.Red
                                     .Symbol.IsVisible = False
                                 Case 4
@@ -2593,7 +2599,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                     .Symbol.Size = 5
                                 Case 3
                                     .Line.IsVisible = True
-                                    .Line.IsSmooth = True
+                                    .Line.IsSmooth = False
                                     .Color = Color.Red
                                     .Symbol.IsVisible = False
                                 Case 4
@@ -4253,6 +4259,16 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         swap = False
         replace = False
 
+        If cbCompound1.SelectedItem Is Nothing Then
+            MessageBox.Show("Please select Compound 1.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If cbCompound2.SelectedItem Is Nothing Then
+            MessageBox.Show("Please select Compound 2.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
         comp1 = cbCompound1.SelectedItem.ToString
         comp2 = cbCompound2.SelectedItem.ToString
 
@@ -4292,7 +4308,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                             End If
                                         Else
                                             fresult.Close()
-                                            MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
+                                            MessageBox.Show(ExceptionProcessing.ExceptionParser.GetFirstException(t.Exception).Message, DWSIM.App.GetLocalString("Erro"))
                                         End If
                                     End Sub)
                        End Sub)

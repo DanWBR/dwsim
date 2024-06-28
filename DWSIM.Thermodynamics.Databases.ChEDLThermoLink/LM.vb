@@ -21,6 +21,8 @@ Imports DWSIM.MathOps
 
 Public Class LMFit
 
+
+
     Public Enum FitType
         Pvap = 0
         Cp = 1

@@ -232,7 +232,7 @@
     <value>None</value>
   </data>
   <data name="lblPatrons.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8pt</value>
+    <value>Arial, 7.5pt</value>
   </data>
   <data name="lblPatrons.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

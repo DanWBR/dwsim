@@ -1039,7 +1039,8 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
                     s.CreateAndAddDropDownRow(container, "Flow Coefficient Type", new List<string>(new[] { "Kv", "Cv" }), (int)valve.FlowCoefficient,
-                        (sender, e) => {
+                        (sender, e) =>
+                        {
                             valve.FlowCoefficient = sender.SelectedIndex.ToEnum<Valve.FlowCoefficientType>();
                         });
                     s.CreateAndAddTextBoxRow(container, nf, "Kv[Cv](max)", valve.Kv,
@@ -1092,8 +1093,10 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         var editor = new Editors.UnitOperations.ValveDataEditor(valve);
                         var form = s.GetDefaultEditorForm("Valve Data Editor", 300, 250, editor, false);
-                        form.Closing += (s, e2) => {
-                            Application.Instance.Invoke(() => {
+                        form.Closing += (s, e2) =>
+                        {
+                            Application.Instance.Invoke(() =>
+                            {
                                 editor.Save();
                             });
                         };
@@ -1763,7 +1766,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
                     var compounds = SimObject.GetFlowsheet().SelectedCompounds.Values.Select((x) => x.Name).ToList();
                     s.CreateAndAddLabelRow(container, "Reacting Compounds");
-                    var ids = reactor2g.ComponentIDs.ToArray();                    
+                    var ids = reactor2g.ComponentIDs.ToArray();
                     foreach (string comp in compounds)
                         s.CreateAndAddCheckBoxRow(container,
                                                    comp,
@@ -1952,6 +1955,9 @@ namespace DWSIM.UI.Desktop.Editors
                                 break;
                         }
                     });
+                    s.CreateAndAddDropDownRow(container, "ODE Solver", new List<string> { "Implicit Runge-Kutta", "Explicit Runge-Kutta", "Adams-Moulton", "Gear’s BDF" },
+                     reactor4.InternalSolver,
+                      (dd, e) => reactor4.InternalSolver = dd.SelectedIndex);
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, reactor4.OutletTemperature),
@@ -2067,8 +2073,9 @@ namespace DWSIM.UI.Desktop.Editors
                              });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Catalyst Void Fraction"));
-                    s.CreateAndAddCheckBoxRow(container, "Use Constant Linear Pressure Drop", reactor4.UseUserDefinedPressureDrop, 
-                        (chk, e) => {
+                    s.CreateAndAddCheckBoxRow(container, "Use Constant Linear Pressure Drop", reactor4.UseUserDefinedPressureDrop,
+                        (chk, e) =>
+                        {
                             reactor4.UseUserDefinedPressureDrop = chk.Checked.GetValueOrDefault();
                         });
                     s.CreateAndAddTextBoxRow(container, nf, "Constant Linear Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, reactor4.UserDefinedPressureDrop),
@@ -2585,7 +2592,8 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddLabelRow(container, "Spreadsheet File");
                     TextBox tbox = null;
 
-                    s.CreateAndAddDropDownRow(container, "File Source", new List<string>(new []{ "Embedded", "External" }), exceluo.FileIsEmbedded ? 0 : 1, (dd, e) => {
+                    s.CreateAndAddDropDownRow(container, "File Source", new List<string>(new[] { "Embedded", "External" }), exceluo.FileIsEmbedded ? 0 : 1, (dd, e) =>
+                    {
                         exceluo.FileIsEmbedded = dd.SelectedIndex == 0 ? true : false;
                     });
 
@@ -2594,7 +2602,8 @@ namespace DWSIM.UI.Desktop.Editors
                     var selected = exceluo.EmbeddedFileName;
                     if (!files.Contains(selected)) selected = "";
 
-                    s.CreateAndAddDropDownRow(container, "Embedded File", files, files.IndexOf(selected), (dd, e) => {
+                    s.CreateAndAddDropDownRow(container, "Embedded File", files, files.IndexOf(selected), (dd, e) =>
+                    {
                         exceluo.EmbeddedFileName = files[dd.SelectedIndex];
                     });
 
@@ -2666,7 +2675,8 @@ namespace DWSIM.UI.Desktop.Editors
                     var fsuo = (Flowsheet)SimObject;
 
 
-                    s.CreateAndAddDropDownRow(container, "File Source", new List<string>(new[] { "Embedded", "External" }), fsuo.FileIsEmbedded ? 0 : 1, (dd, e) => {
+                    s.CreateAndAddDropDownRow(container, "File Source", new List<string>(new[] { "Embedded", "External" }), fsuo.FileIsEmbedded ? 0 : 1, (dd, e) =>
+                    {
                         fsuo.FileIsEmbedded = dd.SelectedIndex == 0 ? true : false;
                     });
 
@@ -2675,7 +2685,8 @@ namespace DWSIM.UI.Desktop.Editors
                     var selected2 = fsuo.EmbeddedFileName;
                     if (!files2.Contains(selected2)) selected2 = "";
 
-                    s.CreateAndAddDropDownRow(container, "Embedded File", files2, files2.IndexOf(selected2), (dd, e) => {
+                    s.CreateAndAddDropDownRow(container, "Embedded File", files2, files2.IndexOf(selected2), (dd, e) =>
+                    {
                         fsuo.EmbeddedFileName = files2[dd.SelectedIndex];
                     });
 

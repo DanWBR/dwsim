@@ -88,7 +88,11 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 if (listcontainer.SelectedItem == null) return;
                 var compound = ((CompoundItem)listcontainer.SelectedItem);
-                var form = s.GetDefaultEditorForm("Compound Properties: " + compound.Text, 800, 600, new CompoundViewer(flowsheet, flowsheet.AvailableCompounds[compound.Text]), false);
+                var dlay = s.GetDefaultContainer();
+                var content = new CompoundViewer(flowsheet, flowsheet.AvailableCompounds[compound.Text]);
+                content.ExportToJSON(dlay);
+                dlay.Add(content);
+                var form = s.GetDefaultEditorForm("Compound Properties: " + compound.Text, 800, 600, dlay, true);
                 form.Show();
             };
 
@@ -98,7 +102,7 @@ namespace DWSIM.UI.Desktop.Editors
             container.Rows.Add(cont);
 
             var txt2 = new Label { Text = "Load and add compounds to the simulation from JSON files", VerticalAlignment = VerticalAlignment.Center };
-            txt2.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
+            txt2.Font = new Font(SystemFont.Default, s.GetEditorFontSize());
             var btn2 = new Button { Width = 200, Height = 26, Text = "Load from JSON" };
             btn2.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
 
@@ -297,7 +301,7 @@ namespace DWSIM.UI.Desktop.Editors
                         var comp = Newtonsoft.Json.JsonConvert.DeserializeObject<Thermodynamics.BaseClasses.ConstantProperties>(System.IO.File.ReadAllText(fn));
                         if (!flowsheet.SelectedCompounds.ContainsKey(comp.Name))
                         {
-                            flowsheet.AvailableCompounds.Add(comp.Name, comp);
+                            if (!flowsheet.AvailableCompounds.ContainsKey(comp.Name)) flowsheet.AvailableCompounds.Add(comp.Name, comp);
                             flowsheet.SelectedCompounds.Add(comp.Name, comp);
                             foreach (var obj in flowsheet.SimulationObjects.Values.Where((x) => (x is Thermodynamics.Streams.MaterialStream)))
                             {

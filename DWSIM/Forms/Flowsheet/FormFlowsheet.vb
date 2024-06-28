@@ -607,7 +607,7 @@ Public Class FormFlowsheet
 
             If Not DoNotOpenSimulationWizard Then
                 If Not DWSIM.App.IsRunningOnMono Then
-                    Dim fw As New FormSimulWizard
+                    Dim fw = New FormSimulWizard()
                     With fw
                         .CurrentFlowsheet = Me
                         .StartPosition = FormStartPosition.CenterScreen
@@ -652,12 +652,6 @@ Public Class FormFlowsheet
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
             My.Application.MainWindowForm.CloseAllToolstripMenuItem.Enabled = True
         End If
-
-        'WriteToLog(DWSIM.App.GetLocalTipString("FLSH003"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
-        'WriteToLog(DWSIM.App.GetLocalTipString("FLSH001"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
-        'WriteToLog(DWSIM.App.GetLocalTipString("FLSH002"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
-        'WriteToLog(DWSIM.App.GetLocalTipString("FLSH005"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
-        'WriteToLog(DWSIM.App.GetLocalTipString("FLSH008"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
 
         FormSurface.FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
         FormSurface.FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
@@ -1563,6 +1557,16 @@ Public Class FormFlowsheet
                     .Tag = attchu
                 End With
                 AddHandler tsmi.Click, AddressOf UtilitiesTSMIHandler
+                AddHandler DirectCast(attchu, AttachedUtilityClass).FormClosed,
+                    Sub(s2, e2)
+                        Try
+                            UIThread(Sub()
+                                         UtilitiesTSMI.DropDownItems.Remove(tsmi)
+                                         Application.DoEvents()
+                                     End Sub)
+                        Catch ex As Exception
+                        End Try
+                    End Sub
                 UtilitiesTSMI.DropDownItems.Add(tsmi)
             Next
         Next
@@ -1575,7 +1579,10 @@ Public Class FormFlowsheet
         If f.Visible Then
             f.Select()
         Else
-            DisplayForm(f)
+            Try
+                DisplayForm(f)
+            Catch ex As Exception
+            End Try
         End If
 
     End Sub
@@ -5724,6 +5731,12 @@ Public Class FormFlowsheet
         End If
 
         Options.FlowsheetTransitionObject = Nothing
+
+    End Sub
+
+    Public Sub UpdateObjectListPanel()
+
+        FormSurface.FormObjects.UpdateData()
 
     End Sub
 

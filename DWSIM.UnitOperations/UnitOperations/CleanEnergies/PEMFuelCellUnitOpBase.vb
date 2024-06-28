@@ -303,7 +303,7 @@ Namespace UnitOperations
 
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
-                    If f.InvokeRequired Then f.BeginInvoke(Sub() f.UpdateInfo())
+                    If f.InvokeRequired Then f.BeginInvoke(Sub() f.UpdateInfo()) Else f.UpdateInfo()
                 End If
             End If
 
