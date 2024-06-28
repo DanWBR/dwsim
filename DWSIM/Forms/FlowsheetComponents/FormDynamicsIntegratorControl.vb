@@ -80,8 +80,12 @@ Public Class FormDynamicsIntegratorControl
 
         If Paused Then
             btnRun.BackgroundImage = My.Resources.icons8_play
+            btnStepBackwards.Enabled = True
+            btnStepForward.Enabled = True
         Else
             btnRun.BackgroundImage = My.Resources.icons8_pause
+            btnStepBackwards.Enabled = False
+            btnStepForward.Enabled = False
         End If
 
         If Flowsheet.DynamicMode Then
@@ -126,20 +130,24 @@ Public Class FormDynamicsIntegratorControl
 
     Sub StoreVariableValues(integrator As DynamicsManager.Integrator, tstep As Integer, tstamp As DateTime)
 
-        Dim list As New List(Of Interfaces.IDynamicsMonitoredVariable)
+        If Not integrator.MonitoredVariableValues.ContainsKey(tstamp.Ticks) Then
 
-        For Each v As DynamicsManager.MonitoredVariable In integrator.MonitoredVariables
-            Dim vnew = DirectCast(v.Clone, DynamicsManager.MonitoredVariable)
-            If Not Flowsheet.SimulationObjects.ContainsKey(vnew.ObjectID) Then
-                Throw New Exception(Flowsheet.GetTranslatedString1("At least one of the monitored variables is not configured correctly, please check."))
-            End If
-            Dim sobj = Flowsheet.SimulationObjects(vnew.ObjectID)
-            vnew.PropertyValue = SystemsOfUnits.Converter.ConvertFromSI(vnew.PropertyUnits, sobj.GetPropertyValue(vnew.PropertyID)).ToString(Globalization.CultureInfo.InvariantCulture)
-            vnew.TimeStamp = tstamp
-            list.Add(vnew)
-        Next
+            Dim list As New List(Of Interfaces.IDynamicsMonitoredVariable)
 
-        integrator.MonitoredVariableValues.Add(tstamp.Ticks, list)
+            For Each v As DynamicsManager.MonitoredVariable In integrator.MonitoredVariables
+                Dim vnew = DirectCast(v.Clone, DynamicsManager.MonitoredVariable)
+                If Not Flowsheet.SimulationObjects.ContainsKey(vnew.ObjectID) Then
+                    Throw New Exception(Flowsheet.GetTranslatedString1("At least one of the monitored variables is not configured correctly, please check."))
+                End If
+                Dim sobj = Flowsheet.SimulationObjects(vnew.ObjectID)
+                vnew.PropertyValue = SystemsOfUnits.Converter.ConvertFromSI(vnew.PropertyUnits, sobj.GetPropertyValue(vnew.PropertyID)).ToString(Globalization.CultureInfo.InvariantCulture)
+                vnew.TimeStamp = tstamp
+                list.Add(vnew)
+            Next
+
+            integrator.MonitoredVariableValues.Add(tstamp.Ticks, list)
+
+        End If
 
     End Sub
 
@@ -233,9 +241,27 @@ Public Class FormDynamicsIntegratorControl
 
     End Sub
 
-    Public Function RunIntegrator(realtime As Boolean, waittofinish As Boolean, restarting As Boolean, guiless As Boolean) As Task
+    Public Sub RestoreHistorianState(htime As Date)
 
-        ChartIsSetup = False
+        Try
+
+            Dim state = Historian(htime)
+
+            Flowsheet.RestoreSnapshot(state, SnapshotType.ObjectData)
+
+            Flowsheet.UpdateInterface()
+
+        Catch ex As Exception
+
+            MessageBox.Show(String.Format("Error Restoring State {0}: {1}", htime, ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End Try
+
+    End Sub
+
+    Public Function RunIntegrator(realtime As Boolean, waittofinish As Boolean, restarting As Boolean, guiless As Boolean, Optional nstep As Integer = 0) As Task
+
+        If nstep = 0 Then ChartIsSetup = False
 
         Abort = False
 
@@ -249,10 +275,14 @@ Public Class FormDynamicsIntegratorControl
             Throw New Exception(Flowsheet.GetTranslatedString1("Please select a valid integrator for the selected schedule."))
         End If
 
-        Flowsheet.ClearLog()
-        Flowsheet.ShowMessage(DWSIM.App.GetLocalString("Dynamics Integrator Starting..."), Interfaces.IFlowsheet.MessageType.Information)
+        If nstep = 0 Then
 
-        My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Dynamics Integrator Started", "", Nothing)
+            Flowsheet.ClearLog()
+            Flowsheet.ShowMessage(DWSIM.App.GetLocalString("Dynamics Integrator Starting..."), Interfaces.IFlowsheet.MessageType.Information)
+
+            My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Dynamics Integrator Started", "", Nothing)
+
+        End If
 
         Dim integrator = Flowsheet.DynamicsManager.IntegratorList(schedule.CurrentIntegrator)
 
@@ -262,14 +292,25 @@ Public Class FormDynamicsIntegratorControl
 
         Dim Controllers2 = Flowsheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is PythonController).ToList
 
-        If Not restarting Then
-            If Not waittofinish Then
-                If Not realtime Then
-                    If Not schedule.UseCurrentStateAsInitial Then
-                        RestoreState(schedule.InitialFlowsheetStateID)
+        If Not restarting And nstep = 0 Then integrator.MonitoredVariableValues.Clear()
+
+        Dim interval = integrator.IntegrationStep.TotalSeconds
+
+        If realtime Then interval = Convert.ToDouble(integrator.RealTimeStepMs) / 1000.0
+
+        If nstep = 0 Then
+            If Not restarting Then
+                If Not waittofinish Then
+                    If Not realtime Then
+                        If Not schedule.UseCurrentStateAsInitial Then
+                            RestoreState(schedule.InitialFlowsheetStateID)
+                        End If
                     End If
                 End If
             End If
+        ElseIf nstep = -1 Then
+            Dim refstate = integrator.CurrentTime.AddSeconds(-2 * interval)
+            RestoreHistorianState(refstate)
         End If
 
         Dim final As Integer
@@ -280,7 +321,7 @@ Public Class FormDynamicsIntegratorControl
 
             btnViewResults.Enabled = False
 
-            If Not restarting Then ProgressBar1.Value = 0
+            If Not restarting And nstep = 0 Then ProgressBar1.Value = 0
 
             ProgressBar1.Minimum = 0
 
@@ -302,13 +343,7 @@ Public Class FormDynamicsIntegratorControl
 
         End If
 
-        If Not restarting Then integrator.MonitoredVariableValues.Clear()
-
-        Dim interval = integrator.IntegrationStep.TotalSeconds
-
-        If realtime Then interval = Convert.ToDouble(integrator.RealTimeStepMs) / 1000.0
-
-        If Not restarting Then
+        If Not restarting And nstep = 0 Then
             For Each controller As PIDController In Controllers
                 controller.Reset()
             Next
@@ -317,7 +352,7 @@ Public Class FormDynamicsIntegratorControl
             Next
         End If
 
-        If schedule.ResetContentsOfAllObjects And Not restarting Then
+        If schedule.ResetContentsOfAllObjects And Not restarting And nstep = 0 Then
             For Each obj In Flowsheet.SimulationObjects.Values
                 If obj.HasPropertiesForDynamicMode Then
                     If TypeOf obj Is BaseClass Then
@@ -339,7 +374,7 @@ Public Class FormDynamicsIntegratorControl
             Next
         End If
 
-        If Not restarting Then
+        If Not restarting And nstep = 0 Then
             integrator.CurrentTime = New Date
             integrator.MonitoredVariableValues.Clear()
         End If
@@ -353,7 +388,9 @@ Public Class FormDynamicsIntegratorControl
         Flowsheet.ClearLog()
         FlowsheetClone = Flowsheet.Clone()
 
-        Historian = New Dictionary(Of Date, XDocument)()
+        If Not restarting And nstep = 0 Then
+            Historian = New Dictionary(Of Date, XDocument)()
+        End If
 
         Dim exceptions As New List(Of Exception)
 
@@ -367,7 +404,17 @@ Public Class FormDynamicsIntegratorControl
 
                                     Dim i As Double = 0
 
-                                    If restarting And Not guiless Then
+                                    If nstep = 0 Then
+                                        If restarting And Not guiless Then
+                                            Flowsheet.RunCodeOnUIThread(Sub()
+                                                                            Try
+                                                                                i = ProgressBar1.Value
+                                                                            Catch ex As Exception
+                                                                            End Try
+                                                                        End Sub)
+                                            Application.DoEvents()
+                                        End If
+                                    Else
                                         Flowsheet.RunCodeOnUIThread(Sub()
                                                                         Try
                                                                             i = ProgressBar1.Value
@@ -431,9 +478,15 @@ Public Class FormDynamicsIntegratorControl
 
                                         If exceptions.Count > 0 Then Exit While
 
-                                        Historian.Add(integrator.CurrentTime, Flowsheet.GetSnapshot(SnapshotType.ObjectData))
+                                        If nstep = 0 Then
 
-                                        StoreVariableValues(integrator, i, integrator.CurrentTime)
+                                            If Not Historian.ContainsKey(integrator.CurrentTime) Then
+                                                Historian.Add(integrator.CurrentTime, Flowsheet.GetSnapshot(SnapshotType.ObjectData))
+                                            End If
+
+                                            StoreVariableValues(integrator, i, integrator.CurrentTime)
+
+                                        End If
 
                                         Flowsheet.ProcessScripts(Scripts.EventType.IntegratorStep, Scripts.ObjectType.Integrator, "")
 
@@ -445,7 +498,11 @@ Public Class FormDynamicsIntegratorControl
                                                                         End Sub)
                                         End If
 
-                                        integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
+                                        If nstep = -1 Then
+                                            integrator.CurrentTime = integrator.CurrentTime.AddSeconds(-interval)
+                                        Else
+                                            integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval)
+                                        End If
 
                                         If integrator.ShouldCalculateControl Then
                                             For Each controller As PIDController In Controllers
@@ -538,7 +595,7 @@ Public Class FormDynamicsIntegratorControl
                                                                       Flowsheet.UpdateOpenEditForms()
                                                                       Dim baseexception As Exception
                                                                       If t.Exception IsNot Nothing Then
-                                                                          Paused = False
+                                                                          If nstep = 0 Then Paused = False
                                                                           Running = False
                                                                           For Each ex In t.Exception.Flatten().InnerExceptions
                                                                               Dim euid As String = Guid.NewGuid().ToString()
@@ -567,7 +624,7 @@ Public Class FormDynamicsIntegratorControl
 
                                                                       DirectCast(FlowsheetClone, FormFlowsheet)?.Dispose()
                                                                       FlowsheetClone = Nothing
-                                                                      Historian.Clear()
+                                                                      If Not Paused Then Historian.Clear()
                                                                       GC.Collect()
 
                                                                   End Sub)
@@ -764,5 +821,13 @@ Public Class FormDynamicsIntegratorControl
 
     Private Sub FormDynamicsIntegratorControl_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         FormMain.TranslateFormFunction?.Invoke(Me)
+    End Sub
+
+    Private Sub btnStepBackwards_Click(sender As Object, e As EventArgs) Handles btnStepBackwards.Click
+        RunIntegrator(False, True, False, False, -1)
+    End Sub
+
+    Private Sub btnStepForward_Click(sender As Object, e As EventArgs) Handles btnStepForward.Click
+        RunIntegrator(False, True, False, False, 1)
     End Sub
 End Class

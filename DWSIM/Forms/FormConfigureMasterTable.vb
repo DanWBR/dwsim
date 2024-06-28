@@ -9,6 +9,8 @@ Public Class FormConfigureMasterTable
 
     Private Translations As New Dictionary(Of String, String)
 
+    Private MasterList As New List(Of ListViewItem)
+
     Private Sub FormConfigureMasterTable_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
         Dim list As New List(Of String)
@@ -98,7 +100,7 @@ Public Class FormConfigureMasterTable
 
         Dim props() As String = Nothing
 
-        lvProps.Items.Clear()
+        MasterList.Clear()
         If Table.ObjectList.Count > 0 Then
             For Each s As String In Table.ObjectList.Keys
                 props = Table.Flowsheet.GetFlowsheetSimulationObject(s).GetProperties(PropertyType.ALL)
@@ -111,9 +113,11 @@ Public Class FormConfigureMasterTable
                 If Table.PropertyList.ContainsKey(p) Then
                     lvi.Checked = Table.PropertyList(p)
                 End If
-                lvProps.Items.Add(lvi)
+                MasterList.Add(lvi)
             Next
         End If
+
+        FilterList("")
 
     End Sub
 
@@ -278,6 +282,26 @@ Public Class FormConfigureMasterTable
     Private Sub nupFS_ValueChanged(sender As Object, e As EventArgs) Handles nupFS.ValueChanged
 
         If Loaded Then Table.FontSize = nupFS.Value
+
+    End Sub
+
+    Private Sub tbSearch_TextChanged(sender As Object, e As EventArgs) Handles tbSearch.TextChanged
+
+        FilterList(tbSearch.Text)
+
+    End Sub
+
+    Public Sub FilterList(searchterms As String)
+
+        lvProps.Items.Clear()
+
+        For Each item In MasterList.Where(Function(lvi)
+                                              Dim words = lvi.Text.ToLower().Trim().Split(" ").ToList()
+                                              Dim terms = searchterms.ToLower().Trim().Split(" ").ToList()
+                                              Return terms.All(Function(w) lvi.Text.ToLower().Contains(w))
+                                          End Function)
+            lvProps.Items.Add(item)
+        Next
 
     End Sub
 

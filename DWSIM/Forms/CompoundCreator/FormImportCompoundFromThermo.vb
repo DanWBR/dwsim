@@ -28,6 +28,8 @@ Public Class FormImportCompoundFromThermo
 
         Try
 
+            compdata = Nothing
+
             Dim result = searcher.SearchCompound(searchtext)
 
             tbQueryMatch.Text = result(0)
@@ -54,10 +56,10 @@ Public Class FormImportCompoundFromThermo
 
             If compdata IsNot Nothing Then
 
-                Try
-                    DDBStructureParser.GetData(DDBStructureParser.GetID(compdata.CAS_Number))
-                Catch ex As Exception
-                End Try
+                'Try
+                '    DDBStructureParser.GetData(DDBStructureParser.GetID(compdata.CAS_Number))
+                'Catch ex As Exception
+                'End Try
 
                 AddPropertiesToGrid()
 
@@ -178,6 +180,8 @@ Public Class FormImportCompoundFromThermo
 
         ChangeDefaultFont()
 
+        ActiveControl = tbSearchString
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -207,6 +211,12 @@ Public Class FormImportCompoundFromThermo
             End If
 
         End If
+
+    End Sub
+
+    Private Sub tbSearchString_KeyPress(sender As Object, e As KeyEventArgs) Handles tbSearchString.KeyDown
+
+        If e.KeyCode = Keys.Enter Then WizardControl1.NextPage()
 
     End Sub
 

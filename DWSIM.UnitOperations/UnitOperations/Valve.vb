@@ -110,6 +110,55 @@ Namespace UnitOperations
 
         Private DelayedOpenings As New Queue(Of Double)
 
+        'proxy properties
+
+        Public Overrides Function GetCalculationModes() As String()
+
+            Dim modes As New List(Of String)
+
+            For Each tstEnum As CalculationMode In System.Enum.GetValues(GetType(CalculationMode))
+                modes.Add(String.Format("Name: {0}  Value: {1}", tstEnum.ToString, CInt(tstEnum).ToString()))
+            Next
+
+            Return modes.ToArray()
+
+        End Function
+
+        Public Overrides Function SetCalculationMode(modeID As Integer) As Object
+
+            Me.CalcMode = modeID
+
+            Return CalcMode.ToString()
+
+        End Function
+
+        Public Property HeatDuty As Double
+            Get
+                Return DeltaQ.GetValueOrDefault()
+            End Get
+            Set(value As Double)
+                DeltaQ = value
+            End Set
+        End Property
+
+        Public Property PressureDrop As Double
+            Get
+                Return DeltaP.GetValueOrDefault()
+            End Get
+            Set(value As Double)
+                DeltaP = value
+            End Set
+        End Property
+
+        Public Property TemperatureChange As Double
+            Get
+                Return DeltaT.GetValueOrDefault()
+            End Get
+            Set(value As Double)
+                DeltaT = value
+            End Set
+        End Property
+
         Public Enum FlowCoefficientType
             Kv = 0
             Cv = 1

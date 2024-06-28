@@ -27,6 +27,7 @@
 🌟 Justin Parrot
 🌟 Leonard Seed
 🌟 Lorenzo Montani
+🌟 Magnus Carlsen
 🌟 Marcos Guimarães
 🌟 Martin Heiser
 🌟 Michael Papantoniou
@@ -78,9 +79,9 @@ Kenneth Troldal
 Leandro Favaretto
 Les Waymont
 Lewis Estall
-Luca Finardi
 Maša Novaković
 Marcos Silva
+Mario Farley
 Masahiro Sakai
 Mohan Vaze
 Nathan Schuh
@@ -96,7 +97,7 @@ Rupert Easter
 Ryszard Sadowski
 Satinder Virdi
 Shubham Wankhede
-SP&POS Engenharia
+SP&&POS Engenharia
 Tetsuo Fuchino
 Thomas Baur
 Tibor Lányi

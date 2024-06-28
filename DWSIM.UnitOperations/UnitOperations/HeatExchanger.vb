@@ -158,6 +158,51 @@ Namespace UnitOperations
 
         Public Property MITA As Double = 0.0#
 
+        'proxy properties
+
+        Public Overrides Function GetCalculationModes() As String()
+
+            Dim modes As New List(Of String)
+
+            For Each tstEnum As HeatExchangerCalcMode In System.Enum.GetValues(GetType(HeatExchangerCalcMode))
+                modes.Add(String.Format("Name: {0}  Value: {1}", tstEnum.ToString, CInt(tstEnum).ToString()))
+            Next
+
+            Return modes.ToArray()
+
+        End Function
+
+        Public Overrides Function SetCalculationMode(modeID As Integer) As Object
+
+            Me.CalcMode = modeID
+
+            Return CalcMode.ToString()
+
+        End Function
+
+        Public Property Efficiency As Double
+            Get
+                Return ThermalEfficiency
+            End Get
+            Set(value As Double)
+                ThermalEfficiency = value
+            End Set
+        End Property
+
+
+        Public Property HeatDuty As Double
+            Get
+                Return Q.GetValueOrDefault()
+            End Get
+            Set(value As Double)
+                Q = value
+            End Set
+        End Property
+
+        Public Property HotSideTemperatureChange As Double
+
+        Public Property ColdSideTemperatureChange As Double
+
         Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
             'workaround for renaming CalcBothTemp_KA calculation type to CalcBothTemp_UA
             For Each xel In data
@@ -230,7 +275,7 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Property Area() As Nullable(Of Double)
+        Public Property Area As Nullable(Of Double)
             Get
                 Return m_Area
             End Get
@@ -239,7 +284,7 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Property DeltaP() As Nullable(Of Double)
+        Public Property DeltaP As Nullable(Of Double)
             Get
                 Return m_dp
             End Get
@@ -248,7 +293,7 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Property Q() As Nullable(Of Double)
+        Public Property Q As Nullable(Of Double)
             Get
                 Return m_Q
             End Get
@@ -257,7 +302,7 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Property HotSidePressureDrop() As Double
+        Public Property HotSidePressureDrop As Double
             Get
                 Return m_HotSidePressureDrop
             End Get
@@ -266,7 +311,7 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Property ColdSidePressureDrop() As Double
+        Public Property ColdSidePressureDrop As Double
             Get
                 Return m_ColdSidePressureDrop
             End Get
@@ -275,7 +320,7 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Property HotSideOutletTemperature() As Double
+        Public Property HotSideOutletTemperature As Double
             Get
                 Return TempHotOut
             End Get
@@ -284,7 +329,7 @@ Namespace UnitOperations
             End Set
         End Property
 
-        Public Property ColdSideOutletTemperature() As Double
+        Public Property ColdSideOutletTemperature As Double
             Get
                 Return TempColdOut
             End Get

@@ -87,11 +87,11 @@ namespace DWSIM.UI.Forms
             lblpatrons.Height = (int)(sf * 227);
             if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
             {
-                lblpatrons.Font = SystemFonts.Label(10.0f);
+                lblpatrons.Font = SystemFonts.Label(9.0f);
             }
             else
             {
-                lblpatrons.Font = SystemFonts.Label(9.0f);
+                lblpatrons.Font = SystemFonts.Label(8.0f);
             }
 
             var layout = new PixelLayout();

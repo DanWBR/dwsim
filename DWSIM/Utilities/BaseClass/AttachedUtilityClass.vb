@@ -250,6 +250,7 @@
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.PanelUtility)
         Me.Controls.Add(Me.PanelHeader)
+        Me.HideOnClose = True
         Me.Name = "AttachedUtilityClass"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
         Me.ShowIcon = False
@@ -274,7 +275,8 @@
 
     Private Sub tsbClose_Click(sender As Object, e As EventArgs) Handles tsbClose.Click
         If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-            Me.Close()
+            HideOnClose = False
+            Close()
         End If
     End Sub
 

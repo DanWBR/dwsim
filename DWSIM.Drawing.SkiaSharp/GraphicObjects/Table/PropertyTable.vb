@@ -25,6 +25,16 @@ Namespace GraphicObjects.Tables
 
         Inherits ShapeGraphic
 
+        Public Enum SortMode
+            AsAdded = 0
+            NameAsc = 1
+            NameDesc = 2
+            FirstParentThenNameAsc = 3
+            FirstParentThenNameDesc = 4
+        End Enum
+
+        Public Property SortingMode As SortMode = SortMode.AsAdded
+
         Public Property VisibleProperties As New Dictionary(Of String, List(Of String))
 
         Public Property Padding As Integer = 4
@@ -195,46 +205,83 @@ Namespace GraphicObjects.Tables
             toremove.Clear()
             toremove = Nothing
 
-            Dim items = VisibleProperties.ToArray
+            Dim items As New List(Of Tuple(Of String, String))
+
+            Select Case SortingMode
+                Case SortMode.AsAdded
+                    For Each item In VisibleProperties
+                        For Each value In item.Value
+                            items.Add(New Tuple(Of String, String)(item.Key, value))
+                        Next
+                    Next
+                Case SortMode.NameAsc
+                    For Each item In VisibleProperties
+                        For Each value In item.Value
+                            items.Add(New Tuple(Of String, String)(item.Key, value))
+                        Next
+                    Next
+                    items = items.OrderBy(Function(i) Flowsheet.GetTranslatedString(i.Item2)).ToList()
+                Case SortMode.NameDesc
+                    For Each item In VisibleProperties
+                        For Each value In item.Value
+                            items.Add(New Tuple(Of String, String)(item.Key, value))
+                        Next
+                    Next
+                    items = items.OrderByDescending(Function(i) Flowsheet.GetTranslatedString(i.Item2)).ToList()
+                Case SortMode.FirstParentThenNameAsc
+                    For Each item In VisibleProperties
+                        Dim values = item.Value.OrderBy(Function(v) Flowsheet.GetTranslatedString(v))
+                        For Each v In values
+                            items.Add(New Tuple(Of String, String)(item.Key, v))
+                        Next
+                    Next
+                    items = items.OrderBy(Function(i) Flowsheet.SimulationObjects(i.Item1).GraphicObject.Tag).ToList()
+                Case SortMode.FirstParentThenNameDesc
+                    For Each item In VisibleProperties
+                        Dim values = item.Value.OrderByDescending(Function(v) Flowsheet.GetTranslatedString(v))
+                        For Each v In values
+                            items.Add(New Tuple(Of String, String)(item.Key, v))
+                        Next
+                    Next
+                    items = items.OrderByDescending(Function(i) Flowsheet.SimulationObjects(i.Item1).GraphicObject.Tag).ToList()
+            End Select
 
             If items.Count > 0 Then
 
                 For Each item In items
-                    For Each value In item.Value
 
-                        size = MeasureString(Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag, tpaint)
+                    size = MeasureString(Me.Flowsheet.SimulationObjects(item.Item1).GraphicObject.Tag, tpaint)
 
-                        If size.Width > maxL0 Then maxL0 = size.Width
-                        If size.Height > maxH Then maxH = size.Height
+                    If size.Width > maxL0 Then maxL0 = size.Width
+                    If size.Height > maxH Then maxH = size.Height
 
-                        propstring = Me.Flowsheet.GetTranslatedString(value)
-                        pval0 = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyValue(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
-                        If TypeOf pval0 Is Double Then
-                            propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
+                    propstring = Me.Flowsheet.GetTranslatedString(item.Item2)
+                    pval0 = Me.Flowsheet.SimulationObjects(item.Item1).GetPropertyValue(item.Item2, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
+                    If TypeOf pval0 Is Double Then
+                        propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
+                    Else
+                        If pval0 IsNot Nothing Then
+                            propval = pval0.ToString
                         Else
-                            If pval0 IsNot Nothing Then
-                                propval = pval0.ToString
-                            Else
-                                propval = ""
-                            End If
+                            propval = ""
                         End If
-                        propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
+                    End If
+                    propunit = Me.Flowsheet.SimulationObjects(item.Item1).GetPropertyUnit(item.Item2, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
 
-                        size = MeasureString(Flowsheet.GetTranslatedString(propstring), tpaint)
-                        If size.Width > maxL1 Then maxL1 = size.Width
-                        If size.Height > maxH Then maxH = size.Height
+                    size = MeasureString(Flowsheet.GetTranslatedString(propstring), tpaint)
+                    If size.Width > maxL1 Then maxL1 = size.Width
+                    If size.Height > maxH Then maxH = size.Height
 
-                        size = MeasureString(propval, tpaint2)
-                        If size.Width > maxL2 Then maxL2 = size.Width
-                        If size.Height > maxH Then maxH = size.Height
+                    size = MeasureString(propval, tpaint2)
+                    If size.Width > maxL2 Then maxL2 = size.Width
+                    If size.Height > maxH Then maxH = size.Height
 
-                        size = MeasureString(propunit, tpaint)
-                        If size.Width > maxL3 Then maxL3 = size.Width
-                        If size.Height > maxH Then maxH = size.Height
+                    size = MeasureString(propunit, tpaint)
+                    If size.Width > maxL3 Then maxL3 = size.Width
+                    If size.Height > maxH Then maxH = size.Height
 
-                        count += 1
+                    count += 1
 
-                    Next
                 Next
 
                 size = MeasureString(Me.HeaderText, tpaint)
@@ -260,37 +307,35 @@ Namespace GraphicObjects.Tables
                 Dim n As Integer = 1
 
                 For Each item In items
-                    For Each value In item.Value
 
-                        canvas.DrawText(Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag, X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                    canvas.DrawText(Me.Flowsheet.SimulationObjects(item.Item1).GraphicObject.Tag, X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
 
-                        propstring = Me.Flowsheet.GetTranslatedString(value)
-                        Try
-                            pval0 = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyValue(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
-                        Catch ex As Exception
-                            pval0 = ""
-                        End Try
-                        If TypeOf pval0 Is Double Then
-                            propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
+                    propstring = Me.Flowsheet.GetTranslatedString(item.Item2)
+                    Try
+                        pval0 = Me.Flowsheet.SimulationObjects(item.Item1).GetPropertyValue(item.Item2, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
+                    Catch ex As Exception
+                        pval0 = ""
+                    End Try
+                    If TypeOf pval0 Is Double Then
+                        propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
+                    Else
+                        If pval0 IsNot Nothing Then
+                            propval = pval0.ToString
                         Else
-                            If pval0 IsNot Nothing Then
-                                propval = pval0.ToString
-                            Else
-                                propval = ""
-                            End If
+                            propval = ""
                         End If
-                        propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
+                    End If
+                    propunit = Me.Flowsheet.SimulationObjects(item.Item1).GetPropertyUnit(item.Item2, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
 
-                        canvas.DrawText(propstring, X + maxL0 + Padding, Y + n * maxH + Padding + size.Height, tpaint)
-                        canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL0 + maxL1, Y + n * maxH + Padding + size.Height, tpaint2)
-                        canvas.DrawText(propunit, X + maxL0 + maxL1 + maxL2 + 2 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
-                        canvas.DrawLine(X, Y + n * maxH, X + Width, Y + n * maxH, bpaint)
+                    canvas.DrawText(propstring, X + maxL0 + Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                    canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL0 + maxL1, Y + n * maxH + Padding + size.Height, tpaint2)
+                    canvas.DrawText(propunit, X + maxL0 + maxL1 + maxL2 + 2 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                    canvas.DrawLine(X, Y + n * maxH, X + Width, Y + n * maxH, bpaint)
 
-                        ClipboardData += Me.Flowsheet.SimulationObjects(item.Key).GraphicObject.Tag + vbTab + propstring + vbTab + propval + vbTab + propunit + vbCrLf
+                    ClipboardData += Me.Flowsheet.SimulationObjects(item.Item1).GraphicObject.Tag + vbTab + propstring + vbTab + propval + vbTab + propunit + vbCrLf
 
-                        n += 1
+                    n += 1
 
-                    Next
                 Next
 
                 canvas.DrawRect(New SKRect(X, Y, X + Width, Y + Height), bpaint)

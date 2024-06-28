@@ -27,6 +27,7 @@ Partial Class FormOptions
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New System.Windows.Forms.TabControl()
         Me.FaTabStripItem1 = New System.Windows.Forms.TabPage()
         Me.GroupBox18 = New System.Windows.Forms.GroupBox()
@@ -55,7 +56,7 @@ Partial Class FormOptions
         Me.cbDefaultLocation = New System.Windows.Forms.ComboBox()
         Me.GroupBox11 = New System.Windows.Forms.GroupBox()
         Me.CheckBoxUndoRedoRecalc = New System.Windows.Forms.CheckBox()
-        Me.FaTabStripItem3 = New System.Windows.Forms.TabPage()
+        Me.TabUserDatasets = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.cbudb = New System.Windows.Forms.CheckBox()
         Me.dgvdb = New System.Windows.Forms.DataGridView()
@@ -72,6 +73,14 @@ Partial Class FormOptions
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewImageColumn1 = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.TabUserJSONs = New System.Windows.Forms.TabPage()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.chkoverrjson = New System.Windows.Forms.CheckBox()
+        Me.dgjsonfiles = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewImageColumn2 = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.FaTabStripItem2 = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnClearDir = New System.Windows.Forms.Button()
@@ -88,6 +97,7 @@ Partial Class FormOptions
         Me.KryptonCheckBox6 = New System.Windows.Forms.CheckBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox17 = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.btnDownPy = New System.Windows.Forms.Button()
         Me.btnSelectPythonPath = New System.Windows.Forms.Button()
         Me.tbPythonPath = New System.Windows.Forms.TextBox()
@@ -107,7 +117,6 @@ Partial Class FormOptions
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -117,11 +126,14 @@ Partial Class FormOptions
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
-        Me.FaTabStripItem3.SuspendLayout()
+        Me.TabUserDatasets.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         CType(Me.dgvdb, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox10.SuspendLayout()
         CType(Me.dgvIPDB, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabUserJSONs.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
+        CType(Me.dgjsonfiles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -141,7 +153,8 @@ Partial Class FormOptions
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem1)
         Me.FaTabStrip1.Controls.Add(Me.TabPage1)
-        Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem3)
+        Me.FaTabStrip1.Controls.Add(Me.TabUserDatasets)
+        Me.FaTabStrip1.Controls.Add(Me.TabUserJSONs)
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem2)
         Me.FaTabStrip1.Controls.Add(Me.TabPage2)
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem7)
@@ -325,13 +338,13 @@ Partial Class FormOptions
         resources.ApplyResources(Me.CheckBoxUndoRedoRecalc, "CheckBoxUndoRedoRecalc")
         Me.CheckBoxUndoRedoRecalc.Name = "CheckBoxUndoRedoRecalc"
         '
-        'FaTabStripItem3
+        'TabUserDatasets
         '
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
-        Me.FaTabStripItem3.BackColor = System.Drawing.SystemColors.Window
-        Me.FaTabStripItem3.Controls.Add(Me.GroupBox4)
-        Me.FaTabStripItem3.Controls.Add(Me.GroupBox10)
-        Me.FaTabStripItem3.Name = "FaTabStripItem3"
+        resources.ApplyResources(Me.TabUserDatasets, "TabUserDatasets")
+        Me.TabUserDatasets.BackColor = System.Drawing.SystemColors.Window
+        Me.TabUserDatasets.Controls.Add(Me.GroupBox4)
+        Me.TabUserDatasets.Controls.Add(Me.GroupBox10)
+        Me.TabUserDatasets.Name = "TabUserDatasets"
         '
         'GroupBox4
         '
@@ -507,6 +520,88 @@ Partial Class FormOptions
         Me.DataGridViewImageColumn1.ReadOnly = True
         Me.DataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         '
+        'TabUserJSONs
+        '
+        resources.ApplyResources(Me.TabUserJSONs, "TabUserJSONs")
+        Me.TabUserJSONs.Controls.Add(Me.GroupBox7)
+        Me.TabUserJSONs.Name = "TabUserJSONs"
+        Me.TabUserJSONs.UseVisualStyleBackColor = True
+        '
+        'GroupBox7
+        '
+        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
+        Me.GroupBox7.Controls.Add(Me.chkoverrjson)
+        Me.GroupBox7.Controls.Add(Me.dgjsonfiles)
+        Me.GroupBox7.Controls.Add(Me.Button1)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.TabStop = False
+        '
+        'chkoverrjson
+        '
+        resources.ApplyResources(Me.chkoverrjson, "chkoverrjson")
+        Me.chkoverrjson.Name = "chkoverrjson"
+        Me.chkoverrjson.UseVisualStyleBackColor = True
+        '
+        'dgjsonfiles
+        '
+        resources.ApplyResources(Me.dgjsonfiles, "dgjsonfiles")
+        Me.dgjsonfiles.AllowUserToAddRows = False
+        Me.dgjsonfiles.AllowUserToDeleteRows = False
+        Me.dgjsonfiles.AllowUserToResizeColumns = False
+        Me.dgjsonfiles.AllowUserToResizeRows = False
+        Me.dgjsonfiles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgjsonfiles.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.dgjsonfiles.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.dgjsonfiles.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgjsonfiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgjsonfiles.ColumnHeadersVisible = False
+        Me.dgjsonfiles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn6, Me.DataGridViewImageColumn2})
+        Me.dgjsonfiles.GridColor = System.Drawing.SystemColors.Control
+        Me.dgjsonfiles.Name = "dgjsonfiles"
+        Me.dgjsonfiles.ReadOnly = True
+        Me.dgjsonfiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgjsonfiles.RowHeadersVisible = False
+        Me.dgjsonfiles.RowTemplate.DefaultCellStyle.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgjsonfiles.RowTemplate.Height = 38
+        Me.dgjsonfiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgjsonfiles.ShowCellErrors = False
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.DataGridViewTextBoxColumn4.FillWeight = 10.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn4, "DataGridViewTextBoxColumn4")
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        Me.DataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn6, "DataGridViewTextBoxColumn6")
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.ReadOnly = True
+        Me.DataGridViewTextBoxColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DataGridViewImageColumn2
+        '
+        Me.DataGridViewImageColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle4.NullValue = CType(resources.GetObject("DataGridViewCellStyle4.NullValue"), Object)
+        Me.DataGridViewImageColumn2.DefaultCellStyle = DataGridViewCellStyle4
+        Me.DataGridViewImageColumn2.FillWeight = 10.0!
+        resources.ApplyResources(Me.DataGridViewImageColumn2, "DataGridViewImageColumn2")
+        Me.DataGridViewImageColumn2.Name = "DataGridViewImageColumn2"
+        Me.DataGridViewImageColumn2.ReadOnly = True
+        Me.DataGridViewImageColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'FaTabStripItem2
         '
         resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
@@ -618,6 +713,11 @@ Partial Class FormOptions
         Me.GroupBox17.Controls.Add(Me.Label18)
         Me.GroupBox17.Name = "GroupBox17"
         Me.GroupBox17.TabStop = False
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
         '
         'btnDownPy
         '
@@ -745,11 +845,6 @@ Partial Class FormOptions
         resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
         Me.OpenFileDialog1.SupportMultiDottedExtensions = True
         '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
         'FormOptions
         '
         resources.ApplyResources(Me, "$this")
@@ -772,12 +867,16 @@ Partial Class FormOptions
         Me.GroupBox12.PerformLayout()
         Me.GroupBox11.ResumeLayout(False)
         Me.GroupBox11.PerformLayout()
-        Me.FaTabStripItem3.ResumeLayout(False)
+        Me.TabUserDatasets.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         CType(Me.dgvdb, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox10.ResumeLayout(False)
         CType(Me.dgvIPDB, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabUserJSONs.ResumeLayout(False)
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
+        CType(Me.dgjsonfiles, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem2.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -811,7 +910,7 @@ Partial Class FormOptions
     Public WithEvents KryptonLabel3 As System.Windows.Forms.Label
     Public WithEvents TrackBar1 As System.Windows.Forms.TrackBar
     Public WithEvents KryptonLabel2 As System.Windows.Forms.Label
-    Public WithEvents FaTabStripItem3 As System.Windows.Forms.TabPage
+    Public WithEvents TabUserDatasets As System.Windows.Forms.TabPage
     Public WithEvents cbudb As System.Windows.Forms.CheckBox
     Public WithEvents Button7 As System.Windows.Forms.Button
     Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
@@ -880,4 +979,12 @@ Partial Class FormOptions
     Friend WithEvents TabPage2 As TabPage
     Public WithEvents btnDownPy As Button
     Public WithEvents Label1 As Label
+    Friend WithEvents TabUserJSONs As TabPage
+    Public WithEvents GroupBox7 As GroupBox
+    Public WithEvents chkoverrjson As CheckBox
+    Public WithEvents dgjsonfiles As DataGridView
+    Public WithEvents Button1 As Button
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewImageColumn2 As DataGridViewImageColumn
 End Class

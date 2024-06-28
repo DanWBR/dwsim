@@ -129,7 +129,7 @@
     <value>48, 22, 48, 22</value>
   </data>
   <data name="graph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>609, 528</value>
+    <value>791, 510</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="graph.TabIndex" type="System.Int32, mscorlib">
@@ -157,7 +157,7 @@
     <value>48, 22, 48, 22</value>
   </data>
   <data name="graph2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>609, 528</value>
+    <value>791, 510</value>
   </data>
   <data name="graph2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -406,7 +406,7 @@
     <value>3, 3</value>
   </data>
   <data name="gridstats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>609, 528</value>
+    <value>791, 510</value>
   </data>
   <data name="gridstats.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -439,7 +439,7 @@
     <value>Vertical</value>
   </data>
   <data name="tbRegResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 100</value>
+    <value>578, 100</value>
   </data>
   <data name="tbRegResults.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -457,10 +457,10 @@
     <value>0</value>
   </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>491, 618</value>
+    <value>3, 551</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 119</value>
+    <value>584, 119</value>
   </data>
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -475,10 +475,10 @@
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>Panel2</value>
   </data>
   <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="btnDoReg.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -725,6 +725,12 @@
   </data>
   <data name="chkIdealVaporPhase.Text" xml:space="preserve">
     <value>Considerar Fase Vapor Ideal</value>
+  </data>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>405, 8</value>
+  </metadata>
+  <data name="chkIdealVaporPhase.ToolTip" xml:space="preserve">
+    <value>If unchecked, DWSIM will use Peng-Robinson EOS to calculate vapor phase fugacities</value>
   </data>
   <data name="&gt;&gt;chkIdealVaporPhase.Name" xml:space="preserve">
     <value>chkIdealVaporPhase</value>
@@ -1162,7 +1168,7 @@
     <value>10, 8</value>
   </data>
   <data name="LabelWithDivider12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 18</value>
+    <value>451, 18</value>
   </data>
   <data name="LabelWithDivider12.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -1630,7 +1636,7 @@
     <value>10, 58</value>
   </data>
   <data name="LabelWithDivider1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 18</value>
+    <value>451, 18</value>
   </data>
   <data name="LabelWithDivider1.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -1663,7 +1669,7 @@
     <value>10, 225</value>
   </data>
   <data name="LabelWithDivider2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 18</value>
+    <value>451, 18</value>
   </data>
   <data name="LabelWithDivider2.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
@@ -1690,7 +1696,7 @@
     <value>3, 16</value>
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>476, 666</value>
+    <value>476, 658</value>
   </data>
   <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1711,7 +1717,7 @@
     <value>6, 52</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>482, 685</value>
+    <value>482, 677</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1729,7 +1735,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="GroupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1741,7 +1747,7 @@
     <value>349, 16</value>
   </data>
   <data name="tbDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>755, 20</value>
+    <value>953, 20</value>
   </data>
   <data name="tbDescription.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1843,7 +1849,7 @@
     <value>6, 4</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1112, 46</value>
+    <value>1310, 46</value>
   </data>
   <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1861,7 +1867,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -1879,7 +1885,7 @@
     <value>Vertical</value>
   </data>
   <data name="tbParam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 77</value>
+    <value>215, 77</value>
   </data>
   <data name="tbParam.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1903,7 +1909,7 @@
     <value>3, 93</value>
   </data>
   <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 23</value>
+    <value>215, 23</value>
   </data>
   <data name="Button4.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1924,10 +1930,10 @@
     <value>1</value>
   </data>
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>879, 618</value>
+    <value>593, 551</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 119</value>
+    <value>221, 119</value>
   </data>
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1942,10 +1948,10 @@
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>Panel2</value>
   </data>
   <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <metadata name="MenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>290, 8</value>
@@ -1966,7 +1972,7 @@
     <value>0, 0</value>
   </data>
   <data name="MenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1122, 24</value>
+    <value>1320, 24</value>
   </data>
   <data name="MenuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1984,7 +1990,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;MenuStrip1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="TabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1996,7 +2002,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 534</value>
+    <value>797, 516</value>
   </data>
   <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2023,7 +2029,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 534</value>
+    <value>797, 516</value>
   </data>
   <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2050,7 +2056,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 534</value>
+    <value>797, 516</value>
   </data>
   <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2071,10 +2077,10 @@
     <value>2</value>
   </data>
   <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>494, 56</value>
+    <value>6, 3</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>623, 560</value>
+    <value>805, 542</value>
   </data>
   <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -2086,22 +2092,52 @@
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TabControl1.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>Panel2</value>
   </data>
   <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Panel2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="Panel2.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Panel2.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>400, 600</value>
+  </data>
+  <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>494, 56</value>
+  </data>
+  <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>814, 673</value>
+  </data>
+  <data name="Panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;Panel2.Name" xml:space="preserve">
+    <value>Panel2</value>
+  </data>
+  <data name="&gt;&gt;Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Panel2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>118</value>
+    <value>37</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1122, 742</value>
+    <value>1320, 734</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -3846,6 +3882,12 @@
   </data>
   <data name="&gt;&gt;SalvarEmBancoDeDadosXMLToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
+    <value>ToolTip1</value>
+  </data>
+  <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormDataRegression</value>

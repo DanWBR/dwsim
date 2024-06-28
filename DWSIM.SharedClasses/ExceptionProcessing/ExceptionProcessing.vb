@@ -94,7 +94,7 @@ Namespace ExceptionProcessing
 
         End Function
 
-        Private Shared Function GetFirstException(ex As AggregateException) As Exception
+        Public Shared Function GetFirstException(ex As AggregateException) As Exception
 
             For Each iex In ex.InnerExceptions
                 If TypeOf iex Is AggregateException Then

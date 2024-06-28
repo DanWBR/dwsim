@@ -7,6 +7,8 @@ Public Class FormConfigurePropertyTable
 
     Private loaded As Boolean = False
 
+    Private MasterList As New List(Of ListViewItem)
+
     Private Sub FormSelectProperties_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
@@ -21,13 +23,16 @@ Public Class FormConfigurePropertyTable
         lvObjects.Sorting = SortOrder.Ascending
         lvObjects.Sort()
 
+        ComboBox1.SelectedIndex = Table.SortingMode
+
         loaded = True
 
     End Sub
 
     Private Sub lvObjects_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles lvObjects.ItemSelectionChanged
+
         If e.IsSelected Then
-            lvProps.Items.Clear()
+            MasterList.Clear()
             For Each item In Table.Flowsheet.SimulationObjects(e.Item.Tag).GetProperties(PropertyType.ALL)
                 Dim lvi = New ListViewItem(Table.Flowsheet.GetTranslatedString(item))
                 lvi.Tag = item
@@ -36,9 +41,12 @@ Public Class FormConfigurePropertyTable
                         lvi.Checked = True
                     End If
                 End If
-                lvProps.Items.Add(lvi)
+                MasterList.Add(lvi)
             Next
         End If
+
+        FilterList("")
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
@@ -47,20 +55,23 @@ Public Class FormConfigurePropertyTable
 
     Private Sub lvProps_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles lvProps.ItemChecked
 
-        If loaded Then
-            If Not Table.VisibleProperties.ContainsKey(lvObjects.SelectedItems(0).Tag) Then
-                Table.VisibleProperties.Add(lvObjects.SelectedItems(0).Tag, New List(Of String))
-            End If
+        If loaded And lvObjects.SelectedItems.Count > 0 Then
+            Try
+                If Not Table.VisibleProperties.ContainsKey(lvObjects.SelectedItems(0).Tag) Then
+                    Table.VisibleProperties.Add(lvObjects.SelectedItems(0).Tag, New List(Of String))
+                End If
+                If e.Item.Checked Then
+                    If Not Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Contains(e.Item.Tag) Then
+                        Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Add(e.Item.Tag)
+                    End If
+                Else
+                    If Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Contains(e.Item.Tag) Then
+                        Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Remove(e.Item.Tag)
+                    End If
+                End If
+            Catch ex As Exception
 
-            If e.Item.Checked Then
-                If Not Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Contains(e.Item.Tag) Then
-                    Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Add(e.Item.Tag)
-                End If
-            Else
-                If Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Contains(e.Item.Tag) Then
-                    Table.VisibleProperties(lvObjects.SelectedItems(0).Tag).Remove(e.Item.Tag)
-                End If
-            End If
+            End Try
         End If
 
     End Sub
@@ -101,4 +112,27 @@ Public Class FormConfigurePropertyTable
 
     End Sub
 
+    Private Sub tbSearch_TextChanged(sender As Object, e As EventArgs) Handles tbSearch.TextChanged
+
+        FilterList(tbSearch.Text)
+
+    End Sub
+
+    Public Sub FilterList(searchterms As String)
+
+        lvProps.Items.Clear()
+
+        For Each item In MasterList.Where(Function(lvi)
+                                              Dim words = lvi.Text.ToLower().Trim().Split(" ").ToList()
+                                              Dim terms = searchterms.ToLower().Trim().Split(" ").ToList()
+                                              Return terms.All(Function(w) lvi.Text.ToLower().Contains(w))
+                                          End Function)
+            lvProps.Items.Add(item)
+        Next
+
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        Table.SortingMode = ComboBox1.SelectedIndex
+    End Sub
 End Class

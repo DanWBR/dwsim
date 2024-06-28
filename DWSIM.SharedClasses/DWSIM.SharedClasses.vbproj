@@ -184,6 +184,7 @@
     <Compile Include="Misc\MAPI.vb" />
     <Compile Include="Misc\MiscClasses.vb" />
     <Compile Include="Misc\SpreadsheetCell.vb" />
+    <Compile Include="Misc\TabularData.vb" />
     <Compile Include="Misc\UndoRedo.vb" />
     <Compile Include="Misc\Utilities.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

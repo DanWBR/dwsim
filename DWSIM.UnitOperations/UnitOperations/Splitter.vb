@@ -50,6 +50,26 @@ Namespace UnitOperations
 
         Public Property OperationMode As OpMode = OpMode.SplitRatios
 
+        Public Overrides Function GetCalculationModes() As String()
+
+            Dim modes As New List(Of String)
+
+            For Each tstEnum As OpMode In System.Enum.GetValues(GetType(OpMode))
+                modes.Add(String.Format("Name: {0}  Value: {1}", tstEnum.ToString, CInt(tstEnum).ToString()))
+            Next
+
+            Return modes.ToArray()
+
+        End Function
+
+        Public Overrides Function SetCalculationMode(modeID As Integer) As Object
+
+            Me.OperationMode = modeID
+
+            Return OperationMode.ToString()
+
+        End Function
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New Splitter()
             obj.LoadData(Me.SaveData)

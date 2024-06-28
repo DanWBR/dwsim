@@ -157,7 +157,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             Location = new Point(center);
 
-            Topmost = true;
+            if (!s.OldUI) Topmost = true;
 
             Visible = true;
         }

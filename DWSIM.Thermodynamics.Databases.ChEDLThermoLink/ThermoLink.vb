@@ -137,29 +137,33 @@ Public Class ChEDLThermoParser
 
             Dim value As Double
 
+            Dim tvals = New List(Of Double)
+
             instance = Py.Import("thermo.vapor_pressure")
 
             Dim calculator As Object = instance.VaporPressure(CASRN:=CAS, extrapolation:="interp1d")
 
             Try
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         Pvap.Add(value)
+                        tvals.Add(item)
                     End If
                 Next
 
                 comp.VaporPressureEquation = 101
 
-                coeffs(0) = 25
-                coeffs(1) = 2000
-                coeffs(2) = -5.245
-                coeffs(3) = 0.0#
-                coeffs(4) = 0.0#
+                coeffs(0) = 74.555
+                coeffs(1) = -7295.59
+                coeffs(2) = -7.44245
+                coeffs(3) = 0.0000042881
+                coeffs(4) = 2.0#
 
-                obj = lmfit.GetCoeffs(TrangeL.ToArray, Pvap.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Pvap, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                obj = lmfit.GetCoeffs(tvals.ToArray, Pvap.ToArray, coeffs.Clone, LMFit.FitType.Pvap, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 fitcoeffs = obj(0)
                 r_fit = obj(2)
                 n_fit = obj(3)
@@ -173,10 +177,20 @@ Public Class ChEDLThermoParser
                 comp.Vapor_Pressure_TMIN = Tmin
                 comp.Vapor_Pressure_TMAX = Tb
 
+                Dim ycalc = tvals.Select(Function(x) comp.GetVaporPressure(x)).ToList()
+
                 comp.Comments += vbCrLf
                 comp.Comments += "Vapor Pressure regression residual = " + r_fit.ToString(ci) + vbCrLf
                 comp.Comments += "Regressed Data Table" + vbCrLf
-                comp.Comments += GetTable(TrangeL, Pvap, "T (K)", "Pvap (Pa)")
+                comp.Comments += GetTable(tvals, Pvap, ycalc, "T (K)", "Pvap (Pa)")
+
+                comp.Vapor_Pressure_Regression_Fit = r_fit
+                comp.Vapor_Pressure_Tabular_Data.XData = tvals.ToList()
+                comp.Vapor_Pressure_Tabular_Data.YData = Pvap
+                comp.Vapor_Pressure_Tabular_Data.XName = "Temperature"
+                comp.Vapor_Pressure_Tabular_Data.YName = "Vapor Pressure"
+                comp.Vapor_Pressure_Tabular_Data.XUnit = "K"
+                comp.Vapor_Pressure_Tabular_Data.YUnit = "Pa"
 
             Catch ex As Exception
 
@@ -189,23 +203,25 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.heat_capacity")
                 calculator = instance.HeatCapacityGas(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeV
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         CpIG.Add(value / comp.Molar_Weight)
+                        tvals.Add(item)
                     End If
                 Next
 
                 comp.IdealgasCpEquation = 5
 
                 coeffs(0) = 1.0
-                coeffs(1) = 0.0249
-                coeffs(2) = 0.000253
-                coeffs(3) = -0.000000384
-                coeffs(4) = 0.000000000129
+                coeffs(1) = 0.000000249
+                coeffs(2) = 0.00000000253
+                coeffs(3) = 0.0
+                coeffs(4) = 0.0
 
-                obj = lmfit.GetCoeffs(TrangeV.ToArray, CpIG.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                obj = lmfit.GetCoeffs(tvals.ToArray, CpIG.ToArray, coeffs.Clone, LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 fitcoeffs = obj(0)
                 r_fit = obj(2)
                 n_fit = obj(3)
@@ -216,10 +232,20 @@ Public Class ChEDLThermoParser
                 comp.Ideal_Gas_Heat_Capacity_Const_D = fitcoeffs(3)
                 comp.Ideal_Gas_Heat_Capacity_Const_E = fitcoeffs(4)
 
+                Dim ycalc = tvals.Select(Function(x) comp.GetIdealGasHeatCapacity(x)).ToList()
+
                 comp.Comments += vbCrLf
                 comp.Comments += "Ideal Gas Heat Capacity regression residual = " + r_fit.ToString(ci) + vbCrLf
                 comp.Comments += "Regressed Data Table" + vbCrLf
-                comp.Comments += GetTable(TrangeV, CpIG, "T (K)", "Cp (kJ/kg.K)")
+                comp.Comments += GetTable(tvals, CpIG, ycalc, "T (K)", "Cp (kJ/kg.K)")
+
+                comp.Ideal_Gas_Heat_Capacity_Regression_Fit = r_fit
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.XData = tvals.ToList()
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.YData = CpIG
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.XName = "Temperature"
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.YName = "Heat Capacity"
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.XUnit = "K"
+                comp.Ideal_Gas_Heat_Capacity_Tabular_Data.YUnit = "kJ/[kg.K]"
 
             Catch ex As Exception
 
@@ -231,11 +257,13 @@ Public Class ChEDLThermoParser
 
                 calculator = instance.HeatCapacityLiquid(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         CpL.Add(value / comp.Molar_Weight)
+                        tvals.Add(item)
                     End If
                 Next
 
@@ -249,7 +277,7 @@ Public Class ChEDLThermoParser
                     coeffs(3) = -0.000000384
                     coeffs(4) = 0.000000000129
 
-                    obj = lmfit.GetCoeffs(TrangeL.ToArray, CpL.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                    obj = lmfit.GetCoeffs(tvals.ToArray, CpL.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                     fitcoeffs = obj(0)
                     r_fit = obj(2)
                     n_fit = obj(3)
@@ -263,10 +291,20 @@ Public Class ChEDLThermoParser
                     comp.Liquid_Heat_Capacity_Tmin = Tmin
                     comp.Liquid_Heat_Capacity_Tmax = Tb
 
+                    Dim ycalc = tvals.Select(Function(x) comp.GetLiquidHeatCapacity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Liquid Heat Capacity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeL, CpL, "T (K)", "Cp (kJ/kg.K)")
+                    comp.Comments += GetTable(tvals, CpL, ycalc, "T (K)", "Cp (kJ/kg.K)")
+
+                    comp.Liquid_Heat_Capacity_Regression_Fit = r_fit
+                    comp.Liquid_Heat_Capacity_Tabular_Data.XData = tvals.ToList()
+                    comp.Liquid_Heat_Capacity_Tabular_Data.YData = CpL
+                    comp.Liquid_Heat_Capacity_Tabular_Data.XName = "Temperature"
+                    comp.Liquid_Heat_Capacity_Tabular_Data.YName = "Heat Capacity"
+                    comp.Liquid_Heat_Capacity_Tabular_Data.XUnit = "K"
+                    comp.Liquid_Heat_Capacity_Tabular_Data.YUnit = "kJ/[kg.K]"
 
                 Else
 
@@ -288,11 +326,13 @@ Public Class ChEDLThermoParser
 
                 calculator = instance.HeatCapacitySolid(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeS
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         CpS.Add(value / comp.Molar_Weight)
+                        tvals.Add(item)
                     End If
                 Next
 
@@ -306,7 +346,7 @@ Public Class ChEDLThermoParser
                     coeffs(3) = -0.000000384
                     coeffs(4) = 0.000000000129
 
-                    obj = lmfit.GetCoeffs(TrangeS.ToArray, CpS.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                    obj = lmfit.GetCoeffs(tvals.ToArray, CpS.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                     fitcoeffs = obj(0)
                     r_fit = obj(2)
                     n_fit = obj(3)
@@ -320,10 +360,20 @@ Public Class ChEDLThermoParser
                     comp.Solid_Heat_Capacity_Tmin = Tmin * 0.5
                     comp.Solid_Heat_Capacity_Tmax = Tmin
 
+                    Dim ycalc = tvals.Select(Function(x) comp.GetSolidHeatCapacity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Solid Heat Capacity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeS, CpS, "T (K)", "Cp (kJ/kg.K)")
+                    comp.Comments += GetTable(tvals, CpS, ycalc, "T (K)", "Cp (kJ/kg.K)")
+
+                    comp.Solid_Heat_Capacity_Regression_Fit = r_fit
+                    comp.Solid_Heat_Capacity_Tabular_Data.XData = tvals.ToList()
+                    comp.Liquid_Heat_Capacity_Tabular_Data.YData = CpS
+                    comp.Solid_Heat_Capacity_Tabular_Data.XName = "Temperature"
+                    comp.Solid_Heat_Capacity_Tabular_Data.YName = "Heat Capacity"
+                    comp.Solid_Heat_Capacity_Tabular_Data.XUnit = "K"
+                    comp.Solid_Heat_Capacity_Tabular_Data.YUnit = "kJ/[kg.K]"
 
                 Else
 
@@ -346,11 +396,13 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.volume")
                 calculator = instance.VolumeSolid(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeS
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         DensS.Add(1 / value / 1000 * comp.Molar_Weight)
+                        tvals.Add(item)
                     End If
                 Next
 
@@ -364,7 +416,7 @@ Public Class ChEDLThermoParser
                     coeffs(3) = 0.0#
                     coeffs(4) = 0.0#
 
-                    obj = lmfit.GetCoeffs(TrangeS.ToArray, DensS.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                    obj = lmfit.GetCoeffs(tvals.ToArray, DensS.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                     fitcoeffs = obj(0)
                     r_fit = obj(2)
                     n_fit = obj(3)
@@ -378,10 +430,20 @@ Public Class ChEDLThermoParser
                     comp.Solid_Density_Tmin = Tmin * 0.5
                     comp.Solid_Density_Tmax = Tmin
 
+                    Dim ycalc = tvals.Select(Function(x) comp.GetSolidDensity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Solid Density regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeS, DensS, "T (K)", "rhoS (kg/m3)")
+                    comp.Comments += GetTable(tvals, DensS, ycalc, "T (K)", "rhoS (kg/m3)")
+
+                    comp.Solid_Density_Regression_Fit = r_fit
+                    comp.Solid_Density_Tabular_Data.XData = tvals.ToList()
+                    comp.Solid_Density_Tabular_Data.YData = DensS
+                    comp.Solid_Density_Tabular_Data.XName = "Temperature"
+                    comp.Solid_Density_Tabular_Data.YName = "Density"
+                    comp.Solid_Density_Tabular_Data.XUnit = "K"
+                    comp.Solid_Density_Tabular_Data.YUnit = "kg/m3"
 
                 Else
 
@@ -403,11 +465,13 @@ Public Class ChEDLThermoParser
 
                 calculator = instance.VolumeLiquid(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.TP_or_T_dependent_property(item.ToPython(), 101325.0F.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         DensL.Add(1 / value / 1000 * comp.Molar_Weight)
+                        tvals.Add(item)
                     End If
                 Next
 
@@ -421,7 +485,7 @@ Public Class ChEDLThermoParser
                     coeffs(3) = -0.000000384
                     coeffs(4) = 0.000000000129
 
-                    obj = lmfit.GetCoeffs(TrangeL.ToArray, DensL.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                    obj = lmfit.GetCoeffs(tvals.ToArray, DensL.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                     fitcoeffs = obj(0)
                     r_fit = obj(2)
                     n_fit = obj(3)
@@ -435,10 +499,20 @@ Public Class ChEDLThermoParser
                     comp.Liquid_Density_Tmin = Tmin
                     comp.Liquid_Density_Tmax = Tb
 
+                    Dim ycalc = tvals.Select(Function(x) comp.GetLiquidDensity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Liquid Density regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeL, DensL, "T (K)", "rhoL (kg/m3)")
+                    comp.Comments += GetTable(tvals, DensL, ycalc, "T (K)", "rhoL (kg/m3)")
+
+                    comp.Liquid_Density_Regression_Fit = r_fit
+                    comp.Liquid_Density_Tabular_Data.XData = tvals.ToList()
+                    comp.Liquid_Density_Tabular_Data.YData = DensL
+                    comp.Liquid_Density_Tabular_Data.XName = "Temperature"
+                    comp.Liquid_Density_Tabular_Data.YName = "Density"
+                    comp.Liquid_Density_Tabular_Data.XUnit = "K"
+                    comp.Liquid_Density_Tabular_Data.YUnit = "kg/m3"
 
                 Else
 
@@ -461,11 +535,13 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.viscosity")
                 calculator = instance.ViscosityLiquid(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.TP_or_T_dependent_property(item.ToPython(), 101325.0F.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         ViscL.Add(value)
+                        tvals.Add(item)
                     End If
                 Next
 
@@ -479,7 +555,7 @@ Public Class ChEDLThermoParser
                     coeffs(3) = 0
                     coeffs(4) = 0
 
-                    obj = lmfit.GetCoeffs(TrangeL.ToArray, ViscL.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.LiqVisc, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                    obj = lmfit.GetCoeffs(tvals.ToArray, ViscL.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.LiqVisc, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                     fitcoeffs = obj(0)
                     r_fit = obj(2)
                     n_fit = obj(3)
@@ -490,10 +566,20 @@ Public Class ChEDLThermoParser
                     comp.Liquid_Viscosity_Const_D = fitcoeffs(3)
                     comp.Liquid_Viscosity_Const_E = fitcoeffs(4)
 
+                    Dim ycalc = tvals.Select(Function(x) comp.GetLiquidViscosity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Liquid Viscosity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeL, ViscL, "T (K)", "muL (Pa.s)")
+                    comp.Comments += GetTable(tvals, ViscL, ycalc, "T (K)", "muL (Pa.s)")
+
+                    comp.Liquid_Viscosity_Regression_Fit = r_fit
+                    comp.Liquid_Viscosity_Tabular_Data.XData = tvals.ToList()
+                    comp.Liquid_Viscosity_Tabular_Data.YData = ViscL
+                    comp.Liquid_Viscosity_Tabular_Data.XName = "Temperature"
+                    comp.Liquid_Viscosity_Tabular_Data.YName = "Viscosity"
+                    comp.Liquid_Viscosity_Tabular_Data.XUnit = "K"
+                    comp.Liquid_Viscosity_Tabular_Data.YUnit = "Pa.s"
 
                 Else
 
@@ -515,11 +601,13 @@ Public Class ChEDLThermoParser
 
                 calculator = instance.ViscosityGas(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeV
                     Dim p = calculator.TP_or_T_dependent_property(item.ToPython(), 101325.0F.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         ViscV.Add(value)
+                        tvals.Add(item)
                     End If
                 Next
 
@@ -533,7 +621,7 @@ Public Class ChEDLThermoParser
                     coeffs(3) = 0.0#
                     coeffs(4) = 0.0#
 
-                    obj = lmfit.GetCoeffs(TrangeV.ToArray, ViscV.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                    obj = lmfit.GetCoeffs(tvals.ToArray, ViscV.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                     fitcoeffs = obj(0)
                     r_fit = obj(2)
                     n_fit = obj(3)
@@ -547,10 +635,20 @@ Public Class ChEDLThermoParser
                     comp.Vapor_Viscosity_Tmin = Tb
                     comp.Vapor_Viscosity_Tmax = Tmax
 
+                    Dim ycalc = tvals.Select(Function(x) comp.GetVaporViscosity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Vapor Viscosity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeV, ViscV, "T (K)", "muV (Pa.s)")
+                    comp.Comments += GetTable(tvals, ViscV, ycalc, "T (K)", "muV (Pa.s)")
+
+                    comp.Vapor_Viscosity_Regression_Fit = r_fit
+                    comp.Vapor_Viscosity_Tabular_Data.XData = tvals.ToList()
+                    comp.Vapor_Viscosity_Tabular_Data.YData = ViscV
+                    comp.Vapor_Viscosity_Tabular_Data.XName = "Temperature"
+                    comp.Vapor_Viscosity_Tabular_Data.YName = "Viscosity"
+                    comp.Vapor_Viscosity_Tabular_Data.XUnit = "K"
+                    comp.Vapor_Viscosity_Tabular_Data.YUnit = "Pa.s"
 
                 Else
 
@@ -573,11 +671,13 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.thermal_conductivity")
                 calculator = instance.ThermalConductivityLiquid(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.TP_or_T_dependent_property(item.ToPython(), 101325.0F.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         TCL.Add(value)
+                        tvals.Add(item)
                     End If
                 Next
 
@@ -591,7 +691,7 @@ Public Class ChEDLThermoParser
                     coeffs(3) = 0.0#
                     coeffs(4) = 0.0#
 
-                    obj = lmfit.GetCoeffs(TrangeL.ToArray, TCL.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                    obj = lmfit.GetCoeffs(tvals.ToArray, TCL.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                     fitcoeffs = obj(0)
                     r_fit = obj(2)
                     n_fit = obj(3)
@@ -602,10 +702,20 @@ Public Class ChEDLThermoParser
                     comp.Liquid_Thermal_Conductivity_Const_D = fitcoeffs(3)
                     comp.Liquid_Thermal_Conductivity_Const_E = fitcoeffs(4)
 
+                    Dim ycalc = tvals.Select(Function(x) comp.GetLiquidThermalConductivity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Liquid Thermal Conductivity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeL, TCL, "T (K)", "TCL (W/m.K)")
+                    comp.Comments += GetTable(tvals, TCL, ycalc, "T (K)", "TCL (W/m.K)")
+
+                    comp.Liquid_Thermal_Conductivity_Regression_Fit = r_fit
+                    comp.Liquid_Thermal_Conductivity_Tabular_Data.XData = tvals
+                    comp.Liquid_Thermal_Conductivity_Tabular_Data.YData = TCL
+                    comp.Liquid_Thermal_Conductivity_Tabular_Data.XName = "Temperature"
+                    comp.Liquid_Thermal_Conductivity_Tabular_Data.YName = "Thermal Conductivity"
+                    comp.Liquid_Thermal_Conductivity_Tabular_Data.XUnit = "K"
+                    comp.Liquid_Thermal_Conductivity_Tabular_Data.YUnit = "W/m.K"
 
                 Else
 
@@ -627,11 +737,13 @@ Public Class ChEDLThermoParser
 
                 calculator = instance.ThermalConductivityGas(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeV
                     Dim p = calculator.TP_or_T_dependent_property(item.ToPython(), 101325.0F.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         TCV.Add(value)
+                        tvals.Add(item)
                     End If
                 Next
 
@@ -645,7 +757,7 @@ Public Class ChEDLThermoParser
                     coeffs(3) = 0.0#
                     coeffs(4) = 0.0#
 
-                    obj = lmfit.GetCoeffs(TrangeV.ToArray, TCV.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                    obj = lmfit.GetCoeffs(tvals.ToArray, TCV.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                     fitcoeffs = obj(0)
                     r_fit = obj(2)
                     n_fit = obj(3)
@@ -656,10 +768,20 @@ Public Class ChEDLThermoParser
                     comp.Vapor_Thermal_Conductivity_Const_D = fitcoeffs(3)
                     comp.Vapor_Thermal_Conductivity_Const_E = fitcoeffs(4)
 
+                    Dim ycalc = TrangeV.Select(Function(x) comp.GetVaporThermalConductivity(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Vapor Thermal Conductivity regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeV, TCV, "T (K)", "TCV (W/m.K)")
+                    comp.Comments += GetTable(tvals, TCV, ycalc, "T (K)", "TCV (W/m.K)")
+
+                    comp.Vapor_Thermal_Conductivity_Regression_Fit = r_fit
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.XData = tvals.ToList()
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.YData = TCV
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.XName = "Temperature"
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.YName = "Thermal Conductivity"
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.XUnit = "K"
+                    comp.Vapor_Thermal_Conductivity_Tabular_Data.YUnit = "W/m.K"
 
                 Else
 
@@ -682,11 +804,13 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.phase_change")
                 calculator = instance.EnthalpyVaporization(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         Hvap.Add(value / comp.Molar_Weight)
+                        tvals.Add(item)
                     End If
                 Next
 
@@ -700,7 +824,7 @@ Public Class ChEDLThermoParser
                     coeffs(3) = 0.0#
                     coeffs(4) = 0.0#
 
-                    obj = lmfit.GetCoeffs(TrangeL.ToArray, Hvap.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                    obj = lmfit.GetCoeffs(tvals.ToArray, Hvap.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                     fitcoeffs = obj(0)
                     r_fit = obj(2)
                     n_fit = obj(3)
@@ -711,10 +835,20 @@ Public Class ChEDLThermoParser
                     comp.HVap_D = fitcoeffs(3)
                     comp.HVap_E = fitcoeffs(4)
 
+                    Dim ycalc = tvals.Select(Function(x) comp.GetEnthalpyOfVaporization(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Enthalpy of Vaporization regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeL, Hvap, "T (K)", "Hvap (kJ/kg.K)")
+                    comp.Comments += GetTable(tvals, Hvap, ycalc, "T (K)", "Hvap (kJ/kg.K)")
+
+                    comp.Enthalpy_Of_Vaporization_Regression_Fit = r_fit
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.XData = tvals.ToList()
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.YData = Hvap
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.XName = "Temperature"
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.YName = "Enthalpy"
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.XUnit = "K"
+                    comp.Enthalpy_Of_Vaporization_Tabular_Data.YUnit = "kJ/[kg.K]"
 
                 Else
 
@@ -737,11 +871,13 @@ Public Class ChEDLThermoParser
                 instance = Py.Import("thermo.interface")
                 calculator = instance.SurfaceTension(CASRN:=CAS, extrapolation:="interp1d")
 
+                tvals.Clear()
                 For Each item In TrangeL
                     Dim p = calculator.T_dependent_property(item.ToPython())
                     If p IsNot Nothing Then
                         value = p.ToString().ToDoubleFromInvariant()
                         SurfT.Add(value)
+                        tvals.Add(item)
                     End If
                 Next
 
@@ -755,7 +891,7 @@ Public Class ChEDLThermoParser
                     coeffs(3) = 0.0#
                     coeffs(4) = 0.0#
 
-                    obj = lmfit.GetCoeffs(TrangeL.ToArray, SurfT.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                    obj = lmfit.GetCoeffs(tvals.ToArray, SurfT.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                     fitcoeffs = obj(0)
                     r_fit = obj(2)
                     n_fit = obj(3)
@@ -766,10 +902,20 @@ Public Class ChEDLThermoParser
                     comp.Surface_Tension_Const_D = fitcoeffs(3)
                     comp.Surface_Tension_Const_E = fitcoeffs(4)
 
+                    Dim ycalc = tvals.Select(Function(x) comp.GetLiquidSurfaceTension(x)).ToList()
+
                     comp.Comments += vbCrLf
                     comp.Comments += "Surface Tension regression residual = " + r_fit.ToString(ci) + vbCrLf
                     comp.Comments += "Regressed Data Table" + vbCrLf
-                    comp.Comments += GetTable(TrangeL, SurfT, "T (K)", "sigma (N/m)")
+                    comp.Comments += GetTable(tvals, SurfT, ycalc, "T (K)", "sigma (N/m)")
+
+                    comp.Surface_Tension_Regression_Fit = r_fit
+                    comp.Surface_Tension_Tabular_Data.XData = tvals.ToList()
+                    comp.Surface_Tension_Tabular_Data.YData = SurfT
+                    comp.Surface_Tension_Tabular_Data.XName = "Temperature"
+                    comp.Surface_Tension_Tabular_Data.YName = "Surface Tension"
+                    comp.Surface_Tension_Tabular_Data.XUnit = "K"
+                    comp.Surface_Tension_Tabular_Data.YUnit = "N/m"
 
                 Else
 
@@ -791,20 +937,19 @@ Public Class ChEDLThermoParser
 
     End Function
 
-    Private Shared Function GetTable(x As List(Of Double), y As List(Of Double), xlabel As String, ylabel As String) As String
+    Private Shared Function GetTable(x As List(Of Double), y As List(Of Double), ycalc As List(Of Double), xlabel As String, ylabel As String) As String
 
         Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
-        Dim i As Integer = 0
-
         Dim sb As New System.Text.StringBuilder()
 
-        sb.AppendLine(xlabel.PadRight(40) + ylabel)
+        sb.AppendLine(xlabel.PadRight(25) + (ylabel + " (exp)").PadRight(25) + (ylabel + " (calc)").PadRight(25) + "err (%)")
         For i = 0 To x.Count - 1
-            sb.AppendLine(x(i).ToString(ci).PadRight(40) + y(i).ToString(ci))
+            Dim err1 = (y(i) - ycalc(i)) / y(i) * 100.0
+            sb.AppendLine(x(i).ToString(ci).PadRight(25) + y(i).ToString(ci).PadRight(25) + ycalc(i).ToString(ci).PadRight(25) + err1.ToString(ci))
         Next
 
-        Return sb.ToString
+        Return sb.ToString()
 
     End Function
 
