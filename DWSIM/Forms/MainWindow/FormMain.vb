@@ -4244,6 +4244,7 @@ Label_00CC:
             Dim form2 As FormFlowsheet = Me.ActiveMdiChild
 
             Dim filename = form2.Options.FilePath
+            Dim shouldOverwriteFile As Boolean = False
 
             Dim filePickerForm As IFilePicker
 
@@ -4253,6 +4254,13 @@ Label_00CC:
                     Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
                     filePickerForm.SuggestedFilename = fname
                     If form2.Options.VirtualFile IsNot Nothing Then
+                        Dim shouldOverwriteExistingFileResult As DialogResult = MessageBox.Show("Do you want to overwrite the existing file?", "Save file", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+                        If (shouldOverwriteExistingFileResult = DialogResult.Yes) Then
+                            shouldOverwriteFile = True
+                        End If
+
+
                         filePickerForm.SuggestedDirectory = form2.Options.VirtualFile.ParentUniqueIdentifier
                     End If
 
@@ -4272,12 +4280,17 @@ Label_00CC:
                 End Try
             End If
 
-            Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
-            New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
-            {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Compressed XML Simulation File", "*.dwxmz"),
-            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("XML Simulation File", "*.dwxml"),
-            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Interchangeable PFD Simulation File", "*.pfdx"),
-            New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Mobile XML Simulation File", "*.xml")})
+            Dim handler As IVirtualFile = Nothing
+            If shouldOverwriteFile Then
+                handler = form2.Options.VirtualFile
+            Else
+                handler = filePickerForm.ShowSaveDialog(
+                New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
+                {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Compressed XML Simulation File", "*.dwxmz"),
+                New SharedClassesCSharp.FilePicker.FilePickerAllowedType("XML Simulation File", "*.dwxml"),
+                New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Interchangeable PFD Simulation File", "*.pfdx"),
+                New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Mobile XML Simulation File", "*.xml")})
+            End If
 
             If handler IsNot Nothing Then
 

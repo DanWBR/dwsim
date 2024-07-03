@@ -4802,7 +4802,7 @@ Namespace UnitOperations
                     If Column.ExternalColumnSolvers.ContainsKey(SolvingMethodName) Then
                         so = Column.ExternalColumnSolvers(SolvingMethodName).SolveColumn(Me, inputdata)
                     Else
-                        Throw New Exception("Unable to find the selected column solver")
+                        Throw New Exception($"Unable to find column solver with name '{SolvingMethodName}'.")
                     End If
                 End If
             ElseIf TypeOf Me Is AbsorptionColumn Then
