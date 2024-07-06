@@ -437,11 +437,11 @@ Public Class FormFlowsheet
                         End If
                         For Each item In extender.Collection
                             item.SetMainWindow(My.Application.MainWindowForm)
-                            item.SetFlowsheet(Me)
                             Dim exttsmi As New ToolStripMenuItem
                             exttsmi.Text = item.DisplayText
                             exttsmi.Image = item.DisplayImage
                             AddHandler exttsmi.Click, Sub(s2, e2)
+                                                          item.SetFlowsheet(Me)
                                                           item.Run()
                                                       End Sub
                             If TypeOf item Is IExtender2 Then
