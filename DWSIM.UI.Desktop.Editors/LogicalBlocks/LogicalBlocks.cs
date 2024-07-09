@@ -61,6 +61,13 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 {
                     if (sender.Text.IsValidDouble()) recycle.MaximumIterations = int.Parse(sender.Text);
                 });
+            var nu = container.CreateAndAddNumericEditorRow("Smoothing Factor", recycle.SmoothingFactor, 0.1, 1.0, 1,
+                (sender, e) =>
+                {
+                    recycle.SmoothingFactor= sender.Value;
+                }
+                );
+            nu.Increment=0.1;
             container.CreateAndAddLabelRow("Convergence Tolerances");
             container.CreateAndAddTextBoxRow(nf, "Mass Flow", cv.ConvertFromSI(su.massflow, recycle.ConvergenceParameters.VazaoMassica),
                 (sender, e) =>
