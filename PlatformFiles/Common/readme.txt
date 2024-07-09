@@ -64,6 +64,26 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 8.8.0
 
+- New search functionality to Property Table editors (Classic UI)
+- New Object List Panel (classic ui)
+- New Step feature in Dynamic Mode (Classic UI)
+- New Recycle Smoothing Factor to improve convergence
+- Implemented item ordering for Flowsheet Property Tables
+- New Load Compound JSON files on startup (Classic UI)
+- Implemented #630: User selected solver for PFR reactor (DotNumerics)
+- Implemented #631: Compound Properties: Add 'Export to JSON' button
+- Improved Azeotropic temperature calculation
+- Workaround for invalid SSL Certificate at cheric.org
+- Fixed Surface Tension calculation
+- Fixed issue with Compound Creator Wizard
+- Fixed issues with Data regression tool
+- Added tabular t-dep data to compound constant properties
+- Fixed issue with PFD designer
+- Fixed #628: Native save dialog for Compound creator
+- Fixed #649: Water electrolyzer results not updating
+- Fixed #628: Compound separator generates mass #652
+- Fixed #628: Utilities running #647
+- Fixed #627: Delete or update user compound
 
 Version 8.7.1
 
