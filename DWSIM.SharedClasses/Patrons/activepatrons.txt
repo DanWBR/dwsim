@@ -3,7 +3,6 @@
 🥈 Alexander Semenyak
 🥈 Pedro Sabóia
 🥈 Sukin Oh
-🥈 Jane Ferris
 🌟 Adam Kovalovszki
 🌟 Alberto Marzi
 🌟 Bernhard Seyfang
@@ -12,7 +11,6 @@
 🌟 Casey Houston
 🌟 Christian Hornhofer
 🌟 Domenico Marchese
-🌟 Fernando Lino
 🌟 Gawayne Escalona
 🌟 George Brindle
 🌟 Gerry Agnew
@@ -22,12 +20,10 @@
 🌟 Henk Fikkert
 🌟 H-Tec Systems GmbH
 🌟 Izabela Alves
-🌟 Javier Fontalvo
 🌟 Jens Greimeier
 🌟 José Marques
 🌟 Justin Parrot
 🌟 Leonard Seed
-🌟 Lorenzo Montani
 🌟 Magnus Carlsen
 🌟 Marcos Guimarães
 🌟 Martin Heiser
@@ -36,7 +32,6 @@
 🌟 Mohammad Fairol
 🌟 Nicholas Canabarro
 🌟 Nicolas Spogis
-🌟 Pablo Jimenez
 🌟 Pawel Zjezdzalka
 🌟 Richard Huntington
 🌟 Roland Berger
@@ -89,7 +84,6 @@ Mohan Vaze
 Nathan Schuh
 Peter Nordquist
 Petroconsulting LLC
-Protherm Systems
 Rainer Scheuring
 Rashad Ahmadov
 Renato Arrieche
