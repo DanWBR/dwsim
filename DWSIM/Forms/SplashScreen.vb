@@ -30,7 +30,7 @@ Public NotInheritable Class SplashScreen
         lblVersion.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
 
 #If DEBUG Then
-        lblVersion.Text += "-" + IO.File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString()
+        lblVersion.Text += " (" + IO.File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString("s", Globalization.CultureInfo.InvariantCulture).Replace("T", " ") + ")"
 #End If
 
         If Environment.Is64BitProcess Then
