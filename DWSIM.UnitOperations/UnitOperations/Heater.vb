@@ -145,7 +145,7 @@ Namespace UnitOperations
             Dim modes As New List(Of String)
 
             For Each tstEnum As CalculationMode In System.Enum.GetValues(GetType(CalculationMode))
-                modes.Add(String.Format("Name: {0}  Value: {1}", tstEnum.ToString, CInt(tstEnum).ToString()))
+                modes.Add(String.Format("Name: {0}  ID: {1}", tstEnum.ToString, CInt(tstEnum).ToString()))
             Next
 
             Return modes.ToArray()

@@ -154,8 +154,8 @@
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
-  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 183</value>
+  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 425</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>337, 202</value>
@@ -163,9 +163,21 @@
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
   </data>
+  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>331, 183</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GroupBoxParameters1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 85</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 13</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Smoothing Factor (0.1-1.0)</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 13</value>
@@ -188,8 +200,21 @@
   <data name="chkGlobalBroyden.Text" xml:space="preserve">
     <value>Global Convergence (Broyden)</value>
   </data>
+  <data name="TrackBar1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TrackBar1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="TrackBar1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 77</value>
+  </data>
+  <data name="TrackBar1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 30</value>
+  </data>
   <data name="GroupBoxParameters1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 84</value>
+    <value>337, 115</value>
   </data>
   <data name="GroupBoxParameters1.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
@@ -238,6 +263,12 @@
   </data>
   <data name="GroupBoxConnections.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="GroupBoxConnections.Size" type="System.Drawing.Size, System.Drawing">
+    <value>337, 83</value>
+  </data>
+  <data name="GroupBoxConnections.Text" xml:space="preserve">
+    <value>Connections</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
     <value>283, 50</value>
@@ -311,14 +342,17 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
   </data>
-  <data name="GroupBoxConnections.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 83</value>
-  </data>
-  <data name="GroupBoxConnections.Text" xml:space="preserve">
-    <value>Connections</value>
-  </data>
   <data name="GroupBoxParameters2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="GroupBoxParameters2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 311</value>
+  </data>
+  <data name="GroupBoxParameters2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>337, 111</value>
+  </data>
+  <data name="GroupBoxParameters2.Text" xml:space="preserve">
+    <value>Convergence Tolerances and Current Errors</value>
   </data>
   <data name="tbWE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -347,16 +381,7 @@
   <data name="tbTE.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 20</value>
   </data>
-  <data name="GroupBoxParameters2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 111</value>
-  </data>
-  <data name="GroupBoxParameters2.Text" xml:space="preserve">
-    <value>Convergence Tolerances and Current Errors</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>355, 941</value>
+    <value>355, 646</value>
   </data>
 </root>

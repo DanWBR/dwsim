@@ -59,6 +59,8 @@ Namespace SpecialOps
         Protected m_Errors As New Dictionary(Of String, Double)
         Protected m_Values As New Dictionary(Of String, Double)
 
+        Public Property SmoothingFactor As Double = 1.0
+
         Public ReadOnly Property Errors As Dictionary(Of String, Double) Implements Interfaces.IRecycle.Errors
             Get
                 Return m_Errors
@@ -264,7 +266,7 @@ Namespace SpecialOps
 
             IObj?.SetCurrent()
 
-            IObj?.paragraphs.add("The Recycle operation is composed by a block 
+            IObj?.Paragraphs.Add("The Recycle operation is composed by a block 
                                 in the flowsheet which does convergence verifications in systems 
                                 were downstream material connects somewhere upstream in the 
                                 diagram. With this tool it is possible to build complex 
@@ -272,13 +274,13 @@ Namespace SpecialOps
                                 way by using the acceleration methods presents in this logical 
                                 operation.")
 
-            Iobj?.paragraphs.add("There are two acceleration methods available: Wegstein and 
+            IObj?.Paragraphs.Add("There are two acceleration methods available: Wegstein and 
                                 Dominant Eigenvalue. The Wegstein method must be used when there 
                                 isn't a significant interaction between convergent variables, in 
                                 the contrary the other method can be used. The successive 
                                 substitution method is slow, but convergence is guaranteed.")
 
-            Iobj?.paragraphs.add("The Wegstein method requires some parameters which can be edited 
+            IObj?.Paragraphs.Add("The Wegstein method requires some parameters which can be edited 
                                 by the user. The dominant eigenvalue does not require any 
                                 additional parameter. The user can define convergence parameters 
                                 for temperature, pressure and mass flow in the recycle, that is, 
@@ -287,7 +289,7 @@ Namespace SpecialOps
                                 identical. The smaller these values are, the more time is used by 
                                 the calculator in order to converge the recycle.")
 
-            Iobj?.paragraphs.add("As a result, the actual error values are shown, together with the 
+            IObj?.Paragraphs.Add("As a result, the actual error values are shown, together with the 
                                 necessary convergence iteration steps.")
 
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
@@ -368,121 +370,33 @@ Namespace SpecialOps
 
             End With
 
-            If Me.IterationCount <= 3 Then
+            Dim sf = SmoothingFactor
 
-                Tnew = Me.ConvergenceHistory.Temperatura
-                Pnew = Me.ConvergenceHistory.Pressao
-                Wnew = Me.ConvergenceHistory.VazaoMassica
-
-            Else
-
-                Select Case Me.AccelerationMethod
-
-                    Case AccelMethod.None
-
-                        Tnew = Me.ConvergenceHistory.Temperatura
-                        Pnew = Me.ConvergenceHistory.Pressao
-                        Wnew = Me.ConvergenceHistory.VazaoMassica
-
-                    Case AccelMethod.Wegstein
-
-                        If Me.WegsteinParameters.AccelDelay <= Me.IterationCount + 3 Then
-
-                            Dim sT, sP, sW As Double
-                            Dim qT, qP, qW As Double
-                            sT = (Me.ConvergenceHistory.TemperaturaE - Me.ConvergenceHistory.TemperaturaE0) / (Me.ConvergenceHistory.Temperatura - Me.ConvergenceHistory.Temperatura0)
-                            sP = (Me.ConvergenceHistory.PressaoE - Me.ConvergenceHistory.PressaoE0) / (Me.ConvergenceHistory.Pressao - Me.ConvergenceHistory.Pressao0)
-                            sW = (Me.ConvergenceHistory.VazaoMassicaE - Me.ConvergenceHistory.VazaoMassicaE0) / (Me.ConvergenceHistory.VazaoMassica - Me.ConvergenceHistory.VazaoMassica0)
-                            qT = sT / (sT - 1)
-                            qP = sP / (sP - 1)
-                            qW = sW / (sW - 1)
-                            If Me.WegsteinParameters.AccelFreq <= Me.m_InternalCounterT And Double.IsNaN(sT) = False And qT > Me.WegsteinParameters.Qmin And qT < Me.WegsteinParameters.Qmax Then
-                                Tnew = Me.ConvergenceHistory.TemperaturaE * (1 - qT) + Me.ConvergenceHistory.Temperatura * qT
-                                Me.m_InternalCounterT = 0
-                            Else
-                                Tnew = Me.ConvergenceHistory.Temperatura
-                                Me.m_InternalCounterT += 1
-                            End If
-                            If Me.WegsteinParameters.AccelFreq <= Me.m_InternalCounterP And Double.IsNaN(sP) = False And qP > Me.WegsteinParameters.Qmin And qP < Me.WegsteinParameters.Qmax Then
-                                Pnew = Me.ConvergenceHistory.PressaoE * (1 - qP) + Me.ConvergenceHistory.Pressao * qP
-                                Me.m_InternalCounterP = 0
-                            Else
-                                Pnew = Me.ConvergenceHistory.Pressao
-                                Me.m_InternalCounterP += 1
-                            End If
-                            If Me.WegsteinParameters.AccelFreq <= Me.m_InternalCounterW And Double.IsNaN(sW) = False And qW > Me.WegsteinParameters.Qmin And qW < Me.WegsteinParameters.Qmax Then
-                                Wnew = Me.ConvergenceHistory.VazaoMassicaE * (1 - qW) + Me.ConvergenceHistory.VazaoMassica * qW
-                                Me.m_InternalCounterW = 0
-                            Else
-                                Wnew = Me.ConvergenceHistory.VazaoMassica
-                                Me.m_InternalCounterW += 1
-                            End If
-
-                        Else
-
-                            Tnew = Me.ConvergenceHistory.Temperatura
-                            Pnew = Me.ConvergenceHistory.Pressao
-                            Wnew = Me.ConvergenceHistory.VazaoMassica
-
-                        End If
-
-                    Case AccelMethod.Dominant_Eigenvalue
-
-                        Dim eT(1), eP(1), eW(1), M As Double
-
-                        eT(0) = Me.ConvergenceHistory.TemperaturaE0
-                        eT(1) = Me.ConvergenceHistory.TemperaturaE
-                        eP(0) = Me.ConvergenceHistory.PressaoE0
-                        eP(1) = Me.ConvergenceHistory.PressaoE
-                        eW(0) = Me.ConvergenceHistory.VazaoMassicaE0
-                        eW(1) = Me.ConvergenceHistory.VazaoMassicaE
-
-                        Dim ve0 As Double() = New Double() {Math.Abs(eT(0)), Math.Abs(eP(0)), Math.Abs(eW(0))}
-                        Dim ve1 As Double() = New Double() {Math.Abs(eT(1)), Math.Abs(eP(1)), Math.Abs(eW(1))}
-
-                        M = MAX(ve1) / MAX(ve0)
-
-                        With Me.ConvergenceHistory
-                            If Double.IsNaN(M) = False Then
-                                Tnew = .Temperatura0 + (.Temperatura - .Temperatura0) / (1 - M)
-                                Pnew = .Pressao0 + (.Pressao - .Pressao0) / (1 - M)
-                                Wnew = .VazaoMassica0 + (.VazaoMassica - .VazaoMassica0) / (1 - M)
-                            Else
-                                Tnew = .Temperatura
-                                Pnew = .Pressao
-                                Wnew = .VazaoMassica
-                            End If
-                        End With
-
-                End Select
-
-            End If
+            Tnew = sf * Me.ConvergenceHistory.Temperatura + (1.0 - sf) * Me.ConvergenceHistory.Temperatura0
+            Pnew = sf * Me.ConvergenceHistory.Pressao + (1.0 - sf) * Me.ConvergenceHistory.Pressao0
+            Wnew = sf * Me.ConvergenceHistory.VazaoMassica + (1.0 - sf) * Me.ConvergenceHistory.VazaoMassica0
 
             Dim copydata As Boolean = True
 
             ems.PropertyPackage.CurrentMaterialStream = ems
 
-            If Me.CopyOnStreamDataError Then
-                copydata = True
-            Else
-                If Not Tnew.IsValid Or Not Pnew.IsValid Or Not Wnew.IsValid Or Not ems.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).Sum.IsValid Then copydata = False
-            End If
+            If Not Me.AccelerationMethod = AccelMethod.GlobalBroyden Then
 
-            If Not Me.AccelerationMethod = AccelMethod.GlobalBroyden And copydata Then
-
-                Dim msfrom, msto As MaterialStream
-                msfrom = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-
-                If Not msfrom.Calculated And Not msfrom.AtEquilibrium Then
+                If Not oms.Calculated And Not oms.AtEquilibrium Then
                     Throw New Exception(FlowSheet.GetTranslatedString("RecycleStreamNotCalculated"))
                 End If
 
-                msto = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-                Dim prevspec = msto.SpecType
-                msto.Assign(msfrom)
-                msto.AssignProps(msfrom)
-                msto.SpecType = prevspec
-                msto.AtEquilibrium = False
+                oms.AtEquilibrium = False
+                oms.SetTemperature(Tnew)
+                oms.SetPressure(Pnew)
+
+                v1 = ems.Phases(0).Compounds.Values.Select(Function(x) x.MassFlow.GetValueOrDefault).ToArray
+                v2 = oms.Phases(0).Compounds.Values.Select(Function(x) x.MassFlow.GetValueOrDefault).ToArray
+
+                For i = 0 To v1.Length - 1
+                    Dim newf = sf * v1(i) + (1.0 - sf) * v2(i)
+                    oms.SetOverallCompoundMassFlow(i, newf)
+                Next
 
             End If
 
@@ -491,8 +405,8 @@ Namespace SpecialOps
                 Throw New TimeoutException(FlowSheet.GetTranslatedString("RecycleMaxItsReached"))
             End If
 
-            If Math.Abs(Me.ConvergenceHistory.TemperaturaE) > Me.ConvergenceParameters.Temperatura Or _
-                Math.Abs(Me.ConvergenceHistory.PressaoE) > Me.ConvergenceParameters.Pressao Or _
+            If Math.Abs(Me.ConvergenceHistory.TemperaturaE) > Me.ConvergenceParameters.Temperatura Or
+                Math.Abs(Me.ConvergenceHistory.PressaoE) > Me.ConvergenceParameters.Pressao Or
                 Math.Abs(Me.ConvergenceHistory.VazaoMassicaE) > Me.ConvergenceParameters.VazaoMassica Then
 
                 Me.Converged = False

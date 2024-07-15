@@ -294,7 +294,13 @@ Namespace UnitOperations
                     engine = Nothing
                     scope = Nothing
                     source = Nothing
-                    Throw New Exception(Me.ErrorMessage, ex)
+                    If ErrorMessage.Contains("line") Then
+                        Dim line = ErrorMessage.Split(vbCrLf)(1).Split(",")(1)
+                        Dim msg = String.Format("Python Script error,{1}: {2}", GraphicObject.Tag, line, ex.Message)
+                        Throw New Exception(msg)
+                    Else
+                        Throw ex
+                    End If
                 Finally
                     engine = Nothing
                     scope = Nothing

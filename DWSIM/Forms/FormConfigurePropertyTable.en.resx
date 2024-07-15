@@ -155,6 +155,18 @@
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 360</value>
   </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 13</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Property Display Ordering</value>
+  </data>
+  <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>137, 357</value>
+  </data>
+  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>349, 21</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure Property Table</value>
   </data>
