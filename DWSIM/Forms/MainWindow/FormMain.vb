@@ -4237,6 +4237,11 @@ Label_00CC:
 
     End Sub
 
+
+    Function IsSimulateFilePath(ByVal simulatePath As String) As Boolean
+        Return simulatePath.StartsWith("//Simulate 365 Dashboard")
+    End Function
+
     Sub SaveFileDialog(Optional dashboardpicker As Boolean = False)
 
         If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
@@ -4253,7 +4258,7 @@ Label_00CC:
                 Try
                     Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
                     filePickerForm.SuggestedFilename = fname
-                    If form2.Options.VirtualFile IsNot Nothing Then
+                    If form2.Options.VirtualFile IsNot Nothing And IsSimulateFilePath(form2.Options.VirtualFile.FullPath) Then
                         Dim shouldOverwriteExistingFileResult As DialogResult = MessageBox.Show("Do you want to overwrite the existing file?", "Save file", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
                         If (shouldOverwriteExistingFileResult = DialogResult.Yes) Then
