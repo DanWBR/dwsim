@@ -1222,9 +1222,9 @@ Namespace UnitOperations
 
                 Select Case prop
                     Case "Condenser_Specification_Value", "Condenser_Calculated_Value"
-                        value = Me.Specs("C").SpecUnit
+                        value = "" 'Me.Specs("C").SpecUnit
                     Case "Reboiler_Specification_Value", "Reboiler_Calculated_Value"
-                        value = Me.Specs("R").SpecUnit
+                        value = "" 'Me.Specs("R").SpecUnit
                     Case "Estimated Height"
                         value = su.diameter
                     Case "Estimated Diameter"
