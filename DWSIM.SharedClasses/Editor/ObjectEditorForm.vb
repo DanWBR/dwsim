@@ -90,7 +90,9 @@ Public Class ObjectEditorForm
                 If _currentToolTipControl IsNot Nothing Then
                     _currentToolTipControl.UIThreadInvoke(Sub()
                                                               Try
-                                                                  ToolTipValues.Hide(_currentToolTipControl)
+                                                                  If Not _currentToolTipControl.IsDisposed Then
+                                                                      ToolTipValues.Hide(_currentToolTipControl)
+                                                                  End If
                                                               Catch ex As Exception
                                                               End Try
                                                           End Sub)
