@@ -89,10 +89,6 @@ Public Class ActivityCoefficients
 
             End If
 
-            Dim codeToRedirectOutput As String = "import sys" & Environment.NewLine + "from io import BytesIO as StringIO" & Environment.NewLine + "sys.stdout = mystdout = StringIO()" & Environment.NewLine + "sys.stdout.flush()" & Environment.NewLine + "sys.stderr = mystderr = StringIO()" & Environment.NewLine + "sys.stderr.flush()"
-
-            PythonEngine.RunSimpleString(codeToRedirectOutput)
-
             Dim reaktoro As Object = Py.Import("reaktoro")
             Dim np As Object = Py.Import("numpy")
 

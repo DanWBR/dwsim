@@ -171,10 +171,6 @@ Imports DWSIM.GlobalSettings
 
         Try
 
-            Dim codeToRedirectOutput As String = "import sys" & Environment.NewLine + "from io import BytesIO as StringIO" & Environment.NewLine + "sys.stdout = mystdout = StringIO()" & Environment.NewLine + "sys.stdout.flush()" & Environment.NewLine + "sys.stderr = mystderr = StringIO()" & Environment.NewLine + "sys.stderr.flush()"
-
-            PythonEngine.RunSimpleString(codeToRedirectOutput)
-
             Dim reaktoro As Object = Py.Import("reaktoro")
 
             'Initialize a thermodynamic database
@@ -187,6 +183,7 @@ Imports DWSIM.GlobalSettings
 
             aqueousPhase.setChemicalModelHKF()
             aqueousPhase.setActivityModelDrummondCO2()
+
             'i = 0
             'For Each na In names
             '    If CompoundMaps.Maps(na).AqueousName <> "" And na <> "Water" And
@@ -275,14 +272,6 @@ Imports DWSIM.GlobalSettings
             ex0 = ex
 
         Finally
-
-            Dim pyStderr = sys.stderr.getvalue()
-            If pyStderr IsNot Nothing Then
-                If pyStderr.ToString() <> "b" + Chr(39) + Chr(39) Then
-                    pyStderr = pyStderr.ToString().Replace("\n", "\r\n")
-                    proppack.Flowsheet?.ShowMessage("Reaktoro error: " + pyStderr.ToString(), DWSIM.Interfaces.IFlowsheet.MessageType.GeneralError)
-                End If
-            End If
 
             pystate?.Dispose()
             pystate = Nothing
@@ -809,14 +798,6 @@ Imports DWSIM.GlobalSettings
             ex0 = ex
 
         Finally
-
-            Dim pyStderr = sys.stderr.getvalue()
-            If pyStderr IsNot Nothing Then
-                If pyStderr.ToString() <> "b" + Chr(39) + Chr(39) Then
-                    pyStderr = pyStderr.ToString().Replace("\n", "\r\n")
-                    proppack.Flowsheet?.ShowMessage("Reaktoro error: " + pyStderr.ToString(), DWSIM.Interfaces.IFlowsheet.MessageType.GeneralError)
-                End If
-            End If
 
             pystate?.Dispose()
             pystate = Nothing
