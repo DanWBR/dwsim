@@ -960,6 +960,8 @@ Namespace UnitOperations
                                 Else
                                     fs = 1.526 * Res ^ -0.129
                                 End If
+                            Else
+                                Throw New Exception(String.Format("The ratio between tube spacing and tube external diameter needs to be less than or equal to 1.5 (current value: {0})", pitch / de))
                             End If
                         Case 2, 3
                             If Res < 100 Then
@@ -1007,6 +1009,8 @@ Namespace UnitOperations
                                 Else
                                     fs = 0.718 * Res ^ -0.008
                                 End If
+                            Else
+                                Throw New Exception(String.Format("The ratio between tube spacing and tube external diameter needs to be less than or equal to 1.5 (current value: {0})", pitch / de))
                             End If
                     End Select
 
@@ -2397,6 +2401,8 @@ Namespace UnitOperations
                                     Else
                                         fs = 1.526 * Res ^ -0.129
                                     End If
+                                Else
+                                    Throw New Exception(String.Format("The ratio between tube spacing and tube external diameter needs to be less than or equal to 1.5 (current value: {0})", pitch / de))
                                 End If
                             Case 2, 3
                                 If Res < 100 Then
@@ -2444,6 +2450,8 @@ Namespace UnitOperations
                                     Else
                                         fs = 0.718 * Res ^ -0.008
                                     End If
+                                Else
+                                    Throw New Exception(String.Format("The ratio between tube spacing and tube external diameter needs to be less than or equal to 1.5 (current value: {0})", pitch / de))
                                 End If
                         End Select
 
