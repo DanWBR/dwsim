@@ -78,3 +78,9 @@ Public Interface IExtender4
     Sub SetParameter(pname As String, pvalue As Object)
 
 End Interface
+
+Public Interface IExtender5
+
+    Property LoadInAutomationMode As Boolean
+
+End Interface
