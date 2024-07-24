@@ -1751,6 +1751,8 @@ Public Class FormFlowsheet
 
         End If
 
+        UpdateObjectListPanel()
+
     End Sub
 
     Public Sub tsmiCloneSelected_Click(sender As Object, e As EventArgs) Handles tsmiCloneSelected.Click
@@ -2174,6 +2176,8 @@ Public Class FormFlowsheet
             Me.FormSurface.FlowsheetSurface.SelectedObject = gobj
             Me.DeleteSelectedObject(Me, New EventArgs(), gobj, confirmation)
         End If
+
+        UpdateObjectListPanel()
 
     End Sub
 
