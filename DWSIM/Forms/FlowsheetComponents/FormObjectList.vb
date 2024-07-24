@@ -10,6 +10,9 @@ Public Class FormObjectList
 
     Public Sub UpdateData()
 
+        OutlookGrid1.BindData(Nothing, Nothing)
+        OutlookGrid1.Columns.AddRange(New DataGridViewColumn() {Me.ColumnID, Me.Column1, Me.Column2, Me.Column5, Me.Column3, Me.Column4})
+
         OutlookGrid1.Rows.Clear()
 
         For Each obj In Flowsheet.SimulationObjects.Values
@@ -20,6 +23,7 @@ Public Class FormObjectList
         OutlookGrid1.GroupTemplate.Height = 30 * Settings.DpiScale
 
         OutlookGrid1.Sort(OutlookGrid1.Columns(2), ComponentModel.ListSortDirection.Ascending)
+        OutlookGrid1.Invalidate()
 
     End Sub
 

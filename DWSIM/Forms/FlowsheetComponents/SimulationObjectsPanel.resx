@@ -149,9 +149,6 @@
   <data name="CheckBox5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CheckBox2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
   <data name="PanelControllers.Size" type="System.Drawing.Size, System.Drawing">
     <value>383, 94</value>
   </data>
@@ -177,8 +174,8 @@
   <data name="PanelControllers.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 1779</value>
   </data>
-  <data name="&gt;&gt;PanelPressure.ZOrder" xml:space="preserve">
-    <value>25</value>
+  <data name="CheckBox12.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
   <data name="&gt;&gt;CheckBox13.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
@@ -267,6 +264,9 @@
   <data name="&gt;&gt;PanelCustomModelsFOSSEE.Name" xml:space="preserve">
     <value>PanelCustomModelsFOSSEE</value>
   </data>
+  <data name="&gt;&gt;PanelReactors.Name" xml:space="preserve">
+    <value>PanelReactors</value>
+  </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 7</value>
   </data>
@@ -275,6 +275,9 @@
   </data>
   <data name="&gt;&gt;CheckBox11.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
+  </data>
+  <data name="CheckBox15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -378,9 +381,6 @@
   <data name="PanelControllers.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="CheckBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 940</value>
-  </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>399, 2163</value>
   </data>
@@ -408,8 +408,8 @@
   <data name="CheckBox7.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="CheckBox12.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CheckBox14.Size" type="System.Drawing.Size, System.Drawing">
     <value>389, 30</value>
@@ -419,9 +419,6 @@
   </data>
   <data name="CheckBox13.Size" type="System.Drawing.Size, System.Drawing">
     <value>389, 30</value>
-  </data>
-  <data name="CheckBox15.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="PanelIndicators.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 1645</value>
@@ -449,9 +446,6 @@
   </data>
   <data name="CheckBox11.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
-  </data>
-  <data name="PanelCE.WrapContents" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
     <value>TabControl1</value>
@@ -519,9 +513,6 @@
   <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="CheckBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="PanelColumns.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -552,8 +543,8 @@
   <data name="CheckBox7.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-  <data name="CheckBox15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="CheckBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 940</value>
   </data>
   <data name="&gt;&gt;PanelIndicators.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -633,6 +624,9 @@
   <data name="CheckBox4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
+  <data name="&gt;&gt;PanelOther.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
   <data name="CheckBox9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
@@ -678,9 +672,6 @@
   <data name="PanelColumns.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="CheckBox12.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
   <data name="CheckBox5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -705,6 +696,9 @@
   </data>
   <data name="CheckBox15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="CheckBox12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>389, 30</value>
   </data>
   <data name="&gt;&gt;CheckBox14.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -760,6 +754,12 @@
   <data name="&gt;&gt;PanelSeparators.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>378, 3</value>
+  </data>
+  <data name="CheckBox5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
   <data name="CheckBox12.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
@@ -784,8 +784,8 @@
   <data name="&gt;&gt;CheckBox14.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="CheckBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>389, 30</value>
+  <data name="CheckBox6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
   <data name="CheckBox2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -820,17 +820,14 @@
   <data name="CheckBox2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-  <data name="PanelLogical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 94</value>
+  <data name="CheckBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;CheckBox6.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
   </data>
   <data name="CheckBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
-  </data>
-  <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CheckBox8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -955,6 +952,9 @@
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 15</value>
   </data>
+  <data name="CheckBox9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;PanelControllers.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
@@ -990,6 +990,9 @@
   </data>
   <data name="PanelExchangers.Size" type="System.Drawing.Size, System.Drawing">
     <value>383, 94</value>
+  </data>
+  <data name="CheckBox12.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="CheckBox5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1042,6 +1045,9 @@
   <data name="CheckBox3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
+  <data name="CheckBox13.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
   <data name="CheckBox10.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
@@ -1065,9 +1071,6 @@
         mYqDxOOpUsJkgoDsKjCfzmMmmf0TJLrxaCYonpQwmTgOVHxxJcMuPEieRVmA4kkJo5DIrnRg1DNtWzgL
         jAgQ+JYn+I+iXl/PM5ozjWpWzbIrWk6d+2hOjPKh/AYW7En4UKkJtgAAAABJRU5ErkJggg==
 </value>
-  </data>
-  <data name="CheckBox3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;CheckBox4.Name" xml:space="preserve">
     <value>CheckBox4</value>
@@ -1198,8 +1201,8 @@
   <data name="CheckBox12.Text" xml:space="preserve">
     <value>Logical Blocks</value>
   </data>
-  <data name="&gt;&gt;PanelOther.Parent" xml:space="preserve">
-    <value>TableLayoutPanel1</value>
+  <data name="PanelCustomModelsFOSSEE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>383, 94</value>
   </data>
   <data name="&gt;&gt;CheckBox8.ZOrder" xml:space="preserve">
     <value>15</value>
@@ -1291,7 +1294,7 @@
   <data name="&gt;&gt;PanelSolids.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
   </data>
-  <data name="CheckBox12.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="CheckBox8.Size" type="System.Drawing.Size, System.Drawing">
     <value>389, 30</value>
   </data>
   <data name="&gt;&gt;TabPage2.Name" xml:space="preserve">
@@ -1354,8 +1357,8 @@
   <data name="CheckBox10.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="CheckBox5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+  <data name="CheckBox2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;CheckBox2.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
@@ -1438,8 +1441,8 @@
   <data name="CheckBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 404</value>
   </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>378, 3</value>
+  <data name="&gt;&gt;PanelPressure.ZOrder" xml:space="preserve">
+    <value>25</value>
   </data>
   <data name="CheckBox9.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1492,8 +1495,8 @@
   <data name="CheckBox5.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="CheckBox13.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="PanelLogical.Size" type="System.Drawing.Size, System.Drawing">
+    <value>383, 94</value>
   </data>
   <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1501,8 +1504,8 @@
   <data name="&gt;&gt;CheckBox5.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PanelReactors.Name" xml:space="preserve">
-    <value>PanelReactors</value>
+  <data name="CheckBox3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
     <value>Panel1</value>
@@ -1573,8 +1576,8 @@
   <data name="&gt;&gt;CheckBox7.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="CheckBox9.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="CheckBox15.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="CheckBox9.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 1074</value>
@@ -1633,8 +1636,8 @@
   <data name="CheckBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>389, 30</value>
   </data>
-  <data name="CheckBox6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+  <data name="PanelCE.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="CheckBox4.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1722,9 +1725,6 @@
   </data>
   <data name="&gt;&gt;CheckBox6.Name" xml:space="preserve">
     <value>CheckBox6</value>
-  </data>
-  <data name="PanelCustomModelsFOSSEE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 94</value>
   </data>
   <data name="CheckBox9.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

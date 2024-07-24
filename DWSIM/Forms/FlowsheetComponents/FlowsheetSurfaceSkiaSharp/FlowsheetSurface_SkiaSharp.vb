@@ -27,7 +27,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public SimObjPanel As SimulationObjectsPanel
 
-    Public FormObjects As New FormObjectList
+    Public FormObjects As FormObjectList
 
     Public FlowsheetSurface As Drawing.SkiaSharp.GraphicsSurface
 
@@ -139,17 +139,18 @@ Public Class FlowsheetSurface_SkiaSharp
                 End If
             End Sub
 
-        FormObjects.Dock = DockStyle.Fill
 
+        FormObjects = New FormObjectList With {.Flowsheet = Flowsheet}
+        FormObjects.Dock = DockStyle.Fill
         SimObjPanel.TabControl1.TabPages(1).Controls.Add(FormObjects)
 
         SplitContainerVertical.Panel2.Controls.Add(SimObjPanel)
 
-        If GlobalSettings.Settings.DpiScale > 1.0 Then
+        If Settings.DpiScale > 1.0 Then
 
-            SplitContainerHorizontal.Panel2MinSize *= GlobalSettings.Settings.DpiScale
+            SplitContainerHorizontal.Panel2MinSize *= Settings.DpiScale
 
-            SplitContainerVertical.Panel2MinSize *= GlobalSettings.Settings.DpiScale
+            SplitContainerVertical.Panel2MinSize *= Settings.DpiScale
 
         End If
 
