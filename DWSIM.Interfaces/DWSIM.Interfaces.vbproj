@@ -97,6 +97,7 @@
     <Compile Include="Enums.vb" />
     <Compile Include="FilePicker\IVirtualFile.vb" />
     <Compile Include="FilePicker\IFilePickerAllowedType.vb" />
+    <Compile Include="IAdditionalSolidPhaseProperties.vb" />
     <Compile Include="IAnalyticsProvider.vb" />
     <Compile Include="IAttachedUtility.vb" />
     <Compile Include="IBidirectionalSolver.vb" />
@@ -142,6 +143,7 @@
     <Compile Include="IReactionStoichBase.vb" />
     <Compile Include="IScript.vb" />
     <Compile Include="IExternalUnitOperation.vb" />
+    <Compile Include="ISolidParticleSizeDistribution.vb" />
     <Compile Include="ISpecialOps.vb" />
     <Compile Include="ISimulationObject.vb" />
     <Compile Include="ISplashScreen.vb" />

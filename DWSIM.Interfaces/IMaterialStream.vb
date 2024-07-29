@@ -104,6 +104,13 @@
     Function SetVolumetricFlow(value As Double) As String
 
     Function SetMassEnthalpy(value As Double) As String
+
     Function GetCompoundMolarFlow(name As String) As Double
+
     Sub SetOverallMolarComposition(Vx() As Double)
+
+    Property SolidParticleData As ISolidParticleData
+
+    Property AdditionalSolidPhaseProperties As IAdditionalSolidPhaseProperties
+
 End Interface
