@@ -6,7 +6,7 @@
 
     Property Description As String
 
-    Property CompoundCurves As Dictionary(Of String, ISolidParticleSizeDistribution)
+    Property Distributions As Dictionary(Of String, ISolidParticleSizeDistribution)
 
     Function Clone() As ISolidParticleData
 
@@ -20,7 +20,7 @@ Public Interface ISolidParticleSizeDistribution
 
     Property Description As String
 
-    Property Curve As ISolidShapeCurve
+    Property Curves As List(Of ISolidShapeCurve)
 
 End Interface
 
@@ -31,6 +31,8 @@ Public Interface ISolidShapeCurve
     Property Name As String
 
     Property Description As String
+
+    Property Shape As String
 
     Property Data As List(Of ISolidParticleSize)
 
