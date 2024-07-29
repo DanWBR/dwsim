@@ -87,6 +87,12 @@ Namespace Streams
 
         Public Property LastSolutionInputData As MaterialStreamInputData
 
+        Public Shared PostCreationAction1 As Action(Of MaterialStream)
+
+        Public Shared PostCreationAction2 As Action(Of MaterialStream)
+
+        Public Shared PostCreationAction3 As Action(Of MaterialStream)
+
 #Region "    XML serialization"
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
@@ -333,6 +339,10 @@ Namespace Streams
             Me.Phases(0).Properties.pressure = 101325
             Me.Phases(0).Properties.massflow = 1
 
+            PostCreationAction1?.Invoke(Me)
+            PostCreationAction2?.Invoke(Me)
+            PostCreationAction3?.Invoke(Me)
+
         End Sub
         Function EmptyPropertyPackage() As Boolean
             Return String.IsNullOrEmpty(Me._ppid) And _pp Is Nothing
@@ -365,6 +375,10 @@ Namespace Streams
             Me.Phases(0).Properties.pressure = 101325
             Me.Phases(0).Properties.massflow = 1
 
+            PostCreationAction1?.Invoke(Me)
+            PostCreationAction2?.Invoke(Me)
+            PostCreationAction3?.Invoke(Me)
+
         End Sub
 
         Public Sub New(ByVal name As String, ByVal description As String)
@@ -387,6 +401,10 @@ Namespace Streams
             Me.Phases(0).Properties.temperature = 298.15
             Me.Phases(0).Properties.pressure = 101325
             Me.Phases(0).Properties.massflow = 1
+
+            PostCreationAction1?.Invoke(Me)
+            PostCreationAction2?.Invoke(Me)
+            PostCreationAction3?.Invoke(Me)
 
         End Sub
 
@@ -6673,6 +6691,10 @@ Namespace Streams
                 Return Phases.Values.ToArray
             End Get
         End Property
+
+        Public Property SolidParticleData As ISolidParticleData Implements IMaterialStream.SolidParticleData
+
+        Public Property AdditionalSolidPhaseProperties As IAdditionalSolidPhaseProperties Implements IMaterialStream.AdditionalSolidPhaseProperties
 
         Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
 
