@@ -2684,6 +2684,26 @@ Public Class FormMain
 
         End If
 
+        form.ParticleSizeDistributions = New List(Of ISolidParticleSizeDistribution)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ParticleSizeDistributions") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ParticleSizeDistributions").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New SharedClassesCSharp.Solids.SolidParticleSizeDistribution()
+                    obj.LoadData(xel.Elements.ToList)
+                    form.ParticleSizeDistributions.Add(obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading PSD Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
         If xdoc.Element("DWSIM_Simulation_Data").Element("MessagesLog") IsNot Nothing Then
             Try
                 data = xdoc.Element("DWSIM_Simulation_Data").Element("MessagesLog").Elements.ToList
@@ -3280,7 +3300,27 @@ Public Class FormMain
 
         End If
 
-        form.Results = New SharedClasses.DWSIM.Flowsheet.FlowsheetResults
+        form.ParticleSizeDistributions = New List(Of ISolidParticleSizeDistribution)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ParticleSizeDistributions") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ParticleSizeDistributions").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New SharedClassesCSharp.Solids.SolidParticleSizeDistribution()
+                    obj.LoadData(xel.Elements.ToList)
+                    form.ParticleSizeDistributions.Add(obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading PSD Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
+        form.Results = New FlowsheetResults
 
         If xdoc.Element("DWSIM_Simulation_Data").Element("Results") IsNot Nothing Then
 
@@ -3824,6 +3864,13 @@ Public Class FormMain
 
         For Each ch As SharedClasses.Charts.Chart In form.ChartCollection.Values
             xel.Add(New XElement("ChartItem", ch.SaveData().ToArray()))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ParticleSizeDistributions"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("ParticleSizeDistributions")
+
+        For Each psd In form.ParticleSizeDistributions
+            xel.Add(New XElement("ParticleSizeDistribution", DirectCast(psd, ICustomXMLSerialization).SaveData().ToArray()))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Spreadsheet"))

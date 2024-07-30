@@ -2536,6 +2536,26 @@ Imports System.Xml
 
         End If
 
+        ParticleSizeDistributions = New List(Of ISolidParticleSizeDistribution)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ParticleSizeDistributions") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ParticleSizeDistributions").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New DWSIM.SharedClassesCSharp.Solids.SolidParticleSizeDistribution()
+                    obj.LoadData(xel.Elements.ToList)
+                    ParticleSizeDistributions.Add(obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading PSD Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
         Results = New SharedClasses.DWSIM.Flowsheet.FlowsheetResults
 
         If xdoc.Element("DWSIM_Simulation_Data").Element("Results") IsNot Nothing Then
@@ -2749,6 +2769,13 @@ Imports System.Xml
 
         For Each ch As SharedClasses.Charts.Chart In Charts.Values
             xel.Add(New XElement("ChartItem", ch.SaveData().ToArray()))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ParticleSizeDistributions"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("ParticleSizeDistributions")
+
+        For Each psd In ParticleSizeDistributions
+            xel.Add(New XElement("ParticleSizeDistribution", DirectCast(psd, ICustomXMLSerialization).SaveData().ToArray()))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Results"))
@@ -3950,6 +3977,8 @@ Label_00CC:
     End Property
 
     Public Property Results As IFlowsheetResults = New SharedClasses.DWSIM.Flowsheet.FlowsheetResults() Implements IFlowsheet.Results
+
+    Public Property ParticleSizeDistributions As List(Of ISolidParticleSizeDistribution) = New List(Of ISolidParticleSizeDistribution) Implements IFlowsheet.ParticleSizeDistributions
 
     Private Shared Function LoadFromExtensionsFolder(ByVal sender As Object, ByVal args As ResolveEventArgs) As Assembly
 

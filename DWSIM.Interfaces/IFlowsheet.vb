@@ -398,6 +398,8 @@
 
     Function GetResultUnits(id As String) As String
 
+    Property ParticleSizeDistributions As List(Of ISolidParticleSizeDistribution)
+
 End Interface
 
 ''' <summary>

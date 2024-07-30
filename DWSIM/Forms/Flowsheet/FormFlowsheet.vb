@@ -112,6 +112,8 @@ Public Class FormFlowsheet
 
     Public ChartCollection As New Dictionary(Of String, IChart)
 
+    Public Property ParticleSizeDistributions As List(Of ISolidParticleSizeDistribution) = New List(Of ISolidParticleSizeDistribution) Implements IFlowsheet.ParticleSizeDistributions
+
     Public Property MessagesLog As New List(Of String) Implements IFlowsheet.MessagesLog
 
     Public CheckedToolstripButton As ToolStripButton
