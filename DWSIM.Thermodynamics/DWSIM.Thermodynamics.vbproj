@@ -279,9 +279,7 @@
     <Compile Include="EditingForms\MaterialStream\MaterialStreamEditor.Designer.vb">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\MaterialStream\MaterialStreamEditor.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\MaterialStream\MaterialStreamEditor.vb" />
     <Compile Include="EditingForms\PropertyPackages\FormConfigCAPEOPENPPSocket.designer.vb">
       <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </Compile>

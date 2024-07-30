@@ -2545,7 +2545,7 @@ Imports System.Xml
             Dim i As Integer = 0
             For Each xel As XElement In data
                 Try
-                    Dim obj As New DWSIM.SharedClassesCSharp.Solids.SolidParticleSizeDistribution()
+                    Dim obj As New SharedClassesCSharp.Solids.SolidParticleSizeDistribution()
                     obj.LoadData(xel.Elements.ToList)
                     ParticleSizeDistributions.Add(obj)
                 Catch ex As Exception
