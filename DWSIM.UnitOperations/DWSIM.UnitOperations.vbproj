@@ -259,249 +259,167 @@
     <Compile Include="EditingForms\EditingForm_AnalogGauge.Designer.vb">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_AnalogGauge.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_AnalogGauge.vb" />
     <Compile Include="EditingForms\EditingForm_CAPEOPENUO.Designer.vb">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_CAPEOPENUO.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_CAPEOPENUO.vb" />
     <Compile Include="EditingForms\EditingForm_HydroelectricTurbine.Designer.vb">
       <DependentUpon>EditingForm_HydroelectricTurbine.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_HydroelectricTurbine.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_HydroelectricTurbine.vb" />
     <Compile Include="EditingForms\EditingForm_OPEMFC.Designer.vb">
       <DependentUpon>EditingForm_OPEMFC.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_OPEMFC.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_OPEMFC.vb" />
     <Compile Include="EditingForms\EditingForm_PythonController.Designer.vb">
       <DependentUpon>EditingForm_PythonController.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_PythonController.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_PythonController.vb" />
     <Compile Include="EditingForms\EditingForm_ReaktoroGibbs.Designer.vb">
       <DependentUpon>EditingForm_ReaktoroGibbs.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_ReaktoroGibbs.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_ReaktoroGibbs.vb" />
     <Compile Include="EditingForms\EditingForm_SolarPanel.Designer.vb">
       <DependentUpon>EditingForm_SolarPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_SolarPanel.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_SolarPanel.vb" />
     <Compile Include="EditingForms\EditingForm_Switch.Designer.vb">
       <DependentUpon>EditingForm_Switch.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Switch.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Switch.vb" />
     <Compile Include="EditingForms\EditingForm_Input.Designer.vb">
       <DependentUpon>EditingForm_Input.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Input.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Input.vb" />
     <Compile Include="EditingForms\EditingForm_DigitalGauge.Designer.vb">
       <DependentUpon>EditingForm_DigitalGauge.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_DigitalGauge.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_DigitalGauge.vb" />
     <Compile Include="EditingForms\EditingForm_Filter.Designer.vb">
       <DependentUpon>EditingForm_Filter.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Filter.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Filter.vb" />
     <Compile Include="EditingForms\EditingForm_Flowsheet.Designer.vb">
       <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Flowsheet.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Flowsheet.vb" />
     <Compile Include="EditingForms\EditingForm_Column.Designer.vb">
       <DependentUpon>EditingForm_Column.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Column.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Column.vb" />
     <Compile Include="EditingForms\EditingForm_LevelGauge.Designer.vb">
       <DependentUpon>EditingForm_LevelGauge.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_LevelGauge.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_LevelGauge.vb" />
     <Compile Include="EditingForms\EditingForm_PIDController.Designer.vb">
       <DependentUpon>EditingForm_PIDController.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_PIDController.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_PIDController.vb" />
     <Compile Include="EditingForms\EditingForm_ShortcutColumn.Designer.vb">
       <DependentUpon>EditingForm_ShortcutColumn.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_ShortcutColumn.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_ShortcutColumn.vb" />
     <Compile Include="EditingForms\EditingForm_Pipe.Designer.vb">
       <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Pipe.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Pipe.vb" />
     <Compile Include="EditingForms\EditingForm_ReactorCSTR.Designer.vb">
       <DependentUpon>EditingForm_ReactorCSTR.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_ReactorCSTR.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_ReactorCSTR.vb" />
     <Compile Include="EditingForms\EditingForm_ReactorPFR.Designer.vb">
       <DependentUpon>EditingForm_ReactorPFR.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_ReactorPFR.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_ReactorPFR.vb" />
     <Compile Include="EditingForms\EditingForm_EnergyRecycle.Designer.vb">
       <DependentUpon>EditingForm_EnergyRecycle.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_EnergyRecycle.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_EnergyRecycle.vb" />
     <Compile Include="EditingForms\EditingForm_Adjust.Designer.vb">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Adjust.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Adjust.vb" />
     <Compile Include="EditingForms\EditingForm_Spec.Designer.vb">
       <DependentUpon>EditingForm_Spec.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Spec.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Spec.vb" />
     <Compile Include="EditingForms\EditingForm_Spreadsheet.Designer.vb">
       <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Spreadsheet.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Spreadsheet.vb" />
     <Compile Include="EditingForms\EditingForm_CustomUO.Designer.vb">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_CustomUO.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_CustomUO.vb" />
     <Compile Include="EditingForms\EditingForm_ReactorConvEqGibbs.Designer.vb">
       <DependentUpon>EditingForm_ReactorConvEqGibbs.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_ReactorConvEqGibbs.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_ReactorConvEqGibbs.vb" />
     <Compile Include="EditingForms\EditingForm_CompoundSeparator.Designer.vb">
       <DependentUpon>EditingForm_CompoundSeparator.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_CompoundSeparator.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_CompoundSeparator.vb" />
     <Compile Include="EditingForms\EditingForm_Pump.Designer.vb">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Pump.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Pump.vb" />
     <Compile Include="EditingForms\EditingForm_Vessel.Designer.vb">
       <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Vessel.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Vessel.vb" />
     <Compile Include="EditingForms\EditingForm_EnergyStream.Designer.vb">
       <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_EnergyStream.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_EnergyStream.vb" />
     <Compile Include="EditingForms\EditingForm_SolidsSep.Designer.vb">
       <DependentUpon>EditingForm_SolidsSep.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_SolidsSep.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_SolidsSep.vb" />
     <Compile Include="EditingForms\EditingForm_Tank.Designer.vb">
       <DependentUpon>EditingForm_Tank.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Tank.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Tank.vb" />
     <Compile Include="EditingForms\EditingForm_Splitter.Designer.vb">
       <DependentUpon>EditingForm_Splitter.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Splitter.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Splitter.vb" />
     <Compile Include="EditingForms\EditingForm_OrificePlate.Designer.vb">
       <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_OrificePlate.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_OrificePlate.vb" />
     <Compile Include="EditingForms\EditingForm_Recycle.Designer.vb">
       <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Recycle.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Recycle.vb" />
     <Compile Include="EditingForms\EditingForm_HeatExchanger.Designer.vb">
       <DependentUpon>EditingForm_HeatExchanger.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_HeatExchanger.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_HeatExchanger.vb" />
     <Compile Include="EditingForms\EditingForm_Valve.Designer.vb">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Valve.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Valve.vb" />
     <Compile Include="EditingForms\EditingForm_HeaterCooler.Designer.vb">
       <DependentUpon>EditingForm_HeaterCooler.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_HeaterCooler.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_HeaterCooler.vb" />
     <Compile Include="EditingForms\EditingForm_Mixer.Designer.vb">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_Mixer.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_Mixer.vb" />
     <Compile Include="EditingForms\EditingForm_ComprExpndr.Designer.vb">
       <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_ComprExpndr.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_ComprExpndr.vb" />
     <Compile Include="EditingForms\EditingForm_WaterElectrolyzer.Designer.vb">
       <DependentUpon>EditingForm_WaterElectrolyzer.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_WaterElectrolyzer.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_WaterElectrolyzer.vb" />
     <Compile Include="EditingForms\EditingForm_WindTurbine.Designer.vb">
       <DependentUpon>EditingForm_WindTurbine.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\EditingForm_WindTurbine.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\EditingForm_WindTurbine.vb" />
     <Compile Include="EditingForms\Other\Form_CapeOpenSelector.designer.vb">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </Compile>
@@ -562,15 +480,11 @@
     <Compile Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor.designer.vb">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor.vb" />
     <Compile Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.designer.vb">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor_Mono.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.vb" />
     <Compile Include="EditingForms\Supporting\EditingForm_Flowsheet_Editor.designer.vb">
       <DependentUpon>EditingForm_Flowsheet_Editor.vb</DependentUpon>
     </Compile>
@@ -580,9 +494,7 @@
     <Compile Include="EditingForms\Supporting\EditingForm_Flowsheet_Viewer.designer.vb">
       <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\Supporting\EditingForm_Flowsheet_Viewer.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\Supporting\EditingForm_Flowsheet_Viewer.vb" />
     <Compile Include="EditingForms\Supporting\EditingForm_Adjust_ControlPanel.designer.vb">
       <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
     </Compile>
@@ -616,9 +528,7 @@
     <Compile Include="EditingForms\Supporting\EditingForm_Column_Results.designer.vb">
       <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\Supporting\EditingForm_Column_Results.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\Supporting\EditingForm_Column_Results.vb" />
     <Compile Include="EditingForms\Supporting\EditingForm_Column_Stages.designer.vb">
       <DependentUpon>EditingForm_Column_Stages.vb</DependentUpon>
     </Compile>
@@ -646,9 +556,7 @@
     <Compile Include="EditingForms\Supporting\ReportViewer.Designer.vb">
       <DependentUpon>ReportViewer.vb</DependentUpon>
     </Compile>
-    <Compile Include="EditingForms\Supporting\ReportViewer.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditingForms\Supporting\ReportViewer.vb" />
     <Compile Include="EnergyStream\Streams.vb" />
     <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\ScintillaExtender.vb" />

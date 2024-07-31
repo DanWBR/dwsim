@@ -1,6 +1,9 @@
 ﻿using DWSIM.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DWSIM.SharedClassesCSharp.Solids
 {
@@ -51,12 +54,33 @@ namespace DWSIM.SharedClassesCSharp.Solids
         public bool LoadData(List<XElement> data)
         {
             XMLSerializer.XMLSerializer.Deserialize(this, data);
+            if (data.Last().Name == "Data")
+            {
+                var cdata = data.Last().Elements().ToList();
+                foreach (XElement xel in cdata)
+                {
+                    try
+                    {
+                        var obj = new SolidParticleSize();
+                        obj.LoadData(xel.Elements().ToList());
+                        Data.Add(obj);
+                    }
+                    catch { }
+                }
+            }
             return true;
         }
 
         public List<XElement> SaveData()
         {
-            return XMLSerializer.XMLSerializer.Serialize(this);
+            var data = XMLSerializer.XMLSerializer.Serialize(this);
+            data.Add(new XElement("Data"));
+            var cx = data.Last();
+            foreach (var d in Data)
+            {
+                cx.Add(new XElement("Data", ((ICustomXMLSerialization)d).SaveData().ToArray()));
+            }
+            return data;
         }
     }
 
@@ -73,12 +97,33 @@ namespace DWSIM.SharedClassesCSharp.Solids
         public bool LoadData(List<XElement> data)
         {
             XMLSerializer.XMLSerializer.Deserialize(this, data);
+            if (data.Last().Name == "Curves")
+            {
+                var cdata = data.Last().Elements().ToList();
+                foreach (XElement xel in cdata)
+                {
+                    try
+                    {
+                        var obj = new SolidShapeCurve();
+                        obj.LoadData(xel.Elements().ToList());
+                        Curves.Add(obj);
+                    }
+                    catch{ }
+                }
+            }
             return true;
         }
 
         public List<XElement> SaveData()
         {
-            return XMLSerializer.XMLSerializer.Serialize(this);
+            var data = XMLSerializer.XMLSerializer.Serialize(this);
+            data.Add(new XElement("Curves"));
+            var cx = data.Last();
+            foreach (var curve in Curves)
+            {
+                cx.Add(new XElement("Curve", ((ICustomXMLSerialization)curve).SaveData().ToArray()));
+            }
+            return data;
         }
     }
 
