@@ -90,7 +90,7 @@ namespace DWSIM.SharedClassesCSharp.Solids
 
         public string Description { get; set; } = "";
 
-        public Dictionary<string, ISolidParticleSizeDistribution> Distributions { get; set; } = new Dictionary<string, ISolidParticleSizeDistribution>();
+        public Dictionary<string, string> Distributions { get; set; } = new Dictionary<string, string>();
 
         public ISolidParticleData Clone()
         {

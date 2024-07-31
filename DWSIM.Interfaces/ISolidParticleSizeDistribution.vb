@@ -6,7 +6,7 @@
 
     Property Description As String
 
-    Property Distributions As Dictionary(Of String, ISolidParticleSizeDistribution)
+    Property Distributions As Dictionary(Of String, String)
 
     Function Clone() As ISolidParticleData
 
