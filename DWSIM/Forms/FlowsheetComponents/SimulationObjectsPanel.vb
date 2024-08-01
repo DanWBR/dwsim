@@ -34,18 +34,18 @@ Public Class SimulationObjectsPanel
 
         PanelCE.Tag = 150
         PanelColumns.Tag = 225
-        PanelControllers.Tag = 75
+        PanelControllers.Tag = 150
         PanelCustomModelsFOSSEE.Tag = 225
         PanelExchangers.Tag = 150
-        PanelIndicators.Tag = 75
+        PanelIndicators.Tag = 150
         PanelLogical.Tag = 225
         PanelMixers.Tag = 150
-        PanelOther.Tag = 75
+        PanelOther.Tag = 150
         PanelPressure.Tag = 225
         PanelReactors.Tag = 150
-        PanelSeparators.Tag = 75
-        PanelSolids.Tag = 75
-        PanelStreams.Tag = 75
+        PanelSeparators.Tag = 150
+        PanelSolids.Tag = 225
+        PanelStreams.Tag = 150
         PanelUser.Tag = 150
 
         CheckBox1.Image = My.Resources.arrow_down
