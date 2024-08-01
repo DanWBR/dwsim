@@ -530,7 +530,7 @@ Public Class Utility
 
         ppath = GetExtendersRootDirectory()
         If Directory.Exists(ppath) Then
-            Dim otheruos As String() = Directory.GetFiles(ppath, "*Extensions.UnitOperations*.dll", SearchOption.TopDirectoryOnly)
+            Dim otheruos As String() = Directory.GetFiles(ppath, "*Extensions*.dll", SearchOption.TopDirectoryOnly)
             For Each fpath In otheruos
                 Try
                     Dim pplist As List(Of Interfaces.IExternalUnitOperation) = GetUnitOperations(Assembly.LoadFile(fpath))
@@ -578,7 +578,7 @@ Public Class Utility
         Dim ppath1 As String = GetExtendersRootDirectory()
         If Directory.Exists(ppath1) Then
             Try
-                Dim otherpps As String() = Directory.GetFiles(ppath1, "*Extensions.Thermodynamics*.dll", SearchOption.TopDirectoryOnly)
+                Dim otherpps As String() = Directory.GetFiles(ppath1, "*Extensions*.dll", SearchOption.TopDirectoryOnly)
                 For Each fpath In otherpps
                     Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(fpath))
                     For Each pp In pplist
