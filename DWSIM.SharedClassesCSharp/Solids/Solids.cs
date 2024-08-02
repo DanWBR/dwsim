@@ -137,6 +137,10 @@ namespace DWSIM.SharedClassesCSharp.Solids
 
         public Dictionary<string, string> Distributions { get; set; } = new Dictionary<string, string>();
 
+        public Dictionary<string, ISolidParticleSizeDistribution> InternalDistributions { get; set; } = new  Dictionary<string, ISolidParticleSizeDistribution>();
+
+        public bool Calculated { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
         public ISolidParticleData Clone()
         {
             var clone = new SolidParticleData();
@@ -147,12 +151,33 @@ namespace DWSIM.SharedClassesCSharp.Solids
         public bool LoadData(List<XElement> data)
         {
             XMLSerializer.XMLSerializer.Deserialize(this, data);
+            if (data.Last().Name == "InternalDistributions")
+            {
+                var cdata = data.Last().Elements().ToList();
+                foreach (XElement xel in cdata)
+                {
+                    try
+                    {
+                        var obj = new SolidParticleSizeDistribution();
+                        obj.LoadData(xel.Elements().ToList());
+                        InternalDistributions.Add(obj.UniqueID, obj);
+                    }
+                    catch { }
+                }
+            }
             return true;
         }
 
         public List<XElement> SaveData()
         {
-            return XMLSerializer.XMLSerializer.Serialize(this);
+            var data = XMLSerializer.XMLSerializer.Serialize(this);
+            data.Add(new XElement("InternalDistributions"));
+            var cx = data.Last();
+            foreach (var dist in InternalDistributions.Values)
+            {
+                cx.Add(new XElement("InternalDistribution", ((ICustomXMLSerialization)dist).SaveData().ToArray()));
+            }
+            return data;
         }
     }
 

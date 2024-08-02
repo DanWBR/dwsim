@@ -8,6 +8,10 @@
 
     Property Distributions As Dictionary(Of String, String)
 
+    Property InternalDistributions As Dictionary(Of String, ISolidParticleSizeDistribution)
+
+    Property Calculated As Boolean
+
     Function Clone() As ISolidParticleData
 
 End Interface
