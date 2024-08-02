@@ -1521,6 +1521,39 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static OxyPlot.PlotModel CreatePlotModel(string title, string subtitle, string xtitle, string ytitle, float zoom)
+        {
+
+            var model = new OxyPlot.PlotModel() { Subtitle = subtitle, Title = title };
+            model.Background = OxyPlot.OxyColors.White;
+            model.TitleFontSize = 14 * zoom;
+            model.SubtitleFontSize = 12 * zoom;
+            model.Axes.Add(new OxyPlot.Axes.LinearAxis()
+            {
+                MajorGridlineStyle = OxyPlot.LineStyle.Dash,
+                MinorGridlineStyle = OxyPlot.LineStyle.Dot,
+                Position = OxyPlot.Axes.AxisPosition.Bottom,
+                FontSize = 12 * zoom,
+                Title = xtitle,
+                Key = "x",
+            });
+            model.Axes.Add(new OxyPlot.Axes.LinearAxis()
+            {
+                MajorGridlineStyle = OxyPlot.LineStyle.Dash,
+                MinorGridlineStyle = OxyPlot.LineStyle.Dot,
+                Position = OxyPlot.Axes.AxisPosition.Left,
+                FontSize = 12 * zoom,
+                Title = ytitle
+            });
+            model.LegendFontSize = 11 * zoom;
+            model.LegendPlacement = OxyPlot.LegendPlacement.Outside;
+            model.LegendOrientation = OxyPlot.LegendOrientation.Horizontal;
+            model.LegendPosition = OxyPlot.LegendPosition.BottomCenter;
+            model.TitleHorizontalAlignment = OxyPlot.TitleHorizontalAlignment.CenteredWithinView;
+
+            return model;
+
+        }
 
         public static OxyPlot.PlotModel CreatePlotModel(double[] x, double[] y, string title, string subtitle, string xtitle, string ytitle)
         {
