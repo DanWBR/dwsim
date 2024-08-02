@@ -139,7 +139,7 @@ namespace DWSIM.SharedClassesCSharp.Solids
 
         public Dictionary<string, ISolidParticleSizeDistribution> InternalDistributions { get; set; } = new  Dictionary<string, ISolidParticleSizeDistribution>();
 
-        public bool Calculated { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public bool Calculated { get; set; } = false;
 
         public ISolidParticleData Clone()
         {
@@ -160,7 +160,7 @@ namespace DWSIM.SharedClassesCSharp.Solids
                     {
                         var obj = new SolidParticleSizeDistribution();
                         obj.LoadData(xel.Elements().ToList());
-                        InternalDistributions.Add(obj.UniqueID, obj);
+                        InternalDistributions.Add(obj.Name, obj);
                     }
                     catch { }
                 }
