@@ -7,7 +7,7 @@
 ## DWSIM - Open Source Process Simulator
 Copyright 2008-2024 Daniel Wagner and contributors
 
-DWSIM is a software for modeling, simulation and optimization of steady-state and dynamic chemical processes.
+DWSIM is a software for modeling, simulating, and optimizing steady-state and dynamic chemical processes.
 
 ### License
 
@@ -17,8 +17,8 @@ See COPYING for more information.
 
 ### Supported Operating Systems
 
-- Windows (32/64-bit x86) with .NET Framework 4.6.2 or newer
-- Linux (32-bit armhf / 64-bit x86) with Mono 6.8 or newer
+- Windows (64-bit x86) with .NET Framework 4.6.2 or newer
+- Linux (64-bit x86) with Mono 6.8 or newer
 - macOS (formerly OS X) 10.7 or newer
 
 ### Donations
