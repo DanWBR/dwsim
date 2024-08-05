@@ -26,7 +26,7 @@ See COPYING for more information.
 - Patreon: https://patreon.com/dwsim
 - GitHub Sponsors: https://github.com/sponsors/DanWBR
 - Buy-me-a-coffee: https://www.buymeacoffee.com/dwsim
-- Bitcoin tips are welcome at 13hphJu9Eit341ZJkMgZPQGPb9bvYZP7wU
+- Bitcoin tips are welcome at bc1qf37y47vfk5wzxqpyh39y7th32x6lja0h0gc383
 
 ### Project Details
 
