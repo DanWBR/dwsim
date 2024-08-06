@@ -50,7 +50,24 @@ namespace DWSIM.SharedClassesCSharp.Solids
         public string Shape { get; set; } = "";
 
         public List<ISolidParticleSize> Data { get; set; } = new List<ISolidParticleSize>();
-       
+
+        public double GetAverageDiameter()
+        {
+           return Data.Select(dp => dp.Size).Average();
+        }
+
+        public double GetMeanDiameter()
+        {
+            var diameters = Data.Select(dp => dp.Size).ToList();
+            return MathNet.Numerics.Statistics.Statistics.Mean(diameters);
+        }
+
+        public double GetDiameterStdDev()
+        {
+            var diameters = Data.Select(dp => dp.Size).ToList();
+            return MathNet.Numerics.Statistics.Statistics.StandardDeviation(diameters);
+        }
+
         public bool LoadData(List<XElement> data)
         {
             XMLSerializer.XMLSerializer.Deserialize(this, data);

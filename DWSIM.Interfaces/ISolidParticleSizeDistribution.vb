@@ -40,6 +40,12 @@ Public Interface ISolidShapeCurve
 
     Property Data As List(Of ISolidParticleSize)
 
+    Function GetMeanDiameter() As Double
+
+    Function GetDiameterStdDev() As Double
+
+    Function GetAverageDiameter() As Double
+
 End Interface
 
 Public Interface ISolidParticleSize
