@@ -26,6 +26,8 @@ Public Interface ISolidParticleSizeDistribution
 
     Property Curves As List(Of ISolidShapeCurve)
 
+    Function Clone() As ISolidParticleSizeDistribution
+
 End Interface
 
 Public Interface ISolidShapeCurve
@@ -45,6 +47,8 @@ Public Interface ISolidShapeCurve
     Function GetDiameterStdDev() As Double
 
     Function GetAverageDiameter() As Double
+
+    Function Clone() As ISolidShapeCurve
 
 End Interface
 

@@ -9,6 +9,13 @@ namespace DWSIM.SharedClassesCSharp.Solids
 {
     public class AdditionalSolidPhaseProperties : IAdditionalSolidPhaseProperties, ICustomXMLSerialization
     {
+        public IAdditionalSolidPhaseProperties Clone()
+        {
+            var obj = new AdditionalSolidPhaseProperties();
+            obj.LoadData(this.SaveData());
+            return obj;
+        }
+
         public bool LoadData(List<XElement> data)
         {
             XMLSerializer.XMLSerializer.Deserialize(this, data);
@@ -99,6 +106,14 @@ namespace DWSIM.SharedClassesCSharp.Solids
             }
             return data;
         }
+
+        public ISolidShapeCurve Clone()
+        {
+            var obj = new SolidShapeCurve();
+            obj.LoadData(this.SaveData());
+            return obj;
+        }
+
     }
 
     public class SolidParticleSizeDistribution : ISolidParticleSizeDistribution, ICustomXMLSerialization
@@ -142,6 +157,14 @@ namespace DWSIM.SharedClassesCSharp.Solids
             }
             return data;
         }
+
+        public ISolidParticleSizeDistribution Clone()
+        {
+            var obj = new SolidParticleSizeDistribution();
+            obj.LoadData(this.SaveData());
+            return obj;
+        }
+
     }
 
     public class SolidParticleData : ISolidParticleData, ICustomXMLSerialization

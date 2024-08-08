@@ -6517,6 +6517,9 @@ Namespace Streams
             ms.DefinedFlow = DefinedFlow
             ms.FloatingTableAmountBasis = FloatingTableAmountBasis
 
+            ms.AdditionalSolidPhaseProperties = AdditionalSolidPhaseProperties?.Clone()
+            ms.SolidParticleData = SolidParticleData?.Clone()
+
             Return ms
 
         End Function
@@ -6669,6 +6672,8 @@ Namespace Streams
             ms.Assign(Me)
             ms.AssignProps(Me)
             ms.AtEquilibrium = False
+            ms.AdditionalSolidPhaseProperties = AdditionalSolidPhaseProperties?.Clone()
+            ms.SolidParticleData = SolidParticleData?.Clone()
             Return ms
         End Function
 
@@ -8747,6 +8752,13 @@ Namespace Streams
             Return newstream
 
         End Function
+
+        Public Sub AssignSolidData(source As MaterialStream)
+
+            AdditionalSolidPhaseProperties = source.AdditionalSolidPhaseProperties?.Clone()
+            SolidParticleData = source.SolidParticleData?.Clone()
+
+        End Sub
 
         ''' <summary>
         ''' Assign properties from another phase in another stream.
