@@ -48,8 +48,6 @@ Namespace UnitOperations
 
         Public Property ExternalSolverConfigData As String = ""
 
-        Public Shared TransferAdditionalSolidDataAction As Action(Of UnitOpBaseClass)
-
         Public Sub New()
 
             MyBase.CreateNew()
@@ -67,12 +65,6 @@ Namespace UnitOperations
             Return New String() {"Getting Calculation Modes through this function not supported by this Unit Operation"}
 
         End Function
-
-        Public Overridable Sub TransferAdditionalSolidData()
-
-            TransferAdditionalSolidDataAction?.Invoke(Me)
-
-        End Sub
 
         Public Overrides Sub CheckDirtyStatus()
 

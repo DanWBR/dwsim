@@ -40,6 +40,8 @@ Namespace UnitOperations
         Public Shared InitializationAction2 As Action(Of BaseClass)
         Public Shared InitializationAction3 As Action(Of BaseClass)
 
+        Public Shared TransferAdditionalSolidDataAction As Action(Of BaseClass)
+
         <Newtonsoft.Json.JsonIgnore> <Xml.Serialization.XmlIgnore> Public Property LastSolutionInputSnapshot As String = ""
 
         Protected Friend _IsDirty As Boolean = True
@@ -492,11 +494,19 @@ Namespace UnitOperations
                 End If
             End If
 
+            TransferAdditionalSolidData()
+
             If GHGEmissionData IsNot Nothing Then
                 GHGEmissionData.OwnerID = Name
                 GHGEmissionData.Flowsheet = FlowSheet
                 GHGEmissionData.Update()
             End If
+
+        End Sub
+
+        Public Overridable Sub TransferAdditionalSolidData()
+
+            TransferAdditionalSolidDataAction?.Invoke(Me)
 
         End Sub
 
