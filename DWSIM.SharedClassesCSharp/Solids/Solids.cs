@@ -116,13 +116,20 @@ namespace DWSIM.SharedClassesCSharp.Solids
 
         public double GetValue(double x)
         {
-            var ordered = Data.OrderBy(k => k.Size).ToList();
-            double value = ordered.Last().MassFraction;
-            foreach (var item in ordered)
+            var ordered = Data.OrderByDescending(k => k.Size).ToList();
+            var xd = ordered.Select(k => k.Size).ToList();
+            var yd = ordered.Select(k => k.MassFraction).ToList();
+            var min = Data.Select(d => d.Size).Min();
+            var max = Data.Select(d => d.Size).Max();
+            if (x < min)
+                return 0.0;
+            else if (x > max)
+                return 0.0;
+            else
             {
-                if (x <= item.Size) value = item.MassFraction;
+                double value = MathNet.Numerics.Interpolate.Common(xd, yd).Interpolate(x);
+                return value;
             }
-            return value;
         }
     }
 
