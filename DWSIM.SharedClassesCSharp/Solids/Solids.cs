@@ -114,6 +114,16 @@ namespace DWSIM.SharedClassesCSharp.Solids
             return obj;
         }
 
+        public double GetValue(double x)
+        {
+            var ordered = Data.OrderBy(k => k.Size).ToList();
+            double value = ordered.Last().MassFraction;
+            foreach (var item in ordered)
+            {
+                if (x <= item.Size) value = item.MassFraction;
+            }
+            return value;
+        }
     }
 
     public class SolidParticleSizeDistribution : ISolidParticleSizeDistribution, ICustomXMLSerialization

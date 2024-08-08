@@ -48,6 +48,8 @@ Public Interface ISolidShapeCurve
 
     Function GetAverageDiameter() As Double
 
+    Function GetValue(x As Double) As Double
+
     Function Clone() As ISolidShapeCurve
 
 End Interface
