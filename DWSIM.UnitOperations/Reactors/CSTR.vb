@@ -962,6 +962,7 @@ out:        Dim ms1, ms2 As MaterialStream
                     If Not dynamics Then
                         .SpecType = ims.SpecType
                         .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
+                        .DefinedFlow = FlowSpec.Mass
                     End If
 
                     .Phases(0).Properties.massfraction = 1
@@ -991,6 +992,7 @@ out:        Dim ms1, ms2 As MaterialStream
                         .SpecType = ims.SpecType
                         .Phases(0).Properties.massflow = ims.Phases(2).Properties.massflow.GetValueOrDefault
                         .Phases(0).Properties.massfraction = 1
+                        .DefinedFlow = FlowSpec.Mass
                     End If
 
                     .Phases(0).Properties.temperature = T

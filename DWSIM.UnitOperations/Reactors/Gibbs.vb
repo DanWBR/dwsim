@@ -1620,6 +1620,7 @@ Namespace Reactors
                     Hv = .PropertyPackage.DW_CalcEnthalpy(ms.GetOverallComposition(), T, P, PropertyPackages.State.Vapor)
                     .Phases(0).Properties.enthalpy = Hv
                     .Phases(0).Properties.massflow = W * wv
+                    .DefinedFlow = FlowSpec.Mass
                 End With
             End If
 
@@ -1644,6 +1645,7 @@ Namespace Reactors
                     Next
                     .Phases(0).Properties.enthalpy = (H - Hv * wv) / (1 - wv)
                     .Phases(0).Properties.massflow = W * (1 - wv)
+                    .DefinedFlow = FlowSpec.Mass
                 End With
             End If
 

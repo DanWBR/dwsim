@@ -1524,6 +1524,7 @@ Namespace Reactors
                 If cp.IsAttached Then
                     ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                     With ms
+                        .DefinedFlow = FlowSpec.Mass
                         .SpecType = ims.SpecType
                         .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
                         .Phases(0).Properties.massfraction = 1

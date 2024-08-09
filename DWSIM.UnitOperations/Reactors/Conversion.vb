@@ -910,6 +910,7 @@ Namespace Reactors
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .SpecType = StreamSpec.Temperature_and_Pressure
+                    .DefinedFlow = FlowSpec.Mass
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
                     Dim comp As BaseClasses.Compound
@@ -936,6 +937,7 @@ Namespace Reactors
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .SpecType = StreamSpec.Temperature_and_Pressure
+                    .DefinedFlow = FlowSpec.Mass
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
                     Dim comp As BaseClasses.Compound
