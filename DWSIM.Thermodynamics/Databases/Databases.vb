@@ -226,6 +226,8 @@ Namespace Databases
                             cp.IG_Enthalpy_of_Formation_25C = Double.Parse(node2.Attributes("value").Value, nf) / 1000 / cp.Molar_Weight
                         Case "GibbsEnergyOfFormation" '/1000/MW, kJ/kg
                             cp.IG_Gibbs_Energy_of_Formation_25C = Double.Parse(node2.Attributes("value").Value, nf) / 1000 / cp.Molar_Weight
+                        Case "HeatOfCombustion" '/1000/MW, kJ/kg
+                            cp.StandardHeatOfCombustion_LHV = Double.Parse(node2.Attributes("value").Value, nf) / 1000 / cp.Molar_Weight
                         Case "RacketParameter"
                             cp.Z_Rackett = Double.Parse(node2.Attributes("value").Value, nf)
                         Case "ChaoSeaderAcentricFactor"

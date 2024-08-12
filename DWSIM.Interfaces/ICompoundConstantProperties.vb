@@ -1335,4 +1335,6 @@
 
     Property ChemSepFamily As Integer
 
+    Property StandardHeatOfCombustion_LHV As Double
+
 End Interface

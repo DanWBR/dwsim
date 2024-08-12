@@ -29,7 +29,7 @@ Imports DWSIM.Interfaces
 
     Public ReadOnly Property Description() As String Implements DWSIM.Interfaces.IUtilityPlugin.Description, IUtilityPlugin5.Description
         Get
-            Return "Utility for calculation of Heat of Combustion of Hydrocarbons in a Material Stream"
+            Return "Utility for calculation of Heat of Combustion of a Material Stream"
         End Get
     End Property
 
@@ -41,7 +41,7 @@ Imports DWSIM.Interfaces
 
     Public ReadOnly Property Name() As String Implements DWSIM.Interfaces.IUtilityPlugin.Name, IUtilityPlugin5.Name
         Get
-            Return "Hydrocarbon Heat of Combustion Calculator"
+            Return "Heat of Combustion Calculator"
         End Get
     End Property
 
@@ -71,7 +71,7 @@ Imports DWSIM.Interfaces
 
     Public ReadOnly Property WebSite() As String Implements DWSIM.Interfaces.IUtilityPlugin.WebSite, IUtilityPlugin5.WebSite
         Get
-            Return "http://dwsim.inforside.com.br"
+            Return "https://dwsim.org"
         End Get
     End Property
 

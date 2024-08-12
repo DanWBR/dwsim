@@ -35,11 +35,7 @@ Public Class Form1
             pp.CurrentMaterialStream = ms
             Dim mw = pp.AUX_MMM(Enums.PhaseLabel.Mixture)
 
-            Dim hhv_mass, hhv_molar, lhv_mass, lhv_molar, t1, t2 As Double
-
-            Dim DelHF_H2O As Double = -13422.7 'kJ/kg
-            Dim DelHF_CO2 As Double = -8941.48 'kJ/kg
-            Dim DHvap_H2O As Double = 2260.0 'kJ/kg
+            Dim lhv_mass, lhv_molar, t1, t2 As Double
 
             'CxHyNzOn (std.) + O2 (g, xs.) → x CO2 (g) + ​y⁄2 H2O (l) + ​z⁄2 N2 (g)
 
@@ -47,23 +43,15 @@ Public Class Form1
             Dim n As Integer = compounds.Count - 1
             For i = 0 To n
                 If molar_composition(i) > 0.0 Then
-                    If compounds(i).Elements.ContainsKey("C") And compounds(i).Elements.ContainsKey("H") Then
-                        Dim nC As Double = compounds(i).Elements("C")
-                        Dim nH As Double = compounds(i).Elements("H")
-                        mass_composition(i) = molar_composition(i) * compounds(i).Molar_Weight / mw
-                        t1 = molar_composition(i) * (nC * DelHF_CO2 * 44.01 + nH / 2 * (DelHF_H2O - DHvap_H2O) * 18.0153 - compounds(i).IG_Enthalpy_of_Formation_25C * compounds(i).Molar_Weight)
-                        t2 = molar_composition(i) * (nC * DelHF_CO2 * 44.01 + nH / 2 * DelHF_H2O * 18.0153 - compounds(i).IG_Enthalpy_of_Formation_25C * compounds(i).Molar_Weight)
-                        hhv_molar += t1
-                        lhv_molar += t2
-                        hhv_mass += t1 / compounds(i).Molar_Weight
-                        lhv_mass += t2 / compounds(i).Molar_Weight
-                    End If
+                    mass_composition(i) = molar_composition(i) * compounds(i).Molar_Weight / mw
+                    t1 = molar_composition(i) * compounds(i).StandardHeatOfCombustion_LHV * compounds(i).Molar_Weight
+                    t2 = mass_composition(i) * compounds(i).StandardHeatOfCombustion_LHV
+                    lhv_molar += t1
+                    lhv_mass += t2
                 End If
             Next
 
-            tbMassHHV.Text = -hhv_mass.ConvertFromSI(fsheet.FlowsheetOptions.SelectedUnitSystem.enthalpy).ToString(fsheet.FlowsheetOptions.NumberFormat)
             tbMassLHV.Text = -lhv_mass.ConvertFromSI(fsheet.FlowsheetOptions.SelectedUnitSystem.enthalpy).ToString(fsheet.FlowsheetOptions.NumberFormat)
-            tbMolarHHV.Text = -hhv_molar.ConvertFromSI(fsheet.FlowsheetOptions.SelectedUnitSystem.molar_enthalpy).ToString(fsheet.FlowsheetOptions.NumberFormat)
             tbMolarLHV.Text = -lhv_molar.ConvertFromSI(fsheet.FlowsheetOptions.SelectedUnitSystem.molar_enthalpy).ToString(fsheet.FlowsheetOptions.NumberFormat)
 
         End If

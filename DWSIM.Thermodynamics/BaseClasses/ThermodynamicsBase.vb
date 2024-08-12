@@ -2657,6 +2657,8 @@ Namespace BaseClasses
 
         Public Property Enthalpy_Of_Vaporization_Tabular_Data As ITabularData = New TabularData() Implements ICompoundConstantProperties.Enthalpy_Of_Vaporization_Tabular_Data
 
+        Public Property StandardHeatOfCombustion_LHV As Double = 0.0 Implements ICompoundConstantProperties.StandardHeatOfCombustion_LHV
+
         Public Sub ExportToXLSX(filepath As String) Implements ICompoundConstantProperties.ExportToXLSX
 
             Using xcl As New OfficeOpenXml.ExcelPackage()
