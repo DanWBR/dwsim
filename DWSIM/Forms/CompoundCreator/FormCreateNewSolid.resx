@@ -183,8 +183,8 @@
   <data name="TextBoxDHF.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
+  <data name="&gt;&gt;Label17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -198,6 +198,9 @@
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Use esta ferramenta para criar uma substância/componente que sempre permanecerá no estado sólido em todas as etapas do processo.</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>kg/m3</value>
+  </data>
+  <data name="lblMW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
   </data>
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>115</value>
@@ -218,6 +224,9 @@
   </data>
   <data name="&gt;&gt;Label17.Name" xml:space="preserve">
     <value>Label17</value>
+  </data>
+  <data name="&gt;&gt;lblMeltingTemp.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="TextBoxCp.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -237,11 +246,11 @@
   <data name="&gt;&gt;lblDGF.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="&gt;&gt;TextBoxMW.ZOrder" xml:space="preserve">
     <value>21</value>
+  </data>
+  <data name="lblDHF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Massa Específica</value>
@@ -252,6 +261,9 @@
   <data name="&gt;&gt;TextBoxFormula.Name" xml:space="preserve">
     <value>TextBoxFormula</value>
   </data>
+  <data name="&gt;&gt;lblMW.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="&gt;&gt;Label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -260,9 +272,6 @@
   </data>
   <data name="TextBoxName.Location" type="System.Drawing.Point, System.Drawing">
     <value>274, 70</value>
-  </data>
-  <data name="&gt;&gt;lblDHF.ZOrder" xml:space="preserve">
-    <value>14</value>
   </data>
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -282,8 +291,8 @@
   <data name="&gt;&gt;TextBoxDensity.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="Label50.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Label53.ZOrder" xml:space="preserve">
+    <value>15</value>
   </data>
   <data name="Label17.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -327,8 +336,8 @@
   <data name="Label53.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
-    <value>Button1</value>
+  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="TextBoxDensity.Location" type="System.Drawing.Point, System.Drawing">
     <value>274, 162</value>
@@ -360,9 +369,6 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>* Os dados de formação são opcionais e devem ser informados caso a substância seja utilizada em um Reator de Gibbs.</value>
   </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 13</value>
-  </data>
   <data name="lblDGF.Text" xml:space="preserve">
     <value>kJ/kg</value>
   </data>
@@ -381,6 +387,9 @@
   <data name="lblMW.Text" xml:space="preserve">
     <value>kg/kmol</value>
   </data>
+  <data name="TextBoxDHF.TabIndex" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
   <data name="&gt;&gt;Label50.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -390,20 +399,17 @@
   <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMeltingTemp.ZOrder" xml:space="preserve">
-    <value>11</value>
+  <data name="TextBoxDensity.TabIndex" type="System.Int32, mscorlib">
+    <value>109</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Exportar para JSON</value>
   </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 13</value>
-  </data>
   <data name="TextBoxMW.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
+  </data>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="Label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -423,6 +429,9 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Criar Novo Sólido</value>
   </data>
+  <data name="&gt;&gt;Label53.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="TextBoxName.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 20</value>
   </data>
@@ -432,14 +441,11 @@
   <data name="&gt;&gt;TextBoxDensity.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;lblMW.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
+    <value>Button1</value>
   </data>
-  <data name="TextBoxFormula.TabIndex" type="System.Int32, mscorlib">
-    <value>116</value>
-  </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblMW.ZOrder" xml:space="preserve">
     <value>20</value>
@@ -456,17 +462,20 @@
   <data name="Label53.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="TextBoxDHF.Location" type="System.Drawing.Point, System.Drawing">
     <value>274, 243</value>
   </data>
-  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="TextBoxDGF.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblDHF.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <data name="&gt;&gt;TextBoxMW.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TextBoxDensity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
   </data>
   <data name="TextBoxDGF.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 20</value>
@@ -501,6 +510,9 @@
   <data name="&gt;&gt;lblDGF.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="TextBoxDGF.TabIndex" type="System.Int32, mscorlib">
+    <value>83</value>
+  </data>
   <data name="&gt;&gt;TextBoxDGF.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -513,14 +525,8 @@
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>421, 40</value>
-  </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="TextBoxDensity.TabIndex" type="System.Int32, mscorlib">
-    <value>109</value>
   </data>
   <data name="&gt;&gt;TextBoxDGF.ZOrder" xml:space="preserve">
     <value>16</value>
@@ -534,14 +540,14 @@
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="&gt;&gt;Label17.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="&gt;&gt;TextBoxMW.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Label22.Name" xml:space="preserve">
     <value>Label22</value>
-  </data>
-  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="lblMW.Location" type="System.Drawing.Point, System.Drawing">
     <value>376, 134</value>
@@ -564,11 +570,8 @@
   <data name="Label50.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
   </data>
-  <data name="TextBoxDGF.TabIndex" type="System.Int32, mscorlib">
-    <value>83</value>
-  </data>
-  <data name="&gt;&gt;Button2.Name" xml:space="preserve">
-    <value>Button2</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
   </data>
   <data name="&gt;&gt;lblMeltingTemp.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -594,8 +597,8 @@
   <data name="&gt;&gt;TextBoxCp.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;Label53.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="TextBoxFormula.TabIndex" type="System.Int32, mscorlib">
+    <value>116</value>
   </data>
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
     <value>113</value>
@@ -648,11 +651,11 @@
   <data name="&gt;&gt;lblDGF.Name" xml:space="preserve">
     <value>lblDGF</value>
   </data>
-  <data name="lblDHF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Button2.Name" xml:space="preserve">
+    <value>Button2</value>
   </data>
-  <data name="&gt;&gt;Label17.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -663,8 +666,8 @@
   <data name="&gt;&gt;Label50.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>421, 27</value>
@@ -711,26 +714,26 @@
   <data name="&gt;&gt;lblMeltingTemp.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>421, 40</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>376, 167</value>
   </data>
-  <data name="lblMW.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
   </data>
-  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="Label50.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="TextBoxDHF.TabIndex" type="System.Int32, mscorlib">
-    <value>80</value>
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;Label17.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="TextBoxMW.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 20</value>
@@ -738,17 +741,14 @@
   <data name="Label22.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
   </data>
-  <data name="TextBoxDGF.Text" xml:space="preserve">
-    <value>0</value>
+  <data name="TextBoxDensity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
   </data>
   <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TextBoxFormula.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 197</value>
@@ -756,8 +756,8 @@
   <data name="&gt;&gt;TextBoxCp.Name" xml:space="preserve">
     <value>TextBoxCp</value>
   </data>
-  <data name="&gt;&gt;Label53.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;TextBoxFormula.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>$this</value>

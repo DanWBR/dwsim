@@ -195,6 +195,9 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Heat Capacity</value>
   </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>421, 41</value>
+  </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Ideal Gas Formation Data is optional and must be entered only if the compound is reactive.</value>
   </data>
