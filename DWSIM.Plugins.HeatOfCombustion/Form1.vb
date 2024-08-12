@@ -43,6 +43,9 @@ Public Class Form1
             Dim n As Integer = compounds.Count - 1
             For i = 0 To n
                 If molar_composition(i) > 0.0 Then
+                    If compounds(i).StandardHeatOfCombustion_LHV = 0.0 Then
+                        stream.GetFlowsheet().ShowMessage(String.Format("Warning: {0} Standard Net Heat of Combustion = 0", compounds(i).Name), IFlowsheet.MessageType.Warning)
+                    End If
                     mass_composition(i) = molar_composition(i) * compounds(i).Molar_Weight / mw
                     t1 = molar_composition(i) * compounds(i).StandardHeatOfCombustion_LHV * compounds(i).Molar_Weight
                     t2 = mass_composition(i) * compounds(i).StandardHeatOfCombustion_LHV
