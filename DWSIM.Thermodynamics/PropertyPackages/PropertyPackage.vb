@@ -7220,45 +7220,49 @@ Final3:
 
             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
                 db = subst.ConstantProperties.OriginalDB
-                If db = "ChemSep" Or (db = "User" And subst.ConstantProperties.SolidDensityEquation <> "") Then
-                    Dim A, B, C, D, E, result As Double
-                    Dim eqno As String = subst.ConstantProperties.SolidDensityEquation
-                    Dim mw As Double = subst.ConstantProperties.Molar_Weight
-                    A = subst.ConstantProperties.Solid_Density_Const_A
-                    B = subst.ConstantProperties.Solid_Density_Const_B
-                    C = subst.ConstantProperties.Solid_Density_Const_C
-                    D = subst.ConstantProperties.Solid_Density_Const_D
-                    E = subst.ConstantProperties.Solid_Density_Const_E
-                    If eqno <> "" Then
-                        result = CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
-                    End If
-                    If eqno = "" OrElse result = 0.0 Then
-                        zerodens += subst.MassFraction.GetValueOrDefault
-                    Else
-                        val += subst.MassFraction.GetValueOrDefault * 1 / (result * mw)
-                    End If
-                ElseIf db = "ChEDL Thermo" And subst.ConstantProperties.SolidDensityEquation <> "" Then
-                    Dim A, B, C, D, E, result As Double
-                    Dim eqno As String = subst.ConstantProperties.SolidDensityEquation
-                    A = subst.ConstantProperties.Solid_Density_Const_A
-                    B = subst.ConstantProperties.Solid_Density_Const_B
-                    C = subst.ConstantProperties.Solid_Density_Const_C
-                    D = subst.ConstantProperties.Solid_Density_Const_D
-                    E = subst.ConstantProperties.Solid_Density_Const_E
-                    If eqno <> "" Then
-                        result = CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kg/m3
-                    End If
-                    val += subst.MassFraction.GetValueOrDefault * 1 / (result)
+                If subst.ConstantProperties.SolidDensityAtTs > 0.0 Then
+                    val += subst.MassFraction.GetValueOrDefault * 1 / subst.ConstantProperties.SolidDensityAtTs
                 Else
-                    If subst.ConstantProperties.SolidDensityAtTs <> 0.0# Then
-                        val += subst.MassFraction.GetValueOrDefault * 1 / subst.ConstantProperties.SolidDensityAtTs
+                    If db = "ChemSep" Or (db = "User" And subst.ConstantProperties.SolidDensityEquation <> "") Then
+                        Dim A, B, C, D, E, result As Double
+                        Dim eqno As String = subst.ConstantProperties.SolidDensityEquation
+                        Dim mw As Double = subst.ConstantProperties.Molar_Weight
+                        A = subst.ConstantProperties.Solid_Density_Const_A
+                        B = subst.ConstantProperties.Solid_Density_Const_B
+                        C = subst.ConstantProperties.Solid_Density_Const_C
+                        D = subst.ConstantProperties.Solid_Density_Const_D
+                        E = subst.ConstantProperties.Solid_Density_Const_E
+                        If eqno <> "" Then
+                            result = CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
+                        End If
+                        If eqno = "" OrElse result = 0.0 Then
+                            zerodens += subst.MassFraction.GetValueOrDefault
+                        Else
+                            val += subst.MassFraction.GetValueOrDefault * 1 / (result * mw)
+                        End If
+                    ElseIf db = "ChEDL Thermo" And subst.ConstantProperties.SolidDensityEquation <> "" Then
+                        Dim A, B, C, D, E, result As Double
+                        Dim eqno As String = subst.ConstantProperties.SolidDensityEquation
+                        A = subst.ConstantProperties.Solid_Density_Const_A
+                        B = subst.ConstantProperties.Solid_Density_Const_B
+                        C = subst.ConstantProperties.Solid_Density_Const_C
+                        D = subst.ConstantProperties.Solid_Density_Const_D
+                        E = subst.ConstantProperties.Solid_Density_Const_E
+                        If eqno <> "" Then
+                            result = CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kg/m3
+                        End If
+                        val += subst.MassFraction.GetValueOrDefault * 1 / (result)
                     Else
                         zerodens += subst.MassFraction.GetValueOrDefault
                     End If
                 End If
             Next
 
-            Return 1 / val / (1 - zerodens)
+            Dim sdens = 1.0 / val / (1.0 - zerodens)
+
+            If Double.IsNaN(sdens) Or Double.IsInfinity(sdens) Then sdens = 0.0
+
+            Return sdens
 
         End Function
 

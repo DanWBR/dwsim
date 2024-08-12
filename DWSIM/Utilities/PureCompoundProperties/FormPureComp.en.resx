@@ -484,10 +484,10 @@
     <value>48, 22, 48, 22</value>
   </data>
   <data name="GraphSolidDens.Size" type="System.Drawing.Size, System.Drawing">
-    <value>754, 336</value>
+    <value>874, 405</value>
   </data>
   <data name="FaTabStripItemSOLIDDENS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>754, 336</value>
+    <value>874, 405</value>
   </data>
   <data name="FaTabStripItemSOLIDDENS.Title" xml:space="preserve">
     <value>Density</value>
@@ -566,6 +566,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>890, 539</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
