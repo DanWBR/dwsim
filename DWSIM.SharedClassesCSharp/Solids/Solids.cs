@@ -1,4 +1,5 @@
 ﻿using DWSIM.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -60,19 +61,20 @@ namespace DWSIM.SharedClassesCSharp.Solids
 
         public double GetAverageDiameter()
         {
-           return Data.Select(dp => dp.Size).Average();
+            return Data.Select(dp => dp.Size * dp.MassFraction).Sum() / Data.Select(dp => dp.MassFraction).Sum();
         }
 
         public double GetMeanDiameter()
         {
-            var diameters = Data.Select(dp => dp.Size).ToList();
-            return MathNet.Numerics.Statistics.Statistics.Mean(diameters);
+            var diameters = Data.Select(dp => dp.Size * dp.MassFraction).ToList();
+            return diameters.Sum();
         }
 
         public double GetDiameterStdDev()
         {
-            var diameters = Data.Select(dp => dp.Size).ToList();
-            return MathNet.Numerics.Statistics.Statistics.StandardDeviation(diameters);
+            var mean = GetMeanDiameter();
+            var stddev = Math.Sqrt(Data.Select(dp => Math.Pow(dp.Size - mean, 2) * dp.MassFraction).Sum());
+            return stddev;
         }
 
         public bool LoadData(List<XElement> data)
@@ -157,7 +159,7 @@ namespace DWSIM.SharedClassesCSharp.Solids
                         obj.LoadData(xel.Elements().ToList());
                         Curves.Add(obj);
                     }
-                    catch{ }
+                    catch { }
                 }
             }
             return true;
@@ -194,7 +196,7 @@ namespace DWSIM.SharedClassesCSharp.Solids
 
         public Dictionary<string, string> Distributions { get; set; } = new Dictionary<string, string>();
 
-        public Dictionary<string, ISolidParticleSizeDistribution> InternalDistributions { get; set; } = new  Dictionary<string, ISolidParticleSizeDistribution>();
+        public Dictionary<string, ISolidParticleSizeDistribution> InternalDistributions { get; set; } = new Dictionary<string, ISolidParticleSizeDistribution>();
 
         public bool Calculated { get; set; } = false;
 
