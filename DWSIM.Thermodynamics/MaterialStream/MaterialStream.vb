@@ -1294,6 +1294,14 @@ Namespace Streams
 
                     Return Phases(2).Properties.H2Spartialpressure.GetValueOrDefault().ConvertFromSI(su.pressure)
 
+                ElseIf prop.Equals("Mean Particle Size (Solid)") Then
+
+                    Return Phases(7).Properties.particleSize_Mean.GetValueOrDefault().ConvertFromSI(su.diameter)
+
+                ElseIf prop.Equals("Particle Size Standard Deviation (Solid)") Then
+
+                    Return Phases(7).Properties.particleSize_StdDev.GetValueOrDefault().ConvertFromSI(su.diameter)
+
                 ElseIf prop.StartsWith("Activity Coefficient") Then
 
                     Dim comp = prop.Split("/")(1).Trim()
@@ -2476,6 +2484,8 @@ Namespace Streams
                     proplist.Add("CO2 Partial Pressure")
                     proplist.Add("H2S Loading")
                     proplist.Add("H2S Partial Pressure")
+                    proplist.Add("Mean Particle Size (Solid)")
+                    proplist.Add("Particle Size Standard Deviation (Solid)")
             End Select
 
             'proplist.AddRange(MyBase.GetProperties(proptype))
@@ -2642,6 +2652,14 @@ Namespace Streams
                 ElseIf prop.Equals("H2S Partial Pressure") Then
 
                     Return su.pressure
+
+                ElseIf prop.Equals("Mean Particle Size (Solid)") Then
+
+                    Return su.diameter
+
+                ElseIf prop.Equals("Particle Size Standard Deviation (Solid)") Then
+
+                    Return su.diameter
 
                 ElseIf prop.StartsWith("Activity Coefficient") Then
 

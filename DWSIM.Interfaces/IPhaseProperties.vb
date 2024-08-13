@@ -78,5 +78,7 @@
     Property CO2partialpressure As Double?
     Property H2Sloading As Double?
     Property H2Spartialpressure As Double?
+    Property particleSize_Mean As Double?
+    Property particleSize_StdDev As Double?
 
 End Interface

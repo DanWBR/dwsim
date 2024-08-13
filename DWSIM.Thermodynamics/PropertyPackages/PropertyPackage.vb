@@ -1290,6 +1290,32 @@ Namespace PropertyPackages
             Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = 1.0E+20
             Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = 1.0E+20
 
+            If CurrentMaterialStream.SolidParticleData IsNot Nothing Then
+                Dim dmean, dstddev, totalfrac As Double
+                For Each comp In CurrentMaterialStream.Phases(7).Compounds.Values
+                    Dim psd As ISolidParticleSizeDistribution = Nothing
+                    If CurrentMaterialStream.SolidParticleData IsNot Nothing AndAlso CurrentMaterialStream.SolidParticleData.Calculated = False AndAlso
+                        CurrentMaterialStream.SolidParticleData.Distributions.ContainsKey(comp.Name) Then
+                        Dim psdkey = CurrentMaterialStream.SolidParticleData.Distributions(comp.Name)
+                        psd = CurrentMaterialStream.Flowsheet.ParticleSizeDistributions.Where(Function(p2) p2.UniqueID = psdkey).FirstOrDefault()
+                    ElseIf CurrentMaterialStream.SolidParticleData IsNot Nothing AndAlso CurrentMaterialStream.SolidParticleData.Calculated AndAlso
+                        CurrentMaterialStream.SolidParticleData.InternalDistributions.ContainsKey(comp.Name) Then
+                        psd = CurrentMaterialStream.SolidParticleData.InternalDistributions(comp.Name)
+                    End If
+                    If psd IsNot Nothing AndAlso psd.Curves.Count > 0 Then
+                        totalfrac += comp.MassFraction.GetValueOrDefault()
+                        dmean += comp.MassFraction.GetValueOrDefault() * psd.Curves(0).GetMeanDiameter()
+                        dstddev += comp.MassFraction.GetValueOrDefault() * psd.Curves(0).GetDiameterStdDev()
+                    End If
+                Next
+                If totalfrac > 0.0 Then
+                    dmean /= totalfrac
+                    dstddev /= totalfrac
+                End If
+                CurrentMaterialStream.Phases(phaseID).Properties.particleSize_Mean = dmean
+                CurrentMaterialStream.Phases(phaseID).Properties.particleSize_StdDev = dstddev
+            End If
+
         End Sub
 
         ''' <summary>

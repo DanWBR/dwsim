@@ -1383,6 +1383,10 @@ Namespace BaseClasses
 
         Public Property H2Spartialpressure As Double? Implements IPhaseProperties.H2Spartialpressure
 
+        Public Property particleSize_Mean As Double? Implements IPhaseProperties.particleSize_Mean
+
+        Public Property particleSize_StdDev As Double? Implements IPhaseProperties.particleSize_StdDev
+
     End Class
 
     <System.Serializable()> Public Class InteractionParameter

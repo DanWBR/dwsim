@@ -777,6 +777,20 @@ Public Class MaterialStreamEditor
 
                 End If
 
+            ElseIf p.Name = "Solid" Then
+
+                If MatStream.PropertyPackage IsNot Nothing Then
+
+                    refval = MatStream.Phases(7).Properties.particleSize_Mean.GetValueOrDefault
+                    val = Converter.ConvertFromSI(units.diameter, refval)
+                    .Add(New Object() {"Mean Particle Size", val, units.diameter})
+
+                    refval = MatStream.Phases(7).Properties.particleSize_StdDev.GetValueOrDefault
+                    val = Converter.ConvertFromSI(units.diameter, refval)
+                    .Add(New Object() {"Particle Size Standard Deviation", val, units.diameter})
+
+                End If
+
             End If
 
         End With

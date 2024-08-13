@@ -241,7 +241,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.head
                     units.AddRange(New String() {"m", "ft", "cm"})
                 Case Enums.UnitOfMeasure.diameter
-                    units.AddRange(New String() {"mm", "in"})
+                    units.AddRange(New String() {"mm", "um", "in"})
                 Case Enums.UnitOfMeasure.force
                     units.AddRange(New String() {"N", "dyn", "kgf", "lbf"})
                 Case Enums.UnitOfMeasure.heat_transf_coeff
@@ -345,7 +345,7 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.molar_volume
                 Case "m2", "cm2", "ft2"
                     Return Enums.UnitOfMeasure.area
-                Case "mm", "in"
+                Case "mm", "um", "in"
                     Return Enums.UnitOfMeasure.diameter
                 Case "N", "dyn", "kgf", "lbf"
                     Return Enums.UnitOfMeasure.force
@@ -1635,6 +1635,8 @@ Namespace SystemsOfUnits
 
                 Case "mm"                               'comprimento'
                     Return value / 1000
+                Case "um"                               'comprimento'
+                    Return value / 1000000
                 Case "in.", "in"
                     Return value / 39.3701
 
@@ -2210,6 +2212,8 @@ Namespace SystemsOfUnits
 
                 Case "mm"                               'comprimento'
                     Return value * 1000
+                Case "mm"                               'comprimento'
+                    Return value * 1000000
                 Case "in.", "in"
                     Return value * 39.3701
 
