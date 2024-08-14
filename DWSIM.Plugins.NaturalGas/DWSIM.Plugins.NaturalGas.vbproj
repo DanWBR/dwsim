@@ -164,9 +164,7 @@
     <Compile Include="Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form1.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Form1.vb" />
     <Compile Include="MethaneNumber\Interface.vb" />
     <Compile Include="MethaneNumber\MethaneNumber.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

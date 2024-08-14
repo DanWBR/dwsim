@@ -35,6 +35,8 @@ namespace DWSIM.SharedClassesCSharp.Solids
 
         public double MassFraction { get; set; } = 0.0;
 
+        public double RelativeSize { get; set; } = 0.0;
+
         public double RelativeMassFraction { get; set; } = 0.0;
 
         public bool LoadData(List<XElement> data)
@@ -141,6 +143,7 @@ namespace DWSIM.SharedClassesCSharp.Solids
             if (Data.Count < 2) return;
             for (int i = 1; i < Data.Count; i++)
             {
+                Data[i].RelativeSize = Data[i].Size - Data[i-1].Size;
                 Data[i].RelativeMassFraction = Data[i].MassFraction - Data[i-1].MassFraction;
             }
         }

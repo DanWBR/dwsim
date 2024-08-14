@@ -66,6 +66,8 @@ Public Interface ISolidParticleSize
 
     Property MassFraction As Double
 
+    Property RelativeSize As Double
+
     Property RelativeMassFraction As Double
 
 
