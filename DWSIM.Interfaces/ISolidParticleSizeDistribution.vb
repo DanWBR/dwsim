@@ -52,6 +52,8 @@ Public Interface ISolidShapeCurve
 
     Function Clone() As ISolidShapeCurve
 
+    Sub Update()
+
 End Interface
 
 Public Interface ISolidParticleSize
@@ -63,6 +65,9 @@ Public Interface ISolidParticleSize
     Property Size As Double
 
     Property MassFraction As Double
+
+    Property RelativeMassFraction As Double
+
 
 End Interface
 

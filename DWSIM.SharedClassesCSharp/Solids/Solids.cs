@@ -35,6 +35,8 @@ namespace DWSIM.SharedClassesCSharp.Solids
 
         public double MassFraction { get; set; } = 0.0;
 
+        public double RelativeMassFraction { get; set; } = 0.0;
+
         public bool LoadData(List<XElement> data)
         {
             XMLSerializer.XMLSerializer.Deserialize(this, data);
@@ -131,6 +133,15 @@ namespace DWSIM.SharedClassesCSharp.Solids
             {
                 double value = MathNet.Numerics.Interpolate.Common(xd, yd).Interpolate(x);
                 return value;
+            }
+        }
+
+        public void Update()
+        {
+            if (Data.Count < 2) return;
+            for (int i = 1; i < Data.Count; i++)
+            {
+                Data[i].RelativeMassFraction = Data[i].MassFraction - Data[i-1].MassFraction;
             }
         }
     }
