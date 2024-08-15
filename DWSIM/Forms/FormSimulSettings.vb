@@ -393,7 +393,7 @@ Public Class FormSimulSettings
             .Add(New String() {DWSIM.App.GetLocalString("IsothermalCompressibility"), su.compressibility, DWSIM.App.GetLocalString("JouleThomsonCoefficient"), su.jouleThomsonCoefficient})
             .Add(New String() {DWSIM.App.GetLocalString("Conductance"), su.conductance, DWSIM.App.GetLocalString("DistComp"), su.distance})
             .Add(New String() {DWSIM.App.GetLocalString("Heat/Energy"), su.heat, DWSIM.App.GetLocalString("Mass"), su.mass})
-            .Add(New String() {DWSIM.App.GetLocalString("Moles"), su.mole, Nothing, Nothing})
+            .Add(New String() {DWSIM.App.GetLocalString("Moles"), su.mole, DWSIM.App.GetLocalString("Specific Power"), su.specific_power})
         End With
 
         If ComboBox2.SelectedIndex <= 3 Then
@@ -741,6 +741,13 @@ Public Class FormSimulSettings
             .Style.Tag = 43
         End With
 
+        With DirectCast(Me.DataGridView1.Rows.Item(21).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.specificpower).ToArray)
+            .Value = su.specific_power
+            .Style.Tag = 44
+        End With
+
         CurrentFlowsheet.UpdateOpenEditForms()
 
     End Sub
@@ -926,6 +933,9 @@ Public Class FormSimulSettings
                 Case 43
                     oldvalue = su.mole
                     su.mole = cell.Value
+                Case 44
+                    oldvalue = su.specific_power
+                    su.specific_power = cell.Value
             End Select
 
             Me.CurrentFlowsheet.FormSurface.UpdateSelectedObject()

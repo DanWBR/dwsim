@@ -169,4 +169,6 @@ Imports DWSIM.Interfaces.Enums
 
     Property emission_factor As String
 
+    Property specific_power As String
+
 End Interface

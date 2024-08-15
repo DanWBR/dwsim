@@ -224,6 +224,7 @@ Namespace Enums
         heat = 68
         mole = 69
         emission_factor = 70
+        specificpower = 71
 
     End Enum
 
