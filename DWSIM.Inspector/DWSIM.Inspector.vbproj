@@ -127,9 +127,7 @@
     <Compile Include="Window2.designer.vb">
       <DependentUpon>Window2.vb</DependentUpon>
     </Compile>
-    <Compile Include="Window2.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Window2.vb" />
     <Compile Include="Window.designer.vb">
       <DependentUpon>Window.vb</DependentUpon>
     </Compile>

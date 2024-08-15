@@ -130,9 +130,7 @@
     <Compile Include="Editor\DynamicsPropertyEditor.Designer.vb">
       <DependentUpon>DynamicsPropertyEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editor\DynamicsPropertyEditor.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editor\DynamicsPropertyEditor.vb" />
     <Compile Include="Editor\FormCustomCalcOrder.designer.vb">
       <DependentUpon>FormCustomCalcOrder.vb</DependentUpon>
     </Compile>
@@ -142,9 +140,7 @@
     <Compile Include="Editor\FormExtraProperties.designer.vb">
       <DependentUpon>FormExtraProperties.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editor\FormExtraProperties.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editor\FormExtraProperties.vb" />
     <Compile Include="Editor\InspectorReportBar.Designer.vb">
       <DependentUpon>InspectorReportBar.vb</DependentUpon>
     </Compile>
@@ -157,9 +153,7 @@
     <Compile Include="Editor\ListViewWithReordering.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Editor\ObjectEditorForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editor\ObjectEditorForm.vb" />
     <Compile Include="Editor\WaitForm.Designer.vb">
       <DependentUpon>WaitForm.vb</DependentUpon>
     </Compile>
