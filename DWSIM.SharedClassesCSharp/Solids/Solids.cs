@@ -122,20 +122,37 @@ namespace DWSIM.SharedClassesCSharp.Solids
 
         public double GetValue(double x)
         {
-            var ordered = Data.OrderByDescending(k => k.Size).ToList();
+            var ordered = Data.OrderBy(k => k.Size).ToList();
             var xd = ordered.Select(k => k.Size).ToList();
             var yd = ordered.Select(k => k.MassFraction).ToList();
             var min = Data.Select(d => d.Size).Min();
             var max = Data.Select(d => d.Size).Max();
+            double value = 0.0;
             if (x < min)
                 return 0.0;
             else if (x > max)
                 return 0.0;
             else
             {
-                double value = MathNet.Numerics.Interpolate.Common(xd, yd).Interpolate(x);
-                return value;
+                double x1, x2, y1, y2;
+
+                if (x < xd[0] || x > xd[xd.Count - 1])
+                    return 0.0;
+                else
+                {
+                    for (int i = 0; i < xd.Count - 1; i++)
+                    {
+                        if (x >= xd[i])
+                        {
+                            x1 = xd[i]; x2 = xd[i+1]; y1 = yd[i]; y2 = yd[i+1];
+                            value = MathNet.Numerics.Interpolate.Linear(new[] { x1, x2 }, new[] { y1, y2 }).Interpolate(x);
+                        }
+                    }
+                }
+
             }
+            //value = MathNet.Numerics.Interpolate.Common(xd, yd).Interpolate(x);
+            return value;
         }
 
         public void Update()
