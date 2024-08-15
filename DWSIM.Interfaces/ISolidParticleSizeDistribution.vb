@@ -50,6 +50,8 @@ Public Interface ISolidShapeCurve
 
     Function GetValue(x As Double) As Double
 
+    Function GetRelativeValue(x As Double, x0 As Double) As Double
+
     Function Clone() As ISolidShapeCurve
 
     Sub Update()

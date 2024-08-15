@@ -144,8 +144,15 @@ namespace DWSIM.SharedClassesCSharp.Solids
             for (int i = 1; i < Data.Count; i++)
             {
                 Data[i].RelativeSize = Data[i].Size - Data[i-1].Size;
-                Data[i].RelativeMassFraction = Data[i].MassFraction - Data[i-1].MassFraction;
+                Data[i].RelativeMassFraction = Math.Abs(Data[i].MassFraction - Data[i-1].MassFraction);
             }
+        }
+
+        public double GetRelativeValue(double x, double x0)
+        {
+            var y = GetValue(x);
+            var y0 = GetValue(x0);
+            return y - y0;
         }
     }
 
