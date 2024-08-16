@@ -257,7 +257,14 @@ namespace DWSIM.SharedClassesCSharp.Solids
                     {
                         var obj = new SolidParticleSizeDistribution();
                         obj.LoadData(xel.Elements().ToList());
-                        InternalDistributions.Add(obj.Name, obj);
+                        if (xel.Attribute("Key") != null)
+                        {
+                            InternalDistributions.Add(xel.Attribute("Key").Value, obj);
+                        }
+                        else
+                        {
+                            InternalDistributions.Add(obj.Name, obj);
+                        }
                     }
                     catch { }
                 }
@@ -270,9 +277,10 @@ namespace DWSIM.SharedClassesCSharp.Solids
             var data = XMLSerializer.XMLSerializer.Serialize(this);
             data.Add(new XElement("InternalDistributions"));
             var cx = data.Last();
-            foreach (var dist in InternalDistributions.Values)
+            foreach (var dist in InternalDistributions)
             {
-                cx.Add(new XElement("InternalDistribution", ((ICustomXMLSerialization)dist).SaveData().ToArray()));
+                cx.Add(new XElement("InternalDistribution", ((ICustomXMLSerialization)dist.Value).SaveData().ToArray()));
+                cx.Elements().Last().SetAttributeValue("Key", dist.Key);
             }
             return data;
         }
