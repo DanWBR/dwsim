@@ -713,7 +713,7 @@ Partial Class FormDynamicsManager
         '
         resources.ApplyResources(Me.nupIntegrationStep, "nupIntegrationStep")
         Me.nupIntegrationStep.Increment = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.nupIntegrationStep.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
+        Me.nupIntegrationStep.Maximum = New Decimal(New Integer() {1569325056, 23283064, 0, 0})
         Me.nupIntegrationStep.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.nupIntegrationStep.Name = "nupIntegrationStep"
         Me.nupIntegrationStep.Value = New Decimal(New Integer() {1000, 0, 0, 0})
