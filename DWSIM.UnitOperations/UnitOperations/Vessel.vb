@@ -340,7 +340,7 @@ Namespace UnitOperations
 
             Dim LiquidVolume, RelativeLevel As Double
 
-            If AccumulationStream.GetPressure > Pmin Then
+            If AccumulationStream.GetPressure >= Pmin Then
 
                 If prevM = 0.0 Or integrator.ShouldCalculateEquilibrium Then
 
