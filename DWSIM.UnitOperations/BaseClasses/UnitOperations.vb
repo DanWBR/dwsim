@@ -48,6 +48,10 @@ Namespace UnitOperations
 
         Public Property ExternalSolverConfigData As String = ""
 
+        Public Property ParticleSizeDistributions As New Dictionary(Of String, String)
+
+        Public Overridable ReadOnly Property SupportsParticleSizeDistributions As Boolean = False
+
         Public Sub New()
 
             MyBase.CreateNew()
