@@ -1189,6 +1189,8 @@ Namespace UnitOperations
                 Dim value As String = ""
                 Dim propidx As Integer = -1
 
+                If prop.Contains("Stage Index") Then Return ""
+
                 Try
                     Integer.TryParse(prop.Split("_")(2), propidx)
                 Catch ex As Exception
@@ -1658,6 +1660,8 @@ Namespace UnitOperations
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim value As String = ""
+
+            If prop.Contains("Stage Index") Then Return ""
 
             Dim propidx As Integer = -1
 
