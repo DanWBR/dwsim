@@ -88,11 +88,11 @@ Namespace GraphicObjects.Shapes
                     Dim aPen As New SKPaint()
                     With aPen
                         If Active Then
-                            .Color = SKColors.LightSteelBlue
+                            .Color = SKColors.SandyBrown
                         Else
                             .Color = SKColors.Gray
                         End If
-                        .StrokeWidth = LineWidth
+                        .StrokeWidth = 1
                         .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                         .PathEffect = SKPathEffect.CreateDash(New Single() {2.0F, 3.0F, 2.0F, 3.0F}, 2.0F)

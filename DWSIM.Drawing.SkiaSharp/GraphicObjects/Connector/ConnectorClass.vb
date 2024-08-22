@@ -751,9 +751,19 @@ Namespace GraphicObjects
                             .Color = SKColors.Salmon
                         End If
                         If AttachedFrom.ObjectType = ObjectType.OT_Recycle Or AttachedFrom.ObjectType = ObjectType.OT_EnergyRecycle Then
+                            If AttachedFrom.Active Then
+                                .Color = SKColors.SandyBrown
+                            Else
+                                .Color = SKColors.Gray
+                            End If
                             .PathEffect = SKPathEffect.CreateCompose(SKPathEffect.CreateDash(New Single() {2, 2}, 4), .PathEffect)
                         End If
                         If AttachedTo.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
+                            If AttachedTo.Active Then
+                                .Color = SKColors.SandyBrown
+                            Else
+                                .Color = SKColors.Gray
+                            End If
                             .PathEffect = SKPathEffect.CreateCompose(SKPathEffect.CreateDash(New Single() {2, 2}, 4), .PathEffect)
                         End If
                     End With
@@ -793,9 +803,19 @@ Namespace GraphicObjects
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                         .PathEffect = SKPathEffect.CreateCorner(2.0F)
                         If AttachedFrom.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
+                            If AttachedFrom.Active Then
+                                .Color = SKColors.SandyBrown
+                            Else
+                                .Color = SKColors.Gray
+                            End If
                             .PathEffect = SKPathEffect.CreateCompose(SKPathEffect.CreateDash(New Single() {2, 2}, 4), .PathEffect)
                         End If
                         If AttachedTo.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
+                            If AttachedTo.Active Then
+                                .Color = SKColors.SandyBrown
+                            Else
+                                .Color = SKColors.Gray
+                            End If
                             .PathEffect = SKPathEffect.CreateCompose(SKPathEffect.CreateDash(New Single() {2, 2}, 4), .PathEffect)
                         End If
                     End With
