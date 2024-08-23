@@ -425,7 +425,7 @@ namespace DWSIM.UI.Desktop.Editors
                     dl.CreateAndAddLabelRow("Formation Properties");
                     dl.CreateAndAddTextBoxRow(nf, "Enthalpy of Formation @ 298 K (kJ/mol)", comp.Electrolyte_DelHF, (sender, e) => comp.Electrolyte_DelHF = sender.Text.IsValidDouble() ? sender.Text.ToDoubleFromCurrent() : comp.Electrolyte_DelHF);
                     dl.CreateAndAddTextBoxRow(nf, "Gibbs Energy of Formation @ 298 K (kJ/mol)", comp.Electrolyte_DelGF, (sender, e) => comp.Electrolyte_DelGF = sender.Text.IsValidDouble() ? sender.Text.ToDoubleFromCurrent() : comp.Electrolyte_DelGF);
-                    dl.CreateAndAddTextBoxRow(nf, "Heat Capacity @ 298 K (kJ/mol)", comp.Electrolyte_Cp0, (sender, e) => comp.Electrolyte_Cp0 = sender.Text.IsValidDouble() ? sender.Text.ToDoubleFromCurrent() : comp.Electrolyte_Cp0);
+                    dl.CreateAndAddTextBoxRow(nf, "Heat Capacity @ 298 K (kJ/[mol.K])", comp.Electrolyte_Cp0, (sender, e) => comp.Electrolyte_Cp0 = sender.Text.IsValidDouble() ? sender.Text.ToDoubleFromCurrent() : comp.Electrolyte_Cp0);
                     break;
                 case 3:
                     //blackoil
