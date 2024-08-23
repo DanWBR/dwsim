@@ -1057,7 +1057,7 @@
     <value>GroupBoxParameters2</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.8.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=8.8.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="rtbAnnotations.ToolTip2" xml:space="preserve">
     <value />

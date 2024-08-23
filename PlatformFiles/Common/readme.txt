@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.8.0
+Version 8.8.1
 Copyright (c) 2017-2024 Daniel Wagner and contributors
 Copyright (c) 2008-2016 Daniel Wagner, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -62,6 +62,18 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
 
+Version 8.8.1
+
+- Added an option to use legacy convergence mode for Recycle blocks (#667)
+- Fixed Reaktoro Property Package
+- Fixed issue with reactor models
+- Fixed Heat of Combubstion plugin
+- Fixed solid density calculation
+- Fixed issue #669 (single compound partial sublimation when Tfus > Tsat)
+- Fixed issue with rigorous column
+- Fixed issue #656 (Crashing when using Simulation setup wizard)
+- Fixed issue #657 (Faulty unit for Cp in compound creator wizard)
+
 Version 8.8.0
 
 - New search functionality to Property Table editors (Classic UI)
@@ -79,11 +91,11 @@ Version 8.8.0
 - Fixed issues with Data regression tool
 - Added tabular t-dep data to compound constant properties
 - Fixed issue with PFD designer
-- Fixed #628: Native save dialog for Compound creator
-- Fixed #649: Water electrolyzer results not updating
-- Fixed #628: Compound separator generates mass #652
-- Fixed #628: Utilities running #647
-- Fixed #627: Delete or update user compound
+- Fixed issue #628: Native save dialog for Compound creator
+- Fixed issue #649: Water electrolyzer results not updating
+- Fixed issue #652: Compound separator generates mass
+- Fixed issue #628: Utilities running
+- Fixed issue #627: Delete or update user compound
 
 Version 8.7.1
 
