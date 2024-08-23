@@ -36,11 +36,12 @@ Partial Class EditingForm_Recycle
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBoxParameters1 = New System.Windows.Forms.GroupBox()
-        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
+        Me.chkLegacyMode = New System.Windows.Forms.CheckBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tbMaxIts = New System.Windows.Forms.TextBox()
         Me.chkGlobalBroyden = New System.Windows.Forms.CheckBox()
+        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
         Me.cbP = New System.Windows.Forms.ComboBox()
         Me.tbPT = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -173,6 +174,7 @@ Partial Class EditingForm_Recycle
         'GroupBoxParameters1
         '
         resources.ApplyResources(Me.GroupBoxParameters1, "GroupBoxParameters1")
+        Me.GroupBoxParameters1.Controls.Add(Me.chkLegacyMode)
         Me.GroupBoxParameters1.Controls.Add(Me.Label5)
         Me.GroupBoxParameters1.Controls.Add(Me.Label1)
         Me.GroupBoxParameters1.Controls.Add(Me.tbMaxIts)
@@ -184,15 +186,14 @@ Partial Class EditingForm_Recycle
         Me.ToolTipValues.SetToolTip(Me.GroupBoxParameters1, resources.GetString("GroupBoxParameters1.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBoxParameters1, resources.GetString("GroupBoxParameters1.ToolTip2"))
         '
-        'TrackBar1
+        'chkLegacyMode
         '
-        resources.ApplyResources(Me.TrackBar1, "TrackBar1")
-        Me.TrackBar1.Minimum = 1
-        Me.TrackBar1.Name = "TrackBar1"
-        Me.ToolTip1.SetToolTip(Me.TrackBar1, resources.GetString("TrackBar1.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.TrackBar1, resources.GetString("TrackBar1.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.TrackBar1, resources.GetString("TrackBar1.ToolTip2"))
-        Me.TrackBar1.Value = 10
+        resources.ApplyResources(Me.chkLegacyMode, "chkLegacyMode")
+        Me.chkLegacyMode.Name = "chkLegacyMode"
+        Me.ToolTip1.SetToolTip(Me.chkLegacyMode, resources.GetString("chkLegacyMode.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkLegacyMode, resources.GetString("chkLegacyMode.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkLegacyMode, resources.GetString("chkLegacyMode.ToolTip2"))
+        Me.chkLegacyMode.UseVisualStyleBackColor = True
         '
         'Label5
         '
@@ -226,6 +227,16 @@ Partial Class EditingForm_Recycle
         Me.ToolTipChangeTag.SetToolTip(Me.chkGlobalBroyden, resources.GetString("chkGlobalBroyden.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.chkGlobalBroyden, resources.GetString("chkGlobalBroyden.ToolTip2"))
         Me.chkGlobalBroyden.UseVisualStyleBackColor = True
+        '
+        'TrackBar1
+        '
+        resources.ApplyResources(Me.TrackBar1, "TrackBar1")
+        Me.TrackBar1.Minimum = 1
+        Me.TrackBar1.Name = "TrackBar1"
+        Me.ToolTip1.SetToolTip(Me.TrackBar1, resources.GetString("TrackBar1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TrackBar1, resources.GetString("TrackBar1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.TrackBar1, resources.GetString("TrackBar1.ToolTip2"))
+        Me.TrackBar1.Value = 10
         '
         'cbP
         '
@@ -520,4 +531,5 @@ Partial Class EditingForm_Recycle
     Public WithEvents tbMaxIts As TextBox
     Friend WithEvents TrackBar1 As TrackBar
     Public WithEvents Label5 As Label
+    Friend WithEvents chkLegacyMode As CheckBox
 End Class

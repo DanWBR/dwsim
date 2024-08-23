@@ -155,7 +155,7 @@
     <value>General Info</value>
   </data>
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 425</value>
+    <value>6, 454</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>337, 202</value>
@@ -170,14 +170,26 @@
   <data name="GroupBoxParameters1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="chkLegacyMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 48</value>
+  </data>
+  <data name="chkLegacyMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 17</value>
+  </data>
+  <data name="chkLegacyMode.Text" xml:space="preserve">
+    <value>Legacy Mode</value>
+  </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 85</value>
+    <value>8, 79</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Smoothing Factor (0.1-1.0)</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 115</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 13</value>
@@ -189,7 +201,7 @@
     <value>Top, Right</value>
   </data>
   <data name="tbMaxIts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 53</value>
+    <value>176, 112</value>
   </data>
   <data name="tbMaxIts.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 20</value>
@@ -208,13 +220,13 @@
     <value>False</value>
   </data>
   <data name="TrackBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 77</value>
+    <value>147, 71</value>
   </data>
   <data name="TrackBar1.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 30</value>
   </data>
   <data name="GroupBoxParameters1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 115</value>
+    <value>337, 143</value>
   </data>
   <data name="GroupBoxParameters1.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
@@ -346,7 +358,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="GroupBoxParameters2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 311</value>
+    <value>6, 340</value>
   </data>
   <data name="GroupBoxParameters2.Size" type="System.Drawing.Size, System.Drawing">
     <value>337, 111</value>
@@ -382,6 +394,6 @@
     <value>80, 20</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>355, 646</value>
+    <value>355, 667</value>
   </data>
 </root>

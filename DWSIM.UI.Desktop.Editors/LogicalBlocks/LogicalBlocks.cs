@@ -56,6 +56,8 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             container.CreateAndAddCheckBoxRow("Converge using global solver",
                 recycle.AccelerationMethod == Interfaces.Enums.AccelMethod.GlobalBroyden,
                 (sender, e) => { if (sender.Checked.GetValueOrDefault()) recycle.AccelerationMethod = Interfaces.Enums.AccelMethod.GlobalBroyden; else recycle.AccelerationMethod = Interfaces.Enums.AccelMethod.None; });
+            container.CreateAndAddCheckBoxRow("Legacy Mode", recycle.LegacyMode,
+                (sender, e) => recycle.LegacyMode = sender.Checked.GetValueOrDefault());
             container.CreateAndAddTextBoxRow("N0", "Maximum Iterations", recycle.MaximumIterations,
                 (sender, e) =>
                 {

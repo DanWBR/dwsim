@@ -61,6 +61,8 @@ Namespace SpecialOps
 
         Public Property SmoothingFactor As Double = 1.0
 
+        Public Property LegacyMode As Boolean = False
+
         Public ReadOnly Property Errors As Dictionary(Of String, Double) Implements Interfaces.IRecycle.Errors
             Get
                 Return m_Errors
@@ -370,33 +372,67 @@ Namespace SpecialOps
 
             End With
 
-            Dim sf = SmoothingFactor
-
-            Tnew = sf * Me.ConvergenceHistory.Temperatura + (1.0 - sf) * Me.ConvergenceHistory.Temperatura0
-            Pnew = sf * Me.ConvergenceHistory.Pressao + (1.0 - sf) * Me.ConvergenceHistory.Pressao0
-            Wnew = sf * Me.ConvergenceHistory.VazaoMassica + (1.0 - sf) * Me.ConvergenceHistory.VazaoMassica0
-
             Dim copydata As Boolean = True
 
             ems.PropertyPackage.CurrentMaterialStream = ems
 
-            If Not Me.AccelerationMethod = AccelMethod.GlobalBroyden Then
+            If LegacyMode Then
 
-                If Not oms.Calculated And Not oms.AtEquilibrium Then
-                    Throw New Exception(FlowSheet.GetTranslatedString("RecycleStreamNotCalculated"))
+                Tnew = Me.ConvergenceHistory.Temperatura
+                Pnew = Me.ConvergenceHistory.Pressao
+                Wnew = Me.ConvergenceHistory.VazaoMassica
+
+                If Me.CopyOnStreamDataError Then
+                    copydata = True
+                Else
+                    If Not Tnew.IsValid Or Not Pnew.IsValid Or Not Wnew.IsValid Or Not ems.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).Sum.IsValid Then copydata = False
                 End If
 
-                oms.AtEquilibrium = False
-                oms.SetTemperature(Tnew)
-                oms.SetPressure(Pnew)
+                If Not Me.AccelerationMethod = AccelMethod.GlobalBroyden And copydata Then
 
-                v1 = ems.Phases(0).Compounds.Values.Select(Function(x) x.MassFlow.GetValueOrDefault).ToArray
-                v2 = oms.Phases(0).Compounds.Values.Select(Function(x) x.MassFlow.GetValueOrDefault).ToArray
+                    Dim msfrom, msto As MaterialStream
+                    msfrom = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
 
-                For i = 0 To v1.Length - 1
-                    Dim newf = sf * v1(i) + (1.0 - sf) * v2(i)
-                    oms.SetOverallCompoundMassFlow(i, newf)
-                Next
+                    If Not msfrom.Calculated And Not msfrom.AtEquilibrium Then
+                        Throw New Exception(FlowSheet.GetTranslatedString("RecycleStreamNotCalculated"))
+                    End If
+
+                    msto = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                    Dim prevspec = msto.SpecType
+                    msto.Assign(msfrom)
+                    msto.AssignProps(msfrom)
+                    msto.SpecType = prevspec
+                    msto.AtEquilibrium = False
+
+                End If
+
+            Else
+
+                Dim sf = SmoothingFactor
+
+                Tnew = sf * Me.ConvergenceHistory.Temperatura + (1.0 - sf) * Me.ConvergenceHistory.Temperatura0
+                Pnew = sf * Me.ConvergenceHistory.Pressao + (1.0 - sf) * Me.ConvergenceHistory.Pressao0
+                Wnew = sf * Me.ConvergenceHistory.VazaoMassica + (1.0 - sf) * Me.ConvergenceHistory.VazaoMassica0
+
+                If Not Me.AccelerationMethod = AccelMethod.GlobalBroyden Then
+
+                    If Not oms.Calculated And Not oms.AtEquilibrium Then
+                        Throw New Exception(FlowSheet.GetTranslatedString("RecycleStreamNotCalculated"))
+                    End If
+
+                    oms.AtEquilibrium = False
+                    oms.SetTemperature(Tnew)
+                    oms.SetPressure(Pnew)
+
+                    v1 = ems.Phases(0).Compounds.Values.Select(Function(x) x.MassFlow.GetValueOrDefault).ToArray
+                    v2 = oms.Phases(0).Compounds.Values.Select(Function(x) x.MassFlow.GetValueOrDefault).ToArray
+
+                    For i = 0 To v1.Length - 1
+                        Dim newf = sf * v1(i) + (1.0 - sf) * v2(i)
+                        oms.SetOverallCompoundMassFlow(i, newf)
+                    Next
+
+                End If
 
             End If
 

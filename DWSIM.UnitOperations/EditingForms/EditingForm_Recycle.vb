@@ -101,6 +101,8 @@ Public Class EditingForm_Recycle
 
             'parameters
 
+            chkLegacyMode.Checked = .LegacyMode
+
             TrackBar1.Value = SimObject.SmoothingFactor * 10.0
             ToolTip1.SetToolTip(TrackBar1, SimObject.SmoothingFactor)
 
@@ -316,9 +318,11 @@ Public Class EditingForm_Recycle
             If chkGlobalBroyden.Checked Then
                 SimObject.AccelerationMethod = Enums.AccelMethod.GlobalBroyden
                 TrackBar1.Enabled = False
+                chkLegacyMode.Enabled = False
             Else
                 SimObject.AccelerationMethod = Enums.AccelMethod.None
                 TrackBar1.Enabled = True
+                chkLegacyMode.Enabled = True
             End If
         End If
     End Sub
@@ -341,6 +345,19 @@ Public Class EditingForm_Recycle
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
         SimObject.SmoothingFactor = TrackBar1.Value / 10.0
         ToolTip1.SetToolTip(TrackBar1, SimObject.SmoothingFactor)
+    End Sub
+
+    Private Sub chkLegacyMode_CheckedChanged(sender As Object, e As EventArgs) Handles chkLegacyMode.CheckedChanged
+        If Loaded Then
+            SimObject.FlowSheet.RegisterSnapshot(Interfaces.Enums.SnapshotType.ObjectData, SimObject)
+            If chkLegacyMode.Checked Then
+                SimObject.LegacyMode = True
+                TrackBar1.Enabled = False
+            Else
+                SimObject.LegacyMode = False
+                TrackBar1.Enabled = True
+            End If
+        End If
     End Sub
 
 End Class
