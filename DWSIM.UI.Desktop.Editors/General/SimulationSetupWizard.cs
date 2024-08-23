@@ -380,7 +380,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             if (hasElectrolytes)
             {
-                var pp = (PropertyPackage)flowsheet.AvailablePropertyPackages["Extended UNIQUAC (Aqueous Electrolytes)"].Clone();
+                var pp = (PropertyPackage)flowsheet.AvailablePropertyPackages["Ideal Solution (Aqueous Electrolytes)"].Clone();
                 pp.UniqueID = Guid.NewGuid().ToString();
                 pp.Tag = pp.ComponentName + " (" + (flowsheet.PropertyPackages.Count + 1).ToString() + ")";
                 flowsheet.AddPropertyPackage(pp);
