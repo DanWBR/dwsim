@@ -64,15 +64,17 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 8.8.1
 
+- Control Panel for Controller Logical Block in Cross-Platform UI
 - Added an option to use legacy convergence mode for Recycle blocks (#667)
 - Fixed Reaktoro Property Package
 - Fixed issue with reactor models
-- Fixed Heat of Combubstion plugin
+- Fixed Heat of Combustion plugin
 - Fixed solid density calculation
 - Fixed issue #669 (single compound partial sublimation when Tfus > Tsat)
 - Fixed issue with rigorous column
 - Fixed issue #656 (Crashing when using Simulation setup wizard)
 - Fixed issue #657 (Faulty unit for Cp in compound creator wizard)
+- Fixed issue #664: memory leak in automation mode
 
 Version 8.8.0
 
