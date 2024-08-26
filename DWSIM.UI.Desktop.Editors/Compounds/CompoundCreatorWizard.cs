@@ -945,11 +945,25 @@ namespace DWSIM.UI.Desktop.Editors
                         try
                         {
                             File.WriteAllText(dialog.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(comp, Newtonsoft.Json.Formatting.Indented));
-                            flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully saved to JSON file.", IFlowsheet.MessageType.Information);
+                            if (flowsheet == null)
+                            {
+                                MessageBox.Show("Compound '" + comp.Name + "' successfully saved to JSON file.");
+                            }
+                            else
+                            {
+                                flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully saved to JSON file.", IFlowsheet.MessageType.Information);
+                            }
                         }
                         catch (Exception ex)
                         {
-                            flowsheet.ShowMessage("Error saving compound to JSON file: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                            if (flowsheet == null)
+                            {
+                                MessageBox.Show("Error saving compound to JSON file: " + ex.ToString());
+                            }
+                            else
+                            {
+                                flowsheet.ShowMessage("Error saving compound to JSON file: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                            }
                         }
                     }
                 }
