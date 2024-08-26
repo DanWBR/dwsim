@@ -800,7 +800,7 @@
     <value>Reactors</value>
   </data>
   <data name="CheckBox14.Text" xml:space="preserve">
-    <value>Controllers</value>
+    <value>Dynamic Controllers</value>
   </data>
   <data name="&gt;&gt;TabControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1765,10 +1765,82 @@
   <data name="TableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="PanelStreams" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox15" Row="28" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelControllers" Row="27" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox14" Row="26" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelIndicators" Row="25" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox13" Row="24" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelLogical" Row="23" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox12" Row="22" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelCustomModelsFOSSEE" Row="21" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox11" Row="20" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelUser" Row="19" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox10" Row="18" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelCE" Row="17" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox9" Row="16" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelSolids" Row="15" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox8" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelColumns" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox7" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelReactors" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox6" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelExchangers" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox5" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelMixers" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox4" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox3" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelPressure" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CheckBox2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelSeparators" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="PanelOther" Row="29" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,30,AutoSize,0,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  </data>
+  <data name="$this.Language" type="System.Globalization.CultureInfo, mscorlib">
     <value>en</value>
-  </metadata>
+  </data>
+  <data name="PanelItems.AutoScroll" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelItems.FlowDirection" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TableLayoutPanel1.Anchor" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TableLayoutPanel1.AutoSize" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TableLayoutPanel1.AutoSizeMode" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelStreams.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelControllers.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelIndicators.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelLogical.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelCustomModelsFOSSEE.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelUser.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelCE.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelSolids.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelColumns.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelReactors.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelExchangers.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelMixers.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelPressure.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelSeparators.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PanelOther.Margin" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPage1.AutoScroll" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.AutoScroll" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.Margin" xml:space="preserve">
+    <value />
+  </data>
 </root>

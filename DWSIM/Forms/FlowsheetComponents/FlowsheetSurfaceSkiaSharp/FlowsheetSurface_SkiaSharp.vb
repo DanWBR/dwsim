@@ -1893,7 +1893,6 @@ Public Class FlowsheetSurface_SkiaSharp
                 Dim myADJ As Adjust = New Adjust(myNode.Name, "Ajuste")
                 myADJ.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myADJ)
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("ADJT001"), Color.Black, MessageType.Tip)
 
             Case ObjectType.OT_Spec
 
@@ -1930,8 +1929,6 @@ Public Class FlowsheetSurface_SkiaSharp
                 Dim myADJ As Recycle = New Recycle(myNode.Name, "Reciclo")
                 myADJ.GraphicObject = myNode
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myNode.Name, myADJ)
-
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("RECY001"), Color.Black, MessageType.Tip)
 
             Case ObjectType.OT_EnergyRecycle
 
@@ -2235,8 +2232,6 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCORCONV.GraphicObject = myRconv
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myRconv.Name, myCORCONV)
 
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("RCON001"), Color.Black, MessageType.Tip)
-
             Case ObjectType.RCT_Equilibrium
 
                 Dim myReq As New EquilibriumReactorGraphic(mpx, mpy, 50, 50)
@@ -2256,8 +2251,6 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCOREQ.GraphicObject = myReq
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myReq.Name, myCOREQ)
 
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("REQL001"), Color.Black, MessageType.Tip)
-
             Case ObjectType.RCT_Gibbs
 
                 Dim myRgibbs As New GibbsReactorGraphic(mpx, mpy, 50, 50)
@@ -2275,8 +2268,6 @@ Public Class FlowsheetSurface_SkiaSharp
                 Dim myCORGIBBS As Reactor_Gibbs = New Reactor_Gibbs(myRgibbs.Name, "ReatorGibbs")
                 myCORGIBBS.GraphicObject = myRgibbs
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myRgibbs.Name, myCORGIBBS)
-
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("RGIB001"), Color.Black, MessageType.Tip)
 
             Case ObjectType.RCT_CSTR
 
@@ -2297,8 +2288,6 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCORCSTR.GraphicObject = myRcstr
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myRcstr.Name, myCORCSTR)
 
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("CSTR001"), Color.Black, MessageType.Tip)
-
             Case ObjectType.RCT_PFR
 
                 Dim myRpfr As New PFRGraphic(mpx, mpy, 70, 20)
@@ -2317,8 +2306,6 @@ Public Class FlowsheetSurface_SkiaSharp
                 Dim myCOPFR As Reactor_PFR = New Reactor_PFR(myRpfr.Name, "ReatorPFR")
                 myCOPFR.GraphicObject = myRpfr
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myRpfr.Name, myCOPFR)
-
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("PFR001"), Color.Black, MessageType.Tip)
 
             Case ObjectType.HeatExchanger
 
@@ -2379,10 +2366,6 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
 
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL001"), Color.Black, MessageType.Tip)
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL002"), Color.Black, MessageType.Tip)
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL003"), Color.Black, MessageType.Tip)
-
             Case ObjectType.AbsorptionColumn
 
                 Dim mySC As New AbsorptionColumnGraphic(mpx, mpy, 144, 180)
@@ -2400,10 +2383,6 @@ Public Class FlowsheetSurface_SkiaSharp
                 Dim myCOSC As AbsorptionColumn = New AbsorptionColumn(mySC.Name, "AbsorptionColumn", Flowsheet)
                 myCOSC.GraphicObject = mySC
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(mySC.Name, myCOSC)
-
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL001"), Color.Black, MessageType.Tip)
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL002"), Color.Black, MessageType.Tip)
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL003"), Color.Black, MessageType.Tip)
 
             Case ObjectType.ComponentSeparator
 
@@ -2498,8 +2477,6 @@ Public Class FlowsheetSurface_SkiaSharp
                 Dim myCOCUO As CustomUO = New CustomUO(myCUO.Name, "CustomUnitOp")
                 myCOCUO.GraphicObject = myCUO
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCUO.Name, myCOCUO)
-
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("CSUO001"), Color.Black, MessageType.Tip)
 
             Case ObjectType.ExcelUO
 

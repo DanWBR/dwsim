@@ -414,9 +414,9 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             {
                 if (adjust.ControlledObject == null) return;
                 if (adjust.ManipulatedObject == null) return;
-                var fcp = new DWSIM.UnitOperations.EditingForm_Adjust_ControlPanel();
-                fcp.myADJ = adjust;
+                var fcp = s.GetDefaultEditorForm("Control Panel: " + adjust.GraphicObject.Tag, 600, 600, new ControllerPanel(adjust));
                 fcp.Show();
+                fcp.Center();
             });
 
         }

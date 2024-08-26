@@ -46,7 +46,7 @@ namespace DWSIM.UI.Desktop.Editors
             
             try
             {
-                string baseaddress = "https://github.com/DanWBR/dwsim6/blob/windows/";
+                string baseaddress = "https://github.com/DanWBR/dwsim/tree/windows";
                 StackTrace st = new StackTrace(exc, true);
                 StackFrame frame = st.GetFrame(0);
                 string path = frame.GetFileName().Replace(mystring, baseaddress);
