@@ -21,6 +21,7 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.PetroleumCharacterization.Methods
+Imports System.Linq
 
 Public Class FormPCBulk
 
@@ -541,8 +542,8 @@ Public Class FormPCBulk
         Dim pp As PropertyPackages.PropertyPackage
         Dim fzra, fw, fprvs, fsrkvs As Double
 
-        If frm.Options.PropertyPackages.Count > 0 Then
-            pp = frm.Options.SelectedPropertyPackage
+        If frm.PropertyPackages.Count > 0 Then
+            pp = frm.PropertyPackages.Values.First()
         Else
             pp = New PropertyPackages.PengRobinsonPropertyPackage()
         End If
@@ -865,8 +866,8 @@ Public Class FormPCBulk
                                                                               SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v2.Text.ToDoubleFromCurrent))
         Dim ms As New Streams.MaterialStream("", "")
         ms.SetFlowsheet(frm)
-        If frm.Options.PropertyPackages.Count > 0 Then
-            ms.PropertyPackage = frm.Options.SelectedPropertyPackage
+        If frm.PropertyPackages.Count > 0 Then
+            ms.PropertyPackage = frm.PropertyPackages.Values.First()
         Else
             ms.PropertyPackage = New PropertyPackages.PengRobinsonPropertyPackage()
         End If
@@ -912,8 +913,8 @@ Public Class FormPCBulk
                            myCOMS.GraphicObject = myMStr
                            myMStr.Owner = myCOMS
                            frm.AddComponentsRows(myCOMS)
-                           If frm.Options.PropertyPackages.Count > 0 Then
-                               myCOMS.PropertyPackage = frm.Options.SelectedPropertyPackage
+                           If frm.PropertyPackages.Count > 0 Then
+                               myCOMS.PropertyPackage = frm.PropertyPackages.Values.First()
                            Else
                                myCOMS.PropertyPackage = New PropertyPackages.PengRobinsonPropertyPackage()
                            End If

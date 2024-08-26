@@ -69,10 +69,6 @@ Namespace DWSIM.Flowsheet
 
         Public ReadOnly Property SelectedPropertyPackage() As IPropertyPackage
             Get
-                For Each pp2 As IPropertyPackage In PropertyPackages.Values
-                    Return pp2
-                    Exit For
-                Next
                 Return Nothing
             End Get
         End Property

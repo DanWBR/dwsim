@@ -21,6 +21,7 @@ Imports DWSIM.MathOps.MathEx
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.PetroleumCharacterization.Methods
+Imports System.Linq
 
 Public Class DCCharacterizationWizard
 
@@ -428,8 +429,8 @@ Public Class DCCharacterizationWizard
                     .PF_v1 = Interpolation.polinterpolation.barycentricinterpolation(pxv1.ToArray(GetType(Double)), pyv1.ToArray(GetType(Double)), w, pxv1.Count, tc.fvm)
                     Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(pxv2.ToArray(GetType(Double)), pxv2.Count, 0.5, w)
                     .PF_v2 = Interpolation.polinterpolation.barycentricinterpolation(pxv2.ToArray(GetType(Double)), pyv2.ToArray(GetType(Double)), w, pxv2.Count, tc.fvm)
-                    If .PF_v1 < 0 Then .PF_v1 = -.PF_v1
-                    If .PF_v2 < 0 Then .PF_v2 = -.PF_v2
+                    If .PF_v1 < 0 Then .PF_v1 = - .PF_v1
+                    If .PF_v2 < 0 Then .PF_v2 = - .PF_v2
                     .PF_Tv1 = Me.TextBoxVT1.Text.ToDoubleFromCurrent.ConvertToSI(su.temperature)
                     .PF_Tv2 = Me.TextBoxVT2.Text.ToDoubleFromCurrent.ConvertToSI(su.temperature)
                 End If
@@ -633,8 +634,8 @@ Public Class DCCharacterizationWizard
         Dim pp As PropertyPackages.PropertyPackage
         Dim fzra, fw, fprvs, fsrkvs As Double
 
-        If form.Options.PropertyPackages.Count > 0 Then
-            pp = form.Options.SelectedPropertyPackage
+        If form.PropertyPackages.Count > 0 Then
+            pp = form.PropertyPackages.Values.First()
         Else
             pp = New PropertyPackages.PengRobinsonPropertyPackage()
         End If
@@ -774,8 +775,8 @@ Public Class DCCharacterizationWizard
 
         Dim ms As New Streams.MaterialStream("", "")
         ms.SetFlowsheet(form)
-        If form.Options.PropertyPackages.Count > 0 Then
-            ms.PropertyPackage = form.Options.SelectedPropertyPackage
+        If form.PropertyPackages.Count > 0 Then
+            ms.PropertyPackage = form.PropertyPackages.Values.First()
         Else
             ms.PropertyPackage = New PropertyPackages.PengRobinsonPropertyPackage()
         End If
@@ -809,8 +810,8 @@ Public Class DCCharacterizationWizard
                            myCOMS.GraphicObject = myMStr
                            myMStr.Owner = myCOMS
                            form.AddComponentsRows(myCOMS)
-                           If form.Options.PropertyPackages.Count > 0 Then
-                               myCOMS.PropertyPackage = form.Options.SelectedPropertyPackage
+                           If form.PropertyPackages.Count > 0 Then
+                               myCOMS.PropertyPackage = form.PropertyPackages.Values.First()
                            Else
                                myCOMS.PropertyPackage = New PropertyPackages.PengRobinsonPropertyPackage()
                            End If
