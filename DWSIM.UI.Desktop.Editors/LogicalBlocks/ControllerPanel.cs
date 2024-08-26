@@ -68,7 +68,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
 
             this.CreateAndAddLabelRow("Live View");
 
-            currstatus = this.CreateAndAddLabelRow2("Status: Idle");
+            currstatus = this.CreateAndAddLabelRow2("Status: idle");
 
             tbcurrval = this.CreateAndAddTextBoxRow(nf, "Current Value", 0.0, null);
             tberror = this.CreateAndAddTextBoxRow(nf, "Current Error", 0.0, null);
@@ -148,10 +148,15 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
 
             curriter = 0;
 
+            tberror.Text = "";
+            tbcurrval.Text = "";
+            currstatus.Text = "Status: idle";
+
             Action<double, double, double, int> updateproc = (mv, cv, sp, c) =>
             {
                 currstatus.Text = "Status: working...";
-                tberror.Text = (adjval - (double)GetCtlVarValue()).ToString(nf);
+                tberror.Text = (adjval - cv).ToString(nf);
+                tbcurrval.Text = cv.ToString(nf);
 
                 ((LineSeries)chart.Model.Series[0]).Points.Add(new DataPoint(c, mv));
                 ((LineSeries)chart.Model.Series[1]).Points.Add(new DataPoint(c, cv));
