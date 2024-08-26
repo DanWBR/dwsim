@@ -11,6 +11,8 @@ using DWSIM.Interfaces;
 using DWSIM.Thermodynamics.Streams;
 using DWSIM.Interfaces.Enums.GraphicObjects;
 using DWSIM.UnitOperations.UnitOperations;
+using System.IO;
+using System.Reflection;
 
 namespace DWSIM.UI.Desktop.Editors.Dynamics
 {
@@ -29,6 +31,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
         private ImageView pb1, pb2, pb3;
 
+        string bitmapprefix = "";
+
         public DynamicsManagerControl(Shared.Flowsheet fs) : base()
         {
             Flowsheet = fs;
@@ -38,6 +42,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
         public void Init()
         {
+
+            bitmapprefix = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "bitmaps") + Path.DirectorySeparatorChar;
 
             var tl1 = new TableLayout { Padding = new Padding(5), Spacing = new Size(10, 10) };
 
@@ -78,8 +84,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var rce = new TableLayout();
             var rce2 = new TableLayout();
 
-            var btnAddEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnRemoveEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnAddEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(bitmapprefix + "icons8-plus_math.png").WithSize(16, 16) };
+            var btnRemoveEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(bitmapprefix + "icons8-delete.png").WithSize(16, 16) };
 
             btnAddEventSet.Click += (s, e) =>
             {
@@ -146,8 +152,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             rce.Rows.Add(new Label { Text = "Selected Event Set", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
 
-            var btnAddEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnRemoveEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnAddEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(bitmapprefix + "icons8-plus_math.png").WithSize(16, 16) };
+            var btnRemoveEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(bitmapprefix + "icons8-delete.png").WithSize(16, 16) };
 
             if (Application.Instance.Platform.IsGtk)
             {
@@ -235,8 +241,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var rcce = new TableLayout();
             var rcce2 = new TableLayout();
 
-            var btnAddCEM = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnRemoveCEM = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnAddCEM = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(bitmapprefix + "icons8-plus_math.png").WithSize(16, 16) };
+            var btnRemoveCEM = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(bitmapprefix + "icons8-delete.png").WithSize(16, 16) };
 
             if (Application.Instance.Platform.IsGtk)
             {
@@ -303,8 +309,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             rcce.Rows.Add(new Label { Text = "Selected Cause-and-Effect Matrix", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
 
-            var btnAddCEI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnRemoveCEI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnAddCEI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(bitmapprefix + "icons8-plus_math.png").WithSize(16, 16) };
+            var btnRemoveCEI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(bitmapprefix + "icons8-delete.png").WithSize(16, 16) };
 
             if (Application.Instance.Platform.IsGtk)
             {
@@ -391,8 +397,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var lcci = new TableLayout();
             var rcci = new TableLayout();
 
-            var btnAddI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnRemoveI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnAddI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(bitmapprefix + "icons8-plus_math.png").WithSize(16, 16) };
+            var btnRemoveI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(bitmapprefix + "icons8-delete.png").WithSize(16, 16) };
 
             if (Application.Instance.Platform.IsGtk)
             {
@@ -470,8 +476,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var lcv = new TableLayout();
             var rcv = new TableLayout();
 
-            var btnAddVar = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Variable", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnRemoveVar = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Variable", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnAddVar = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Variable", Image = new Bitmap(bitmapprefix + "icons8-plus_math.png").WithSize(16, 16) };
+            var btnRemoveVar = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Variable", Image = new Bitmap(bitmapprefix + "icons8-delete.png").WithSize(16, 16) };
 
             if (Application.Instance.Platform.IsGtk)
             {
@@ -569,8 +575,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var lcs = new TableLayout();
             var rcs = new TableLayout();
 
-            var btnAddS = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Schedule", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnRemoveS = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Schedule", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnAddS = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Schedule", Image = new Bitmap(bitmapprefix + "icons8-plus_math.png").WithSize(16, 16) };
+            var btnRemoveS = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Schedule", Image = new Bitmap(bitmapprefix + "icons8-delete.png").WithSize(16, 16) };
 
             if (Application.Instance.Platform.IsGtk)
             {
@@ -933,25 +939,24 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             layout.CreateAndAddLabelRow("Properties");
 
-            var dtp = new DateTimePicker { Mode = DateTimePickerMode.Time, Value = new DateTime().Add(integ.Duration) };
-            dtp.MinDate = new DateTime();
-            dtp.MaxDate = new DateTime(2100, 12, 1);
-            dtp.Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize());
-            dtp.ValueChanged += (s, e) =>
+            double days, hours, minutes, seconds;
+
+            days = integ.Duration.Days;
+            hours = integ.Duration.Hours;
+            minutes = integ.Duration.Minutes;
+            seconds = integ.Duration.Seconds;
+
+            Action updatetime = () =>
             {
-                try
-                {
-                    integ.Duration = dtp.Value.GetValueOrDefault().Subtract(new DateTime());
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error setting integrator duration: " + ex.Message, "Error", MessageBoxType.Error);
-                }
+                integ.Duration = new TimeSpan((int)days, (int)hours, (int)minutes, (int)seconds);
             };
 
-            layout.CreateAndAddLabelAndControlRow("Duration", dtp);
+            layout.CreateAndAddNumericEditorRow("Duration Days", days, 0, 1000, 0, (ns, e) => { days = ns.Value; updatetime.Invoke(); });
+            layout.CreateAndAddNumericEditorRow("Duration Hours", hours, 0, 1000, 0, (ns, e) => { hours = ns.Value; updatetime.Invoke(); });
+            layout.CreateAndAddNumericEditorRow("Duration Minutes", minutes, 0, 1000, 0, (ns, e) => { minutes = ns.Value; updatetime.Invoke(); });
+            layout.CreateAndAddNumericEditorRow("Duration Seconds", seconds, 0, 1000, 0, (ns, e) => { seconds = ns.Value; updatetime.Invoke(); });
 
-            var dtp2 = new NumericStepper { MinValue=100, MaxValue = 100000, Value = integ.IntegrationStep.TotalMilliseconds };
+            var dtp2 = new NumericStepper { MinValue=100, MaxValue = int.MaxValue, Value = integ.IntegrationStep.TotalMilliseconds };
             dtp2.Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize());
             dtp2.ValueChanged += (s, e) =>
             {
@@ -960,7 +965,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             layout.CreateAndAddLabelAndControlRow("Integration Step (ms)", dtp2);
 
-            layout.CreateAndAddNumericEditorRow2("Real-Time Step (ms)", integ.RealTimeStepMs, 1, 10000, 0, (s, e) =>
+            layout.CreateAndAddNumericEditorRow2("Real-Time Step (ms)", integ.RealTimeStepMs, 1, int.MaxValue, 0, (s, e) =>
             {
                 integ.RealTimeStepMs = (int)s.Text.ToDoubleFromCurrent();
             });
@@ -1092,7 +1097,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 ev.TransitionReference = dd.SelectedIndex.ToEnum<Interfaces.Enums.Dynamics.DynamicsEventTransitionReferenceType>();
             });
 
-            layout.CreateAndAddStringEditorRow("Transition Reference Event ID", ev.TransitionReferenceEventID, (tb, e) => {
+            layout.CreateAndAddStringEditorRow("Transition Reference Event ID", ev.TransitionReferenceEventID, (tb, e) =>
+            {
                 ev.TransitionReferenceEventID = tb.Text;
             });
 

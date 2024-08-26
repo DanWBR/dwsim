@@ -151,7 +151,7 @@ namespace DWSIM.UI.Forms
         {
             Task.Factory.StartNew(() =>
             {
-                Thread.Sleep(3500);
+                Thread.Sleep(2000);
                 PerformExtraTasks();
             }).ContinueWith((t) => Application.Instance.Invoke(() =>
             {
@@ -212,7 +212,7 @@ namespace DWSIM.UI.Forms
                     {
                         if (MessageBox.Show("An updated version is available to download from the official website. Update DWSIM to fix bugs, crashes and take advantage of new features.\n\n" + whatsnew, "Update Available", MessageBoxButtons.OKCancel, MessageBoxType.Information, MessageBoxDefaultButton.OK) == DialogResult.Ok)
                         {
-                            Process.Start("https://dwsim.org/wiki/index.php?title=Downloads#DWSIM_for_Desktop_Systems");
+                            Process.Start("https://dwsim.org/wiki/index.php?title=Downloads");
                         }
                     });
                 }

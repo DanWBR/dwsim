@@ -64,8 +64,10 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 8.8.1
 
-- Control Panel for Controller Logical Block in Cross-Platform UI
+- Control Panel for Controller Logical Block in Cross-Platform UI (CPUI)
 - Added an option to use legacy convergence mode for Recycle blocks (#667)
+- Improved CPUI initialization and loading times
+- Fixed Dynamics Integrator not working in CPUI
 - Fixed Reaktoro Property Package
 - Fixed issue with reactor models
 - Fixed Heat of Combustion plugin

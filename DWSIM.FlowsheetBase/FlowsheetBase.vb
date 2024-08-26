@@ -4396,8 +4396,19 @@ Label_00CC:
                 xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
                 xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
 
-                SimulationObjects(obj.Name).SetFlowsheet(Me)
-                xel.Add(New XElement("SimulationObject", {SimulationObjects(obj.Name).SaveData().ToArray()}))
+                If obj Is Nothing Then
+
+                    For Each obj In SimulationObjects.Values
+                        obj.SetFlowsheet(Me)
+                        xel.Add(New XElement("SimulationObject", {obj.SaveData().ToArray()}))
+                    Next
+
+                Else
+
+                    SimulationObjects(obj.Name).SetFlowsheet(Me)
+                    xel.Add(New XElement("SimulationObject", {SimulationObjects(obj.Name).SaveData().ToArray()}))
+
+                End If
 
             Else 'includeobjectlayout
 

@@ -5,6 +5,8 @@ using DWSIM.Interfaces;
 using s = DWSIM.UI.Shared.Common;
 using DWSIM.Interfaces.Enums;
 using System.Linq;
+using System.IO;
+using System.Reflection;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -24,6 +26,8 @@ namespace DWSIM.UI.Desktop.Editors
 
         private DWSIM.Interfaces.IScript selscript;
 
+        string bitmapprefix = "";
+
         public ScriptManager_Mac(DWSIM.UI.Desktop.Shared.Flowsheet fs)
             : base()
         {
@@ -34,35 +38,37 @@ namespace DWSIM.UI.Desktop.Editors
         void Init()
         {
 
+            bitmapprefix = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "bitmaps") + Path.DirectorySeparatorChar;
+
             var leftcontainer = new TableLayout();
             var rightcontainer = new TableLayout();
 
-            var ti1 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "New Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-new.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var ti2 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Update Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-approve_and_update.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var ti3 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Print", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-print.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var ti3a = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-filled_trash.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var ti1 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "New Script", Image = new Bitmap(bitmapprefix + "icons8-new.png").WithSize(16, 16) };
+            var ti2 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Update Selected", Image = new Bitmap(bitmapprefix + "icons8-approve_and_update.png").WithSize(16, 16) };
+            var ti3 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Print", Image = new Bitmap(bitmapprefix + "icons8-print.png").WithSize(16, 16) };
+            var ti3a = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected", Image = new Bitmap(bitmapprefix + "icons8-filled_trash.png").WithSize(16, 16) };
 
-            var ti4 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Cut", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-cut.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var ti5 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Copy", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var ti6 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Paste", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-paste.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var ti4 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Cut", Image = new Bitmap(bitmapprefix + "icons8-cut.png").WithSize(16, 16) };
+            var ti5 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Copy", Image = new Bitmap(bitmapprefix + "icons8-copy.png").WithSize(16, 16) };
+            var ti6 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Paste", Image = new Bitmap(bitmapprefix + "icons8-paste.png").WithSize(16, 16) };
 
-            var ti7 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Undo", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-undo.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var ti8 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Redo", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-redo.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var ti7 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Undo", Image = new Bitmap(bitmapprefix + "icons8-undo.png").WithSize(16, 16) };
+            var ti8 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Redo", Image = new Bitmap(bitmapprefix + "icons8-redo.png").WithSize(16, 16) };
 
-            var ti9 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Text = "", ToolTip = "Toggle Comment/Uncomment Selected Lines", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-code.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var ti9 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Text = "", ToolTip = "Toggle Comment/Uncomment Selected Lines", Image = new Bitmap(bitmapprefix + "icons8-code.png").WithSize(16, 16) };
 
-            var ti10 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Indent Right", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "indent-right.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var ti11 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Indent Left", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "left-indentation-option.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var ti10 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Indent Right", Image = new Bitmap(bitmapprefix + "indent-right.png").WithSize(16, 16) };
+            var ti11 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Indent Left", Image = new Bitmap(bitmapprefix + "left-indentation-option.png").WithSize(16, 16) };
 
-            var ti12 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Decrease Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-decrease_font.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var ti13 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Increase Font Size", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-increase_font.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var ti12 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Decrease Font Size", Image = new Bitmap(bitmapprefix + "icons8-decrease_font.png").WithSize(16, 16) };
+            var ti13 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Increase Font Size", Image = new Bitmap(bitmapprefix + "icons8-increase_font.png").WithSize(16, 16) };
 
-            var ti14 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Text = "", ToolTip = "Insert Snippet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "code.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var ti14 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Text = "", ToolTip = "Insert Snippet", Image = new Bitmap(bitmapprefix + "code.png").WithSize(16, 16) };
 
-            var ti15 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Run Script", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var ti16 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Run Script (Async)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-circled_play.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var ti15 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Run Script", Image = new Bitmap(bitmapprefix + "icons8-play.png").WithSize(16, 16) };
+            var ti16 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Run Script (Async)", Image = new Bitmap(bitmapprefix + "icons8-circled_play.png").WithSize(16, 16) };
 
-            var ti17 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Text = "", ToolTip = "Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-help.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var ti17 = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Text = "", ToolTip = "Help", Image = new Bitmap(bitmapprefix + "icons8-help.png").WithSize(16, 16) };
 
             var l1 = new Label() { VerticalAlignment = VerticalAlignment.Bottom, Text = "Rename", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()) };
 

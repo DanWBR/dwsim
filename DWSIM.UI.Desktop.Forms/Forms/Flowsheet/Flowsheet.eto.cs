@@ -59,6 +59,8 @@ namespace DWSIM.UI.Forms
 
         string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
+        string bitmapprefix = "";
+
         private string backupfilename = "";
 
         public bool newsim = false;
@@ -135,6 +137,8 @@ namespace DWSIM.UI.Forms
 
         void InitializeComponent()
         {
+
+            bitmapprefix = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "bitmaps") + Path.DirectorySeparatorChar;
 
             if (s.DarkMode) BGColor = SystemColors.ControlBackground;
 
@@ -303,25 +307,25 @@ namespace DWSIM.UI.Forms
 
             // toolbar
 
-            var btnmSave = new ButtonToolItem { ToolTip = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png", this.GetType().Assembly)) };
+            var btnmSave = new ButtonToolItem { ToolTip = "Save Flowsheet", Image = new Bitmap(bitmapprefix + "icons8-save.png") };
 
-            var btnmSolve = new ButtonToolItem { ToolTip = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png", this.GetType().Assembly)) };
-            var btnmStop = new ButtonToolItem { ToolTip = "Stop Solving", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-stop.png", this.GetType().Assembly)) };
-            var btnmSimultSolve = new CheckToolItem { ToolTip = "Enable/Disable Simultaneous Adjust Solver", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Checked_96px.png", this.GetType().Assembly)) };
+            var btnmSolve = new ButtonToolItem { ToolTip = "Solve Flowsheet", Image = new Bitmap(bitmapprefix + "icons8-play.png") };
+            var btnmStop = new ButtonToolItem { ToolTip = "Stop Solving", Image = new Bitmap(bitmapprefix + "icons8-stop.png") };
+            var btnmSimultSolve = new CheckToolItem { ToolTip = "Enable/Disable Simultaneous Adjust Solver", Image = new Bitmap(bitmapprefix + "Checked_96px.png") };
 
-            var btnmComps = new ButtonToolItem { ToolTip = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png", this.GetType().Assembly)) };
-            var btnmBasis = new ButtonToolItem { ToolTip = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png", this.GetType().Assembly)) };
-            var btnmOptions = new ButtonToolItem { ToolTip = "Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png", this.GetType().Assembly)) };
+            var btnmComps = new ButtonToolItem { ToolTip = "Compounds", Image = new Bitmap(bitmapprefix + "icons8-thin_test_tube.png") };
+            var btnmBasis = new ButtonToolItem { ToolTip = "Basis", Image = new Bitmap(bitmapprefix + "icons8-math.png") };
+            var btnmOptions = new ButtonToolItem { ToolTip = "Settings", Image = new Bitmap(bitmapprefix + "icons8-sorting_options.png") };
 
-            var btnmUndo = new ButtonToolItem { ToolTip = "Undo Action", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "back_arrow_96px.png", this.GetType().Assembly)) };
-            var btnmRedo = new ButtonToolItem { ToolTip = "Redo Action", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "forward_button_96px.png", this.GetType().Assembly)) };
+            var btnmUndo = new ButtonToolItem { ToolTip = "Undo Action", Image = new Bitmap(bitmapprefix + "back_arrow_96px.png") };
+            var btnmRedo = new ButtonToolItem { ToolTip = "Redo Action", Image = new Bitmap(bitmapprefix + "forward_button_96px.png") };
 
-            chkmDynamics = new CheckToolItem { Checked = FlowsheetObject.DynamicMode, ToolTip = "Enable/Disable Dynamic Mode", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-exercise.png", this.GetType().Assembly)) };
-            var btnmDynManager = new ButtonToolItem { ToolTip = "Dynamics Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-module.png", this.GetType().Assembly)) };
-            var btnmDynIntegrator = new ButtonToolItem { ToolTip = "Dynamics Integrator Controls", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ecg.png", this.GetType().Assembly)) };
+            chkmDynamics = new CheckToolItem { Checked = FlowsheetObject.DynamicMode, ToolTip = "Enable/Disable Dynamic Mode", Image = new Bitmap(bitmapprefix + "icons8-exercise.png") };
+            var btnmDynManager = new ButtonToolItem { ToolTip = "Dynamics Manager", Image = new Bitmap(bitmapprefix + "icons8-module.png") };
+            var btnmDynIntegrator = new ButtonToolItem { ToolTip = "Dynamics Integrator Controls", Image = new Bitmap(bitmapprefix + "icons8-ecg.png") };
 
-            var chkmInspector = new CheckToolItem { Checked = s.InspectorEnabled, ToolTip = "Enable/Disable Inspector", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_male.png", this.GetType().Assembly)) };
-            var btnmInspector = new ButtonToolItem { ToolTip = "View Inspector Window", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_filled.png", this.GetType().Assembly)) };
+            var chkmInspector = new CheckToolItem { Checked = s.InspectorEnabled, ToolTip = "Enable/Disable Inspector", Image = new Bitmap(bitmapprefix + "icons8-spy_male.png") };
+            var btnmInspector = new ButtonToolItem { ToolTip = "View Inspector Window", Image = new Bitmap(bitmapprefix + "icons8-spy_filled.png") };
 
             if (Application.Instance.Platform.IsMac)
             {
@@ -358,15 +362,15 @@ namespace DWSIM.UI.Forms
 
             // menu items
 
-            var btnSave = new ButtonMenuItem { Text = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png", this.GetType().Assembly)), Shortcut = Keys.S | Application.Instance.CommonModifier };
-            var btnSaveAs = new ButtonMenuItem { Text = "Save As...", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save_as.png", this.GetType().Assembly)), Shortcut = Keys.S | Application.Instance.CommonModifier | Keys.Shift };
-            var btnClose = new ButtonMenuItem { Text = "Close Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png", this.GetType().Assembly)), Shortcut = Keys.Q | Application.Instance.CommonModifier };
-            var btnComps = new ButtonMenuItem { Text = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png", this.GetType().Assembly)), Shortcut = Keys.C | Application.Instance.AlternateModifier };
-            var btnBasis = new ButtonMenuItem { Text = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png", this.GetType().Assembly)), Shortcut = Keys.B | Application.Instance.AlternateModifier };
-            var btnOptions = new ButtonMenuItem { Text = "Flowsheet Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png", this.GetType().Assembly)), Shortcut = Keys.M | Application.Instance.AlternateModifier };
-            var btnGlobalOptions = new ButtonMenuItem { Text = "Global Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png", this.GetType().Assembly)), Shortcut = Keys.G | Application.Instance.AlternateModifier };
-            var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png", this.GetType().Assembly)), Shortcut = Keys.F5 };
-            var btnSolveC = new ButtonMenuItem { Text = "Solve Flowsheet (Custom Calculation Order)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png", this.GetType().Assembly)), Shortcut = Keys.F5 | Application.Instance.CommonModifier | Application.Instance.AlternateModifier };
+            var btnSave = new ButtonMenuItem { Text = "Save Flowsheet", Image = new Bitmap(bitmapprefix + "icons8-save.png"), Shortcut = Keys.S | Application.Instance.CommonModifier };
+            var btnSaveAs = new ButtonMenuItem { Text = "Save As...", Image = new Bitmap(bitmapprefix + "icons8-save_as.png"), Shortcut = Keys.S | Application.Instance.CommonModifier | Keys.Shift };
+            var btnClose = new ButtonMenuItem { Text = "Close Flowsheet", Image = new Bitmap(bitmapprefix + "Delete_96px.png"), Shortcut = Keys.Q | Application.Instance.CommonModifier };
+            var btnComps = new ButtonMenuItem { Text = "Compounds", Image = new Bitmap(bitmapprefix + "icons8-thin_test_tube.png"), Shortcut = Keys.C | Application.Instance.AlternateModifier };
+            var btnBasis = new ButtonMenuItem { Text = "Basis", Image = new Bitmap(bitmapprefix + "icons8-math.png"), Shortcut = Keys.B | Application.Instance.AlternateModifier };
+            var btnOptions = new ButtonMenuItem { Text = "Flowsheet Settings", Image = new Bitmap(bitmapprefix + "icons8-sorting_options.png"), Shortcut = Keys.M | Application.Instance.AlternateModifier };
+            var btnGlobalOptions = new ButtonMenuItem { Text = "Global Settings", Image = new Bitmap(bitmapprefix + "icons8-sorting_options.png"), Shortcut = Keys.G | Application.Instance.AlternateModifier };
+            var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(bitmapprefix + "icons8-play.png"), Shortcut = Keys.F5 };
+            var btnSolveC = new ButtonMenuItem { Text = "Solve Flowsheet (Custom Calculation Order)", Image = new Bitmap(bitmapprefix + "icons8-play.png"), Shortcut = Keys.F5 | Application.Instance.CommonModifier | Application.Instance.AlternateModifier };
 
             // actions
 
@@ -614,9 +618,9 @@ namespace DWSIM.UI.Forms
 
             btnSaveAs.Click += (sender, e) => ActSaveAs.Invoke();
 
-            var btnUtilities_TrueCriticalPoint = new ButtonMenuItem { Text = "True Critical Point", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png", this.GetType().Assembly)) };
-            var btnUtilities_BinaryEnvelope = new ButtonMenuItem { Text = "Binary Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png", this.GetType().Assembly)) };
-            var btnUtilities_PhaseEnvelope = new ButtonMenuItem { Text = "Phase Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png", this.GetType().Assembly)) };
+            var btnUtilities_TrueCriticalPoint = new ButtonMenuItem { Text = "True Critical Point", Image = new Bitmap(bitmapprefix + "icons8-swiss_army_knife.png") };
+            var btnUtilities_BinaryEnvelope = new ButtonMenuItem { Text = "Binary Envelope", Image = new Bitmap(bitmapprefix + "icons8-swiss_army_knife.png") };
+            var btnUtilities_PhaseEnvelope = new ButtonMenuItem { Text = "Phase Envelope", Image = new Bitmap(bitmapprefix + "icons8-swiss_army_knife.png") };
 
             btnUtilities_TrueCriticalPoint.Click += (sender, e) =>
             {
@@ -642,17 +646,17 @@ namespace DWSIM.UI.Forms
                 form.Center();
             };
 
-            var btnObjects = new ButtonMenuItem { Text = "Add New Simulation Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png", this.GetType().Assembly)), Shortcut = Keys.A | Application.Instance.AlternateModifier };
-            var btnInsertText = new ButtonMenuItem { Text = "Add New Text Block", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "TextWidth_96px.png", this.GetType().Assembly)) };
-            var btnInsertTable = new ButtonMenuItem { Text = "Add New Property Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Grid_96px.png", this.GetType().Assembly)) };
-            var btnInsertMasterTable = new ButtonMenuItem { Text = "Add New Master Property Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "GridView_96px.png", this.GetType().Assembly)) };
-            var btnInsertSpreadsheetTable = new ButtonMenuItem { Text = "Add New Linked Spreadsheet Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "PivotTable_96px.png", this.GetType().Assembly)) };
-            var btnInsertChartObject = new ButtonMenuItem { Text = "Add New Chart Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png", this.GetType().Assembly)) };
+            var btnObjects = new ButtonMenuItem { Text = "Add New Simulation Object", Image = new Bitmap(bitmapprefix + "icons8-workflow.png"), Shortcut = Keys.A | Application.Instance.AlternateModifier };
+            var btnInsertText = new ButtonMenuItem { Text = "Add New Text Block", Image = new Bitmap(bitmapprefix + "TextWidth_96px.png") };
+            var btnInsertTable = new ButtonMenuItem { Text = "Add New Property Table", Image = new Bitmap(bitmapprefix + "Grid_96px.png") };
+            var btnInsertMasterTable = new ButtonMenuItem { Text = "Add New Master Property Table", Image = new Bitmap(bitmapprefix + "GridView_96px.png") };
+            var btnInsertSpreadsheetTable = new ButtonMenuItem { Text = "Add New Linked Spreadsheet Table", Image = new Bitmap(bitmapprefix + "PivotTable_96px.png") };
+            var btnInsertChartObject = new ButtonMenuItem { Text = "Add New Chart Object", Image = new Bitmap(bitmapprefix + "AreaChart_100px.png") };
 
-            var btnSensAnalysis = new ButtonMenuItem { Text = "Sensitivity Analysis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png", this.GetType().Assembly)) };
-            var btnOptimization = new ButtonMenuItem { Text = "Flowsheet Optimizer", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png", this.GetType().Assembly)) };
+            var btnSensAnalysis = new ButtonMenuItem { Text = "Sensitivity Analysis", Image = new Bitmap(bitmapprefix + "icons8-maintenance.png") };
+            var btnOptimization = new ButtonMenuItem { Text = "Flowsheet Optimizer", Image = new Bitmap(bitmapprefix + "icons8-maintenance.png") };
 
-            var btnInspector = new ButtonMenuItem { Text = "Solution Inspector", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-spy_filled.png", this.GetType().Assembly)) };
+            var btnInspector = new ButtonMenuItem { Text = "Solution Inspector", Image = new Bitmap(bitmapprefix + "icons8-spy_filled.png") };
 
             btnInspector.Click += (sender, e) => ActInspector.Invoke();
 
@@ -777,9 +781,9 @@ namespace DWSIM.UI.Forms
 
             chkDynamics = new CheckMenuItem { Text = "Enable/Disable Dynamic Mode" };
             chkDynamics.Checked = FlowsheetObject.DynamicMode;
-            var btnDynManager = new ButtonMenuItem { Text = "Dynamics Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-module.png", this.GetType().Assembly)) };
-            var btnDynIntegrator = new ButtonMenuItem { Text = "Integrator Controls", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ecg.png", this.GetType().Assembly)) };
-            var btnDynPIDTuning = new ButtonMenuItem { Text = "PID Controller Tuning", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-adjust.png", this.GetType().Assembly)) };
+            var btnDynManager = new ButtonMenuItem { Text = "Dynamics Manager", Image = new Bitmap(bitmapprefix + "icons8-module.png") };
+            var btnDynIntegrator = new ButtonMenuItem { Text = "Integrator Controls", Image = new Bitmap(bitmapprefix + "icons8-ecg.png") };
+            var btnDynPIDTuning = new ButtonMenuItem { Text = "PID Controller Tuning", Image = new Bitmap(bitmapprefix + "icons8-adjust.png") };
 
             btnDynPIDTuning.Click += (s, e) =>
             {
@@ -828,7 +832,7 @@ namespace DWSIM.UI.Forms
                     ButtonMenuItem tsmi = new ButtonMenuItem();
                     tsmi.Text = iplugin.Name;
                     tsmi.Tag = iplugin.UniqueID;
-                    tsmi.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Electrical_96px.png"));
+                    tsmi.Image = new Bitmap(bitmapprefix + "Electrical_96px.png");
                     tsmi.Click += (sender, e) =>
                     {
                         iplugin.SetFlowsheet(this.FlowsheetObject);
@@ -893,25 +897,25 @@ namespace DWSIM.UI.Forms
                     break;
             }
 
-            var hitem1 = new ButtonMenuItem { Text = "Online Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
+            var hitem1 = new ButtonMenuItem { Text = "Online Help", Image = new Bitmap(bitmapprefix + "help_browser.png") };
             hitem1.Click += (sender, e) =>
             {
                 "https://dwsim.org/docs/crossplatform/help/".OpenURL();
             };
 
-            var hitem2 = new ButtonMenuItem { Text = "Support".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
+            var hitem2 = new ButtonMenuItem { Text = "Support".Localize(), Image = new Bitmap(bitmapprefix + "help_browser.png") };
             hitem2.Click += (sender, e) =>
             {
                 "https://dwsim.org/wiki/index.php?title=Support".OpenURL();
             };
 
-            var hitem3 = new ButtonMenuItem { Text = "Report a Bug".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
+            var hitem3 = new ButtonMenuItem { Text = "Report a Bug".Localize(), Image = new Bitmap(bitmapprefix + "help_browser.png") };
             hitem3.Click += (sender, e) =>
             {
                 "https://github.com/DanWBR/dwsim/issues".OpenURL();
             };
 
-            var hitem4 = new ButtonMenuItem { Text = "Go to DWSIM's Website".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
+            var hitem4 = new ButtonMenuItem { Text = "Go to DWSIM's Website".Localize(), Image = new Bitmap(bitmapprefix + "help_browser.png") };
             hitem4.Click += (sender, e) =>
             {
                 "https://dwsim.org".OpenURL();
@@ -1092,9 +1096,9 @@ namespace DWSIM.UI.Forms
 
             var flowsheetcontrolcontainer = new TableLayout { Padding = new Padding(5), Spacing = new Size(5, 5) };
 
-            var btnmZoomIn = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Zoom In", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_in_filled.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmZoomOut = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Zoom Out", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_out_filled.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmZoomFit = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Zoom to Fit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_extents.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnmZoomIn = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Zoom In", Image = new Bitmap(bitmapprefix + "icons8-zoom_in_filled.png").WithSize(16, 16) };
+            var btnmZoomOut = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Zoom Out", Image = new Bitmap(bitmapprefix + "icons8-zoom_out_filled.png").WithSize(16, 16) };
+            var btnmZoomFit = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Zoom to Fit", Image = new Bitmap(bitmapprefix + "icons8-zoom_to_extents.png").WithSize(16, 16) };
 
             btnmDrawGrid = new Eto.Forms.CheckBox { Text = "Draw Grid" };
             btnmSnapToGrid = new Eto.Forms.CheckBox { Text = "Snap to Grid" };
@@ -1105,15 +1109,15 @@ namespace DWSIM.UI.Forms
             btnmSnapToGrid.CheckedChanged += (sender, e) => ActSnapToGrid.Invoke();
             btnmMultiSelect.CheckedChanged += (sender, e) => ActMultiSelect.Invoke();
 
-            var btnmZoomDefault = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Default Zoom", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_actual_size_filled.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmAlignLefts = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Lefts", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_left.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmAlignCenters = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Centers", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_center.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmAlignRights = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Rights", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_right.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmAlignTops = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Tops", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_top.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmAlignMiddles = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Middles", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_middle.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmAlignBottoms = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Bottoms", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_bottom.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmEqHoriz = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Equalize Horizontally", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_middle1.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmEqVert = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Equalize Vertically", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_center1.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnmZoomDefault = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Default Zoom", Image = new Bitmap(bitmapprefix + "icons8-zoom_to_actual_size_filled.png").WithSize(16, 16) };
+            var btnmAlignLefts = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Lefts", Image = new Bitmap(bitmapprefix + "shape_align_left.png").WithSize(16, 16) };
+            var btnmAlignCenters = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Centers", Image = new Bitmap(bitmapprefix + "shape_align_center.png").WithSize(16, 16) };
+            var btnmAlignRights = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Rights", Image = new Bitmap(bitmapprefix + "shape_align_right.png").WithSize(16, 16) };
+            var btnmAlignTops = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Tops", Image = new Bitmap(bitmapprefix + "shape_align_top.png").WithSize(16, 16) };
+            var btnmAlignMiddles = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Middles", Image = new Bitmap(bitmapprefix + "shape_align_middle.png").WithSize(16, 16) };
+            var btnmAlignBottoms = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Bottoms", Image = new Bitmap(bitmapprefix + "shape_align_bottom.png").WithSize(16, 16) };
+            var btnmEqHoriz = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Equalize Horizontally", Image = new Bitmap(bitmapprefix + "shape_align_middle1.png").WithSize(16, 16) };
+            var btnmEqVert = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Equalize Vertically", Image = new Bitmap(bitmapprefix + "shape_align_center1.png").WithSize(16, 16) };
 
             ActAlignLefts = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignLefts)); };
             ActAlignCenters = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignCenters)); };
@@ -1157,9 +1161,9 @@ namespace DWSIM.UI.Forms
             var chkControlPanelMode = new Eto.Forms.CheckBox { Text = "Control Panel Mode", ToolTip = "Enable/Disable Control Panel Mode" };
 
             ddstates = new DropDown { Width = 100 };
-            var btnSaveState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Save State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-scroll_up.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnLoadState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Load State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-scroll_down.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnDeleteState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Delete Selected State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-cancel.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnSaveState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Save State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-scroll_up.png").WithSize(16, 16)) };
+            var btnLoadState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Load State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-scroll_down.png").WithSize(16, 16)) };
+            var btnDeleteState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Delete Selected State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-cancel.png").WithSize(16, 16)) };
 
             btnDeleteState.Click += (s, e) =>
             {
@@ -1404,11 +1408,11 @@ namespace DWSIM.UI.Forms
 
             // weather bar
 
-            var imgsun = new ImageView { ToolTip = "Solar Irradiation", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sun_with_face.png")) };
-            var imgtemp = new ImageView { ToolTip = "Ambient Temperature", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-temperature.png")) };
-            var imgpgauge = new ImageView { ToolTip = "Atmospheric Pressure", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-pressure_gauge.png")) };
-            var imghum = new ImageView { ToolTip = "Relative Humidity", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-humidity.png")) };
-            var imgwind = new ImageView { ToolTip = "Wind Speed", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-wind.png")) };
+            var imgsun = new ImageView { ToolTip = "Solar Irradiation", Image = new Bitmap(bitmapprefix + "icons8-sun_with_face.png") };
+            var imgtemp = new ImageView { ToolTip = "Ambient Temperature", Image = new Bitmap(bitmapprefix + "icons8-temperature.png") };
+            var imgpgauge = new ImageView { ToolTip = "Atmospheric Pressure", Image = new Bitmap(bitmapprefix + "icons8-pressure_gauge.png") };
+            var imghum = new ImageView { ToolTip = "Relative Humidity", Image = new Bitmap(bitmapprefix + "icons8-humidity.png") };
+            var imgwind = new ImageView { ToolTip = "Wind Speed", Image = new Bitmap(bitmapprefix + "icons8-wind.png") };
 
             var wobj = FlowsheetObject.FlowsheetOptions.CurrentWeather;
             var nf = FlowsheetObject.FlowsheetOptions.NumberFormat;
@@ -1595,11 +1599,11 @@ namespace DWSIM.UI.Forms
 
             // status bar
 
-            var imgheart = new ImageView { Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "heart.png")) };
+            var imgheart = new ImageView { Image = new Bitmap(bitmapprefix + "heart.png") };
             var lbldonate = new Label { Text = "Support continuous development and maintenance of DWSIM for as low as 3 USD/month or with a one-time donation." };
 
-            var btnSingleDonation = new Button { Text = "One-Time Donation", ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "coffee.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnMonthlyDonation = new Button { Text = "Monthly Donation", ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-patreon.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnSingleDonation = new Button { Text = "One-Time Donation", ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "coffee.png").WithSize(16, 16)) };
+            var btnMonthlyDonation = new Button { Text = "Monthly Donation", ImagePosition = ButtonImagePosition.Left, Height = 24, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-patreon.png").WithSize(16, 16)) };
 
             if (s.RunningPlatform() == s.Platform.Linux)
             {
@@ -1681,7 +1685,7 @@ namespace DWSIM.UI.Forms
                                 var itemtype = new ButtonMenuItem { Text = "Data Table", Enabled = false };
                                 selctxmenu.Items.Add(itemtype);
 
-                                var menuitem0 = new ButtonMenuItem { Text = "Edit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
+                                var menuitem0 = new ButtonMenuItem { Text = "Edit", Image = new Bitmap(bitmapprefix + "EditProperty_96px.png") };
                                 menuitem0.Click += (sender2, e2) =>
                                 {
                                     EditSelectedObjectProperties();
@@ -1689,7 +1693,7 @@ namespace DWSIM.UI.Forms
 
                                 selctxmenu.Items.Add(menuitem0);
 
-                                var item7 = new ButtonMenuItem { Text = "Copy Data to Clipboard", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy_2_filled.png")) };
+                                var item7 = new ButtonMenuItem { Text = "Copy Data to Clipboard", Image = new Bitmap(bitmapprefix + "icons8-copy_2_filled.png") };
 
                                 item7.Click += (sender2, e2) =>
                                 {
@@ -1698,7 +1702,7 @@ namespace DWSIM.UI.Forms
 
                                 selctxmenu.Items.Add(item7);
 
-                                var delitem = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
+                                var delitem = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(bitmapprefix + "Delete_96px.png") };
                                 delitem.Click += (sender2, e2) =>
                                 {
                                     if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
@@ -1717,7 +1721,7 @@ namespace DWSIM.UI.Forms
                                 var itemtype2 = new ButtonMenuItem { Text = "Misc Object", Enabled = false };
                                 selctxmenu.Items.Add(itemtype2);
 
-                                var menuitem02 = new ButtonMenuItem { Text = "Edit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png", this.GetType().Assembly)) };
+                                var menuitem02 = new ButtonMenuItem { Text = "Edit", Image = new Bitmap(bitmapprefix + "EditProperty_96px.png") };
                                 menuitem02.Click += (sender2, e2) =>
                                 {
                                     EditSelectedObjectProperties();
@@ -1725,7 +1729,7 @@ namespace DWSIM.UI.Forms
 
                                 selctxmenu.Items.Add(menuitem02);
 
-                                var item7a = new ButtonMenuItem { Text = "Copy Data to Clipboard", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy_2_filled.png", this.GetType().Assembly)) };
+                                var item7a = new ButtonMenuItem { Text = "Copy Data to Clipboard", Image = new Bitmap(bitmapprefix + "icons8-copy_2_filled.png") };
 
                                 item7a.Click += (sender2, e2) =>
                                 {
@@ -1734,7 +1738,7 @@ namespace DWSIM.UI.Forms
 
                                 selctxmenu.Items.Add(item7a);
 
-                                var delitem2 = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png", this.GetType().Assembly)) };
+                                var delitem2 = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(bitmapprefix + "Delete_96px.png") };
                                 delitem2.Click += (sender2, e2) =>
                                 {
                                     if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
@@ -2227,10 +2231,10 @@ namespace DWSIM.UI.Forms
                 obj.GraphicObject.DrawLabel = !obj.GraphicObject.DrawLabel;
             };
 
-            var item3 = new ButtonMenuItem { Text = "Calculate", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
+            var item3 = new ButtonMenuItem { Text = "Calculate", Image = new Bitmap(bitmapprefix + "icons8-play.png") };
             item3.Click += (sender, e) => FlowsheetObject.RequestCalculation(obj, false);
 
-            var item4 = new ButtonMenuItem { Text = "Debug", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Console_96px.png")) };
+            var item4 = new ButtonMenuItem { Text = "Debug", Image = new Bitmap(bitmapprefix + "Console_96px.png") };
             item4.Click += (sender, e) =>
             {
                 DebugObject();
@@ -2238,7 +2242,7 @@ namespace DWSIM.UI.Forms
 
             var selobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
 
-            var menuitem0 = new ButtonMenuItem { Text = "Edit/View", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
+            var menuitem0 = new ButtonMenuItem { Text = "Edit/View", Image = new Bitmap(bitmapprefix + "EditProperty_96px.png") };
             menuitem0.Click += (sender, e) =>
             {
                 var simobj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
@@ -2246,7 +2250,7 @@ namespace DWSIM.UI.Forms
                 EditObject_New(simobj);
             };
 
-            var item5 = new ButtonMenuItem { Text = "Clone", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Copy_96px.png")) };
+            var item5 = new ButtonMenuItem { Text = "Clone", Image = new Bitmap(bitmapprefix + "Copy_96px.png") };
             item5.Click += (sender, e) =>
             {
                 Interfaces.ISimulationObject isobj;
@@ -2278,14 +2282,14 @@ namespace DWSIM.UI.Forms
                 }
             };
 
-            var item6 = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
+            var item6 = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(bitmapprefix + "Delete_96px.png") };
 
             item6.Click += (sender, e) =>
             {
                 DeleteObject();
             };
 
-            var item7 = new ButtonMenuItem { Text = "Copy Data to Clipboard", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy_2_filled.png")) };
+            var item7 = new ButtonMenuItem { Text = "Copy Data to Clipboard", Image = new Bitmap(bitmapprefix + "icons8-copy_2_filled.png") };
 
             item7.Click += (sender, e) =>
             {
@@ -2323,7 +2327,7 @@ namespace DWSIM.UI.Forms
                 }
                 if (cancopy)
                 {
-                    var aitem1 = new ButtonMenuItem { Text = "Copy Data From...", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Copy_96px.png")) };
+                    var aitem1 = new ButtonMenuItem { Text = "Copy Data From...", Image = new Bitmap(bitmapprefix + "Copy_96px.png") };
                     foreach (var mstr in FlowsheetObject.SimulationObjects.Values.Where((x) => x is Thermodynamics.Streams.MaterialStream))
                     {
                         if (mstr.GraphicObject.Tag != obj.GraphicObject.Tag)
@@ -2341,7 +2345,7 @@ namespace DWSIM.UI.Forms
                     }
                     selctxmenu.Items.Insert(5, aitem1);
                 }
-                var aitem2 = new ButtonMenuItem { Text = "Split Stream", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-line_spliting_filled.png")) };
+                var aitem2 = new ButtonMenuItem { Text = "Split Stream", Image = new Bitmap(bitmapprefix + "icons8-line_spliting_filled.png") };
                 aitem2.Click += (sender, e) =>
                 {
                     try
@@ -2398,7 +2402,7 @@ namespace DWSIM.UI.Forms
 
             deselctxmenu.Items.Clear();
 
-            var item0 = new ButtonMenuItem { Text = "Add New Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")) };
+            var item0 = new ButtonMenuItem { Text = "Add New Object", Image = new Bitmap(bitmapprefix + "icons8-workflow.png") };
 
             int currposx = (int)Mouse.Position.X - Location.X;
             int currposy = (int)Mouse.Position.Y - Location.Y;
@@ -2427,8 +2431,8 @@ namespace DWSIM.UI.Forms
                 item0.Items.Add(menuitem);
             }
 
-            var item1 = new ButtonMenuItem { Text = "Zoom All", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_extents.png")) };
-            var item2 = new ButtonMenuItem { Text = "Default Zoom", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_actual_size_filled.png")) };
+            var item1 = new ButtonMenuItem { Text = "Zoom All", Image = new Bitmap(bitmapprefix + "icons8-zoom_to_extents.png") };
+            var item2 = new ButtonMenuItem { Text = "Default Zoom", Image = new Bitmap(bitmapprefix + "icons8-zoom_to_actual_size_filled.png") };
 
             item1.Click += (sender, e) =>
             {
@@ -2440,17 +2444,17 @@ namespace DWSIM.UI.Forms
                 ActZoomDefault.Invoke();
             };
 
-            var item4 = new ButtonMenuItem { Text = "Copy as Image (100%)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy_2_filled.png")) };
-            var item5 = new ButtonMenuItem { Text = "Copy as Image (200%)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy_2_filled.png")) };
-            var item6 = new ButtonMenuItem { Text = "Copy as Image (300%)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-copy_2_filled.png")) };
+            var item4 = new ButtonMenuItem { Text = "Copy as Image (100%)", Image = new Bitmap(bitmapprefix + "icons8-copy_2_filled.png") };
+            var item5 = new ButtonMenuItem { Text = "Copy as Image (200%)", Image = new Bitmap(bitmapprefix + "icons8-copy_2_filled.png") };
+            var item6 = new ButtonMenuItem { Text = "Copy as Image (300%)", Image = new Bitmap(bitmapprefix + "icons8-copy_2_filled.png") };
 
             item4.Click += (sender, e) => CopyAsImage(1);
             item5.Click += (sender, e) => CopyAsImage(2);
             item6.Click += (sender, e) => CopyAsImage(3);
 
-            var item7a = new ButtonMenuItem { Text = "Perform Natural Layout", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-parallel_workflow.png")) };
-            var item7b = new ButtonMenuItem { Text = "Perform Auto-Layout", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-parallel_workflow.png")) };
-            var item8 = new ButtonMenuItem { Text = "Restore Layout", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-parallel_workflow.png")) };
+            var item7a = new ButtonMenuItem { Text = "Perform Natural Layout", Image = new Bitmap(bitmapprefix + "icons8-parallel_workflow.png") };
+            var item7b = new ButtonMenuItem { Text = "Perform Auto-Layout", Image = new Bitmap(bitmapprefix + "icons8-parallel_workflow.png") };
+            var item8 = new ButtonMenuItem { Text = "Restore Layout", Image = new Bitmap(bitmapprefix + "icons8-parallel_workflow.png") };
 
             item7a.Click += (sender, e) =>
             {
@@ -2470,8 +2474,8 @@ namespace DWSIM.UI.Forms
                 ActZoomFit.Invoke();
             };
 
-            var item9 = new ButtonMenuItem { Text = "Export to PDF File", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-pdf.png")) };
-            var item10 = new ButtonMenuItem { Text = "Export to SVG File", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-vector.png")) };
+            var item9 = new ButtonMenuItem { Text = "Export to PDF File", Image = new Bitmap(bitmapprefix + "icons8-pdf.png") };
+            var item10 = new ButtonMenuItem { Text = "Export to SVG File", Image = new Bitmap(bitmapprefix + "icons8-vector.png") };
 
             item9.Click += (sender, e) => ExportToPDF();
             item10.Click += (sender, e) => ExportToSVG();

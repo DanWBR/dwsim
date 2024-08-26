@@ -157,6 +157,11 @@
     <Compile Include="Forms\Main\MainForm.eto.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Shared\Shared.cs" />
     <Compile Include="Forms\SplashScreen.cs" />
     <Compile Include="Forms\SplashScreen.eto.cs">
@@ -175,6 +180,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Icons\AreaChart_100px.png" />
     <EmbeddedResource Include="Resources\Icons\BoxFilled_100px.png" />
     <EmbeddedResource Include="Resources\Icons\Donate_100px.png" />

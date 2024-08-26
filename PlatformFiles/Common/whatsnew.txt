@@ -1,6 +1,8 @@
 Version 8.8.1
 
 - Control Panel for Controller Logical Block in Cross-Platform UI
+- Improved CPUI initialization and loading times
+- Fixed Dynamics Integrator not working in CPUI
 - Added an option to use legacy convergence mode for Recycle blocks (#667)
 - Fixed Reaktoro Property Package
 - Fixed issue with reactor models
