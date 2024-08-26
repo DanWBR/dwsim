@@ -308,6 +308,10 @@ Public Class FormBinEnv
             Settings.gpu.FreeAll()
         End If
 
+        For Each pp1 As PropertyPackage In Flowsheet.PropertyPackages.Values
+            pp1.CurrentMaterialStream = Nothing
+        Next
+
         Me.BtnCalculate.Enabled = True
         Me.BtnCalculate.BackColor = SystemColors.Control
         Me.PanelCalc.Visible = False

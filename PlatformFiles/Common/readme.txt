@@ -77,6 +77,7 @@ Version 8.8.1
 - Fixed issue #656 (Crashing when using Simulation setup wizard)
 - Fixed issue #657 (Faulty unit for Cp in compound creator wizard)
 - Fixed issue #664: memory leak in automation mode
+- Fixed issue with property package missing BIPs after calculating a binary envelope (Classic UI)
 
 Version 8.8.0
 
