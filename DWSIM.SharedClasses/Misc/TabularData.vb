@@ -1,4 +1,5 @@
-﻿Public Class TabularData
+﻿<System.Serializable>
+Public Class TabularData
 
     Implements ITabularData, ICustomXMLSerialization
 
