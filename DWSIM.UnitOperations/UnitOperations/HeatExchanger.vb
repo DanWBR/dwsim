@@ -1173,6 +1173,8 @@ Namespace UnitOperations
 
             StOutHot.AssignFromPhase(PhaseLabel.Mixture, AccumulationStreamHot, False)
             StOutCold.AssignFromPhase(PhaseLabel.Mixture, AccumulationStreamCold, False)
+            StOutHot.DefinedFlow = FlowSpec.Mass
+            StOutCold.DefinedFlow = FlowSpec.Mass
 
             StInHot.SetPressure(Ph1)
             StInCold.SetPressure(Pc1)
@@ -2711,6 +2713,8 @@ Namespace UnitOperations
 
                 StOutCold.AtEquilibrium = False
                 StOutHot.AtEquilibrium = False
+                StOutHot.DefinedFlow = FlowSpec.Mass
+                StOutCold.DefinedFlow = FlowSpec.Mass
 
                 If CalculationMode <> HeatExchangerCalcMode.OutletVaporFraction1 And CalculationMode <> HeatExchangerCalcMode.OutletVaporFraction2 Then
                     If Th2 < Tc1 Or Tc2 > Th1 Then
