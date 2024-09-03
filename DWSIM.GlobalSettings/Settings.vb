@@ -204,7 +204,7 @@ Public Class Settings
                 End If
 
                 If Not Directory.Exists(pythonpath) Then
-                    Throw New Exception("Please define the path to a valid Python 3.7-3.9 distribution in General Settings and try again.")
+                    Throw New Exception("Please define the path to a valid Python distribution in General Settings and try again.")
                 End If
 
                 Try
@@ -226,7 +226,7 @@ Public Class Settings
                 End If
 
                 If Not File.Exists(pythonpath) Then
-                    Throw New Exception("Please define the path to a valid Python 3.7-3.9 distribution in General Settings and try again.")
+                    Throw New Exception("Please define the path to a valid Python distribution in General Settings and try again.")
                 End If
 
                 Try
