@@ -817,12 +817,15 @@ Public Class MaterialStreamEditor
         tbEnth.Enabled = False
         tbEntr.Enabled = False
         tbFracSpec.Enabled = False
+        PanelComposition.Enabled = False
 
     End Sub
 
     Public Sub UpdateEditableStatus()
 
         DisableEditableStatus()
+
+        PanelComposition.Enabled = True
 
         MatStream.SpecType = cbSpec.SelectedIndex
 
