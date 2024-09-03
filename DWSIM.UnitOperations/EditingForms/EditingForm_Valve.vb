@@ -27,7 +27,7 @@ Public Class EditingForm_Valve
 
     End Sub
 
-    Private Sub SetupGrid()
+    Public Sub SetupGrid()
 
         With grid1.Worksheets(0)
             .SetScale(Settings.DpiScale)
