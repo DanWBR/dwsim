@@ -93,7 +93,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                 End If
 
                                 For Each utility In myUnitOp.AttachedUtilities
-                                    If utility.AutoUpdate Then utility.Update()
+                                    If utility.AutoUpdate Then fbag.RunCodeOnUIThread(Sub() utility.Update())
                                 Next
 
                                 myUnitOp.Calculated = True
@@ -147,7 +147,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             End If
 
                             For Each utility In myUnitOp.AttachedUtilities
-                                If utility.AutoUpdate Then utility.Update()
+                                If utility.AutoUpdate Then fbag.RunCodeOnUIThread(Sub() utility.Update())
                             Next
 
                             myUnitOp.Calculated = False
@@ -189,7 +189,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     End If
 
                     For Each utility In myObj.AttachedUtilities
-                        If utility.AutoUpdate Then utility.Update()
+                        If utility.AutoUpdate Then fbag.RunCodeOnUIThread(Sub() utility.Update())
                     Next
 
                     myObj.Calculated = True
@@ -314,7 +314,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         myObj.Solve()
                     End If
                     For Each utility In myObj.AttachedUtilities
-                        If utility.AutoUpdate Then utility.Update()
+                        If utility.AutoUpdate Then fbag.RunCodeOnUIThread(Sub() utility.Update())
                     Next
                     myObj.Calculated = True
                     If myObj.IsSpecAttached = True Then
@@ -544,7 +544,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             End If
                         End If
                         For Each au In myobj.AttachedUtilities
-                            If au.AutoUpdate Then au.Update()
+                            If au.AutoUpdate Then fbag.RunCodeOnUIThread(Sub() au.Update())
                         Next
                         myobj.GraphicObject.Calculated = True
                         myobj.LastUpdated = Date.Now
@@ -660,7 +660,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         CalculateObjectAsync(fobj, myinfo, ct)
                     End If
                     For Each au In myobj.AttachedUtilities
-                        If au.AutoUpdate Then au.Update()
+                        If au.AutoUpdate Then fbag.RunCodeOnUIThread(Sub() au.Update())
                     Next
                     myobj.GraphicObject.Calculated = True
                     myobj.LastUpdated = Date.Now
@@ -771,7 +771,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                        CalculateObjectAsync(fobj, myinfo, ct)
                                                    End If
                                                    For Each au In myobj.AttachedUtilities
-                                                       If au.AutoUpdate Then au.Update()
+                                                       If au.AutoUpdate Then fbag.RunCodeOnUIThread(Sub() au.Update())
                                                    Next
                                                    myobj.GraphicObject.Calculated = True
                                                    myobj.LastUpdated = Date.Now

@@ -4203,7 +4203,7 @@ Public Class FormFlowsheet
                                 ShowMessage(ex.Message, IFlowsheet.MessageType.Warning)
                             End Try
                             Try
-                                obj.AttachedUtilities.ForEach(Sub(x) x.Populate())
+                                obj.AttachedUtilities.ForEach(Sub(x) UIThread(Sub() x.Populate()))
                             Catch ex As Exception
                                 ShowMessage(ex.Message, IFlowsheet.MessageType.Warning)
                             End Try
