@@ -2220,9 +2220,9 @@ Imports System.Xml
         End Try
 
         If sver < New Version("5.0.0.0") Then
-            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
-                                                   SharedClasses.Utility.UpdateElement(xel1)
-                                               End Sub)
+            For Each xel1 In xdoc.Descendants
+                Utility.UpdateElement(xel1)
+            Next
         End If
 
         'check saved from Classic UI
@@ -2236,9 +2236,9 @@ Imports System.Xml
 
         If savedfromclui Then
             Try
-                Parallel.ForEach(xdoc.Descendants, Sub(xel1)
-                                                       SharedClasses.Utility.UpdateElementForNewUI(xel1)
-                                                   End Sub)
+                For Each xel1 In xdoc.Descendants
+                    Utility.UpdateElementForNewUI(xel1)
+                Next
             Catch ex As Exception
             End Try
         End If
@@ -2315,13 +2315,13 @@ Imports System.Xml
             Options.SelectedComponents.Add(obj.Name, obj)
         Next
 
-        Parallel.ForEach(data, Sub(xel)
-                                   Try
-                                       Options.SelectedComponents(xel.Element("Name").Value).LoadData(xel.Elements.ToList)
-                                   Catch ex As Exception
-                                       excs.Add(New Exception("Error Loading Compound Information", ex))
-                                   End Try
-                               End Sub)
+        Try
+            For Each xel In data
+                Options.SelectedComponents(xel.Element("Name").Value).LoadData(xel.Elements.ToList)
+            Next
+        Catch ex As Exception
+            excs.Add(New Exception("Error Loading Compound Information", ex))
+        End Try
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.ToList
 
@@ -4355,21 +4355,18 @@ Label_00CC:
                 p.Compounds.Clear()
             Next
             obj.Dispose()
+            obj.SetFlowsheet(Nothing)
         Next
 
-        'For Each obj As CapeOpenUO In SimulationObjects.Values.Where(Function(so) TypeOf so Is CapeOpenUO)
-        '    obj.DisconnectPorts()
-        'Next
-
         'For Each uobj As SharedClasses.UnitOperations.BaseClass In SimulationObjects.Values
-        'uobj.GraphicObject = Nothing
-        'Try
-        '    If uobj.disposedValue = False Then
-        '        uobj.Dispose()
-        '        uobj = Nothing
-        '    End If
-        'Catch ex As Exception
-        'End Try
+        '    uobj.GraphicObject = Nothing
+        '    Try
+        '        If uobj.disposedValue = False Then
+        '            uobj.Dispose()
+        '            uobj = Nothing
+        '        End If
+        '    Catch ex As Exception
+        '    End Try
         'Next
 
         'For Each gobj In GraphicObjects.Values

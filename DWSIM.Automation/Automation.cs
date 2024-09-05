@@ -732,8 +732,13 @@ namespace DWSIM.Automation
                     {
                         foreach (var item in extender.Collection)
                         {
-                            item.SetMainWindow(null);
-                            item.Run();
+                            var load = false;
+                            if (item is IExtender5) load = ((IExtender5)item).LoadInAutomationMode;
+                            if (load)
+                            {
+                                item.SetMainWindow(null);
+                                item.Run();
+                            }
                         }
                     }
                 }

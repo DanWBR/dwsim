@@ -32,6 +32,7 @@ Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
+Imports System.Threading
 
 Namespace UnitOperations
 
@@ -1211,6 +1212,9 @@ Namespace UnitOperations
             ' Check to see if Dispose has already been called.
 
             If Not Me.disposedValue Then
+
+                DisconnectPorts()
+
                 ' If disposing equals true, dispose all managed 
                 ' and unmanaged resources.
                 If disposing Then
@@ -1225,7 +1229,10 @@ Namespace UnitOperations
                 If Not _couo Is Nothing Then
                     Terminate()
                     If Marshal.IsComObject(_couo) Then Marshal.ReleaseComObject(_couo)
+                    _couo = Nothing
                 End If
+
+                _istr = Nothing
 
                 ' Note disposing has been done.
                 disposedValue = True

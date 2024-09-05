@@ -715,27 +715,31 @@ Public Class FormFlowsheet
         Try
             FileDatabaseProvider.ReleaseDatabase()
         Catch ex As Exception
-
         End Try
 
-        For Each uobj As SharedClasses.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
-            Try
-                If uobj.disposedValue = False Then uobj.Dispose()
-            Catch ex As Exception
-            End Try
-        Next
+        'For Each uobj As BaseClass In Me.Collections.FlowsheetObjectCollection.Values
+        '    Try
+        '        If uobj.disposedValue = False Then uobj.Dispose()
+        '    Catch ex As Exception
+        '    End Try
+        'Next
 
-        For Each gobj In Collections.GraphicObjectCollection.Values
-            Try
-                gobj.ReleaseReferences()
-            Catch ex As Exception
-            End Try
-        Next
+        'For Each gobj In Collections.GraphicObjectCollection.Values
+        '    Try
+        '        gobj.ReleaseReferences()
+        '    Catch ex As Exception
+        '    End Try
+        'Next
+
+        FileDatabaseProvider = Nothing
 
         Collections.GraphicObjectCollection.Clear()
         Collections.FlowsheetObjectCollection.Clear()
         Collections.OPT_OptimizationCollection.Clear()
         Collections.OPT_SensAnalysisCollection.Clear()
+
+        PropertyPackages.Clear()
+        SelectedCompounds.Clear()
 
         If GlobalSettings.Settings.OldUI Then
 
@@ -922,11 +926,11 @@ Public Class FormFlowsheet
         Catch ex As Exception
         End Try
 
-        'garbage collection (frees unused memory)
-        System.GC.Collect()
-        System.GC.WaitForPendingFinalizers()
-        System.GC.Collect()
-        System.GC.WaitForPendingFinalizers()
+        Options.SelectedComponents = Nothing
+        Options.NotSelectedComponents = Nothing
+        Options.SelectedUnitSystem = Nothing
+        Options.SelectedUnitSystem1 = Nothing
+        Options = Nothing
 
     End Sub
 
