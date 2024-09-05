@@ -120,7 +120,7 @@ Namespace Databases
 
             Dim mytxt As String = ""
 
-            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.chemsep1.xml")
+            Using filestr As Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DWSIM.Thermodynamics.chemsep1.xml")
                 Using t As New StreamReader(filestr)
                     mytxt = t.ReadToEnd()
                 End Using
@@ -129,7 +129,7 @@ Namespace Databases
             xmldoc = New XmlDocument
             xmldoc.LoadXml(mytxt)
 
-            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.chemsep2.xml")
+            Using filestr As Stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DWSIM.Thermodynamics.chemsep2.xml")
                 Using t As New StreamReader(filestr)
                     mytxt = t.ReadToEnd()
                 End Using

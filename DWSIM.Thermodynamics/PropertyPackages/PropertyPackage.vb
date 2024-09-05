@@ -11752,38 +11752,42 @@ Final3:
 
             Dim pathsep = IO.Path.DirectorySeparatorChar
 
-            Dim HenryLines() As String
+            If m_Henry.Count = 0 Then
 
-            SyncLock m_Henry
+                Dim HenryLines() As String
 
-                m_Henry.Clear()
+                SyncLock m_Henry
 
-                Dim t0 As Type = Type.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage")
+                    m_Henry.Clear()
 
-                Using filestr As Stream = Assembly.GetAssembly(t0).GetManifestResourceStream("DWSIM.Thermodynamics.henry_constants.csv")
-                    Using t As New StreamReader(filestr)
-                        HenryLines = t.ReadToEnd().Split(vbLf)
+                    Dim t0 As Type = Type.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage")
+
+                    Using filestr As Stream = Assembly.GetAssembly(t0).GetManifestResourceStream("DWSIM.Thermodynamics.henry_constants.csv")
+                        Using t As New StreamReader(filestr)
+                            HenryLines = t.ReadToEnd().Split(vbLf)
+                        End Using
                     End Using
-                End Using
 
-                For i = 3 To HenryLines.Length - 2
-                    Dim HP As New HenryParam
-                    Dim cols = HenryLines(i).Split(",")
-                    HP.Component = cols(4).Replace(Chr(34), "")
-                    HP.CAS = cols(10).Replace(Chr(34), "")
-                    Dim val1 = cols(1).Replace(Chr(34), "")
-                    Dim val2 = cols(3).Replace(Chr(34), "")
-                    Dim val3 = cols(2).Replace(Chr(34), "")
-                    If val1 <> "" And val3 <> "" And val2.Contains("L") Then
-                        HP.KHcp = val1.ToDoubleFromInvariant()
-                        HP.C = val3.ToDoubleFromInvariant()
-                        If Not m_Henry.ContainsKey(HP.CAS) Then
-                            m_Henry.Add(HP.CAS, HP)
+                    For i = 3 To HenryLines.Length - 2
+                        Dim HP As New HenryParam
+                        Dim cols = HenryLines(i).Split(",")
+                        HP.Component = cols(4).Replace(Chr(34), "")
+                        HP.CAS = cols(10).Replace(Chr(34), "")
+                        Dim val1 = cols(1).Replace(Chr(34), "")
+                        Dim val2 = cols(3).Replace(Chr(34), "")
+                        Dim val3 = cols(2).Replace(Chr(34), "")
+                        If val1 <> "" And val3 <> "" And val2.Contains("L") Then
+                            HP.KHcp = val1.ToDoubleFromInvariant()
+                            HP.C = val3.ToDoubleFromInvariant()
+                            If Not m_Henry.ContainsKey(HP.CAS) Then
+                                m_Henry.Add(HP.CAS, HP)
+                            End If
                         End If
-                    End If
-                Next
+                    Next
 
-            End SyncLock
+                End SyncLock
+
+            End If
 
             If Settings.CAPEOPENMode And Not Settings.ExcelMode Then
 

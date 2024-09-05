@@ -690,6 +690,12 @@ Public Class FormFlowsheet
 
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
+        ReleaseResources()
+
+    End Sub
+
+    Public Sub ReleaseResources() Implements IFlowsheet.ReleaseResources
+
         Try
             If ToolStrip1 IsNot Nothing Then
                 ToolStripManager.RevertMerge(My.Application.MainWindowForm.ToolStrip1, ToolStrip1)
@@ -5745,6 +5751,7 @@ Public Class FormFlowsheet
         FormSurface.FormObjects.UpdateData()
 
     End Sub
+
 
 #End Region
 

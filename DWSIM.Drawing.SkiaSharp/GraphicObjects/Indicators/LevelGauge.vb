@@ -267,6 +267,8 @@ Namespace GraphicObjects
 
             End If
 
+            SelectedObject = Nothing
+
         End Sub
 
         Public Sub SetupPositioning(StartDir As ConDir, EndDir As ConDir, StartPos As Point, EndPos As Point)

@@ -34,6 +34,8 @@ Imports System.Xml
 
     Implements IFlowsheet, IFlowsheetCalculationQueue
 
+    Public Property SupressDataLoading As Boolean = False
+
     Public Property WeatherProvider As IWeatherProvider = New SharedClasses.WeatherProvider() Implements IFlowsheet.WeatherProvider
 
     Public Property DynamicMode As Boolean = False Implements IFlowsheet.DynamicMode
@@ -3105,72 +3107,77 @@ Imports System.Xml
 
         ReactionSets.Add("DefaultSet", New ReactionSet("DefaultSet", "Default Set", ""))
 
-        AddPropPacks()
         AddExternalUOs()
+        AddSystemsOfUnits()
+        AddDefaultProperties()
 
-        Dim addedcomps As New List(Of String)
-        Dim casnumbers As New List(Of String)
+        If Not SupressDataLoading Then
 
-        Dim tc = TaskHelper.Run(Sub()
-                                    Dim csdb As New Databases.ChemSep
-                                    Dim cpa() As ConstantProperties
-                                    csdb.Load()
-                                    cpa = csdb.Transfer()
-                                    For Each cp As ConstantProperties In cpa
-                                        If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
-                                    Next
-                                    Dim cpdb As New Databases.CoolProp
-                                    cpdb.Load()
-                                    cpa = cpdb.Transfer()
-                                    addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
-                                    For Each cp As ConstantProperties In cpa
-                                        If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
-                                    Next
-                                    Dim bddb As New Databases.Biodiesel
-                                    bddb.Load()
-                                    cpa = bddb.Transfer()
-                                    addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
-                                    For Each cp As ConstantProperties In cpa
-                                        If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
-                                    Next
-                                    Dim chedl As New Databases.ChEDL_Thermo
-                                    chedl.Load()
-                                    cpa = chedl.Transfer().ToArray()
-                                    addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
-                                    casnumbers = AvailableCompounds.Values.Select(Function(x) x.CAS_Number).ToList()
-                                    For Each cp As ConstantProperties In cpa
-                                        If Not addedcomps.Contains(cp.Name.ToLower) And Not addedcomps.Contains(cp.Name) Then
-                                            If Not casnumbers.Contains(cp.CAS_Number) Then
-                                                If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
-                                            End If
-                                        End If
-                                    Next
-                                    Dim elec As New Databases.Electrolyte
-                                    elec.Load()
-                                    cpa = elec.Transfer().ToArray()
-                                    addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
-                                    For Each cp As ConstantProperties In cpa
-                                        If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
-                                    Next
-                                    Dim comps = Databases.UserDB.LoadAdditionalCompounds()
-                                    For Each cp As BaseClasses.ConstantProperties In comps
-                                        If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
-                                    Next
-                                    Using filestr As Stream = Assembly.GetAssembly(elec.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.FoodProp.xml")
-                                        Dim fcomps = Databases.UserDB.ReadComps(filestr)
-                                        For Each cp As BaseClasses.ConstantProperties In fcomps
-                                            cp.CurrentDB = "FoodProp"
+            AddPropPacks()
+
+            Dim addedcomps As New List(Of String)
+            Dim casnumbers As New List(Of String)
+
+            Dim tc = TaskHelper.Run(Sub()
+                                        Dim csdb As New Databases.ChemSep
+                                        Dim cpa() As ConstantProperties
+                                        csdb.Load()
+                                        cpa = csdb.Transfer()
+                                        For Each cp As ConstantProperties In cpa
                                             If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
                                         Next
-                                    End Using
-                                    csdb.Dispose()
-                                    cpdb.Dispose()
-                                    chedl.Dispose()
-                                    AddSystemsOfUnits()
-                                    AddDefaultProperties()
-                                End Sub)
+                                        Dim cpdb As New Databases.CoolProp
+                                        cpdb.Load()
+                                        cpa = cpdb.Transfer()
+                                        addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
+                                        For Each cp As ConstantProperties In cpa
+                                            If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
+                                        Next
+                                        Dim bddb As New Databases.Biodiesel
+                                        bddb.Load()
+                                        cpa = bddb.Transfer()
+                                        addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
+                                        For Each cp As ConstantProperties In cpa
+                                            If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
+                                        Next
+                                        Dim chedl As New Databases.ChEDL_Thermo
+                                        chedl.Load()
+                                        cpa = chedl.Transfer().ToArray()
+                                        addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
+                                        casnumbers = AvailableCompounds.Values.Select(Function(x) x.CAS_Number).ToList()
+                                        For Each cp As ConstantProperties In cpa
+                                            If Not addedcomps.Contains(cp.Name.ToLower) And Not addedcomps.Contains(cp.Name) Then
+                                                If Not casnumbers.Contains(cp.CAS_Number) Then
+                                                    If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                                End If
+                                            End If
+                                        Next
+                                        Dim elec As New Databases.Electrolyte
+                                        elec.Load()
+                                        cpa = elec.Transfer().ToArray()
+                                        addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
+                                        For Each cp As ConstantProperties In cpa
+                                            If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                        Next
+                                        Dim comps = Databases.UserDB.LoadAdditionalCompounds()
+                                        For Each cp As BaseClasses.ConstantProperties In comps
+                                            If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                        Next
+                                        Using filestr As Stream = Assembly.GetAssembly(elec.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.FoodProp.xml")
+                                            Dim fcomps = Databases.UserDB.ReadComps(filestr)
+                                            For Each cp As BaseClasses.ConstantProperties In fcomps
+                                                cp.CurrentDB = "FoodProp"
+                                                If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                            Next
+                                        End Using
+                                        csdb.Dispose()
+                                        cpdb.Dispose()
+                                        chedl.Dispose()
+                                    End Sub)
 
-        If GlobalSettings.Settings.AutomationMode Then tc.Wait()
+            tc.Wait()
+
+        End If
 
     End Sub
 
@@ -4331,6 +4338,61 @@ Label_00CC:
     Public Sub DisplayDockableBrowserWindow(url As String) Implements IFlowsheet.DisplayDockableBrowserWindow
         Throw New NotImplementedException()
     End Sub
+
+    Public Sub ReleaseResources() Implements IFlowsheet.ReleaseResources
+
+        Me.ProcessScripts(Enums.Scripts.EventType.SimulationClosed, Enums.Scripts.ObjectType.Simulation, "")
+
+        'dispose objects
+
+        Try
+            FileDatabaseProvider.ReleaseDatabase()
+        Catch ex As Exception
+        End Try
+
+        For Each obj As MaterialStream In SimulationObjects.Values.Where(Function(so) TypeOf so Is MaterialStream)
+            For Each p In obj.Phases.Values
+                p.Compounds.Clear()
+            Next
+            obj.Dispose()
+        Next
+
+        'For Each obj As CapeOpenUO In SimulationObjects.Values.Where(Function(so) TypeOf so Is CapeOpenUO)
+        '    obj.DisconnectPorts()
+        'Next
+
+        'For Each uobj As SharedClasses.UnitOperations.BaseClass In SimulationObjects.Values
+        'uobj.GraphicObject = Nothing
+        'Try
+        '    If uobj.disposedValue = False Then
+        '        uobj.Dispose()
+        '        uobj = Nothing
+        '    End If
+        'Catch ex As Exception
+        'End Try
+        'Next
+
+        'For Each gobj In GraphicObjects.Values
+        '    gobj.Owner = Nothing
+        'Next
+
+        FlowsheetSurface = Nothing
+        FileDatabaseProvider = Nothing
+
+        GraphicObjects.Clear()
+        SimulationObjects.Clear()
+        OptimizationCollection.Clear()
+        SensAnalysisCollection.Clear()
+        PropertyPackages.Clear()
+        SelectedCompounds.Clear()
+        Options.SelectedComponents = Nothing
+        Options.NotSelectedComponents = Nothing
+        Options.SelectedUnitSystem = Nothing
+        Options.SelectedUnitSystem1 = Nothing
+        Options = Nothing
+
+    End Sub
+
 
 #Region "    Snapshots"
 

@@ -9,33 +9,23 @@ public class LoopTest
     static void Main()
     {
 
-        System.IO.Directory.SetCurrentDirectory(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+        Directory.SetCurrentDirectory(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
 
         //create automation manager
 
-        var sw = new Stopwatch();
-        sw.Start();
-
         var interf = new DWSIM.Automation.Automation3();
-
-        var sim = interf.LoadFlowsheet(Path.Combine("samples", "Biodiesel Production.dwxmz"));
-
-        sim.SetMessageListener((s, mt) => Console.WriteLine(s));
-
         for (int i = 0; i < 100; i++)
         {
-
+            var sw = new Stopwatch();
+            sw.Start();
+            var sim = interf.LoadFlowsheet("C:\\Users\\danie\\Downloads\\capeopen.dwxmz");
+            sim.SetMessageListener((s, mt) => Console.WriteLine(s));
             interf.CalculateFlowsheet2(sim);
-
+            sim.ReleaseResources();
+            sim = null;
+            Console.WriteLine(String.Format("Finished in {0} ms.", sw.ElapsedMilliseconds));
         }
-
-        sim = null;
-
         interf.ReleaseResources();
-
-        sw.Stop();
-
-        Console.WriteLine("Finished.");
 
         Console.ReadLine();
     }

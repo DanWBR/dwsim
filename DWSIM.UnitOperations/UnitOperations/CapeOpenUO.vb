@@ -813,6 +813,34 @@ Namespace UnitOperations
 
         End Sub
 
+        Sub DisconnectPorts()
+            If Not _couo Is Nothing Then
+                Dim cnobj As Object = Nothing
+                Dim myuo As CapeOpen.ICapeUnit = _couo
+                Dim myports As ICapeCollection = myuo.ports
+                Dim i As Integer = 0
+                Dim numports As Integer = myports.Count
+                If numports > 0 Then
+                    For i = 1 To numports
+                        Dim id As ICapeIdentification = myports.Item(i)
+                        Dim myport As ICapeUnitPort = myports.Item(i)
+                        Try
+                            cnobj = myport.connectedObject
+                        Catch ex As Exception
+                            cnobj = Nothing
+                        End Try
+                        Try
+                            If Not cnobj Is Nothing Then myport.Disconnect()
+                        Catch ex As Exception
+                            Dim ecu As CapeOpen.ECapeUser = myuo
+                            Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": CAPE-OPEN Exception: " & ecu.code & " at " & ecu.interfaceName & ". Reason: " & ecu.description, IFlowsheet.MessageType.Warning)
+                        End Try
+                    Next
+                End If
+            End If
+        End Sub
+
+
         Sub Edit()
             If Not _couo Is Nothing Then
                 Dim myuo As CapeOpen.ICapeUtilities = _couo
@@ -1179,7 +1207,9 @@ Namespace UnitOperations
 #Region "    IDisposable Overload"
 
         Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+
             ' Check to see if Dispose has already been called.
+
             If Not Me.disposedValue Then
                 ' If disposing equals true, dispose all managed 
                 ' and unmanaged resources.
@@ -1201,6 +1231,7 @@ Namespace UnitOperations
                 disposedValue = True
 
             End If
+
         End Sub
 
 #End Region

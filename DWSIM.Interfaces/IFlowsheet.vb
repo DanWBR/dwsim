@@ -400,6 +400,8 @@
 
     Property ParticleSizeDistributions As List(Of ISolidParticleSizeDistribution)
 
+    Sub ReleaseResources()
+
 End Interface
 
 ''' <summary>
