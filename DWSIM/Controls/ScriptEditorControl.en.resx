@@ -140,27 +140,6 @@
   <data name="tc3.Width" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
-  <data name="ItemToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 22</value>
-  </data>
-  <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 6</value>
-  </data>
-  <data name="ViewAPIHelpTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 22</value>
-  </data>
-  <data name="ViewAPIHelpTSMI.Text" xml:space="preserve">
-    <value>View Online API Help</value>
-  </data>
-  <data name="ViewSourceCodeTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 22</value>
-  </data>
-  <data name="ViewSourceCodeTSMI.Text" xml:space="preserve">
-    <value>View Source Code (GitHub)</value>
-  </data>
-  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 76</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tvVariables.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

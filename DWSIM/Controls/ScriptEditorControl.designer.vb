@@ -22,7 +22,6 @@ Partial Class ScriptEditorControl
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ScriptEditorControl))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.txtScript = New ScintillaNET.Scintilla()
@@ -32,11 +31,6 @@ Partial Class ScriptEditorControl
         Me.tc1 = New Aga.Controls.Tree.TreeColumn()
         Me.tc2 = New Aga.Controls.Tree.TreeColumn()
         Me.tc3 = New Aga.Controls.Tree.TreeColumn()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ItemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ViewAPIHelpTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ViewSourceCodeTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.NodeIcon1 = New Aga.Controls.Tree.NodeControls.NodeIcon()
         Me.NodeTextBox1 = New Aga.Controls.Tree.NodeControls.NodeTextBox()
         Me.NodeTextBox2 = New Aga.Controls.Tree.NodeControls.NodeTextBox()
@@ -58,7 +52,6 @@ Partial Class ScriptEditorControl
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.ContextMenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -112,7 +105,6 @@ Partial Class ScriptEditorControl
         Me.tvVariables.Columns.Add(Me.tc1)
         Me.tvVariables.Columns.Add(Me.tc2)
         Me.tvVariables.Columns.Add(Me.tc3)
-        Me.tvVariables.ContextMenuStrip = Me.ContextMenuStrip1
         Me.tvVariables.DefaultToolTipProvider = Nothing
         Me.tvVariables.DragDropMarkColor = System.Drawing.Color.Black
         Me.tvVariables.FullRowSelect = True
@@ -142,34 +134,6 @@ Partial Class ScriptEditorControl
         '
         resources.ApplyResources(Me.tc3, "tc3")
         Me.tc3.SortOrder = System.Windows.Forms.SortOrder.None
-        '
-        'ContextMenuStrip1
-        '
-        resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ItemToolStripMenuItem, Me.ToolStripSeparator1, Me.ViewAPIHelpTSMI, Me.ViewSourceCodeTSMI})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        '
-        'ItemToolStripMenuItem
-        '
-        resources.ApplyResources(Me.ItemToolStripMenuItem, "ItemToolStripMenuItem")
-        Me.ItemToolStripMenuItem.Name = "ItemToolStripMenuItem"
-        '
-        'ToolStripSeparator1
-        '
-        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        '
-        'ViewAPIHelpTSMI
-        '
-        resources.ApplyResources(Me.ViewAPIHelpTSMI, "ViewAPIHelpTSMI")
-        Me.ViewAPIHelpTSMI.Image = Global.DWSIM.My.Resources.Resources.help1
-        Me.ViewAPIHelpTSMI.Name = "ViewAPIHelpTSMI"
-        '
-        'ViewSourceCodeTSMI
-        '
-        resources.ApplyResources(Me.ViewSourceCodeTSMI, "ViewSourceCodeTSMI")
-        Me.ViewSourceCodeTSMI.Image = Global.DWSIM.My.Resources.Resources.tag
-        Me.ViewSourceCodeTSMI.Name = "ViewSourceCodeTSMI"
         '
         'NodeIcon1
         '
@@ -287,7 +251,6 @@ Partial Class ScriptEditorControl
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "ScriptEditorControl"
@@ -296,7 +259,6 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
@@ -323,11 +285,6 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Friend WithEvents NodeTextBox3 As Aga.Controls.Tree.NodeControls.NodeTextBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents NodeIcon1 As Aga.Controls.Tree.NodeControls.NodeIcon
-    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
-    Friend WithEvents ViewAPIHelpTSMI As ToolStripMenuItem
-    Friend WithEvents ViewSourceCodeTSMI As ToolStripMenuItem
-    Friend WithEvents ItemToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents Label5 As Label
     Public WithEvents btnDelete As Button
     Public WithEvents tbName As TextBox
