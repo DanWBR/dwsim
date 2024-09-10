@@ -143,7 +143,7 @@ Public Class FormFlowsheet
 
     Private PanelCOWarningDismissed = False
 
-    Private MessagePump As New Queue(Of Tuple(Of String, WarningType, String))
+    Private MessagePump As New Concurrent.ConcurrentQueue(Of Tuple(Of String, Interfaces.IFlowsheet.MessageType, String))
 
     Public Shared DoNotOpenSimulationWizard As Boolean = False
 
@@ -1261,7 +1261,7 @@ Public Class FormFlowsheet
                                                       lblLastMessage.LinkColor = Color.Blue
                                               End Select
 
-                                              If frlog.Grid1.Rows.Count > 1500 Then
+                                              If frlog.Grid1.Rows.Count > 100 Then
                                                   frlog.Grid1.Rows.Clear()
                                               End If
 
@@ -3939,9 +3939,7 @@ Public Class FormFlowsheet
         End If
 
         If Not SupressMessages Then
-            SyncLock MessagePump
-                MessagePump.Enqueue(New Tuple(Of String, WarningType, String)(text, mtype, exceptionID))
-            End SyncLock
+            MessagePump.Enqueue(New Tuple(Of String, Interfaces.IFlowsheet.MessageType, String)(text, mtype, exceptionID))
         End If
 
     End Sub
@@ -4730,8 +4728,9 @@ Public Class FormFlowsheet
     Public Sub ClearLog() Implements IFlowsheet.ClearLog
 
         UIThread(Sub()
-                     MessagePump.Clear()
+                     MessagePump = New Concurrent.ConcurrentQueue(Of Tuple(Of String, Interfaces.IFlowsheet.MessageType, String))
                      FormLog.Grid1.Rows.Clear()
+                     lblTotalMessages.Text = ""
                  End Sub)
 
     End Sub
@@ -5452,19 +5451,18 @@ Public Class FormFlowsheet
 
         If Not SupressMessages Then
 
-            SyncLock MessagePump
-
-                If MessagePump.Count > 0 Then
-
-                    For Each item In MessagePump
-                        ShowMessageInternal(item.Item1, item.Item2, item.Item3)
-                    Next
-
-                    MessagePump.Clear()
-
-                End If
-
-            End SyncLock
+            If MessagePump.Count > 0 Then
+                For Each item In MessagePump
+                    ShowMessageInternal(item.Item1, item.Item2, item.Item3)
+                Next
+                Dim infos, warnings, errors As Integer
+                infos = MessagePump.Where(Function(m) m.Item2 = IFlowsheet.MessageType.Information).Count()
+                warnings = MessagePump.Where(Function(m) m.Item2 = IFlowsheet.MessageType.Warning).Count()
+                errors = MessagePump.Where(Function(m) m.Item2 = IFlowsheet.MessageType.GeneralError).Count()
+                Dim last = MessagePump.Last.Item2
+                MessagePump = New Concurrent.ConcurrentQueue(Of Tuple(Of String, IFlowsheet.MessageType, String))()
+                UIThread(Sub() lblTotalMessages.Text = String.Format("(+ {0} warnings, {1} errors)", warnings, errors))
+            End If
 
         End If
 
@@ -5747,6 +5745,16 @@ Public Class FormFlowsheet
         End If
 
         Options.FlowsheetTransitionObject = Nothing
+
+    End Sub
+
+    Private Sub lblTotalMessages_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblTotalMessages.LinkClicked
+
+        If Not FormLog.Visible Then
+            FormLog.Show(dckPanel)
+        Else
+            FormLog.Hide()
+        End If
 
     End Sub
 
