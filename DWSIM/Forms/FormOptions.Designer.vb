@@ -41,6 +41,9 @@ Partial Class FormOptions
         Me.Label11 = New System.Windows.Forms.Label()
         Me.chkEnableParallelCalcs = New System.Windows.Forms.CheckBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.cbDefaultSU = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
         Me.chkAA = New System.Windows.Forms.CheckBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
@@ -122,6 +125,7 @@ Partial Class FormOptions
         Me.GroupBox18.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.GroupBox8.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
@@ -232,12 +236,34 @@ Partial Class FormOptions
         'TabPage1
         '
         resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.GroupBox8)
         Me.TabPage1.Controls.Add(Me.GroupBox13)
         Me.TabPage1.Controls.Add(Me.GroupBox5)
         Me.TabPage1.Controls.Add(Me.GroupBox12)
         Me.TabPage1.Controls.Add(Me.GroupBox11)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'GroupBox8
+        '
+        resources.ApplyResources(Me.GroupBox8, "GroupBox8")
+        Me.GroupBox8.Controls.Add(Me.cbDefaultSU)
+        Me.GroupBox8.Controls.Add(Me.Label3)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.TabStop = False
+        '
+        'cbDefaultSU
+        '
+        resources.ApplyResources(Me.cbDefaultSU, "cbDefaultSU")
+        Me.cbDefaultSU.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDefaultSU.FormattingEnabled = True
+        Me.cbDefaultSU.Items.AddRange(New Object() {resources.GetString("cbDefaultSU.Items"), resources.GetString("cbDefaultSU.Items1")})
+        Me.cbDefaultSU.Name = "cbDefaultSU"
+        '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
         '
         'GroupBox13
         '
@@ -859,6 +885,8 @@ Partial Class FormOptions
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.TabPage1.ResumeLayout(False)
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox8.PerformLayout()
         Me.GroupBox13.ResumeLayout(False)
         Me.GroupBox13.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
@@ -987,4 +1015,7 @@ Partial Class FormOptions
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewImageColumn2 As DataGridViewImageColumn
+    Public WithEvents GroupBox8 As GroupBox
+    Friend WithEvents cbDefaultSU As ComboBox
+    Public WithEvents Label3 As Label
 End Class

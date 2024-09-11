@@ -219,5 +219,8 @@
     <Setting Name="ReplaceJSONUserCompounds" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="PreferredSystemOfUnits" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SI</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -50,12 +50,15 @@ Public Class FormFileExplorer
 
     Public Sub ListFiles()
 
-        Dim provider = Flowsheet.FileDatabaseProvider
-        Dim files = provider.GetFiles()
-        ListView1.Items.Clear()
-        For Each item In files
-            ListView1.Items.Add(item)
-        Next
+        Try
+            Dim provider = Flowsheet.FileDatabaseProvider
+            Dim files = provider.GetFiles()
+            ListView1.Items.Clear()
+            For Each item In files
+                ListView1.Items.Add(item)
+            Next
+        Catch ex As Exception
+        End Try
 
     End Sub
 

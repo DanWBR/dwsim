@@ -83,6 +83,7 @@ Partial Class FormSimulWizard
         Me.Column12 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.WizardPage5 = New AeroWizard.WizardPage()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.btnCreateNewUnits = New System.Windows.Forms.Button()
         Me.btnCloneUnits = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
@@ -596,7 +597,7 @@ Partial Class FormSimulWizard
         'WizardPage5
         '
         resources.ApplyResources(Me.WizardPage5, "WizardPage5")
-        Me.WizardPage5.AllowCancel = False
+        Me.WizardPage5.Controls.Add(Me.Button6)
         Me.WizardPage5.Controls.Add(Me.btnCreateNewUnits)
         Me.WizardPage5.Controls.Add(Me.btnCloneUnits)
         Me.WizardPage5.Controls.Add(Me.DataGridView1)
@@ -605,6 +606,13 @@ Partial Class FormSimulWizard
         Me.WizardPage5.Controls.Add(Me.Label7)
         Me.WizardPage5.Name = "WizardPage5"
         Me.ToolTip1.SetToolTip(Me.WizardPage5, resources.GetString("WizardPage5.ToolTip"))
+        '
+        'Button6
+        '
+        resources.ApplyResources(Me.Button6, "Button6")
+        Me.Button6.Name = "Button6"
+        Me.ToolTip1.SetToolTip(Me.Button6, resources.GetString("Button6.ToolTip"))
+        Me.Button6.UseVisualStyleBackColor = True
         '
         'btnCreateNewUnits
         '
@@ -974,4 +982,5 @@ Partial Class FormSimulWizard
     Friend WithEvents PictureBox2 As PictureBox
     Public WithEvents Panel1 As Panel
     Public WithEvents WizardPage2 As AeroWizard.WizardPage
+    Friend WithEvents Button6 As Button
 End Class

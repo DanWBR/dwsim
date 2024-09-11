@@ -156,7 +156,11 @@ Public Class FormSimulWizard
         Me.ComboBox2.Items.Clear()
         Me.ComboBox2.Items.AddRange(array1)
 
-        ComboBox2.SelectedIndex = 0
+        If FormMain.AvailableUnitSystems.ContainsKey(My.Settings.PreferredSystemOfUnits) Then
+            ComboBox2.SelectedItem = My.Settings.PreferredSystemOfUnits
+        Else
+            ComboBox2.SelectedIndex = 0
+        End If
 
         cbPPFilter.SelectedIndex = 0
 
@@ -1871,6 +1875,12 @@ Public Class FormSimulWizard
             FormMain.AnalyticsProvider?.RegisterEvent("Undo/Redo Enabled/Disabled", CurrentFlowsheet.Options.EnabledUndoRedo, Nothing)
 
         End If
+
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+
+        My.Settings.PreferredSystemOfUnits = ComboBox2.SelectedItem.ToString()
 
     End Sub
 

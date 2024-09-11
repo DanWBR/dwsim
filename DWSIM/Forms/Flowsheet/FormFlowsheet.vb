@@ -322,6 +322,10 @@ Public Class FormFlowsheet
                 Me.Options.NotSelectedComponents.Add(tmpc.Name, newc)
             Next
 
+            If FormMain.AvailableUnitSystems.ContainsKey(My.Settings.PreferredSystemOfUnits) Then
+                Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(My.Settings.PreferredSystemOfUnits)
+            End If
+
             Dim Frm = ParentForm
 
             ' Set DockPanel properties

@@ -19,6 +19,7 @@ Imports DWSIM.Interfaces
 Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
+Imports System.Linq
 
 Public Class FormOptions
 
@@ -108,6 +109,18 @@ Public Class FormOptions
         If Directory.Exists(configdir) Then tbConfigDir.Text = configdir Else tbConfigDir.Text = "N/A"
 
         chkUpdates.Checked = Settings.CheckForUpdates
+
+        Dim sukeys = FormMain.AvailableUnitSystems.Keys.ToArray()
+
+        cbDefaultSU.Items.Clear()
+        cbDefaultSU.Items.AddRange(sukeys)
+
+        If sukeys.Contains(My.Settings.PreferredSystemOfUnits) Then
+            cbDefaultSU.SelectedItem = My.Settings.PreferredSystemOfUnits
+        Else
+            My.Settings.PreferredSystemOfUnits = "SI"
+            cbDefaultSU.SelectedItem = My.Settings.PreferredSystemOfUnits
+        End If
 
         If Not FormMain.IsPro Then
             gbLoadExtensions.Visible = True
@@ -576,5 +589,9 @@ Public Class FormOptions
                 MessageBox.Show("File successfully removed from list.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         End If
+    End Sub
+
+    Private Sub cbDefaultSU_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDefaultSU.SelectedIndexChanged
+        My.Settings.PreferredSystemOfUnits = cbDefaultSU.SelectedItem.ToString()
     End Sub
 End Class
