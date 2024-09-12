@@ -742,8 +742,8 @@ Public Class FormFlowsheet
         Collections.OPT_OptimizationCollection.Clear()
         Collections.OPT_SensAnalysisCollection.Clear()
 
-        PropertyPackages.Clear()
-        SelectedCompounds.Clear()
+        PropertyPackages?.Clear()
+        SelectedCompounds?.Clear()
 
         If GlobalSettings.Settings.OldUI Then
 
