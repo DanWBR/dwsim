@@ -308,42 +308,34 @@ Imports System.Xml
 
     Public Function GetTranslatedString(text As String) As String Implements IFlowsheet.GetTranslatedString
 
-        If Settings.AutomationMode Then
+        If _translatefunction IsNot Nothing Then
+            Return _translatefunction.Invoke(text)
+        End If
 
-            Return text
+        If rm Is Nothing Then
+            rm = New Resources.ResourceManager("DWSIM.FlowsheetBase.Strings", Assembly.GetExecutingAssembly())
+        End If
 
+        Dim ttext As String = rm.GetString(text)
+
+        If Not ttext Is Nothing AndAlso Not ttext.Equals(text) Then
+            Return ttext
         Else
-
-            If _translatefunction IsNot Nothing Then
-                Return _translatefunction.Invoke(text)
+            If prm Is Nothing Then
+                prm = New Resources.ResourceManager("DWSIM.FlowsheetBase.Properties", Assembly.GetExecutingAssembly())
             End If
-
-            If rm Is Nothing Then
-                rm = New Resources.ResourceManager("DWSIM.FlowsheetBase.Strings", Assembly.GetExecutingAssembly())
-            End If
-
-            Dim ttext As String = rm.GetString(text)
-
-            If Not ttext Is Nothing AndAlso Not ttext.Equals(text) Then
-                Return ttext
-            Else
-                If prm Is Nothing Then
-                    prm = New Resources.ResourceManager("DWSIM.FlowsheetBase.Properties", Assembly.GetExecutingAssembly())
+            Try
+                If text.Split("/"c).Length = 2 Then
+                    Dim prop As String = text.Split("/"c)(0)
+                    Dim ttext2 As String = prm.GetString(prop)
+                    If ttext2 Is Nothing Then Return text Else Return ttext2 + " / " + text.Split("/"c)(1)
+                Else
+                    Dim ttext2 As String = prm.GetString(text)
+                    If ttext2 Is Nothing Then Return text Else Return ttext2
                 End If
-                Try
-                    If text.Split("/"c).Length = 2 Then
-                        Dim prop As String = text.Split("/"c)(0)
-                        Dim ttext2 As String = prm.GetString(prop)
-                        If ttext2 Is Nothing Then Return text Else Return ttext2 + " / " + text.Split("/"c)(1)
-                    Else
-                        Dim ttext2 As String = prm.GetString(text)
-                        If ttext2 Is Nothing Then Return text Else Return ttext2
-                    End If
-                Catch ex As Exception
-                    Return text
-                End Try
-            End If
-
+            Catch ex As Exception
+                Return text
+            End Try
         End If
 
     End Function
