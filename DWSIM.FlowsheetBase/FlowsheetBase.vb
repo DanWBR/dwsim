@@ -92,6 +92,14 @@ Imports System.Xml
 
     Protected _translatefunction As Func(Of String, String)
 
+    Public Sub SetResourcesManager(_rm As Resources.ResourceManager)
+        rm = _rm
+    End Sub
+
+    Public Sub SetPropertyResourcesManager(_prm As Resources.ResourceManager)
+        prm = _prm
+    End Sub
+
     Public Sub AddCompoundsToMaterialStream(ms As IMaterialStream) Implements IFlowsheet.AddCompoundsToMaterialStream
         For Each phase As IPhase In ms.Phases.Values
             For Each comp In Me.Options.SelectedComponents.Values

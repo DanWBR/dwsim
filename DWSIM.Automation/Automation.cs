@@ -17,6 +17,8 @@ using System.Threading.Tasks;
 using DWSIM.Thermodynamics.AdvancedEOS;
 using CapeOpen;
 using DWSIM.Thermodynamics.BaseClasses;
+using System.Resources;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DWSIM.Automation
 {
@@ -246,6 +248,8 @@ namespace DWSIM.Automation
 
         public Dictionary<String, ICompoundConstantProperties> AvailableCompounds { get; } = new Dictionary<string, ICompoundConstantProperties>();
 
+        private System.Resources.ResourceManager rm, prm;
+
         public Automation3()
         {
             Settings.AutomationMode = true;
@@ -254,13 +258,18 @@ namespace DWSIM.Automation
             GlobalSettings.Settings.AutomationMode = true;
             AppDomain currentDomain = AppDomain.CurrentDomain;
             currentDomain.AssemblyResolve += new ResolveEventHandler(LoadAssembly);
-            FlowsheetBase.FlowsheetBase.AddPropPacks();
+            //FlowsheetBase.FlowsheetBase.AddPropPacks();
             LoadItems();
             LoadExtenders();
         }
 
         private void LoadItems()
         {
+
+            // resources
+
+            rm = new System.Resources.ResourceManager("DWSIM.FlowsheetBase.Strings", Assembly.GetAssembly(typeof(FlowsheetBase.FlowsheetBase)));
+            prm = new System.Resources.ResourceManager("DWSIM.FlowsheetBase.Properties", Assembly.GetAssembly(typeof(FlowsheetBase.FlowsheetBase)));
 
             // proppacks
 
@@ -544,6 +553,8 @@ namespace DWSIM.Automation
             fsheet.SupressDataLoading = true;
             fsheet.AvailableCompounds = AvailableCompounds;
             fsheet.PropertyPackages = AvailablePropertyPackages;
+            fsheet.SetResourcesManager(rm);
+            fsheet.SetPropertyResourcesManager(prm);
             fsheet.Init();
             if (System.IO.Path.GetExtension(filepath).ToLower().EndsWith("z"))
             {
@@ -565,6 +576,8 @@ namespace DWSIM.Automation
             fsheet.SupressDataLoading = true;
             fsheet.AvailableCompounds = AvailableCompounds;
             fsheet.PropertyPackages = AvailablePropertyPackages;
+            fsheet.SetResourcesManager(rm);
+            fsheet.SetPropertyResourcesManager(prm);
             fsheet.Init();
             if (System.IO.Path.GetExtension(filepath).ToLower().EndsWith("z"))
             {
@@ -580,7 +593,10 @@ namespace DWSIM.Automation
         [DispId(3)]
         public void ReleaseResources()
         {
-
+            rm = null;
+            prm = null;
+            AvailablePropertyPackages?.Clear();
+            AvailableCompounds?.Clear();
         }
 
         [DispId(4)]
@@ -636,6 +652,8 @@ namespace DWSIM.Automation
             f.SupressDataLoading = true;
             f.AvailableCompounds = AvailableCompounds;
             f.PropertyPackages = AvailablePropertyPackages;
+            f.SetResourcesManager(rm);
+            f.SetPropertyResourcesManager(prm);
             f.Init();
             return f;
         }
