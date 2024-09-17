@@ -5272,6 +5272,8 @@ redirect2:                  IObj?.SetCurrent()
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.isothermal_compressibility = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.CO2loading = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.CO2partialpressure = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.particleSize_Mean = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.particleSize_StdDev = Nothing
 
                 Else
 
@@ -5305,6 +5307,8 @@ redirect2:                  IObj?.SetCurrent()
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.isothermal_compressibility = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.CO2loading = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.CO2partialpressure = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.particleSize_Mean = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.particleSize_StdDev = Nothing
 
                     If Not CalculatedOnly Then
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.molarflow = Nothing
