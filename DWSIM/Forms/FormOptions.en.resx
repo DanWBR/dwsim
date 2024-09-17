@@ -375,22 +375,22 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
 </value>
   </data>
   <data name="dgvdb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>644, 326</value>
+    <value>319, 326</value>
   </data>
   <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>636, 23</value>
+    <value>311, 23</value>
   </data>
   <data name="Button7.Text" xml:space="preserve">
     <value>Add User Dataset</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>653, 410</value>
+    <value>328, 410</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>User Compound Datasets</value>
   </data>
   <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>636, 23</value>
+    <value>311, 23</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>Add User IP Dataset</value>
@@ -413,16 +413,16 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
 </value>
   </data>
   <data name="dgvIPDB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>644, 231</value>
+    <value>319, 231</value>
   </data>
   <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>653, 283</value>
+    <value>328, 283</value>
   </data>
   <data name="GroupBox10.Text" xml:space="preserve">
     <value>User-Defined Interaction Parameter Datasets</value>
   </data>
   <data name="TabUserDatasets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 720</value>
+    <value>339, 720</value>
   </data>
   <data name="TabUserDatasets.Text" xml:space="preserve">
     <value>User Datasets</value>
@@ -467,7 +467,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>50</value>
   </data>
   <data name="dgjsonfiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>661, 636</value>
+    <value>324, 636</value>
   </data>
   <data name="Button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -476,7 +476,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>NoControl</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>653, 23</value>
+    <value>316, 23</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Add User-Defined Compound JSON File</value>
@@ -485,7 +485,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Fill</value>
   </data>
   <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>670, 714</value>
+    <value>333, 714</value>
   </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>JSON Files</value>
@@ -494,7 +494,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabUserJSONs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 720</value>
+    <value>339, 720</value>
   </data>
   <data name="TabUserJSONs.Text" xml:space="preserve">
     <value>User Compounds</value>
@@ -502,8 +502,17 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
   <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="btnClearDir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 25</value>
+  </data>
   <data name="btnClearDir.Text" xml:space="preserve">
     <value>Clean Directory</value>
+  </data>
+  <data name="tbConfigDir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 21</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>328, 87</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Configuration Directory</value>
@@ -515,7 +524,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Keep a copy of existing files when saving</value>
   </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 25</value>
+    <value>224, 25</value>
   </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Delete All ".dwbak" Files in Backup Folder</value>
@@ -524,7 +533,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>5 minutes</value>
   </data>
   <data name="TrackBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 19</value>
+    <value>251, 19</value>
   </data>
   <data name="KryptonLabel2.Text" xml:space="preserve">
     <value>Interval between saves:</value>
@@ -533,7 +542,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Select</value>
   </data>
   <data name="KryptonTextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 21</value>
+    <value>313, 21</value>
   </data>
   <data name="KryptonLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 13</value>
@@ -548,13 +557,13 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Enable backup copies</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 239</value>
+    <value>328, 239</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Backup Copies</value>
   </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 720</value>
+    <value>339, 720</value>
   </data>
   <data name="FaTabStripItem2.Text" xml:space="preserve">
     <value>Backups</value>
@@ -581,13 +590,13 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>6, 93</value>
   </data>
   <data name="btnDownPy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>356, 46</value>
+    <value>308, 46</value>
   </data>
   <data name="btnDownPy.Text" xml:space="preserve">
     <value>Download a portable Python distro from winpython.github.io</value>
   </data>
   <data name="btnSelectPythonPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 25</value>
+    <value>68, 25</value>
   </data>
   <data name="btnSelectPythonPath.Text" xml:space="preserve">
     <value>Select</value>
@@ -602,13 +611,13 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>11, 10</value>
   </data>
   <data name="GroupBox17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 151</value>
+    <value>325, 151</value>
   </data>
   <data name="GroupBox17.Text" xml:space="preserve">
     <value>Python.NET Interpreter Settings</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 720</value>
+    <value>339, 720</value>
   </data>
   <data name="gbLoadExtensions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -629,7 +638,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>9, 284</value>
   </data>
   <data name="gbLoadExtensions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 61</value>
+    <value>327, 61</value>
   </data>
   <data name="gbLoadExtensions.Text" xml:space="preserve">
     <value>External Components</value>
@@ -641,7 +650,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Check for Updates</value>
   </data>
   <data name="GroupBox16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 61</value>
+    <value>327, 61</value>
   </data>
   <data name="GroupBox16.Text" xml:space="preserve">
     <value>Updates</value>
@@ -650,7 +659,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Top, Left, Right</value>
   </data>
   <data name="chkIgnoreCompConstData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>349, 37</value>
+    <value>303, 37</value>
   </data>
   <data name="chkIgnoreCompConstData.Text" xml:space="preserve">
     <value>Ignore compound constant properties stored in the simulation file during loading</value>
@@ -659,7 +668,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>9, 208</value>
   </data>
   <data name="GroupBox15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 70</value>
+    <value>327, 70</value>
   </data>
   <data name="GroupBox15.Text" xml:space="preserve">
     <value>Compound Constant Properties</value>
@@ -668,7 +677,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>Top, Left, Right</value>
   </data>
   <data name="chkHideSolidPhaseCO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>346, 37</value>
+    <value>300, 37</value>
   </data>
   <data name="chkHideSolidPhaseCO.Text" xml:space="preserve">
     <value>Remove Solid Phase from the list of present phases for external components (requires restart)</value>
@@ -677,7 +686,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>9, 134</value>
   </data>
   <data name="GroupBox14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 70</value>
+    <value>327, 70</value>
   </data>
   <data name="cbDebugLevel.Items" xml:space="preserve">
     <value>None</value>
@@ -701,13 +710,13 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
     <value>9, 71</value>
   </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 60</value>
+    <value>327, 60</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Debug Mode</value>
   </data>
   <data name="FaTabStripItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>676, 720</value>
+    <value>339, 720</value>
   </data>
   <data name="FaTabStripItem7.Text" xml:space="preserve">
     <value>Other</value>
@@ -723,7 +732,7 @@ When the Inspector Reports feature is enabled and the Flowsheet Solver is called
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAXwBCwF8AQsBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAYQBCwGEAQsBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm
