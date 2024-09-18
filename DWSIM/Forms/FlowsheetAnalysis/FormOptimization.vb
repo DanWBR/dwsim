@@ -1880,6 +1880,7 @@ Public Class FormOptimization
         If selected Then
             Me.lbCases.Items(Me.lbCases.SelectedIndex) = Me.tbCaseName.Text
             form.Collections.OPT_OptimizationCollection(Me.lbCases.SelectedIndex).name = Me.tbCaseName.Text
+            tbCaseName.Focus()
         End If
     End Sub
 
