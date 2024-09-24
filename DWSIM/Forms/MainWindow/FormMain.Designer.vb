@@ -32,7 +32,7 @@ Partial Class FormMain
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiNewCompoundCreatorStudy = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiNewCompoundWizard = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovoRegressaoUNIFACIPs = New System.Windows.Forms.ToolStripMenuItem()
@@ -140,7 +140,7 @@ Partial Class FormMain
         'FileTSMI
         '
         resources.ApplyResources(Me.FileTSMI, "FileTSMI")
-        Me.FileTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.tsmiNewCompoundWizard, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.AbrirDoDashboardToolStripMenuItem, Me.toolStripSeparator, Me.SaveToDashboardTSMI, Me.SaveToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.tsmiFOSSEE, Me.tsmiSamples, Me.tsFileSeparator, Me.ExitToolStripMenuItem})
+        Me.FileTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.tsmiNewCompoundCreatorStudy, Me.tsmiNewCompoundWizard, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.AbrirDoDashboardToolStripMenuItem, Me.toolStripSeparator, Me.SaveToDashboardTSMI, Me.SaveToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.tsmiFOSSEE, Me.tsmiSamples, Me.tsFileSeparator, Me.ExitToolStripMenuItem})
         Me.FileTSMI.Name = "FileTSMI"
         Me.FileTSMI.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
         '
@@ -150,11 +150,11 @@ Partial Class FormMain
         Me.NewToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.file_80px
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         '
-        'NovoEstudoDoCriadorDeComponentesToolStripMenuItem
+        'tsmiNewCompoundCreatorStudy
         '
-        resources.ApplyResources(Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, "NovoEstudoDoCriadorDeComponentesToolStripMenuItem")
-        Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.test_tube_80px
-        Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Name = "NovoEstudoDoCriadorDeComponentesToolStripMenuItem"
+        resources.ApplyResources(Me.tsmiNewCompoundCreatorStudy, "tsmiNewCompoundCreatorStudy")
+        Me.tsmiNewCompoundCreatorStudy.Image = Global.DWSIM.My.Resources.Resources.test_tube_80px
+        Me.tsmiNewCompoundCreatorStudy.Name = "tsmiNewCompoundCreatorStudy"
         '
         'tsmiNewCompoundWizard
         '
@@ -943,7 +943,6 @@ Partial Class FormMain
     Friend WithEvents NovoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents NewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NovoEstudoDeRegressaoDeDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents NovoEstudoDoCriadorDeComponentesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents tsmiSamples As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NovoRegressaoUNIFACIPs As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SettingsPanel As System.Windows.Forms.Panel
@@ -988,7 +987,8 @@ Partial Class FormMain
     Public WithEvents tsbQuickQuestion As ToolStripDropDownButton
     Friend WithEvents UsersGuideToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsmiProUG As ToolStripMenuItem
-    Friend WithEvents tsmiNewCompoundWizard As ToolStripMenuItem
     Friend WithEvents CheckingCredentialsLabel As ToolStripLabel
     Friend WithEvents ToolStripDropDownButton1 As ToolStripDropDownButton
+    Public WithEvents tsmiNewCompoundWizard As ToolStripMenuItem
+    Public WithEvents tsmiNewCompoundCreatorStudy As ToolStripMenuItem
 End Class

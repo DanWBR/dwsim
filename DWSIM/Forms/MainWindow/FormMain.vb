@@ -4843,7 +4843,7 @@ Label_00CC:
         End If
     End Sub
 
-    Private Sub NovoEstudoDoCriadorDeComponentesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Click
+    Private Sub NovoEstudoDoCriadorDeComponentesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiNewCompoundCreatorStudy.Click
 
         Me.WelcomePanel.Visible = False
         PainelDeBoasvindasToolStripMenuItem.Checked = False
