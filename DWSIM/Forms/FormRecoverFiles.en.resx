@@ -122,6 +122,10 @@
 
 Select the ones that you want to recover. You can save them again once they're active in the simulator.</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Column4.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>File</value>
   </data>
