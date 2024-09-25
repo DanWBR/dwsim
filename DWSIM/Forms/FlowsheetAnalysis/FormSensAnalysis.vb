@@ -653,193 +653,190 @@ Public Class FormSensAnalysis
             dvprop = .dv.propID
         End With
 
-        Try
-            Me.btnRun.Enabled = False
-            Me.btnAbort.Enabled = True
-            btnExportToNewSheet.Enabled = False
-            Me.abortCalc = False
-            res.Clear()
-            counter = 0
-            Me.tbStats.Text = ""
-            With Me.dgvResults
-                .Columns.Clear()
-                .Columns.Add("IV1", "")
-                .Columns.Add("IV2", "")
-                .Rows.Clear()
-                If Me.tbUnitIndVar1.Text <> "" Then
-                    .Columns(0).HeaderText = Me.cbObjIndVar1.SelectedItem.ToString & " - " & Me.cbPropIndVar1.SelectedItem.ToString & " (" & Me.tbUnitIndVar1.Text & ")"
-                Else
-                    .Columns(0).HeaderText = Me.cbObjIndVar1.SelectedItem.ToString & " - " & Me.cbPropIndVar1.SelectedItem.ToString
-                End If
-                If chkIndVar2.Checked Then
-                    .Columns(1).Visible = True
-                    If Me.tbUnitIndVar2.Text <> "" Then
-                        .Columns(1).HeaderText = Me.cbObjIndVar2.SelectedItem.ToString & " - " & Me.cbPropIndVar2.SelectedItem.ToString & " (" & Me.tbUnitIndVar2.Text & ")"
-                    Else
-                        .Columns(1).HeaderText = Me.cbObjIndVar2.SelectedItem.ToString & " - " & Me.cbPropIndVar2.SelectedItem.ToString
-                    End If
-                Else
-                    .Columns(1).Visible = False
-                End If
-                If Me.rbExp.Checked Then
-                    .Columns.Add("DV", "EXP Val")
-                Else
-                    For Each var As SAVariable In selectedsacase.depvariables.Values
-                        .Columns.Add(var.propID, var.objectTAG & " - " & form.GetTranslatedString1(var.propID) & " (" & var.unit & ")")
-                    Next
-                End If
-            End With
-            'store original values
-            If iv1id <> "SpreadsheetCell" And iv1id <> "ReactionProperty" Then
-                iv1val0 = form.Collections.FlowsheetObjectCollection(iv1id).GetPropertyValue(iv1prop)
-            ElseIf iv1id = "ReactionProperty" Then
-                Dim rx = form.Reactions.Values.Where(Function(x) x.Name = iv1prop.Split("|")(0)).FirstOrDefault
-                iv1val0 = rx.GetPropertyValue(iv1prop.Split("|")(1))
+        Dim state0 = form.GetSnapshot(SnapshotType.All)
+
+        Dim EndAction = Sub()
+                            UIThread(Sub()
+                                         Me.btnRun.Enabled = True
+                                         Me.btnAbort.Enabled = False
+                                         Me.tbStats.Text += "Restoring simulation to its original state..." & vbCrLf
+                                         Me.tbStats.SelectionStart = Me.tbStats.Text.Length - 1
+                                         Me.tbStats.SelectionLength = 1
+                                         Me.tbStats.ScrollToCaret()
+
+                                         form.RestoreSnapshot(state0, SnapshotType.All)
+
+                                         Me.tbStats.Text += "Done!" & vbCrLf
+                                         Me.tbStats.SelectionStart = Me.tbStats.Text.Length - 1
+                                         Me.tbStats.SelectionLength = 1
+                                         Me.tbStats.ScrollToCaret()
+                                         Me.BtnDrawChart.Enabled = True
+                                         If My.Application.UtilityPlugins.ContainsKey("DF7368D6-5A06-4856-9B7A-D7F09D81F71F") Then
+                                             btnRegressData.Enabled = True
+                                         End If
+                                         btnExportToNewSheet.Enabled = True
+                                         FillChartData()
+                                     End Sub)
+                        End Sub
+
+        Me.btnRun.Enabled = False
+        Me.btnAbort.Enabled = True
+        btnExportToNewSheet.Enabled = False
+        Me.abortCalc = False
+        res.Clear()
+        counter = 0
+        Me.tbStats.Text = ""
+        With Me.dgvResults
+            .Columns.Clear()
+            .Columns.Add("IV1", "")
+            .Columns.Add("IV2", "")
+            .Rows.Clear()
+            If Me.tbUnitIndVar1.Text <> "" Then
+                .Columns(0).HeaderText = Me.cbObjIndVar1.SelectedItem.ToString & " - " & Me.cbPropIndVar1.SelectedItem.ToString & " (" & Me.tbUnitIndVar1.Text & ")"
             Else
-                iv1val0 = form.FormSpreadsheet.GetCellValue(iv1prop).Data
+                .Columns(0).HeaderText = Me.cbObjIndVar1.SelectedItem.ToString & " - " & Me.cbPropIndVar1.SelectedItem.ToString
             End If
-            If Me.chkIndVar2.Checked Then
-                If iv2id <> "SpreadsheetCell" And iv2id <> "ReactionProperty" Then
-                    iv2val0 = form.Collections.FlowsheetObjectCollection(iv2id).GetPropertyValue(iv2prop)
-                ElseIf iv2id = "ReactionProperty" Then
-                    Dim rx = form.Reactions.Values.Where(Function(x) x.Name = iv2prop.Split("|")(0)).FirstOrDefault
-                    iv2val0 = rx.GetPropertyValue(iv2prop.Split("|")(1))
+            If chkIndVar2.Checked Then
+                .Columns(1).Visible = True
+                If Me.tbUnitIndVar2.Text <> "" Then
+                    .Columns(1).HeaderText = Me.cbObjIndVar2.SelectedItem.ToString & " - " & Me.cbPropIndVar2.SelectedItem.ToString & " (" & Me.tbUnitIndVar2.Text & ")"
                 Else
-                    iv2val0 = form.FormSpreadsheet.GetCellValue(iv2prop).Data
+                    .Columns(1).HeaderText = Me.cbObjIndVar2.SelectedItem.ToString & " - " & Me.cbPropIndVar2.SelectedItem.ToString
                 End If
             Else
-                iv2val0 = 0.0#
+                .Columns(1).Visible = False
             End If
-            For i = 0 To iv1np
-                For j = 0 To iv2np
-                    iv1val = iv1ll + i * (iv1ul - iv1ll) / iv1np
-                    If Me.chkIndVar2.Checked Then iv2val = iv2ll + j * (iv2ul - iv2ll) / iv2np Else iv2val = 0
-                    'set object properties
-                    If iv1id <> "SpreadsheetCell" And iv1id <> "ReactionProperty" Then
-                        form.Collections.FlowsheetObjectCollection(iv1id).SetPropertyValue(iv1prop, iv1val)
-                    ElseIf iv1id = "ReactionProperty" Then
-                        Dim rx = form.Reactions.Values.Where(Function(x) x.Name = iv1prop.Split("|")(0)).FirstOrDefault
-                        rx.SetPropertyValue(iv1prop.Split("|")(1), iv1val)
-                    Else
-                        form.FormSpreadsheet.SetCellValue(iv1prop, iv1val)
-                    End If
-                    If Me.chkIndVar2.Checked Then
-                        If iv2id <> "SpreadsheetCell" And iv2id <> "ReactionProperty" Then
-                            form.Collections.FlowsheetObjectCollection(iv2id).SetPropertyValue(iv2prop, iv2val)
-                        ElseIf iv2id = "ReactionProperty" Then
-                            Dim rx = form.Reactions.Values.Where(Function(x) x.Name = iv2prop.Split("|")(0)).FirstOrDefault
-                            rx.SetPropertyValue(iv2prop.Split("|")(1), iv2val)
-                        Else
-                            form.FormSpreadsheet.SetCellValue(iv2prop, iv2val)
-                        End If
-                    End If
-                    'run simulation
-                    Dim exceptions = FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, Settings.SolverMode)
-                    If exceptions.Count > 0 Then Throw New AggregateException(exceptions)
-                    Application.DoEvents()
-                    'get the value of the dependent variable
-                    If rbExp.Checked Then
-                        Me.selectedsacase.econtext = New ExpressionContext
-                        Me.selectedsacase.expression = Me.tbExpression.Text
-                        With Me.selectedsacase.econtext
-                            .Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-                            .Imports.AddType(GetType(System.Math))
-                            For Each var As SAVariable In selectedsacase.variables.Values
-                                If var.objectID = "SpreadsheetCell" Then
-                                    .Variables.Add(var.name, form.FormSpreadsheet.GetCellValue(var.propID).Data)
-                                ElseIf var.objectID = "FlowsheetResult" Then
-                                    .Variables.Add(var.name, form.GetResultValue(var.propID))
-                                Else
-                                    .Variables.Add(var.name, SystemsOfUnits.Converter.ConvertFromSI(var.unit, form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)))
-                                End If
-                            Next
-                            Me.selectedsacase.exbase = Me.selectedsacase.econtext.CompileGeneric(Of Double)(Me.selectedsacase.expression)
-                        End With
-                        dvval = Me.selectedsacase.exbase.Evaluate
-                        'store results
-                        res.Add(New Double() {iv1val, iv2val, dvval})
-                    Else
-                        'store results
-                        Dim currresults As New ArrayList
-                        currresults.Add(iv1val)
-                        currresults.Add(iv2val)
-                        For Each var As SAVariable In selectedsacase.depvariables.Values
-                            If var.objectID = "SpreadsheetCell" Then
-                                var.currentvalue = form.FormSpreadsheet.GetCellValue(var.propID).Data
-                            ElseIf var.objectID = "FlowsheetResult" Then
-                                var.currentvalue = form.GetResultValue(var.propID)
-                            Else
-                                var.currentvalue = form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)
-                            End If
-                            currresults.Add(var.currentvalue)
-                        Next
-                        res.Add(currresults.ToArray(Type.GetType("System.Double")))
-                    End If
-                    If rbExp.Checked Then
-                        Me.dgvResults.Rows.Add(New Object() {Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv1.unit, iv1val), nf), Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv2.unit, iv2val), nf), Format(dvval, nf)})
-                    Else
-                        Dim formattedvalues As New ArrayList
-                        formattedvalues.Add(Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv1.unit, iv1val), nf))
-                        formattedvalues.Add(Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv2.unit, iv2val), nf))
-                        For Each var As SAVariable In selectedsacase.depvariables.Values
-                            formattedvalues.Add(Format(SystemsOfUnits.Converter.ConvertFromSI(var.unit, var.currentvalue), nf))
-                        Next
-                        Me.dgvResults.Rows.Add(formattedvalues.ToArray())
-                    End If
-                    Me.dgvResults.FirstDisplayedScrollingRowIndex = Me.dgvResults.Rows.Count - 1
-                    counter += 1
-                    Me.tbStats.Text += "Run #" & counter & " completed..." & vbCrLf
-                    Me.tbStats.SelectionStart = Me.tbStats.Text.Length - 1
-                    Me.tbStats.SelectionLength = 1
-                    Me.tbStats.ScrollToCaret()
-                    If Me.abortCalc Then Exit Sub
+            If Me.rbExp.Checked Then
+                .Columns.Add("DV", "EXP Val")
+            Else
+                For Each var As SAVariable In selectedsacase.depvariables.Values
+                    .Columns.Add(var.propID, var.objectTAG & " - " & form.GetTranslatedString1(var.propID) & " (" & var.unit & ")")
                 Next
-            Next
-        Catch ex As Exception
-            Me.tbStats.Text += "Error: " & ex.Message.ToString & vbCrLf
-        Finally
-            Me.btnRun.Enabled = True
-            Me.btnAbort.Enabled = False
-            're-run simulation to restore original state
-            Me.tbStats.Text += "Restoring simulation to its original state..." & vbCrLf
-            Me.tbStats.SelectionStart = Me.tbStats.Text.Length - 1
-            Me.tbStats.SelectionLength = 1
-            Me.tbStats.ScrollToCaret()
-            If iv1id <> "SpreadsheetCell" And iv1id <> "ReactionProperty" Then
-                form.Collections.FlowsheetObjectCollection(iv1id).SetPropertyValue(iv1prop, iv1val0)
-            ElseIf iv1id = "ReactionProperty" Then
-                Dim rx = form.Reactions.Values.Where(Function(x) x.Name = iv1prop.Split("|")(0)).FirstOrDefault
-                rx.SetPropertyValue(iv1prop.Split("|")(1), iv1val)
+            End If
+        End With
+        'store original values
+        If iv1id <> "SpreadsheetCell" And iv1id <> "ReactionProperty" Then
+            iv1val0 = form.Collections.FlowsheetObjectCollection(iv1id).GetPropertyValue(iv1prop)
+        ElseIf iv1id = "ReactionProperty" Then
+            Dim rx = form.Reactions.Values.Where(Function(x) x.Name = iv1prop.Split("|")(0)).FirstOrDefault
+            iv1val0 = rx.GetPropertyValue(iv1prop.Split("|")(1))
+        Else
+            iv1val0 = form.FormSpreadsheet.GetCellValue(iv1prop).Data
+        End If
+        If Me.chkIndVar2.Checked Then
+            If iv2id <> "SpreadsheetCell" And iv2id <> "ReactionProperty" Then
+                iv2val0 = form.Collections.FlowsheetObjectCollection(iv2id).GetPropertyValue(iv2prop)
+            ElseIf iv2id = "ReactionProperty" Then
+                Dim rx = form.Reactions.Values.Where(Function(x) x.Name = iv2prop.Split("|")(0)).FirstOrDefault
+                iv2val0 = rx.GetPropertyValue(iv2prop.Split("|")(1))
             Else
-                form.FormSpreadsheet.SetCellValue(iv1prop, iv1val0)
+                iv2val0 = form.FormSpreadsheet.GetCellValue(iv2prop).Data
             End If
-            If Me.chkIndVar2.Checked Then
-                If iv2id <> "SpreadsheetCell" And iv2id <> "ReactionProperty" Then
-                    form.Collections.FlowsheetObjectCollection(iv2id).SetPropertyValue(iv2prop, iv2val0)
-                ElseIf iv2id = "ReactionProperty" Then
-                    Dim rx = form.Reactions.Values.Where(Function(x) x.Name = iv2prop.Split("|")(0)).FirstOrDefault
-                    rx.SetPropertyValue(iv2prop.Split("|")(1), iv2val)
-                Else
-                    form.FormSpreadsheet.SetCellValue(iv2prop, iv2val0)
-                End If
-            End If
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, Settings.SolverMode)
-            Me.tbStats.Text += "Done!" & vbCrLf
-            Me.tbStats.SelectionStart = Me.tbStats.Text.Length - 1
-            Me.tbStats.SelectionLength = 1
-            Me.tbStats.ScrollToCaret()
-            Me.BtnDrawChart.Enabled = True
+        Else
+            iv2val0 = 0.0#
+        End If
 
-            If My.Application.UtilityPlugins.ContainsKey("DF7368D6-5A06-4856-9B7A-D7F09D81F71F") Then
-
-                btnRegressData.Enabled = True
-
-            End If
-
-            btnExportToNewSheet.Enabled = True
-
-            FillChartData()
-        End Try
+        TaskHelper.Run(Sub()
+                           form.SupressMessages = True
+                           For i = 0 To iv1np
+                               For j = 0 To iv2np
+                                   iv1val = iv1ll + i * (iv1ul - iv1ll) / iv1np
+                                   If Me.chkIndVar2.Checked Then iv2val = iv2ll + j * (iv2ul - iv2ll) / iv2np Else iv2val = 0
+                                   'set object properties
+                                   If iv1id <> "SpreadsheetCell" And iv1id <> "ReactionProperty" Then
+                                       form.Collections.FlowsheetObjectCollection(iv1id).SetPropertyValue(iv1prop, iv1val)
+                                   ElseIf iv1id = "ReactionProperty" Then
+                                       Dim rx = form.Reactions.Values.Where(Function(x) x.Name = iv1prop.Split("|")(0)).FirstOrDefault
+                                       rx.SetPropertyValue(iv1prop.Split("|")(1), iv1val)
+                                   Else
+                                       form.FormSpreadsheet.SetCellValue(iv1prop, iv1val)
+                                   End If
+                                   If Me.chkIndVar2.Checked Then
+                                       If iv2id <> "SpreadsheetCell" And iv2id <> "ReactionProperty" Then
+                                           form.Collections.FlowsheetObjectCollection(iv2id).SetPropertyValue(iv2prop, iv2val)
+                                       ElseIf iv2id = "ReactionProperty" Then
+                                           Dim rx = form.Reactions.Values.Where(Function(x) x.Name = iv2prop.Split("|")(0)).FirstOrDefault
+                                           rx.SetPropertyValue(iv2prop.Split("|")(1), iv2val)
+                                       Else
+                                           form.FormSpreadsheet.SetCellValue(iv2prop, iv2val)
+                                       End If
+                                   End If
+                                   'run simulation
+                                   Dim exceptions = FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, Settings.SolverMode)
+                                   If exceptions.Count > 0 Then Throw New AggregateException(exceptions)
+                                   Application.DoEvents()
+                                   'get the value of the dependent variable
+                                   If rbExp.Checked Then
+                                       Me.selectedsacase.econtext = New ExpressionContext
+                                       Me.selectedsacase.expression = Me.tbExpression.Text
+                                       With Me.selectedsacase.econtext
+                                           .Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                                           .Imports.AddType(GetType(System.Math))
+                                           For Each var As SAVariable In selectedsacase.variables.Values
+                                               If var.objectID = "SpreadsheetCell" Then
+                                                   .Variables.Add(var.name, form.FormSpreadsheet.GetCellValue(var.propID).Data)
+                                               ElseIf var.objectID = "FlowsheetResult" Then
+                                                   .Variables.Add(var.name, form.GetResultValue(var.propID))
+                                               Else
+                                                   .Variables.Add(var.name, SystemsOfUnits.Converter.ConvertFromSI(var.unit, form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)))
+                                               End If
+                                           Next
+                                           Me.selectedsacase.exbase = Me.selectedsacase.econtext.CompileGeneric(Of Double)(Me.selectedsacase.expression)
+                                       End With
+                                       dvval = Me.selectedsacase.exbase.Evaluate
+                                       'store results
+                                       res.Add(New Double() {iv1val, iv2val, dvval})
+                                   Else
+                                       'store results
+                                       Dim currresults As New ArrayList
+                                       currresults.Add(iv1val)
+                                       currresults.Add(iv2val)
+                                       For Each var As SAVariable In selectedsacase.depvariables.Values
+                                           If var.objectID = "SpreadsheetCell" Then
+                                               var.currentvalue = form.FormSpreadsheet.GetCellValue(var.propID).Data
+                                           ElseIf var.objectID = "FlowsheetResult" Then
+                                               var.currentvalue = form.GetResultValue(var.propID)
+                                           Else
+                                               var.currentvalue = form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)
+                                           End If
+                                           currresults.Add(var.currentvalue)
+                                       Next
+                                       res.Add(currresults.ToArray(Type.GetType("System.Double")))
+                                   End If
+                                   UIThread(Sub()
+                                                If rbExp.Checked Then
+                                                    Me.dgvResults.Rows.Add(New Object() {Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv1.unit, iv1val), nf), Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv2.unit, iv2val), nf), Format(dvval, nf)})
+                                                Else
+                                                    Dim formattedvalues As New ArrayList
+                                                    formattedvalues.Add(Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv1.unit, iv1val), nf))
+                                                    formattedvalues.Add(Format(SystemsOfUnits.Converter.ConvertFromSI(sacase.iv2.unit, iv2val), nf))
+                                                    For Each var As SAVariable In selectedsacase.depvariables.Values
+                                                        formattedvalues.Add(Format(SystemsOfUnits.Converter.ConvertFromSI(var.unit, var.currentvalue), nf))
+                                                    Next
+                                                    Me.dgvResults.Rows.Add(formattedvalues.ToArray())
+                                                End If
+                                                Me.dgvResults.FirstDisplayedScrollingRowIndex = Me.dgvResults.Rows.Count - 1
+                                                counter += 1
+                                                Me.tbStats.Text += "Run #" & counter & " completed..." & vbCrLf
+                                                Me.tbStats.SelectionStart = Me.tbStats.Text.Length - 1
+                                                Me.tbStats.SelectionLength = 1
+                                                Me.tbStats.ScrollToCaret()
+                                            End Sub)
+                                   If Me.abortCalc Then Exit Sub
+                               Next
+                           Next
+                       End Sub).ContinueWith(
+                       Sub(tsk)
+                           form.ClearLog()
+                           form.SupressMessages = False
+                           If tsk.Exception IsNot Nothing Then
+                               UIThread(Sub()
+                                            Me.tbStats.Text += "Error: " & tsk.Exception.Message.ToString & vbCrLf
+                                        End Sub)
+                           End If
+                           EndAction.Invoke()
+                       End Sub)
+        If Me.abortCalc Then Exit Sub
 
     End Sub
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAbort.Click
