@@ -240,6 +240,8 @@ Namespace UnitOperations
 
         Public Overrides Function GetEnergyConsumption() As Double
 
+            If GraphicObject Is Nothing Then Return 0.0
+
             Dim ec As Double = 0
             For Each ic In GraphicObject.InputConnectors
                 If ic.Type = GraphicObjects.ConType.ConEn And ic.IsAttached Then

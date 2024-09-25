@@ -4678,6 +4678,7 @@ Public Class FormFlowsheet
                             Invalidating = False
                         End Sub)
         End If
+        Application.DoEvents()
 
     End Sub
 
