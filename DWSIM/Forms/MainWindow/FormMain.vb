@@ -757,7 +757,7 @@ Public Class FormMain
                 If File.Exists(str) Then
                     Dim tsmi As New ToolStripMenuItem
                     With tsmi
-                        .Text = str
+                        .Text = Path.GetFileName(str)
                         .Tag = str
                         .DisplayStyle = ToolStripItemDisplayStyle.Text
                     End With
