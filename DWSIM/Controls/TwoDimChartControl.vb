@@ -417,7 +417,7 @@ Public Class TwoDimChartControl
         Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
         Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
-            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType(extension + " File", "*." + extension)})
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType(extension + " File", "*." + extension.ToLower())})
 
         If handler IsNot Nothing Then
             Using stream As New MemoryStream()
