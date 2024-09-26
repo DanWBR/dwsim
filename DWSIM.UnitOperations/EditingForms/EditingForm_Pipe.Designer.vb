@@ -41,6 +41,8 @@ Partial Class EditingForm_Pipe
         Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.nupCalculateEquilibrium = New System.Windows.Forms.NumericUpDown()
+        Me.chkCalculateEquilibrium = New System.Windows.Forms.CheckBox()
         Me.cbSlurryVisc = New System.Windows.Forms.ComboBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -94,6 +96,7 @@ Partial Class EditingForm_Pipe
         Me.GroupBoxParameters.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage4.SuspendLayout()
+        CType(Me.nupCalculateEquilibrium, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBoxConnections.SuspendLayout()
         Me.GroupBoxResults.SuspendLayout()
         Me.tabstrip1.SuspendLayout()
@@ -218,6 +221,8 @@ Partial Class EditingForm_Pipe
         'TabPage4
         '
         resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Controls.Add(Me.nupCalculateEquilibrium)
+        Me.TabPage4.Controls.Add(Me.chkCalculateEquilibrium)
         Me.TabPage4.Controls.Add(Me.cbSlurryVisc)
         Me.TabPage4.Controls.Add(Me.Label21)
         Me.TabPage4.Controls.Add(Me.Label8)
@@ -248,6 +253,24 @@ Partial Class EditingForm_Pipe
         Me.ToolTipValues.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip2"))
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'nupCalculateEquilibrium
+        '
+        resources.ApplyResources(Me.nupCalculateEquilibrium, "nupCalculateEquilibrium")
+        Me.nupCalculateEquilibrium.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nupCalculateEquilibrium.Name = "nupCalculateEquilibrium"
+        Me.ToolTipChangeTag.SetToolTip(Me.nupCalculateEquilibrium, resources.GetString("nupCalculateEquilibrium.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.nupCalculateEquilibrium, resources.GetString("nupCalculateEquilibrium.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.nupCalculateEquilibrium, resources.GetString("nupCalculateEquilibrium.ToolTip2"))
+        '
+        'chkCalculateEquilibrium
+        '
+        resources.ApplyResources(Me.chkCalculateEquilibrium, "chkCalculateEquilibrium")
+        Me.chkCalculateEquilibrium.Name = "chkCalculateEquilibrium"
+        Me.ToolTip1.SetToolTip(Me.chkCalculateEquilibrium, resources.GetString("chkCalculateEquilibrium.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkCalculateEquilibrium, resources.GetString("chkCalculateEquilibrium.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkCalculateEquilibrium, resources.GetString("chkCalculateEquilibrium.ToolTip2"))
+        Me.chkCalculateEquilibrium.UseVisualStyleBackColor = True
         '
         'cbSlurryVisc
         '
@@ -728,6 +751,7 @@ Partial Class EditingForm_Pipe
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
+        CType(Me.nupCalculateEquilibrium, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBoxConnections.ResumeLayout(False)
         Me.GroupBoxConnections.PerformLayout()
         Me.GroupBoxResults.ResumeLayout(False)
@@ -799,4 +823,6 @@ Partial Class EditingForm_Pipe
     Public WithEvents CheckBox1 As CheckBox
     Friend WithEvents cbSlurryVisc As ComboBox
     Friend WithEvents Label21 As Label
+    Friend WithEvents nupCalculateEquilibrium As NumericUpDown
+    Friend WithEvents chkCalculateEquilibrium As CheckBox
 End Class

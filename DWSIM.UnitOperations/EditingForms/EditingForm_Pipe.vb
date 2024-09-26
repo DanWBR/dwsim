@@ -136,6 +136,10 @@ Public Class EditingForm_Pipe
 
             cbSlurryVisc.SelectedIndex = .SlurryViscosityMode
 
+            chkCalculateEquilibrium.Checked = .CalculateEquilibrium
+
+            nupCalculateEquilibrium.Value = .CalculateEquilibriumIntervalInSteps
+
             'profiles
 
             TabPage5.Controls.Clear()
@@ -486,5 +490,13 @@ Public Class EditingForm_Pipe
 
         SimObject.SlurryViscosityMode = cbSlurryVisc.SelectedIndex
 
+    End Sub
+
+    Private Sub chkCalculateEquilibrium_CheckedChanged(sender As Object, e As EventArgs) Handles chkCalculateEquilibrium.CheckedChanged
+        If Loaded Then SimObject.CalculateEquilibrium = chkCalculateEquilibrium.Checked
+    End Sub
+
+    Private Sub nupCalculateEquilibrium_ValueChanged(sender As Object, e As EventArgs) Handles nupCalculateEquilibrium.ValueChanged
+        If Loaded Then SimObject.CalculateEquilibriumIntervalInSteps = nupCalculateEquilibrium.Value
     End Sub
 End Class
