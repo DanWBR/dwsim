@@ -83,12 +83,19 @@ Namespace UnitOperations
         Public Property UseGlobalWeather As Boolean = False
 
         Public Property Specification As Specmode = Specmode.Length
+
         Public Property OutletPressure As Double = 101325
+
         Public Property OutletTemperature As Double = 298.15
 
         Public Property SlurryViscosityMode As Integer = 0
 
+        Public Property CalculateEquilibrium As Boolean = True
+
+        Public Property CalculateEquilibriumIntervalInSteps As Integer = 1
+
         Public Property PressureDrop_Static As Double = 0.0
+
         Public Property PressureDrop_Friction As Double = 0.0
 
         Public Property IncludeEmulsion() As Boolean
@@ -528,6 +535,9 @@ Namespace UnitOperations
 
                         End With
 
+                        Dim eqcheck = 0
+                        Dim calceq = False
+
                         Do
 
                             If Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
@@ -822,7 +832,10 @@ Namespace UnitOperations
                             IObj4?.Paragraphs.Add(String.Format("Recalculating the temporary material stream and moving on to the next segment/increment..."))
 
                             IObj4?.SetCurrent()
-                            oms.Calculate(True, True)
+
+                            If calceq And CalculateEquilibrium Then
+                                oms.Calculate(True, True)
+                            End If
 
                             With oms
 
@@ -896,6 +909,14 @@ Namespace UnitOperations
                             j += 1
 
                             IObj4?.Close()
+
+                            eqcheck += j
+                            If eqcheck >= CalculateEquilibriumIntervalInSteps * j Then
+                                eqcheck = 0.0
+                                calceq = True
+                            Else
+                                calceq = False
+                            End If
 
                         Loop Until j = nseg
 
