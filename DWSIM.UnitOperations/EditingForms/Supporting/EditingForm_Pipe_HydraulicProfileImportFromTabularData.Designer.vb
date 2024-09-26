@@ -24,9 +24,9 @@ Partial Class EditingForm_Pipe_HydraulicProfileImportFromTabularData
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Pipe_HydraulicProfileImportFromTabularData))
         Me.gbTable = New System.Windows.Forms.GroupBox()
+        Me.grid1 = New unvell.ReoGrid.ReoGridControl()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.grid1 = New unvell.ReoGrid.ReoGridControl()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.gbTable.SuspendLayout()
         Me.SuspendLayout()
@@ -43,25 +43,6 @@ Partial Class EditingForm_Pipe_HydraulicProfileImportFromTabularData
         Me.gbTable.TabIndex = 48
         Me.gbTable.TabStop = False
         Me.gbTable.Text = "Data Table"
-        '
-        'Button1
-        '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(848, 544)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(92, 23)
-        Me.Button1.TabIndex = 49
-        Me.Button1.Text = "Import Profile"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(7, 10)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(967, 13)
-        Me.Label1.TabIndex = 50
-        Me.Label1.Text = resources.GetString("Label1.Text")
         '
         'grid1
         '
@@ -81,6 +62,25 @@ Partial Class EditingForm_Pipe_HydraulicProfileImportFromTabularData
         Me.grid1.Size = New System.Drawing.Size(1025, 488)
         Me.grid1.TabIndex = 0
         Me.grid1.Text = "ReoGridControl1"
+        '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.Location = New System.Drawing.Point(848, 544)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(92, 23)
+        Me.Button1.TabIndex = 49
+        Me.Button1.Text = "Import Profile"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(7, 10)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(967, 13)
+        Me.Label1.TabIndex = 50
+        Me.Label1.Text = resources.GetString("Label1.Text")
         '
         'Button2
         '
