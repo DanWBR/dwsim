@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 8.8.1
+Version 8.8.2
 Copyright (c) 2017-2024 Daniel Wagner and contributors
 Copyright (c) 2008-2016 Daniel Wagner, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,16 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 8.8.2
+
+- Fixed issues with Sensitivity Analysis (Classic UI)
+- Set default System of Units  (Classic UI) 
+- Tentative fix for Excel.exe not closing in Spreadsheet UO after calculation
+- Fixed memory leaks
+- Optimized memory consumption and CPU usage
+- Fixed issue with Heat Exchanger UO
+- Other fixes and enhancements
 
 Version 8.8.1
 

@@ -1,16 +1,9 @@
-Version 8.8.1
+Version 8.8.2
 
-- Control Panel for Controller Logical Block in Cross-Platform UI
-- Improved CPUI initialization and loading times
-- Fixed Dynamics Integrator not working in CPUI
-- Added an option to use legacy convergence mode for Recycle blocks (#667)
-- Fixed Reaktoro Property Package
-- Fixed issue with reactor models
-- Fixed Heat of Combustion plugin
-- Fixed solid density calculation
-- Fixed issue #669 (single compound partial sublimation when Tfus > Tsat)
-- Fixed issue with rigorous column
-- Fixed issue #656 (Crashing when using Simulation setup wizard)
-- Fixed issue #657 (Faulty unit for Cp in compound creator wizard)
-- Fixed issue #664: memory leak in automation mode
-- Fixed issue with property package missing BIPs after calculating a binary envelope (Classic UI)
+- Fixed issues with Sensitivity Analysis (Classic UI)
+- Set default System of Units  (Classic UI) 
+- Tentative fix for Excel.exe not closing in Spreadsheet UO after calculation
+- Fixed memory leaks
+- Optimized memory consumption and CPU usage
+- Fixed issue with Heat Exchanger UO
+- Other fixes and enhancements
