@@ -552,7 +552,7 @@ namespace DWSIM.Automation
             var fsheet = new Flowsheet2(null, UIUpdHandler);
             fsheet.SupressDataLoading = true;
             fsheet.AvailableCompounds = AvailableCompounds;
-            fsheet.PropertyPackages = AvailablePropertyPackages;
+            fsheet.AvailablePropertyPackages = AvailablePropertyPackages;
             fsheet.SetResourcesManager(rm);
             fsheet.SetPropertyResourcesManager(prm);
             fsheet.Init();
@@ -575,7 +575,7 @@ namespace DWSIM.Automation
             var fsheet = new Flowsheet2(null, null);
             fsheet.SupressDataLoading = true;
             fsheet.AvailableCompounds = AvailableCompounds;
-            fsheet.PropertyPackages = AvailablePropertyPackages;
+            fsheet.AvailablePropertyPackages = AvailablePropertyPackages;
             fsheet.SetResourcesManager(rm);
             fsheet.SetPropertyResourcesManager(prm);
             fsheet.Init();
@@ -651,7 +651,7 @@ namespace DWSIM.Automation
             var f = new Flowsheet2(null, null);
             f.SupressDataLoading = true;
             f.AvailableCompounds = AvailableCompounds;
-            f.PropertyPackages = AvailablePropertyPackages;
+            f.AvailablePropertyPackages = AvailablePropertyPackages;
             f.SetResourcesManager(rm);
             f.SetPropertyResourcesManager(prm);
             f.Init();
