@@ -69,7 +69,6 @@ Partial Class ScriptEditorControl
         '
         resources.ApplyResources(Me.SplitContainer1.Panel2, "SplitContainer1.Panel2")
         Me.SplitContainer1.Panel2.Controls.Add(Me.TableLayoutPanel1)
-        Me.SplitContainer1.Panel2Collapsed = True
         '
         'txtScript
         '

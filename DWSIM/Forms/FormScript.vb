@@ -1012,11 +1012,9 @@ Imports PythonConsoleControl
 
                 CancelDebugToken = New CancellationTokenSource()
 
+                Dim breakpoints As List(Of Integer) = scripteditor.txtScript.GetBookmarks
+
                 Dim t = TaskHelper.Run(Sub() RunScript_IronPython("", script, fc, Sub(frame)
-
-                                                                                      Dim breakpoints As New List(Of Integer)
-
-                                                                                      Me.UIThreadInvoke(Sub() breakpoints = scripteditor.txtScript.GetBookmarks)
 
                                                                                       If breakpoints.Contains(frame.f_lineno) Then
 

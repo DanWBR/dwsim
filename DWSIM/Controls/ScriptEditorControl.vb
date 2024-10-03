@@ -30,6 +30,11 @@ Public Class ScriptEditorControl
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
+        tvVariables.Columns(0).Width = 100 * Settings.DpiScale
+        tvVariables.Columns(1).Width = 150 * Settings.DpiScale
+        tvVariables.Columns(2).Width = 200 * Settings.DpiScale
+        tvVariables.RowHeight = 20 * Settings.DpiScale
+
         Me.txtScript.Tag = 1
 
         cbLinkedObject.Items.AddRange(New String() {"Simulation", "Solver", "Integrator"})
