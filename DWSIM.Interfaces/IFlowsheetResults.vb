@@ -7,4 +7,8 @@
 
     Property Additional As Dynamic.ExpandoObject
 
+    Property ResidualMassBalance As Double
+
+    Property TotalEnergyBalance As Double
+
 End Interface

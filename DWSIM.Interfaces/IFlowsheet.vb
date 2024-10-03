@@ -402,6 +402,8 @@
 
     Sub ReleaseResources()
 
+    Sub UpdateMassAndEnergyBalance()
+
 End Interface
 
 ''' <summary>

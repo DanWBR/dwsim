@@ -29,6 +29,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 Imports SkiaSharp
 Imports System.Text.RegularExpressions
 Imports System.Xml
+Imports DWSIM.ExtensionMethods
 
 <System.Runtime.InteropServices.ComVisible(True)> Public MustInherit Class FlowsheetBase
 
@@ -5273,7 +5274,11 @@ Label_00CC:
             "Total GHG Mass Emissions",
             "Total GHG Molar Emissions",
             "Total CO2eq GHG Mass Emissions",
-            "Total CO2eq GHG Molar Emissions"
+            "Total CO2eq GHG Molar Emissions",
+            "Residual Mass Balance",
+            "Total Energy Balance",
+            "Total CAPEX",
+            "Total OPEX"
         }
 
         Dim extraprops = DirectCast(Results.Additional, IDictionary(Of String, Object))
@@ -5292,19 +5297,35 @@ Label_00CC:
 
             Case "Total GHG Mass Emissions"
 
-                Return Results.GHGEmissionsSummary.TotalGHGMassEmission
+                Return Results.GHGEmissionsSummary.TotalGHGMassEmission.ConvertFromSI(Options.SelectedUnitSystem.massflow)
 
             Case "Total GHG Molar Emissions"
 
-                Return Results.GHGEmissionsSummary.TotalGHGMolarEmission
+                Return Results.GHGEmissionsSummary.TotalGHGMolarEmission.ConvertFromSI(Options.SelectedUnitSystem.molarflow)
 
             Case "Total CO2eq GHG Mass Emissions"
 
-                Return Results.GHGEmissionsSummary.TotalCO2eqMassEmission
+                Return Results.GHGEmissionsSummary.TotalCO2eqMassEmission.ConvertFromSI(Options.SelectedUnitSystem.massflow)
 
             Case "Total CO2eq GHG Molar Emissions"
 
-                Return Results.GHGEmissionsSummary.TotalCO2eqMolarEmission
+                Return Results.GHGEmissionsSummary.TotalCO2eqMolarEmission.ConvertFromSI(Options.SelectedUnitSystem.molarflow)
+
+            Case "Total CAPEX"
+
+                Return Results.TotalCAPEX
+
+            Case "Total OPEX"
+
+                Return Results.TotalOPEX
+
+            Case "Residual Mass Balance"
+
+                Return Results.ResidualMassBalance.ConvertFromSI(Options.SelectedUnitSystem.massflow)
+
+            Case "Total Energy Balance"
+
+                Return Results.TotalEnergyBalance.ConvertFromSI(Options.SelectedUnitSystem.heatflow)
 
             Case Else
 
@@ -5326,19 +5347,35 @@ Label_00CC:
 
             Case "Total GHG Mass Emissions"
 
-                Return "kg/s"
+                Return Options.SelectedUnitSystem.massflow
 
             Case "Total GHG Molar Emissions"
 
-                Return "mol/s"
+                Return Options.SelectedUnitSystem.molarflow
 
             Case "Total CO2eq GHG Mass Emissions"
 
-                Return "kg/s"
+                Return Options.SelectedUnitSystem.massflow
 
             Case "Total CO2eq GHG Molar Emissions"
 
-                Return "mol/s"
+                Return Options.SelectedUnitSystem.molarflow
+
+            Case "Total CAPEX"
+
+                Return "$"
+
+            Case "Total OPEX"
+
+                Return "$/year"
+
+            Case "Residual Mass Balance"
+
+                Return Options.SelectedUnitSystem.massflow
+
+            Case "Total Energy Balance"
+
+                Return Options.SelectedUnitSystem.heatflow
 
             Case Else
 
@@ -5347,6 +5384,51 @@ Label_00CC:
         End Select
 
     End Function
+
+    Public Sub UpdateMassAndEnergyBalance() Implements IFlowsheet.UpdateMassAndEnergyBalance
+
+        Dim equipments = SimulationObjects.Values.Where(Function(o) TypeOf o Is UnitOpBaseClass And TypeOf o IsNot IIndicator)
+
+        Dim totalE As Double = 0.0
+
+        For Each eq In equipments
+            'check efficiency
+            Dim eff As Nullable(Of Double)
+            Dim props = eq.GetType().GetProperties()
+            If props.Where(Function(p) p.Name = "Eficiencia").Count > 0 Then
+                eff = Convert.ToDouble(eq.GetType().GetProperty("Eficiencia").GetValue(eq))
+            ElseIf props.Where(Function(p) p.Name = "ThermalEfficiency").Count > 0 Then
+                eff = Convert.ToDouble(eq.GetType().GetProperty("ThermalEfficiency").GetValue(eq))
+            ElseIf props.Where(Function(p) p.Name = "Efficiency").Count > 0 Then
+                eff = Convert.ToDouble(eq.GetType().GetProperty("Efficiency").GetValue(eq))
+            ElseIf props.Where(Function(p) p.Name = "AdiabaticEfficiency").Count > 0 Then
+                eff = Convert.ToDouble(eq.GetType().GetProperty("AdiabaticEfficiency").GetValue(eq))
+            Else
+                eff = Nothing
+            End If
+            Dim eb = eq.GetPowerGeneratedOrConsumed()
+            totalE += eb
+        Next
+
+        Results.TotalEnergyBalance = totalE
+
+        Dim streams = SimulationObjects.Values.Where(Function(o) TypeOf o Is IMaterialStream).Select(Function(o) DirectCast(o, MaterialStream))
+
+        Dim totalM = 0.0
+
+        For Each s In streams
+            Dim mf = s.GetMassFlow()
+            If Not s.GraphicObject.InputConnectors(0).IsAttached Then
+                totalM += mf
+            End If
+            If Not s.GraphicObject.OutputConnectors(0).IsAttached Then
+                totalM -= mf
+            End If
+        Next
+
+        Results.ResidualMassBalance = totalM
+
+    End Sub
 
 #End Region
 

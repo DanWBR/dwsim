@@ -1649,6 +1649,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             End Select
 
+            fs.UpdateMassAndEnergyBalance()
+
             'clears any calculation stop request.
 
             Settings.CalculatorStopRequested = False

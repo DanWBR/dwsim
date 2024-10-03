@@ -303,6 +303,10 @@ Namespace DWSIM.Flowsheet
 
         Public Property Additional As ExpandoObject = New ExpandoObject() Implements IFlowsheetResults.Additional
 
+        Public Property ResidualMassBalance As Double Implements IFlowsheetResults.ResidualMassBalance
+
+        Public Property TotalEnergyBalance As Double Implements IFlowsheetResults.TotalEnergyBalance
+
         Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
 
             Dim elements = XMLSerializer.XMLSerializer.Serialize(Me)

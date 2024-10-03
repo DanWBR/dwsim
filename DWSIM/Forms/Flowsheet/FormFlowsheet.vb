@@ -5499,19 +5499,19 @@ Public Class FormFlowsheet
 
             Case "Total GHG Mass Emissions"
 
-                Return Results.GHGEmissionsSummary.TotalGHGMassEmission
+                Return Results.GHGEmissionsSummary.TotalGHGMassEmission.ConvertFromSI(Options.SelectedUnitSystem.massflow)
 
             Case "Total GHG Molar Emissions"
 
-                Return Results.GHGEmissionsSummary.TotalGHGMolarEmission
+                Return Results.GHGEmissionsSummary.TotalGHGMolarEmission.ConvertFromSI(Options.SelectedUnitSystem.molarflow)
 
             Case "Total CO2eq GHG Mass Emissions"
 
-                Return Results.GHGEmissionsSummary.TotalCO2eqMassEmission
+                Return Results.GHGEmissionsSummary.TotalCO2eqMassEmission.ConvertFromSI(Options.SelectedUnitSystem.massflow)
 
             Case "Total CO2eq GHG Molar Emissions"
 
-                Return Results.GHGEmissionsSummary.TotalCO2eqMolarEmission
+                Return Results.GHGEmissionsSummary.TotalCO2eqMolarEmission.ConvertFromSI(Options.SelectedUnitSystem.molarflow)
 
             Case "Total CAPEX"
 
@@ -5521,9 +5521,13 @@ Public Class FormFlowsheet
 
                 Return Results.TotalOPEX
 
-            Case "Total CO2eq GHG Molar Emissions"
+            Case "Residual Mass Balance"
 
-                Return Results.GHGEmissionsSummary.TotalCO2eqMolarEmission
+                Return Results.ResidualMassBalance.ConvertFromSI(Options.SelectedUnitSystem.massflow)
+
+            Case "Total Energy Balance"
+
+                Return Results.TotalEnergyBalance.ConvertFromSI(Options.SelectedUnitSystem.heatflow)
 
             Case Else
 
@@ -5553,19 +5557,35 @@ Public Class FormFlowsheet
 
             Case "Total GHG Mass Emissions"
 
-                Return "kg/s"
+                Return Options.SelectedUnitSystem.massflow
 
             Case "Total GHG Molar Emissions"
 
-                Return "mol/s"
+                Return Options.SelectedUnitSystem.molarflow
 
             Case "Total CO2eq GHG Mass Emissions"
 
-                Return "kg/s"
+                Return Options.SelectedUnitSystem.massflow
 
             Case "Total CO2eq GHG Molar Emissions"
 
-                Return "mol/s"
+                Return Options.SelectedUnitSystem.molarflow
+
+            Case "Total CAPEX"
+
+                Return "$"
+
+            Case "Total OPEX"
+
+                Return "$/year"
+
+            Case "Residual Mass Balance"
+
+                Return Options.SelectedUnitSystem.massflow
+
+            Case "Total Energy Balance"
+
+                Return Options.SelectedUnitSystem.heatflow
 
             Case Else
 
@@ -5769,6 +5789,50 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Public Sub UpdateMassAndEnergyBalance() Implements IFlowsheet.UpdateMassAndEnergyBalance
+
+        Dim equipments = SimulationObjects.Values.Where(Function(o) TypeOf o Is UnitOpBaseClass And TypeOf o IsNot IIndicator)
+
+        Dim totalE As Double = 0.0
+
+        For Each eq In equipments
+            'check efficiency
+            Dim eff As Nullable(Of Double)
+            Dim props = eq.GetType().GetProperties()
+            If props.Where(Function(p) p.Name = "Eficiencia").Count > 0 Then
+                eff = Convert.ToDouble(eq.GetType().GetProperty("Eficiencia").GetValue(eq))
+            ElseIf props.Where(Function(p) p.Name = "ThermalEfficiency").Count > 0 Then
+                eff = Convert.ToDouble(eq.GetType().GetProperty("ThermalEfficiency").GetValue(eq))
+            ElseIf props.Where(Function(p) p.Name = "Efficiency").Count > 0 Then
+                eff = Convert.ToDouble(eq.GetType().GetProperty("Efficiency").GetValue(eq))
+            ElseIf props.Where(Function(p) p.Name = "AdiabaticEfficiency").Count > 0 Then
+                eff = Convert.ToDouble(eq.GetType().GetProperty("AdiabaticEfficiency").GetValue(eq))
+            Else
+                eff = Nothing
+            End If
+            Dim eb = eq.GetPowerGeneratedOrConsumed()
+            totalE += eb
+        Next
+
+        Results.TotalEnergyBalance = totalE
+
+        Dim streams = SimulationObjects.Values.Where(Function(o) TypeOf o Is IMaterialStream).Select(Function(o) DirectCast(o, Streams.MaterialStream))
+
+        Dim totalM = 0.0
+
+        For Each s In streams
+            Dim mf = s.GetMassFlow()
+            If Not s.GraphicObject.InputConnectors(0).IsAttached Then
+                totalM += mf
+            End If
+            If Not s.GraphicObject.OutputConnectors(0).IsAttached Then
+                totalM -= mf
+            End If
+        Next
+
+        Results.ResidualMassBalance = totalM
+
+    End Sub
 
 #End Region
 
