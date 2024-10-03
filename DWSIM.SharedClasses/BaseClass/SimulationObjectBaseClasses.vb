@@ -723,10 +723,16 @@ Namespace UnitOperations
 
             Dim proplist As New List(Of String)
 
-            Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+            Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+            Dim col2 = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
+            Dim col3 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
 
-            For Each item In epcol
-                proplist.Add(item.Key)
+            For Each p In col1
+                If col2.ContainsKey(p.Key) And col3.ContainsKey(p.Key) Then
+                    If FlowSheet IsNot Nothing AndAlso FlowSheet.DynamicMode Then proplist.Add(p.Key)
+                Else
+                    proplist.Add(p.Key)
+                End If
             Next
 
             If FlowSheet IsNot Nothing Then
