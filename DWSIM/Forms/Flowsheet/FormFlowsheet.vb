@@ -5480,7 +5480,10 @@ Public Class FormFlowsheet
             "Total GHG Molar Emissions",
             "Total CO2eq GHG Mass Emissions",
             "Total CO2eq GHG Molar Emissions",
-            "Total CAPEX", "Total OPEX"
+            "Residual Mass Balance",
+            "Total Energy Balance",
+            "Total CAPEX",
+            "Total OPEX"
         }
 
         Dim extraprops = DirectCast(Results.Additional, IDictionary(Of String, Object))
