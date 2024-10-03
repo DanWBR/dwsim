@@ -167,9 +167,6 @@
   <data name="&gt;&gt;tbName.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="cbLinkedObject.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkLink.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 17</value>
@@ -186,14 +183,20 @@
   <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="ItemToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;tc2.Name" xml:space="preserve">
+    <value>tc2</value>
   </data>
   <data name="chkLink.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="cbPythonEngine.Items1" xml:space="preserve">
     <value>Python.NET</value>
+  </data>
+  <data name="ViewSourceCodeTSMI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 22</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
   </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -228,7 +231,7 @@
   <data name="txtScript.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtScript.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;cbLinkedObject.Parent" xml:space="preserve">
@@ -258,6 +261,9 @@
   <data name="&gt;&gt;ViewSourceCodeTSMI.Name" xml:space="preserve">
     <value>ViewSourceCodeTSMI</value>
   </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 13</value>
+  </data>
   <data name="&gt;&gt;tvVariables.Name" xml:space="preserve">
     <value>tvVariables</value>
   </data>
@@ -285,9 +291,6 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ScriptEditorControl</value>
   </data>
-  <data name="txtScript.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
   <data name="btnDelete.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -299,6 +302,9 @@
   </data>
   <data name="&gt;&gt;ContextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
+    <value>Label2</value>
   </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 557</value>
@@ -342,11 +348,11 @@
   <data name="tbName.Location" type="System.Drawing.Point, System.Drawing">
     <value>54, 7</value>
   </data>
+  <data name="&gt;&gt;cbLinkedObject.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="&gt;&gt;NodeTextBox3.Type" xml:space="preserve">
     <value>Aga.Controls.Tree.NodeControls.NodeTextBox, Aga.Controls, Version=1.7.0.0, Culture=neutral, PublicKeyToken=fcc90fbf924463a3</value>
-  </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 11</value>
   </data>
   <data name="&gt;&gt;txtScript.Parent" xml:space="preserve">
     <value>SplitContainer1.Panel1</value>
@@ -357,14 +363,8 @@
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="&gt;&gt;treeViewItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;SplitContainer1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtScript.Type" xml:space="preserve">
-    <value>ScintillaNET.Scintilla, ScintillaNET, Version=3.6.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tbName.Name" xml:space="preserve">
     <value>tbName</value>
@@ -375,8 +375,8 @@
   <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;tc1.Name" xml:space="preserve">
-    <value>tc1</value>
+  <data name="&gt;&gt;cbPythonEngine.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;NodeTextBox1.Type" xml:space="preserve">
     <value>Aga.Controls.Tree.NodeControls.NodeTextBox, Aga.Controls, Version=1.7.0.0, Culture=neutral, PublicKeyToken=fcc90fbf924463a3</value>
@@ -384,17 +384,11 @@
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
   </data>
-  <data name="&gt;&gt;ToolStripSeparator1.Name" xml:space="preserve">
-    <value>ToolStripSeparator1</value>
-  </data>
   <data name="Label2.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="cbLinkedEvent.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="cbLinkedObject.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 21</value>
   </data>
   <data name="treeViewItems.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 97</value>
@@ -411,6 +405,9 @@
   <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="TableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="&gt;&gt;tvVariables.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
   </data>
@@ -420,8 +417,8 @@
   <data name="&gt;&gt;chkLink.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tc2.Name" xml:space="preserve">
-    <value>tc2</value>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="tbName.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -438,8 +435,11 @@
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>701, 12</value>
   </data>
-  <data name="Label4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;treeViewItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbPythonEngine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tc1.TooltipText" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -450,14 +450,11 @@
   <data name="&gt;&gt;cbLinkedObject.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
   <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;tc1.Name" xml:space="preserve">
+    <value>tc1</value>
   </data>
   <data name="&gt;&gt;NodeTextBox2.Name" xml:space="preserve">
     <value>NodeTextBox2</value>
@@ -468,8 +465,8 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 76</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -480,29 +477,26 @@
   <data name="TableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="btnDelete.Text" xml:space="preserve">
-    <value>Excluir</value>
-  </data>
   <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
   <data name="&gt;&gt;ViewAPIHelpTSMI.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
+    <value>SplitContainer1</value>
+  </data>
   <data name="cbLinkedObject.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;txtScript.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
   </data>
-  <data name="cbPythonEngine.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;txtScript.Type" xml:space="preserve">
+    <value>ScintillaNET.Scintilla, ScintillaNET, Version=3.6.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cbLinkedObject.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="cbLinkedObject.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 21</value>
   </data>
   <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
     <value>btnDelete</value>
@@ -510,11 +504,8 @@
   <data name="&gt;&gt;SplitContainer1.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;cbPythonEngine.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 76</value>
+  <data name="cbPythonEngine.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -524,9 +515,6 @@
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
-  </data>
-  <data name="&gt;&gt;tc3.Name" xml:space="preserve">
-    <value>tc3</value>
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
@@ -555,12 +543,6 @@
   <data name="cbLinkedEvent.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 21</value>
   </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="treeViewItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
   <data name="tc2.Header" xml:space="preserve">
     <value>Valor</value>
   </data>
@@ -588,8 +570,11 @@
   <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 13</value>
+  <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
+    <value>724</value>
+  </data>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;tc2.Type" xml:space="preserve">
     <value>Aga.Controls.Tree.TreeColumn, Aga.Controls, Version=1.7.0.0, Culture=neutral, PublicKeyToken=fcc90fbf924463a3</value>
@@ -615,26 +600,29 @@
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
-    <value>SplitContainer1</value>
+  <data name="cbLinkedObject.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cbLinkedEvent.Location" type="System.Drawing.Point, System.Drawing">
     <value>494, 7</value>
   </data>
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
-    <value>Label5</value>
+  <data name="txtScript.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>724</value>
+  <data name="Label4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
-  <data name="TableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="treeViewItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="ViewSourceCodeTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 22</value>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>241, 11</value>
   </data>
   <data name="&gt;&gt;NodeTextBox1.Name" xml:space="preserve">
     <value>NodeTextBox1</value>
@@ -669,11 +657,14 @@
   <data name="&gt;&gt;SplitContainer1.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="&gt;&gt;TableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
+    <value>Label5</value>
   </data>
   <data name="txtScript.Size" type="System.Drawing.Size, System.Drawing">
     <value>1019, 557</value>
@@ -684,11 +675,17 @@
   <data name="tc1.Width" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
-  <data name="&gt;&gt;TableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tc3.Name" xml:space="preserve">
+    <value>tc3</value>
   </data>
   <data name="&gt;&gt;TableLayoutPanel1.Name" xml:space="preserve">
     <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;SplitContainer1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ItemToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
@@ -702,8 +699,8 @@
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
-    <value>Label2</value>
+  <data name="btnDelete.Text" xml:space="preserve">
+    <value>Excluir</value>
   </data>
   <data name="&gt;&gt;NodeTextBox3.Name" xml:space="preserve">
     <value>NodeTextBox3</value>
@@ -717,11 +714,14 @@
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 10</value>
   </data>
-  <data name="&gt;&gt;cbPythonEngine.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;ToolStripSeparator1.Name" xml:space="preserve">
+    <value>ToolStripSeparator1</value>
+  </data>
+  <data name="Label4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
