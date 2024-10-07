@@ -830,7 +830,7 @@ Public Class FormSensAnalysis
                            If tsk.Exception IsNot Nothing Then
                                UIThread(Sub()
                                             For Each ex In tsk.Exception.InnerExceptions
-                                                Me.tbStats.Text += "Error: " & ex.Message & vbCrLf
+                                                Me.tbStats.Text += "Error: " & ex.ToString() & vbCrLf
                                             Next
                                         End Sub)
                            End If
