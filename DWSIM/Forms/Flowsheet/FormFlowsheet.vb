@@ -5636,143 +5636,147 @@ Public Class FormFlowsheet
 
     Private Sub ProcessTransition()
 
-        If Options.FlowsheetTransitionObject IsNot Nothing Then
+        If Options IsNot Nothing Then
 
-            Dim ts = Options.FlowsheetTransitionObject
+            If Options.FlowsheetTransitionObject IsNot Nothing Then
 
-            If ts.FeatureName = "" Then
+                Dim ts = Options.FlowsheetTransitionObject
 
-                Options.FlowsheetTransitionObject = Nothing
+                If ts.FeatureName = "" Then
 
-                Exit Sub
+                    Options.FlowsheetTransitionObject = Nothing
+
+                    Exit Sub
+
+                End If
+
+                ShowMessage("Welcome to DWSIM Pro! You can now continue working on your simulation using all of the available professional features in this version of DWSIM.", IFlowsheet.MessageType.Information)
+
+                Select Case ts.FeatureType
+
+                    Case "Property Package"
+
+                        If ts.Location = "Simulation Wizard" Then
+
+                            Dim fw As New FormSimulWizard
+                            AddHandler fw.Shown, Sub()
+
+                                                     fw.StepWizardControl1.NextPage()
+                                                     fw.StepWizardControl1.NextPage()
+
+                                                     Dim pp As PropertyPackages.PropertyPackage
+                                                     pp = FormMain.PropertyPackages(ts.FeatureName).Clone
+                                                     With pp
+                                                         pp.Tag = pp.ComponentName + " (" + (PropertyPackages.Count + 1).ToString() + ")"
+                                                         pp.UniqueID = "PP-" & Guid.NewGuid.ToString
+                                                         pp.Flowsheet = Me
+                                                     End With
+
+                                                     FormMain.AnalyticsProvider?.RegisterEvent("Property Package Added", pp.ComponentName, Nothing)
+
+                                                     Options.PropertyPackages.Add(pp.UniqueID, pp)
+                                                     fw.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName, "..."})
+                                                     fw.dgvpp.Rows(fw.dgvpp.Rows.Count - 1).Selected = True
+
+                                                 End Sub
+                            With fw
+                                .CurrentFlowsheet = Me
+                                .StartPosition = FormStartPosition.CenterScreen
+                                .WindowState = FormWindowState.Normal
+                                .ShowDialog(Me)
+                            End With
+
+                        Else
+
+                            FrmStSim1.CurrentFlowsheet = Me
+                            FrmStSim1.TabControl1.SelectedTab = FrmStSim1.TabPage2
+                            Me.FrmStSim1.Show(Me.dckPanel)
+
+                            Dim pp As PropertyPackages.PropertyPackage
+                            pp = FormMain.PropertyPackages(ts.FeatureName).Clone()
+
+                            With pp
+                                pp.Tag = pp.ComponentName + " (" + (PropertyPackages.Count + 1).ToString() + ")"
+                                pp.UniqueID = "PP-" & Guid.NewGuid.ToString
+                                pp.Flowsheet = Me
+                            End With
+
+                            FormMain.AnalyticsProvider?.RegisterEvent("Property Package Added", pp.ComponentName, Nothing)
+
+                            Options.PropertyPackages.Add(pp.UniqueID, pp)
+                            FrmStSim1.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName})
+
+                            UpdateOpenEditForms()
+
+                        End If
+
+                    Case "Unit Operation"
+
+                        Dim o = My.Application.MainWindowForm.ExternalUnitOperations.Values.Where(Function(v) v.GetType().FullName.Equals(ts.Location)).FirstOrDefault()
+                        Dim t = o.GetType()
+
+                        FormSurface.AddObjectToSurface(ObjectType.External,
+                                                       ts.Position(0),
+                                                       ts.Position(1),
+                                                       False, "", "", Activator.CreateInstance(t))
+
+                    Case "Heatmaps"
+
+                        Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("E9484EF4-1FD5-481C-8E5D-B838D106A407")
+                        Dim he As IExtender4 = hec.Collection(0)
+                        he.SetParameter("DrawHeatmaps", True)
+                        GetSurface().DrawAdditionalItems = True
+
+                    Case "Live Flows"
+
+                        Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("E9484EF4-1FD5-481C-8E5D-B838D106A407")
+                        Dim he As IExtender4 = hec.Collection(0)
+                        he.SetParameter("DrawLiveFlows", True)
+                        GetSurface().DrawAdditionalItems = True
+
+                    Case "Costing"
+
+                        Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("212ad7bf-b9b9-47c1-9386-c695ee4324b4")
+                        Dim he As IExtender4 = hec.Collection(0)
+                        he.SetParameter("Select", True)
+
+                    Case "GHG Emissions"
+
+                        Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("8ffa4569-421f-474b-a44c-fa0ab59920f5")
+                        Dim he As IExtender4 = hec.Collection(0)
+                        he.SetParameter("Select", True)
+
+                    Case "Tool"
+
+                        Select Case ts.FeatureName
+
+                            Case "Excel Reports"
+
+                                Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("fd83c303-5dec-4038-8602-6f0a6c411091")
+                                Dim he As IExtender = hec.Collection(0)
+                                he.Run()
+
+                            Case "Process Flowsheet Diagram"
+
+                                Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("1a6f3989-93a4-4b39-873b-b3c99549eae4")
+                                Dim he As IExtender = hec.Collection(0)
+                                he.Run()
+
+                            Case "Stream Data Importer"
+
+                                Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("713AA5A8-8ADE-420B-BEFF-47117E7807FB")
+                                Dim he As IExtender = hec.Collection(0)
+                                he.Run()
+
+                        End Select
+
+                End Select
 
             End If
 
-            ShowMessage("Welcome to DWSIM Pro! You can now continue working on your simulation using all of the available professional features in this version of DWSIM.", IFlowsheet.MessageType.Information)
-
-            Select Case ts.FeatureType
-
-                Case "Property Package"
-
-                    If ts.Location = "Simulation Wizard" Then
-
-                        Dim fw As New FormSimulWizard
-                        AddHandler fw.Shown, Sub()
-
-                                                 fw.StepWizardControl1.NextPage()
-                                                 fw.StepWizardControl1.NextPage()
-
-                                                 Dim pp As PropertyPackages.PropertyPackage
-                                                 pp = FormMain.PropertyPackages(ts.FeatureName).Clone
-                                                 With pp
-                                                     pp.Tag = pp.ComponentName + " (" + (PropertyPackages.Count + 1).ToString() + ")"
-                                                     pp.UniqueID = "PP-" & Guid.NewGuid.ToString
-                                                     pp.Flowsheet = Me
-                                                 End With
-
-                                                 FormMain.AnalyticsProvider?.RegisterEvent("Property Package Added", pp.ComponentName, Nothing)
-
-                                                 Options.PropertyPackages.Add(pp.UniqueID, pp)
-                                                 fw.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName, "..."})
-                                                 fw.dgvpp.Rows(fw.dgvpp.Rows.Count - 1).Selected = True
-
-                                             End Sub
-                        With fw
-                            .CurrentFlowsheet = Me
-                            .StartPosition = FormStartPosition.CenterScreen
-                            .WindowState = FormWindowState.Normal
-                            .ShowDialog(Me)
-                        End With
-
-                    Else
-
-                        FrmStSim1.CurrentFlowsheet = Me
-                        FrmStSim1.TabControl1.SelectedTab = FrmStSim1.TabPage2
-                        Me.FrmStSim1.Show(Me.dckPanel)
-
-                        Dim pp As PropertyPackages.PropertyPackage
-                        pp = FormMain.PropertyPackages(ts.FeatureName).Clone()
-
-                        With pp
-                            pp.Tag = pp.ComponentName + " (" + (PropertyPackages.Count + 1).ToString() + ")"
-                            pp.UniqueID = "PP-" & Guid.NewGuid.ToString
-                            pp.Flowsheet = Me
-                        End With
-
-                        FormMain.AnalyticsProvider?.RegisterEvent("Property Package Added", pp.ComponentName, Nothing)
-
-                        Options.PropertyPackages.Add(pp.UniqueID, pp)
-                        FrmStSim1.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName})
-
-                        UpdateOpenEditForms()
-
-                    End If
-
-                Case "Unit Operation"
-
-                    Dim o = My.Application.MainWindowForm.ExternalUnitOperations.Values.Where(Function(v) v.GetType().FullName.Equals(ts.Location)).FirstOrDefault()
-                    Dim t = o.GetType()
-
-                    FormSurface.AddObjectToSurface(ObjectType.External,
-                                                   ts.Position(0),
-                                                   ts.Position(1),
-                                                   False, "", "", Activator.CreateInstance(t))
-
-                Case "Heatmaps"
-
-                    Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("E9484EF4-1FD5-481C-8E5D-B838D106A407")
-                    Dim he As IExtender4 = hec.Collection(0)
-                    he.SetParameter("DrawHeatmaps", True)
-                    GetSurface().DrawAdditionalItems = True
-
-                Case "Live Flows"
-
-                    Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("E9484EF4-1FD5-481C-8E5D-B838D106A407")
-                    Dim he As IExtender4 = hec.Collection(0)
-                    he.SetParameter("DrawLiveFlows", True)
-                    GetSurface().DrawAdditionalItems = True
-
-                Case "Costing"
-
-                    Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("212ad7bf-b9b9-47c1-9386-c695ee4324b4")
-                    Dim he As IExtender4 = hec.Collection(0)
-                    he.SetParameter("Select", True)
-
-                Case "GHG Emissions"
-
-                    Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("8ffa4569-421f-474b-a44c-fa0ab59920f5")
-                    Dim he As IExtender4 = hec.Collection(0)
-                    he.SetParameter("Select", True)
-
-                Case "Tool"
-
-                    Select Case ts.FeatureName
-
-                        Case "Excel Reports"
-
-                            Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("fd83c303-5dec-4038-8602-6f0a6c411091")
-                            Dim he As IExtender = hec.Collection(0)
-                            he.Run()
-
-                        Case "Process Flowsheet Diagram"
-
-                            Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("1a6f3989-93a4-4b39-873b-b3c99549eae4")
-                            Dim he As IExtender = hec.Collection(0)
-                            he.Run()
-
-                        Case "Stream Data Importer"
-
-                            Dim hec As IExtenderCollection = My.Application.MainWindowForm.Extenders("713AA5A8-8ADE-420B-BEFF-47117E7807FB")
-                            Dim he As IExtender = hec.Collection(0)
-                            he.Run()
-
-                    End Select
-
-            End Select
+            Options.FlowsheetTransitionObject = Nothing
 
         End If
-
-        Options.FlowsheetTransitionObject = Nothing
 
     End Sub
 
