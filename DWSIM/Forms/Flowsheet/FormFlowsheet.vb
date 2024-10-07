@@ -1502,7 +1502,6 @@ Public Class FormFlowsheet
                                pbSolver.Visible = True
                            End Sub)
 
-
             Dim data As New Dictionary(Of String, String)
             data.Add("Compounds", Me.SelectedCompounds.Count)
             data.Add("Objects", Me.SimulationObjects.Count)
@@ -1513,12 +1512,12 @@ Public Class FormFlowsheet
                 My.Application.MainWindowForm.AnalyticsProvider?.RegisterEvent("Requested Flowsheet Solving", "", data)
             End If
 
-            RaiseEvent ToolOpened("Solve Flowsheet", New EventArgs())
+            UIThread(Sub() RaiseEvent ToolOpened("Solve Flowsheet", New EventArgs()))
             Settings.TaskCancellationTokenSource = Nothing
             My.Application.ActiveSimulation = Me
             If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
             Dim t As New Task(Of List(Of Exception))(Function()
-                                                         RaiseEvent StartedSolving(Me, New EventArgs())
+                                                         UIThread(Sub() RaiseEvent StartedSolving(Me, New EventArgs()))
                                                          If ExternalFlowsheetSolver IsNot Nothing Then
                                                              Return ExternalFlowsheetSolver.SolveFlowsheet(Me)
                                                          Else
@@ -1538,7 +1537,7 @@ Public Class FormFlowsheet
                                                          End If
                                                      End Function)
             t.ContinueWith(Sub(tres)
-                               RaiseEvent FinishedSolving(Me, New EventArgs())
+                               UIThread(Sub() RaiseEvent FinishedSolving(Me, New EventArgs()))
                                Me.UIThread(Sub()
                                                pbSolver.Visible = False
                                                UpdateOpenEditForms()
