@@ -7,7 +7,6 @@
 🌟 Alberto Marzi
 🌟 Bernhard Seyfang
 🌟 Bryan Evans
-🌟 Cameron Ward
 🌟 Casey Houston
 🌟 Christian Hornhofer
 🌟 Domenico Marchese
@@ -50,6 +49,7 @@ Andrew Dickson
 Antony Loane
 Bednarz Marc
 Bruce Bishkin
+Camilo Gantiva
 Carlos Pantoja
 Christian Jordan
 Christian Pedersen
