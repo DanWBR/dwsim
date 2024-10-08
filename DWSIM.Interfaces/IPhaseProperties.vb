@@ -80,5 +80,6 @@
     Property H2Spartialpressure As Double?
     Property particleSize_Mean As Double?
     Property particleSize_StdDev As Double?
+    Property volumetricFraction As Double?
 
 End Interface

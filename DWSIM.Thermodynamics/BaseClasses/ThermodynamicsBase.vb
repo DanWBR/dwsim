@@ -1387,6 +1387,8 @@ Namespace BaseClasses
 
         Public Property particleSize_StdDev As Double? Implements IPhaseProperties.particleSize_StdDev
 
+        Public Property volumetricFraction As Double? Implements IPhaseProperties.volumetricFraction
+
     End Class
 
     <System.Serializable()> Public Class InteractionParameter

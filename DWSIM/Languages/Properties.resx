@@ -1662,4 +1662,25 @@
   <data name="PROP_VA_6" xml:space="preserve">
     <value>Parâmetro Característico</value>
   </data>
+  <data name="PROP_MS_246" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PROP_MS_247" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PROP_MS_260" xml:space="preserve">
+    <value>Volumetric Fraction (Vapor)</value>
+  </data>
+  <data name="PROP_MS_261" xml:space="preserve">
+    <value>Volumetric Fraction (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_262" xml:space="preserve">
+    <value>Volumetric Fraction (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_263" xml:space="preserve">
+    <value>Volumetric Fraction (Liquid 2)</value>
+  </data>
+  <data name="PROP_MS_264" xml:space="preserve">
+    <value>Volumetric Fraction (Solid)</value>
+  </data>
 </root>

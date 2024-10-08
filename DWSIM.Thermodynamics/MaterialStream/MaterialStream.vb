@@ -903,6 +903,25 @@ Namespace Streams
                     Dim hf = GetMassFlow() * PropertyPackage.RET_VMAS(PropertyPackages.Phase.Mixture).MultiplyY(PropertyPackage.RET_VDHF).SumY()
                     TotalEnergyFlow = hf + GetMassEnthalpy() * GetMassFlow() 'kW
 
+                    'volumetric fractions
+
+                    Dim vv = Phases(2).Properties.massflow.GetValueOrDefault() / Phases(2).Properties.density.GetValueOrDefault()
+                    Dim vl1 = Phases(3).Properties.massflow.GetValueOrDefault() / Phases(3).Properties.density.GetValueOrDefault()
+                    Dim vl2 = Phases(4).Properties.massflow.GetValueOrDefault() / Phases(4).Properties.density.GetValueOrDefault()
+                    Dim vs = Phases(7).Properties.massflow.GetValueOrDefault() / Phases(7).Properties.density.GetValueOrDefault()
+
+                    If Double.IsInfinity(vv) Or Double.IsNaN(vv) Then vv = 0.0
+                    If Double.IsInfinity(vl1) Or Double.IsNaN(vl1) Then vl1 = 0.0
+                    If Double.IsInfinity(vl2) Or Double.IsNaN(vl2) Then vl2 = 0.0
+                    If Double.IsInfinity(vs) Or Double.IsNaN(vs) Then vs = 0.0
+
+                    Phases(2).Properties.volumetricFraction = vv / (vv + vl1 + vl2 + vs)
+                    Phases(3).Properties.volumetricFraction = vl1 / (vv + vl1 + vl2 + vs)
+                    Phases(4).Properties.volumetricFraction = vl2 / (vv + vl1 + vl2 + vs)
+                    Phases(7).Properties.volumetricFraction = vs / (vv + vl1 + vl2 + vs)
+
+                    Phases(1).Properties.volumetricFraction = (vl1 + vl2) / (vv + vl1 + vl2 + vs)
+
                     If DebugMode Then AppendDebugLine(String.Format("Material Stream calculated successfully."))
 
                 End If
@@ -2271,6 +2290,16 @@ Namespace Streams
                             value = cv.ConvertFromSI(su.enthalpy, Phases(1).Properties.idealGasHeatCapacityRatio.GetValueOrDefault)
                         Case 259
                             value = cv.ConvertFromSI(su.enthalpy, Phases(7).Properties.idealGasHeatCapacityRatio.GetValueOrDefault)
+                        Case 260
+                            value = Phases(2).Properties.volumetricFraction.GetValueOrDefault
+                        Case 261
+                            value = Phases(1).Properties.volumetricFraction.GetValueOrDefault
+                        Case 262
+                            value = Phases(3).Properties.volumetricFraction.GetValueOrDefault
+                        Case 263
+                            value = Phases(4).Properties.volumetricFraction.GetValueOrDefault
+                        Case 264
+                            value = Phases(7).Properties.volumetricFraction.GetValueOrDefault
                     End Select
 
                     Return value
@@ -2391,6 +2420,9 @@ Namespace Streams
                     proplist.Add("CO2 Partial Pressure")
                     proplist.Add("H2S Loading")
                     proplist.Add("H2S Partial Pressure")
+                    For i = 260 To 264
+                        proplist.Add("PROP_MS_" + CStr(i))
+                    Next
                 Case PropertyType.WR
                     For i = 0 To 4
                         proplist.Add("PROP_MS_" + CStr(i))
@@ -2486,6 +2518,9 @@ Namespace Streams
                     proplist.Add("H2S Partial Pressure")
                     proplist.Add("Mean Particle Size (Solid)")
                     proplist.Add("Particle Size Standard Deviation (Solid)")
+                    For i = 260 To 264
+                        proplist.Add("PROP_MS_" + CStr(i))
+                    Next
             End Select
 
             'proplist.AddRange(MyBase.GetProperties(proptype))

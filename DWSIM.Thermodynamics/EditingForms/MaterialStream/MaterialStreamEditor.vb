@@ -677,9 +677,12 @@ Public Class MaterialStreamEditor
                 refval = p.Properties.kinematic_viscosity.GetValueOrDefault
                 If refval.HasValue Then val = Converter.ConvertFromSI(units.cinematic_viscosity, refval)
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Viscosidadecinemtica"), val, units.cinematic_viscosity})
-                refval = p.Properties.viscosity.GetValueOrDefault
+                refval = p.Properties.viscosity
                 If refval.HasValue Then val = Converter.ConvertFromSI(units.viscosity, refval)
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Viscosidadedinmica"), val, units.viscosity})
+
+                refval = p.Properties.volumetricFraction.GetValueOrDefault()
+                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Phase Volumetric Fraction"), refval.Value, ""})
 
             End If
 
