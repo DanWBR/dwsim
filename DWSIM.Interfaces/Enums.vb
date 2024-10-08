@@ -775,6 +775,7 @@ Namespace Enums.GraphicObjects
         CompoundMolarFlow = 6
         CompoundMassFraction = 7
         CompoundMolarFraction = 8
+        MeanSolidParticleSize = 9
 
     End Enum
 

@@ -729,6 +729,8 @@ Namespace GraphicObjects
                                 v = im.GetEnergyFlow()
                             Case PointValueType.Concentration
                                 v = im.GetCompoundMassConcentration(args(0))
+                            Case PointValueType.MeanSolidParticleSize
+                                v = im.Phases(7).Properties.particleSize_Mean.GetValueOrDefault()
                         End Select
                         points.Add(New Tuple(Of Point, Double)(New Point(ic.Position.X - X, ic.Position.Y - Y), v))
                     End If

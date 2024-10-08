@@ -906,6 +906,8 @@ Namespace GraphicObjects
                             v1 = ms.Phases(0).Compounds(args(0)).MassFraction.GetValueOrDefault()
                         Case PointValueType.CompoundMolarFraction
                             v1 = ms.Phases(0).Compounds(args(0)).MoleFraction.GetValueOrDefault()
+                        Case PointValueType.MeanSolidParticleSize
+                            v1 = ms.Phases(7).Properties.particleSize_Mean.GetValueOrDefault()
                     End Select
                     Return v1
                 Else
