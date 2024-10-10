@@ -22,24 +22,24 @@ Namespace DWSIM.Utilities.HYD
 
     Public Class AuxMethods
 
-        Public MAT_UNIFAC(60, 35)
-        Public MAT_UNIFAC_ELL(60, 35)
-        Public MAT_PROPS(47, 26)
-        Public MAT_PROPS2(40, 27)
-        Public MAT_KIJ(38, 38)
-        Public MAT_KIJ_PRSV(38, 38)
-        Public MAT_KAPPA1(37, 1)
-        Public MAT_DIEL(37, 2)
-        Public MAT_SLOAN1(93, 15)
-        Public MAT_SLOAN2(81, 9)
-        Public MAT_SLOAN3(53, 7)
-        Public MAT_CHENGUO(35, 6)
-        Public MAT_KLAUDASANDLER(53, 7)
-        Public MAT_VDWP_PP(53, 7)
-        Public MAT_MOD_LIFAC(73, 47)
-        Public MAT_MOD_LIFAC_BIJ(22, 22)
-        Public MAT_MOD_LIFAC_CIJ(22, 22)
-        Public MAT_INIB(46, 2)
+        Public MAT_UNIFAC(60, 35) As Double
+        Public MAT_UNIFAC_ELL(60, 35) As Double
+        Public MAT_PROPS(47, 26) As Double
+        Public MAT_PROPS2(40, 27) As Double
+        Public MAT_KIJ(38, 38) As Double
+        Public MAT_KIJ_PRSV(38, 38) As Double
+        Public MAT_KAPPA1(37, 1) As Double
+        Public MAT_DIEL(37, 2) As Double
+        Public MAT_SLOAN1(93, 15) As Double
+        Public MAT_SLOAN2(81, 9) As Double
+        Public MAT_SLOAN3(53, 7) As Double
+        Public MAT_CHENGUO(35, 6) As Double
+        Public MAT_KLAUDASANDLER(53, 7) As Double
+        Public MAT_VDWP_PP(53, 7) As Double
+        Public MAT_MOD_LIFAC(73, 47) As Double
+        Public MAT_MOD_LIFAC_BIJ(22, 22) As Double
+        Public MAT_MOD_LIFAC_CIJ(22, 22) As Double
+        Public MAT_INIB(46, 2) As Double
 
         Sub New()
 
@@ -242,9 +242,9 @@ Namespace DWSIM.Utilities.HYD
 
         End Function
 
-        Function GET_HS_KS(ByVal id)
+        Function GET_HS_KS(ByVal id) As Double()
 
-            Dim i, tmp(3)
+            Dim i As Integer, tmp(3) As Double
             i = 0
 
             If id = 1 Then i = 29

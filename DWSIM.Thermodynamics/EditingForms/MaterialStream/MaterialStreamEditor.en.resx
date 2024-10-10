@@ -516,10 +516,10 @@
     <value>Amount</value>
   </data>
   <data name="gridCompVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 370</value>
+    <value>375, 370</value>
   </data>
   <data name="tabCompVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 370</value>
+    <value>375, 370</value>
   </data>
   <data name="tabCompVapor.Text" xml:space="preserve">
     <value>Vapor</value>
@@ -531,10 +531,10 @@
     <value>Amount</value>
   </data>
   <data name="gridCompLiqMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 370</value>
+    <value>375, 370</value>
   </data>
   <data name="tabCompLiqMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 370</value>
+    <value>375, 370</value>
   </data>
   <data name="tabCompLiqMix.Text" xml:space="preserve">
     <value>Overall Liquid</value>
@@ -546,10 +546,10 @@
     <value>Amount</value>
   </data>
   <data name="gridCompLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 370</value>
+    <value>375, 370</value>
   </data>
   <data name="tabCompLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 370</value>
+    <value>375, 370</value>
   </data>
   <data name="tabCompLiq1.Text" xml:space="preserve">
     <value>Liquid 1</value>
@@ -561,10 +561,10 @@
     <value>Amount</value>
   </data>
   <data name="gridCompLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 370</value>
+    <value>375, 370</value>
   </data>
   <data name="tabCompLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 370</value>
+    <value>375, 370</value>
   </data>
   <data name="tabCompLiq2.Text" xml:space="preserve">
     <value>Liquid 2</value>
@@ -576,10 +576,10 @@
     <value>Amount</value>
   </data>
   <data name="gridCompSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 370</value>
+    <value>375, 370</value>
   </data>
   <data name="tabCompSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 370</value>
+    <value>375, 370</value>
   </data>
   <data name="tabCompSolid.Text" xml:space="preserve">
     <value>Solid</value>
@@ -621,7 +621,7 @@
     <value>Amounts</value>
   </data>
   <data name="lblCompPropUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 16</value>
+    <value>291, 16</value>
   </data>
   <data name="lblCompPropUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
@@ -642,10 +642,10 @@
     <value>Property</value>
   </data>
   <data name="gridCompPropVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 428</value>
+    <value>365, 428</value>
   </data>
   <data name="TabCompPropVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 428</value>
+    <value>365, 428</value>
   </data>
   <data name="TabCompPropVapor.Text" xml:space="preserve">
     <value>Vapor</value>
@@ -699,7 +699,7 @@
     <value>6, 39</value>
   </data>
   <data name="TabCompoundPhaseProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 454</value>
+    <value>373, 454</value>
   </data>
   <data name="cbCompoundPhaseProperties.Items" xml:space="preserve">
     <value>Fugacity Coefficients</value>
@@ -720,10 +720,10 @@
     <value>Infinite Dilution Diffusion Coefficients</value>
   </data>
   <data name="cbCompoundPhaseProperties.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 21</value>
+    <value>206, 21</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 496</value>
+    <value>385, 496</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Properties</value>
@@ -747,10 +747,10 @@
     <value>Units</value>
   </data>
   <data name="gridPropertiesMixture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 502</value>
+    <value>391, 502</value>
   </data>
   <data name="tabPropsMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 502</value>
+    <value>391, 502</value>
   </data>
   <data name="tabPropsMix.Text" xml:space="preserve">
     <value>Mixture</value>
@@ -846,10 +846,10 @@
     <value>Solid</value>
   </data>
   <data name="TabPhaseProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 528</value>
+    <value>399, 528</value>
   </data>
   <data name="TabPageResultsProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 528</value>
+    <value>399, 528</value>
   </data>
   <data name="TabPageResultsProps.Text" xml:space="preserve">
     <value>Phase Properties</value>
@@ -1092,9 +1092,6 @@
   <data name="HydratesTSMI.Text" xml:space="preserve">
     <value>Natural Gas Hydrates</value>
   </data>
-  <data name="HydratesTSMI.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="TCPTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 22</value>
   </data>
@@ -1102,13 +1099,13 @@
     <value>True Critical Point</value>
   </data>
   <data name="AddUtilityTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="AddUtilityTSMI.Text" xml:space="preserve">
     <value>Attach Utility</value>
   </data>
   <data name="UtilitiesCtxMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 26</value>
+    <value>181, 48</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
     <value>417, 106</value>

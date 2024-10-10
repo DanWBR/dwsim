@@ -16,17 +16,8 @@ Public Class FormAddUtility
 
                 Dim items As String()
 
-                If My.Settings.CultureInfo = "pt-BR" Then
-
-                    items = New String() {"Diagrama de Fases", "Diagrama de Fases (Binário)", "Diagrama de Fases (Ternário)",
-                        "Ponto Crítico Verdadeiro", "Propriedades de Petróleos"}
-
-                Else
-
-                    items = New String() {"Phase Envelope", "Binary Phase Envelope", "Ternary Phase Envelope",
-                        "True Critical Point", "Petroleum Cold Flow Properties"}
-
-                End If
+                items = New String() {"Phase Envelope", "Binary Phase Envelope", "Ternary Phase Envelope",
+                        "True Critical Point", "Petroleum Cold Flow Properties", "Natural Gas Hydrates"}
 
                 ListBox2.Items.AddRange(items)
 
@@ -36,15 +27,7 @@ Public Class FormAddUtility
 
             Case 1 'VSEP
 
-                If My.Settings.CultureInfo = "pt-BR" Then
-
-                    ListBox2.Items.Add("Dimensionamento (Vaso Vertical/Horizontal)")
-
-                Else
-
-                    ListBox2.Items.Add("Horizontal/Vertical Vessel Sizing")
-
-                End If
+                ListBox2.Items.Add("Horizontal/Vertical Vessel Sizing")
 
                 Dim objlist As String() = Flowsheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.Vessel).Select(Function(m) m.Tag).ToArray
 
@@ -52,15 +35,7 @@ Public Class FormAddUtility
 
             Case 2 'VALVE
 
-                If My.Settings.CultureInfo = "pt-BR" Then
-
-                    ListBox2.Items.Add("Dimensionamento de PSV")
-
-                Else
-
-                    ListBox2.Items.Add("Pressure Safety Valve Sizing")
-
-                End If
+                ListBox2.Items.Add("Pressure Safety Valve Sizing")
 
                 Dim objlist As String() = Flowsheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.Valve).Select(Function(m) m.Tag).ToArray
 
@@ -87,10 +62,10 @@ Public Class FormAddUtility
             Case 0 'MS
 
                 Select Case ListBox2.SelectedIndex
-                    'Case 0
-                    '    'Natural Gas Hydrates
-                    '    utility = Flowsheet.GetUtility(Interfaces.Enums.FlowsheetUtility.NaturalGasHydrates)
-                    '    utility.Name = "NaturalGasHydrates" & (obj.AttachedUtilities.Where(Function(x) x.GetUtilityType = Interfaces.Enums.FlowsheetUtility.NaturalGasHydrates).Count + 1).ToString
+                    Case 5
+                        'Natural Gas Hydrates
+                        utility = Flowsheet.GetUtility(Interfaces.Enums.FlowsheetUtility.NaturalGasHydrates)
+                        utility.Name = "NaturalGasHydrates" & (obj.AttachedUtilities.Where(Function(x) x.GetUtilityType = Interfaces.Enums.FlowsheetUtility.NaturalGasHydrates).Count + 1).ToString
                     Case 0
                         'Phase Envelope
                         utility = Flowsheet.GetUtility(Interfaces.Enums.FlowsheetUtility.PhaseEnvelope)

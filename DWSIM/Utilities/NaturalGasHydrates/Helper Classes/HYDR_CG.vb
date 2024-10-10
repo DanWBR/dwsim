@@ -112,18 +112,19 @@ Namespace DWSIM.Utilities.HYD
         Function OBJ_FUNC_HYD_CG(ByVal TIPO_HIDRATO As String, ByVal P As Double, ByVal T As Double, ByVal Vz As Object, ByVal Vids As Object, Optional ByVal vaporonly As Boolean = False) As Object
 
             Dim n = UBound(Vz)
-            Dim F0Ts1(n), F0Ps1(n), F0As1(n), consts, F0sI(n)
-            Dim F0Ts2(n), F0Ps2(n), F0As2(n), consts2, F0sII(n)
+            Dim F0Ts1(n), F0Ps1(n), F0As1(n), F0sI(n) As Double
+            Dim F0Ts2(n), F0Ps2(n), F0As2(n), F0sII(n) As Double
+            Dim consts, consts2 As Double()
             Dim objfunc As Double
-            Dim vm(1, 1), sumTETAsI, sumTETAsII
-            Dim C1(1, n), C2(1, n)
-            Dim DT, Tnfp, DHm, Td
+            Dim vm(1, 1), sumTETAsI, sumTETAsII As Double
+            Dim C1(1, n), C2(1, n) As Double
+            Dim DT, Tnfp, DHm, Td As Double
             Dim Vx(n), Vx2(n), t1, t2, t3, t4, t5 As Double
-            Dim ZLinf(n), ZV
-            Dim H(n), tmp2(3)
-            Dim TETA1(1, n), TETA2(1, n)
-            Dim vi_(n)
-            Dim Vp(n), Tc(n), Tb(n), Pc(n), Vc(n), Zc(n), W(n), Tr(n)
+            Dim ZLinf(n), ZV As Double
+            Dim H(n), tmp2(3) As Double
+            Dim TETA1(1, n), TETA2(1, n) As Double
+            Dim vi_(n) As Double
+            Dim Vp(n), Tc(n), Tb(n), Pc(n), Vc(n), Zc(n), W(n), Tr(n) As Double
             Dim Vy(n) As Double, pos
             Dim R = 8.314
             Dim temp1, tv, tv2
@@ -785,18 +786,19 @@ STEP2:
         Function DET_HYD_CG(ByVal TIPO_HIDRATO As String, ByVal P As Double, ByVal T As Double, ByVal Vz As Object, ByVal Vids As Object, Optional ByVal vaporonly As Boolean = False) As Object
 
             Dim n = UBound(Vz)
-            Dim F0Ts1(n), F0Ps1(n), F0As1(n), consts, F0sI(n)
-            Dim F0Ts2(n), F0Ps2(n), F0As2(n), consts2, F0sII(n)
+            Dim F0Ts1(n), F0Ps1(n), F0As1(n), F0sI(n) As Double
+            Dim F0Ts2(n), F0Ps2(n), F0As2(n), F0sII(n) As Double
+            Dim consts, consts2 As Double()
             Dim objfunc As Double
-            Dim vm(1, 1), sumTETAsI, sumTETAsII
-            Dim C1(1, n), C2(1, n)
-            Dim DT, Tnfp, DHm, Td
+            Dim vm(1, 1), sumTETAsI, sumTETAsII As Double
+            Dim C1(1, n), C2(1, n) As Double
+            Dim DT, Tnfp, DHm, Td As Double
             Dim Vx(n), VxHC(n), Vh(n), Ki(n), t1, t2, t3, t4, t5 As Double
-            Dim ZLinf(n), ZV
-            Dim H(n), tmp2(3)
-            Dim TETA1(1, n), TETA2(1, n)
-            Dim vi_(n)
-            Dim Vp(n), Tc(n), Tb(n), Pc(n), Vc(n), Zc(n), W(n), Tr(n)
+            Dim ZLinf(n), ZV As Double
+            Dim H(n), tmp2(3) As Double
+            Dim TETA1(1, n), TETA2(1, n) As Double
+            Dim vi_(n) As Double
+            Dim Vp(n), Tc(n), Tb(n), Pc(n), Vc(n), Zc(n), W(n), Tr(n) As Double
             Dim Vy(n) As Double, pos
             Dim R = 8.314
             Dim temp1, tv, tv2

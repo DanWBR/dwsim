@@ -28,8 +28,8 @@ Public Class FormHYD
     Dim mat As Streams.MaterialStream
     Dim Frm As FormFlowsheet
 
-    Public su As New SystemsOfUnits.Units
-    Public cv As New SystemsOfUnits.Converter
+    Public su As SystemsOfUnits.Units
+    Public cv As SystemsOfUnits.Converter
     Public nf As String
 
     Dim resPC, resTC As Object
@@ -52,12 +52,11 @@ Public Class FormHYD
         Me.ComboBox3.SelectedIndex = 0
         Me.ComboBox3.Enabled = False
 
+        ChangeDefaultFont(Me)
+
     End Sub
 
     Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
-
-        Me.su = Frm.Options.SelectedUnitSystem
-        Me.nf = Frm.Options.NumberFormat
 
     End Sub
 
@@ -68,6 +67,9 @@ Public Class FormHYD
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
+        su = Frm.Options.SelectedUnitSystem
+        nf = Frm.Options.NumberFormat
 
         If Not Me.ComboBox3.SelectedItem Is Nothing Then
 
