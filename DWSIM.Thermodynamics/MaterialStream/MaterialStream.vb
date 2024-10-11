@@ -6857,6 +6857,8 @@ Namespace Streams
                 results.DataUnits.Add("[Vapor Phase] Phase Mole Fraction", "")
                 results.Data.Add("[Vapor Phase] Phase Mass Fraction", GetSinglePhaseProp2("phasefraction", "mass", "Vapor"))
                 results.DataUnits.Add("[Vapor Phase] Phase Mass Fraction", "")
+                results.Data.Add("[Vapor Phase] Phase Volumetric Fraction", New List(Of Double) From {Phases(2).Properties.volumetricFraction.GetValueOrDefault()})
+                results.DataUnits.Add("[Vapor Phase] Phase Volumetric Fraction", "")
 
                 vz = GetSinglePhaseProp2("fraction", "mole", "Vapor").ToArray
                 wz = GetSinglePhaseProp2("fraction", "mass", "Vapor").ToArray
@@ -6911,6 +6913,8 @@ Namespace Streams
                 results.DataUnits.Add("[Liquid Phase] Phase Mole Fraction", "")
                 results.Data.Add("[Liquid Phase] Phase Mass Fraction", GetSinglePhaseProp2("phasefraction", "mass", "Liquid"))
                 results.DataUnits.Add("[Liquid Phase] Phase Mass Fraction", "")
+                results.Data.Add("[Liquid Phase] Phase Volumetric Fraction", New List(Of Double) From {Phases(3).Properties.volumetricFraction.GetValueOrDefault()})
+                results.DataUnits.Add("[Liquid Phase] Phase Volumetric Fraction", "")
 
                 vz = GetSinglePhaseProp2("fraction", "mole", "Liquid").ToArray
                 wz = GetSinglePhaseProp2("fraction", "mass", "Liquid").ToArray
@@ -6966,6 +6970,8 @@ Namespace Streams
                 results.DataUnits.Add("[Liquid Phase 2] Phase Mole Fraction", "")
                 results.Data.Add("[Liquid Phase 2] Phase Mass Fraction", GetSinglePhaseProp2("phasefraction", "mass", "Liquid2"))
                 results.DataUnits.Add("[Liquid Phase 2] Phase Mass Fraction", "")
+                results.Data.Add("[Liquid Phase 2] Phase Volumetric Fraction", New List(Of Double) From {Phases(4).Properties.volumetricFraction.GetValueOrDefault()})
+                results.DataUnits.Add("[Liquid Phase 2] Phase Volumetric Fraction", "")
 
                 vz = GetSinglePhaseProp2("fraction", "mole", "Liquid2").ToArray
                 wz = GetSinglePhaseProp2("fraction", "mass", "Liquid2").ToArray
@@ -7020,6 +7026,8 @@ Namespace Streams
                 results.DataUnits.Add("[Solid Phase] Phase Mole Fraction", "")
                 results.Data.Add("[Solid Phase] Phase Mass Fraction", GetSinglePhaseProp2("phasefraction", "mass", "Solid"))
                 results.DataUnits.Add("[Solid Phase] Phase Mass Fraction", "")
+                results.Data.Add("[Solid Phase] Phase Volumetric Fraction", New List(Of Double) From {Phases(7).Properties.volumetricFraction.GetValueOrDefault()})
+                results.DataUnits.Add("[Solid Phase] Phase Volumetric Fraction", "")
 
                 vz = GetSinglePhaseProp2("fraction", "mole", "Solid").ToArray
                 wz = GetSinglePhaseProp2("fraction", "mass", "Solid").ToArray
@@ -7142,12 +7150,22 @@ Namespace Streams
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Property Package: " & Me.PropertyPackage.ComponentName}))
 
-            Dim ny, nl1, nl2, ns, vz(), wz(), vnz(), wnz() As Double, i As Integer
+            Dim ny, nl1, nl2, ns, wy, wl1, wl2, ws, vy, vl1, vl2, vs, vz(), wz(), vnz(), wnz() As Double, i As Integer
 
             ny = Phases(2).Properties.molarfraction.GetValueOrDefault
             nl1 = Phases(3).Properties.molarfraction.GetValueOrDefault
             nl2 = Phases(4).Properties.molarfraction.GetValueOrDefault
             ns = Phases(7).Properties.molarfraction.GetValueOrDefault
+
+            wy = Phases(2).Properties.massfraction.GetValueOrDefault
+            wl1 = Phases(3).Properties.massfraction.GetValueOrDefault
+            wl2 = Phases(4).Properties.massfraction.GetValueOrDefault
+            ws = Phases(7).Properties.massfraction.GetValueOrDefault
+
+            vy = Phases(2).Properties.volumetricFraction.GetValueOrDefault
+            vl1 = Phases(3).Properties.volumetricFraction.GetValueOrDefault
+            vl2 = Phases(4).Properties.volumetricFraction.GetValueOrDefault
+            vs = Phases(7).Properties.volumetricFraction.GetValueOrDefault
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Main Properties"}))
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
@@ -7186,6 +7204,40 @@ Namespace Streams
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                      New String() {"Solid",
                      ns.ToString(nf),
+                     ""}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Phase Mass Fractions"}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Vapor",
+                     wy.ToString(nf),
+                     ""}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Liquid 1",
+                     wl1.ToString(nf),
+                     ""}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Liquid 2",
+                     wl2.ToString(nf),
+                     ""}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Solid",
+                     ws.ToString(nf),
+                     ""}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Phase Volumetric Fractions"}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Vapor",
+                     vy.ToString(nf),
+                     ""}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Liquid 1",
+                     vl1.ToString(nf),
+                     ""}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Liquid 2",
+                     vl2.ToString(nf),
+                     ""}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                     New String() {"Solid",
+                     vs.ToString(nf),
                      ""}))
 
             If (ny > 0.0000000001# And ny < 0.9999999999#) OrElse nl2 > 0.000000001# OrElse ns > 0.0# Then

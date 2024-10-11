@@ -64,11 +64,15 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 8.8.2
 
-- Fixed issues with Sensitivity Analysis (Classic UI)
+- Optimized memory consumption and CPU usage
+- Added mass balance residual and total energy balance to flowsheet results
+- Added phase volumetric fractions
 - Set default System of Units  (Classic UI) 
+- Fixed issues with Sensitivity Analysis (Classic UI)
+- Fixed ironpython script debugging
+- Fixed/disabled display of dynamic properties in steady state
 - Tentative fix for Excel.exe not closing in Spreadsheet UO after calculation
 - Fixed memory leaks
-- Optimized memory consumption and CPU usage
 - Fixed issue with Heat Exchanger UO
 - Other fixes and enhancements
 
