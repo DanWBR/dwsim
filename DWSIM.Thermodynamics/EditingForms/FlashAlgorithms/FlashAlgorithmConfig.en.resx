@@ -121,10 +121,29 @@
   <data name="GroupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkDisplayCompWarning.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkDisplayCompWarning.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chkDisplayCompWarning.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 212</value>
+  </data>
+  <data name="chkDisplayCompWarning.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 17</value>
+  </data>
+  <data name="chkDisplayCompWarning.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="chkDisplayCompWarning.Text" xml:space="preserve">
+    <value>Display Warning for Missing Compound Parameters</value>
+  </data>
   <data name="cbFSMethod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cbFSMethod.Location" type="System.Drawing.Point, System.Drawing">
     <value>204, 76</value>
   </data>
@@ -282,13 +301,13 @@
     <value>Top, Right</value>
   </data>
   <data name="tbPT_DampingFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>495, 325</value>
+    <value>495, 346</value>
   </data>
   <data name="tbPT_DampingFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 20</value>
   </data>
   <data name="Label30.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 328</value>
+    <value>12, 349</value>
   </data>
   <data name="Label30.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 13</value>
@@ -300,13 +319,13 @@
     <value>Top, Right</value>
   </data>
   <data name="tbPH_MaxDT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 299</value>
+    <value>496, 320</value>
   </data>
   <data name="tbPH_MaxDT.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 20</value>
   </data>
   <data name="Label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 302</value>
+    <value>13, 323</value>
   </data>
   <data name="Label29.Size" type="System.Drawing.Size, System.Drawing">
     <value>321, 13</value>
@@ -315,7 +334,7 @@
     <value>PH/PS Flash - Maximum Temperature Update Delta (K) (1.0 - 50.0)</value>
   </data>
   <data name="Label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 224</value>
+    <value>14, 245</value>
   </data>
   <data name="Label26.Size" type="System.Drawing.Size, System.Drawing">
     <value>356, 13</value>
@@ -327,7 +346,7 @@
     <value>Top, Right</value>
   </data>
   <data name="tbPV_EpsilonT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 221</value>
+    <value>496, 242</value>
   </data>
   <data name="tbPV_EpsilonT.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 20</value>
@@ -336,7 +355,7 @@
     <value>Top, Right</value>
   </data>
   <data name="tbPV_DampingFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 273</value>
+    <value>496, 294</value>
   </data>
   <data name="tbPV_DampingFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 20</value>
@@ -351,7 +370,7 @@
     <value>Validate Equilibrium Calculation Results</value>
   </data>
   <data name="Label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 250</value>
+    <value>13, 271</value>
   </data>
   <data name="Label25.Size" type="System.Drawing.Size, System.Drawing">
     <value>301, 13</value>
@@ -363,13 +382,13 @@
     <value>Top, Right</value>
   </data>
   <data name="tbPV_MaxDT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 247</value>
+    <value>496, 268</value>
   </data>
   <data name="tbPV_MaxDT.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 20</value>
   </data>
   <data name="Label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 276</value>
+    <value>13, 297</value>
   </data>
   <data name="Label24.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 13</value>

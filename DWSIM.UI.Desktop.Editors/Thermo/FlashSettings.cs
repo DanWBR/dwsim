@@ -84,6 +84,12 @@ namespace DWSIM.UI.Desktop.Editors
                     s[f.ValidateEquilibriumCalc] = cb.Checked.GetValueOrDefault().ToString();
                 });
 
+            c.CreateAndAddCheckBoxRow("Display Warning for Missing Compound Parameters", pp.DisplayMissingCompoundPropertiesWarning,
+                (cb, e) =>
+                {
+                    pp.DisplayMissingCompoundPropertiesWarning = cb.Checked.GetValueOrDefault();
+                });
+
             c.CreateAndAddLabelRow("Nested Loops Options");
 
             c.CreateAndAddCheckBoxRow("Handle Solids", bool.Parse(s[f.HandleSolidsInDefaultEqCalcMode]),

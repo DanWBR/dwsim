@@ -65,6 +65,8 @@ Public Class FlashAlgorithmConfig
 
         chkIdealPVFlash.Checked = Settings(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure)
 
+        chkDisplayCompWarning.Checked = PropPack.DisplayMissingCompoundPropertiesWarning
+
         Select Case Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
             Case "Default"
                 cbFlashType.SelectedIndex = 0
@@ -189,6 +191,8 @@ Public Class FlashAlgorithmConfig
             Settings(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure) = chkIdealPVFlash.Checked
 
             PropPack.FlashCalculationApproach = cbFlashApproach.SelectedIndex
+
+            PropPack.DisplayMissingCompoundPropertiesWarning = chkDisplayCompWarning.Checked
 
             If cbExternalSolver.Enabled And PropPack.Flowsheet IsNot Nothing Then
                 Dim selectedsolver = PropPack.Flowsheet.ExternalSolvers.Values.Where(

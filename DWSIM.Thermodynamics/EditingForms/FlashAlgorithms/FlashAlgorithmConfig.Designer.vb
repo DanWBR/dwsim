@@ -72,6 +72,7 @@ Partial Class FlashAlgorithmConfig
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbPTIntTol = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.chkDisplayCompWarning = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPageGeneral.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -98,6 +99,7 @@ Partial Class FlashAlgorithmConfig
         'GroupBox4
         '
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.chkDisplayCompWarning)
         Me.GroupBox4.Controls.Add(Me.cbFSMethod)
         Me.GroupBox4.Controls.Add(Me.Label12)
         Me.GroupBox4.Controls.Add(Me.btnConfigExtSolver)
@@ -395,6 +397,11 @@ Partial Class FlashAlgorithmConfig
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
         '
+        'chkDisplayCompWarning
+        '
+        resources.ApplyResources(Me.chkDisplayCompWarning, "chkDisplayCompWarning")
+        Me.chkDisplayCompWarning.Name = "chkDisplayCompWarning"
+        '
         'FlashAlgorithmConfig
         '
         resources.ApplyResources(Me, "$this")
@@ -464,4 +471,5 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents chkIdealPVFlash As CheckBox
     Friend WithEvents cbFSMethod As ComboBox
     Friend WithEvents Label12 As Label
+    Public WithEvents chkDisplayCompWarning As CheckBox
 End Class

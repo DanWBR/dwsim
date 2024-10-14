@@ -270,6 +270,8 @@ Namespace PropertyPackages
 
         Public Property AreModelParametersDirty = True
 
+        Public Property DisplayMissingCompoundPropertiesWarning As Boolean = True
+
 #End Region
 
 #Region "   Members"
@@ -678,27 +680,31 @@ Namespace PropertyPackages
 
         Public Sub CheckCompounds()
 
-            For Each c In CurrentMaterialStream.Phases(0).Compounds.Values
-                Dim cp = c.ConstantProperties
-                If cp.Molar_Weight = 0.0 Then
-                    Flowsheet?.ShowMessage(String.Format("Compound '{0}' is missing its Molar Weight, equilibrium calculations may fail", cp.Name), IFlowsheet.MessageType.Warning)
-                End If
-                If cp.Critical_Temperature = 0.0 Then
-                    Flowsheet?.ShowMessage(String.Format("Compound '{0}' is missing its Critical Temperature, equilibrium calculations may fail", cp.Name), IFlowsheet.MessageType.Warning)
-                End If
-                If cp.Critical_Pressure = 0.0 Then
-                    Flowsheet?.ShowMessage(String.Format("Compound '{0}' is missing its Critical Pressure, equilibrium calculations may fail", cp.Name), IFlowsheet.MessageType.Warning)
-                End If
-                If cp.Acentric_Factor = 0.0 Then
-                    Flowsheet?.ShowMessage(String.Format("Compound '{0}' is missing its Acentric Factor, equilibrium calculations may fail", cp.Name), IFlowsheet.MessageType.Warning)
-                End If
-                If cp.Normal_Boiling_Point = 0.0 Then
-                    Flowsheet?.ShowMessage(String.Format("Compound '{0}' is missing its Normal Boiling Point, equilibrium calculations may fail", cp.Name), IFlowsheet.MessageType.Warning)
-                End If
-                If cp.TemperatureOfFusion = 0.0 Then
-                    Flowsheet?.ShowMessage(String.Format("Compound '{0}' is missing its Temperature of Fusion, equilibrium calculations with solid phase may fail", cp.Name), IFlowsheet.MessageType.Warning)
-                End If
-            Next
+            If DisplayMissingCompoundPropertiesWarning Then
+
+                For Each c In CurrentMaterialStream.Phases(0).Compounds.Values
+                    Dim cp = c.ConstantProperties
+                    If cp.Molar_Weight = 0.0 Then
+                        Flowsheet?.ShowMessage(String.Format("Compound '{0}' is missing its Molar Weight, equilibrium calculations may fail", cp.Name), IFlowsheet.MessageType.Warning)
+                    End If
+                    If cp.Critical_Temperature = 0.0 Then
+                        Flowsheet?.ShowMessage(String.Format("Compound '{0}' is missing its Critical Temperature, equilibrium calculations may fail", cp.Name), IFlowsheet.MessageType.Warning)
+                    End If
+                    If cp.Critical_Pressure = 0.0 Then
+                        Flowsheet?.ShowMessage(String.Format("Compound '{0}' is missing its Critical Pressure, equilibrium calculations may fail", cp.Name), IFlowsheet.MessageType.Warning)
+                    End If
+                    If cp.Acentric_Factor = 0.0 Then
+                        Flowsheet?.ShowMessage(String.Format("Compound '{0}' is missing its Acentric Factor, equilibrium calculations may fail", cp.Name), IFlowsheet.MessageType.Warning)
+                    End If
+                    If cp.Normal_Boiling_Point = 0.0 Then
+                        Flowsheet?.ShowMessage(String.Format("Compound '{0}' is missing its Normal Boiling Point, equilibrium calculations may fail", cp.Name), IFlowsheet.MessageType.Warning)
+                    End If
+                    If cp.TemperatureOfFusion = 0.0 Then
+                        Flowsheet?.ShowMessage(String.Format("Compound '{0}' is missing its Temperature of Fusion, equilibrium calculations with solid phase may fail", cp.Name), IFlowsheet.MessageType.Warning)
+                    End If
+                Next
+
+            End If
 
         End Sub
 
@@ -12283,6 +12289,9 @@ Final3:
             e1 = (From el As XElement In data Select el Where el.Name = "CalculateAdditionalMaterialStreamProperties").FirstOrDefault
             If e1 IsNot Nothing Then CalculateAdditionalMaterialStreamProperties = e1.Value
 
+            e1 = (From el As XElement In data Select el Where el.Name = "DisplayMissingCompoundPropertiesWarning").FirstOrDefault
+            If e1 IsNot Nothing Then DisplayMissingCompoundPropertiesWarning = e1.Value
+
             If (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault IsNot Nothing Then
                 Try
                     LiquidDensityCalculationMode_Subcritical = [Enum].Parse(LiquidDensityCalculationMode_Subcritical.GetType, (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault.Value)
@@ -12897,6 +12906,8 @@ Final3:
                 .Add(New XElement("IgnoreSalinityLimit", IgnoreSalinityLimit))
                 .Add(New XElement("CalculateAdditionalMaterialStreamProperties", CalculateAdditionalMaterialStreamProperties))
                 .Add(New XElement("FlashCalculationApproach", FlashCalculationApproach))
+
+                .Add(New XElement("DisplayMissingCompoundPropertiesWarning", DisplayMissingCompoundPropertiesWarning))
 
                 Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}
 
