@@ -90,23 +90,60 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="dwsim-web-ui\asset-manifest.json" />
-    <None Include="dwsim-web-ui\manifest.json" />
-    <None Include="dwsim-web-ui\static\css\main.506bd696.css.map" />
-    <None Include="dwsim-web-ui\static\js\787.d6b8112c.chunk.js.map" />
+    <None Include="dwsim-web-ui\asset-manifest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="dwsim-web-ui\manifest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="dwsim-web-ui\static\css\main.bb5e8611.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="dwsim-web-ui\static\js\787.d6b8112c.chunk.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="dwsim-web-ui\static\js\main.1b691f9a.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dwsim-web-ui\favicon.ico" />
-    <Content Include="dwsim-web-ui\index.html" />
-    <Content Include="dwsim-web-ui\logo192.png" />
-    <Content Include="dwsim-web-ui\logo512.png" />
-    <Content Include="dwsim-web-ui\robots.txt" />
-    <Content Include="dwsim-web-ui\s365-full-logo.png" />
-    <Content Include="dwsim-web-ui\static\css\main.506bd696.css" />
-    <Content Include="dwsim-web-ui\static\js\787.d6b8112c.chunk.js" />
-    <Content Include="dwsim-web-ui\static\media\genericfile.a118dce6bd90109248c926aedf58197f.svg" />
-    <Content Include="dwsim-web-ui\static\media\xlsx_icon.71610099b6235cf8a249034898e3a53f.svg" />
+    <Content Include="dwsim-web-ui\favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dwsim-web-ui\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dwsim-web-ui\logo192.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dwsim-web-ui\logo512.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dwsim-web-ui\robots.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dwsim-web-ui\s365-full-logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dwsim-web-ui\static\css\main.bb5e8611.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dwsim-web-ui\static\js\787.d6b8112c.chunk.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dwsim-web-ui\static\js\main.1b691f9a.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dwsim-web-ui\static\js\main.1b691f9a.js.LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dwsim-web-ui\static\media\genericfile.a118dce6bd90109248c926aedf58197f.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dwsim-web-ui\static\media\xlsx_icon.71610099b6235cf8a249034898e3a53f.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
