@@ -102,7 +102,7 @@
     <None Include="dwsim-web-ui\static\js\787.d6b8112c.chunk.js.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="dwsim-web-ui\static\js\main.1b691f9a.js.map">
+    <None Include="dwsim-web-ui\static\js\main.d288f251.js.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
@@ -132,10 +132,10 @@
     <Content Include="dwsim-web-ui\static\js\787.d6b8112c.chunk.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="dwsim-web-ui\static\js\main.1b691f9a.js">
+    <Content Include="dwsim-web-ui\static\js\main.d288f251.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="dwsim-web-ui\static\js\main.1b691f9a.js.LICENSE.txt">
+    <Content Include="dwsim-web-ui\static\js\main.d288f251.js.LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="dwsim-web-ui\static\media\genericfile.a118dce6bd90109248c926aedf58197f.svg">
