@@ -98,8 +98,8 @@ Partial Class FormEventDescription
         Me.Controls.Add(Me.tbEventType)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormEventDescription"
+        Me.ShowIcon = False
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

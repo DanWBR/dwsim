@@ -144,6 +144,9 @@
   <data name="Button5.Text" xml:space="preserve">
     <value>Search Forums</value>
   </data>
+  <data name="LabelWithDivider3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="LabelWithDivider3.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 314</value>
   </data>
@@ -225,6 +228,9 @@
   <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 51</value>
   </data>
+  <data name="LabelWithDivider1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="LabelWithDivider1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -236,6 +242,9 @@
   </data>
   <data name="LabelWithDivider1.Text" xml:space="preserve">
     <value>Call Stack</value>
+  </data>
+  <data name="LabelWithDivider2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="LabelWithDivider2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

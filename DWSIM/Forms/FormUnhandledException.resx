@@ -128,9 +128,6 @@
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 25</value>
   </data>
-  <data name="&gt;&gt;Button4.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Label8.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -153,9 +150,6 @@
   <data name="&gt;&gt;Button2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;LabelWithDivider1.Name" xml:space="preserve">
     <value>LabelWithDivider1</value>
   </data>
@@ -168,8 +162,8 @@
   <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 435</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>O DWSIM gerou um erro (exceção) inesperado. Clique em 'Detalhes' para mais informações.</value>
@@ -211,6 +205,9 @@
     <value>12</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TextBox1.ZOrder" xml:space="preserve">
@@ -261,6 +258,9 @@
   <data name="Button4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="Button5.Text" xml:space="preserve">
+    <value>Pesquisar Fóruns</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -306,8 +306,8 @@
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 498</value>
   </data>
-  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 25</value>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>333, 13</value>
   </data>
   <data name="Button2.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -399,9 +399,6 @@
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>441, 13</value>
   </data>
-  <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 435</value>
-  </data>
   <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -423,11 +420,14 @@
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
   <data name="&gt;&gt;Button4.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;Label7.Name" xml:space="preserve">
-    <value>Label7</value>
+  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 25</value>
   </data>
   <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -449,6 +449,9 @@
   </data>
   <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="TextBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>715, 347</value>
   </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 497</value>
@@ -493,11 +496,8 @@
   <data name="LabelWithDivider3.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
-  <data name="TextBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>715, 347</value>
-  </data>
-  <data name="TextBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
+  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
   </data>
   <data name="PictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -514,6 +514,9 @@
   <data name="&gt;&gt;LabelWithDivider3.Name" xml:space="preserve">
     <value>LabelWithDivider3</value>
   </data>
+  <data name="Label9.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>545, 13</value>
   </data>
@@ -525,9 +528,6 @@
   </data>
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
   </data>
   <data name="Button4.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -556,8 +556,8 @@
   <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="Label9.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
+  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -568,8 +568,8 @@
   <data name="&gt;&gt;PictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Button5.Text" xml:space="preserve">
-    <value>Pesquisar Fóruns</value>
+  <data name="TextBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -577,14 +577,14 @@
   <data name="TextBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 13</value>
+  <data name="&gt;&gt;Button4.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;Label7.Name" xml:space="preserve">
+    <value>Label7</value>
   </data>
   <data name="Button6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

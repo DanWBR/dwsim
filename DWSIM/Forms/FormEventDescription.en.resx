@@ -117,18 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>535, 373</value>
+  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Event Type</value>
   </data>
+  <data name="tbEventType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="tbEventType.Location" type="System.Drawing.Point, System.Drawing">
     <value>77, 12</value>
   </data>
   <data name="tbEventType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>529, 20</value>
+    <value>531, 20</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
@@ -136,8 +146,11 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Description:</value>
   </data>
+  <data name="Label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 238</value>
+    <value>9, 174</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
@@ -145,8 +158,11 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Location:</value>
   </data>
+  <data name="Label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 335</value>
+    <value>9, 271</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -154,36 +170,53 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Mitigation Actions:</value>
   </data>
+  <data name="tbEventDescription.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="tbEventDescription.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 8.25pt</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbEventDescription.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
   </data>
   <data name="tbEventDescription.Size" type="System.Drawing.Size, System.Drawing">
-    <value>597, 171</value>
+    <value>599, 107</value>
+  </data>
+  <data name="tbEventLocation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="tbEventLocation.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 8.25pt</value>
   </data>
   <data name="tbEventLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 256</value>
+    <value>9, 192</value>
   </data>
   <data name="tbEventLocation.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
+  </data>
+  <data name="tbEventLocation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>599, 74</value>
+  </data>
+  <data name="tbEventActions.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
   </data>
   <data name="tbEventActions.Font" type="System.Drawing.Font, System.Drawing">
     <value>Consolas, 8.25pt</value>
   </data>
   <data name="tbEventActions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 354</value>
+    <value>9, 290</value>
   </data>
   <data name="tbEventActions.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
   </data>
   <data name="tbEventActions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>597, 72</value>
+    <value>599, 72</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>618, 409</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

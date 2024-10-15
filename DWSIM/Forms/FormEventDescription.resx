@@ -170,9 +170,6 @@
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 43</value>
   </data>
-  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;Button1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -321,11 +318,14 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormEventDescription</value>
   </data>
-  <data name="&gt;&gt;tbEventType.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tbEventLocation.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;tbEventType.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;tbEventType.Name" xml:space="preserve">
     <value>tbEventType</value>

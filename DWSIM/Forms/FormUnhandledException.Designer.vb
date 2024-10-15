@@ -44,7 +44,7 @@ Partial Class FormUnhandledException
         '
         resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.BackColor = System.Drawing.Color.White
-        Me.PictureBox1.Image = My.Resources.Resources.bubble_gum_error
+        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.bubble_gum_error
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
