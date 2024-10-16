@@ -1470,7 +1470,7 @@ Namespace UnitOperations
             If isolamento = True Then
 
                 esp_isol = Me.m_thermalprofile.Espessura 'm
-                U_isol = Me.m_thermalprofile.Condtermica / (Math.Log((Dext + esp_isol) / Dext) * Dext)
+                U_isol = Me.m_thermalprofile.Condtermica / (Math.Log((Dext + 2 * esp_isol) / Dext) * Dext)
 
             End If
 
