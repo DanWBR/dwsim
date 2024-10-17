@@ -150,4 +150,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Property FlowsheetTransitionObject As IFlowsheetTransitionRestore
 
+    ReadOnly Property UniqueID As String
+
 End Interface

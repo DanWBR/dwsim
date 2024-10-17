@@ -289,6 +289,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property FlowsheetTransitionObject As IFlowsheetTransitionRestore = New FlowsheetTransitionRestore() Implements IFlowsheetOptions.FlowsheetTransitionObject
 
+        Public ReadOnly Property UniqueID As String = Guid.NewGuid().ToString() Implements IFlowsheetOptions.UniqueID
+
     End Class
 
     <System.Serializable()> Public Class FlowsheetResults
