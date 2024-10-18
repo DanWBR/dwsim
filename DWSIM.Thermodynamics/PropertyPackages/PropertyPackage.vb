@@ -270,7 +270,7 @@ Namespace PropertyPackages
 
         Public Property AreModelParametersDirty = True
 
-        Public Property DisplayMissingCompoundPropertiesWarning As Boolean = True
+        Public Property DisplayMissingCompoundPropertiesWarning As Boolean = False
 
 #End Region
 
