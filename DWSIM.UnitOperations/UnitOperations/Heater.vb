@@ -620,7 +620,7 @@ Namespace UnitOperations
 
                     IObj?.Paragraphs.Add("Calculation Mode: Outlet Vapor Fraction")
 
-                    IObj?.Paragraphs.Add("Outlet Stream will be specified with Pressure and Temperature. Temperature will be calculated through a PVF Flash call.")
+                    IObj?.Paragraphs.Add("Outlet Stream will be specified with Pressure and Enthalpy. Temperature will be calculated through a PVF Flash call.")
 
                     V2 = m_VFout.GetValueOrDefault
 
@@ -686,7 +686,7 @@ Namespace UnitOperations
                         Case CalculationMode.EnergyStream, CalculationMode.HeatAdded
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
                         Case CalculationMode.OutletVaporFraction
-                            .SpecType = StreamSpec.Pressure_and_VaporFraction
+                            .SpecType = StreamSpec.Pressure_and_Enthalpy
                         Case CalculationMode.TemperatureChange, CalculationMode.OutletTemperature
                             .SpecType = StreamSpec.Temperature_and_Pressure
                     End Select

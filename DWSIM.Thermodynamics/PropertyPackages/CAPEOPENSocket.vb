@@ -295,6 +295,14 @@ Namespace PropertyPackages
 
             Me.CurrentMaterialStream.AtEquilibrium = False
 
+            Me.DW_ZerarPhaseProps(Phase.Vapor)
+            Me.DW_ZerarPhaseProps(Phase.Liquid)
+            Me.DW_ZerarPhaseProps(Phase.Liquid1)
+            Me.DW_ZerarPhaseProps(Phase.Liquid2)
+            Me.DW_ZerarPhaseProps(Phase.Liquid3)
+            Me.DW_ZerarPhaseProps(Phase.Aqueous)
+            Me.DW_ZerarPhaseProps(Phase.Solid)
+
             Dim s1 As String() = New String() {}
             Dim s2 As String() = New String() {}
             Dim s11 As String = ""
@@ -335,14 +343,6 @@ Namespace PropertyPackages
             End Select
 
             Me.CurrentMaterialStream.SetOverallComposition(mixmolefrac)
-
-            Me.DW_ZerarPhaseProps(Phase.Vapor)
-            Me.DW_ZerarPhaseProps(Phase.Liquid)
-            Me.DW_ZerarPhaseProps(Phase.Liquid1)
-            Me.DW_ZerarPhaseProps(Phase.Liquid2)
-            Me.DW_ZerarPhaseProps(Phase.Liquid3)
-            Me.DW_ZerarPhaseProps(Phase.Aqueous)
-            Me.DW_ZerarPhaseProps(Phase.Solid)
 
             If _coversion = "1.0" Then
                 Try
@@ -1464,13 +1464,13 @@ Namespace PropertyPackages
         Public Overrides Sub CalcEquilibrium1(ByVal specification1 As Object, ByVal specification2 As Object, ByVal solutionType As String)
             'Me.SetMaterial(Me.CurrentMaterialStream)
 
-            Me.DW_ZerarPhaseProps(Phase.Vapor)
-            Me.DW_ZerarPhaseProps(Phase.Liquid)
-            Me.DW_ZerarPhaseProps(Phase.Liquid1)
-            Me.DW_ZerarPhaseProps(Phase.Liquid2)
-            Me.DW_ZerarPhaseProps(Phase.Liquid3)
-            Me.DW_ZerarPhaseProps(Phase.Aqueous)
-            Me.DW_ZerarPhaseProps(Phase.Solid)
+            'Me.DW_ZerarPhaseProps(Phase.Vapor)
+            'Me.DW_ZerarPhaseProps(Phase.Liquid)
+            'Me.DW_ZerarPhaseProps(Phase.Liquid1)
+            'Me.DW_ZerarPhaseProps(Phase.Liquid2)
+            'Me.DW_ZerarPhaseProps(Phase.Liquid3)
+            'Me.DW_ZerarPhaseProps(Phase.Aqueous)
+            'Me.DW_ZerarPhaseProps(Phase.Solid)
 
             Me.CurrentMaterialStream.AtEquilibrium = False
 
