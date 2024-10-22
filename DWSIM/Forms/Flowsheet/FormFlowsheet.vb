@@ -737,10 +737,13 @@ Public Class FormFlowsheet
 
         FileDatabaseProvider = Nothing
 
-        Collections.GraphicObjectCollection.Clear()
-        Collections.FlowsheetObjectCollection.Clear()
-        Collections.OPT_OptimizationCollection.Clear()
-        Collections.OPT_SensAnalysisCollection.Clear()
+        Try
+            Collections.GraphicObjectCollection.Clear()
+            Collections.FlowsheetObjectCollection.Clear()
+            Collections.OPT_OptimizationCollection.Clear()
+            Collections.OPT_SensAnalysisCollection.Clear()
+        Catch ex As Exception
+        End Try
 
         PropertyPackages?.Clear()
         SelectedCompounds?.Clear()
