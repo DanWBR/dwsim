@@ -679,7 +679,7 @@ Namespace UnitOperations
                         Case CalculationMode.HeatRemoved
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
                         Case CalculationMode.OutletVaporFraction
-                            .SpecType = StreamSpec.Pressure_and_VaporFraction
+                            .SpecType = StreamSpec.Pressure_and_Enthalpy
                         Case CalculationMode.TemperatureChange, CalculationMode.OutletTemperature
                             .SpecType = StreamSpec.Temperature_and_Pressure
                     End Select
