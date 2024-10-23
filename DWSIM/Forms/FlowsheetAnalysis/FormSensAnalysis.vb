@@ -42,6 +42,8 @@ Public Class FormSensAnalysis
 
     Public cbc2, cbc3, cbc0, cbc1 As DataGridViewComboBoxCell
 
+    Private Loaded As Boolean = False
+
     Private Sub FormSensAnalysis_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
@@ -142,6 +144,8 @@ Public Class FormSensAnalysis
         form.WriteToLog(DWSIM.App.GetLocalTipString("FSAN001"), Color.Black, MessageType.Tip)
 
         FormMain.TranslateFormFunction?.Invoke(Me)
+
+        Loaded = True
 
     End Sub
 
@@ -267,20 +271,26 @@ Public Class FormSensAnalysis
 
     Private Sub btnNewCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewCase.Click
 
-        Dim sacase As New SensitivityAnalysisCase
-        Dim n As Integer = form.Collections.OPT_SensAnalysisCollection.Count
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+                   form.GetTranslatedString1("Ateno"),
+                   MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
-        Do
-            If GetNameIndex("SACase" & n) < 0 Then Exit Do
-            n += 1
-        Loop
+            Dim sacase As New SensitivityAnalysisCase
+            Dim n As Integer = form.Collections.OPT_SensAnalysisCollection.Count
 
-        sacase.name = "SACase" & n
+            Do
+                If GetNameIndex("SACase" & n) < 0 Then Exit Do
+                n += 1
+            Loop
 
-        form.Collections.OPT_SensAnalysisCollection.Add(sacase)
+            sacase.name = "SACase" & n
 
-        Me.lbCases.Items.Add(sacase.name)
-        Me.lbCases.SelectedItem = sacase.name
+            form.Collections.OPT_SensAnalysisCollection.Add(sacase)
+
+            Me.lbCases.Items.Add(sacase.name)
+            Me.lbCases.SelectedItem = sacase.name
+
+        End If
 
     End Sub
 
@@ -404,34 +414,41 @@ Public Class FormSensAnalysis
 
     Private Sub lbCases_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbCases.SelectedIndexChanged
 
-        If Me.selectedindex <> Me.lbCases.SelectedIndex Then
+        If Loaded And selectedindex <> lbCases.SelectedIndex And
+            lbCases.SelectedIndex >= 0 Then
 
-            Me.selectedindex = Me.lbCases.SelectedIndex
+            If MessageBox.Show(form.GetTranslatedString1("Desejasalvarasaltera"),
+               form.GetTranslatedString1("Pergunta"),
+               MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
-            If Not Me.lbCases.SelectedItem Is Nothing Then
-                For Each sacase As SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
-                    If sacase.name = Me.lbCases.SelectedItem.ToString Then
-                        Me.selectedsacase = sacase
-                        Me.PopulateForm(sacase)
-                        Exit For
-                    End If
-                Next
-                'TabPage2.Enabled = True
-                'TabPage3.Enabled = True
-                GroupBox8.Enabled = True
-                GroupBox9.Enabled = True
-                btnRun.Enabled = True
-                'gbExp.Enabled = True
-            Else
-                'TabPage2.Enabled = False
-                'TabPage3.Enabled = False
-                'gbExp.Enabled = False
-                GroupBox8.Enabled = False
-                GroupBox9.Enabled = False
-                btnRun.Enabled = False
+                Me.selectedindex = Me.lbCases.SelectedIndex
+
+                If Not Me.lbCases.SelectedItem Is Nothing Then
+                    For Each sacase As SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
+                        If sacase.name = Me.lbCases.SelectedItem.ToString Then
+                            Me.selectedsacase = sacase
+                            Me.PopulateForm(sacase)
+                            Exit For
+                        End If
+                    Next
+                    'TabPage2.Enabled = True
+                    'TabPage3.Enabled = True
+                    GroupBox8.Enabled = True
+                    GroupBox9.Enabled = True
+                    btnRun.Enabled = True
+                    'gbExp.Enabled = True
+                Else
+                    'TabPage2.Enabled = False
+                    'TabPage3.Enabled = False
+                    'gbExp.Enabled = False
+                    GroupBox8.Enabled = False
+                    GroupBox9.Enabled = False
+                    btnRun.Enabled = False
+                End If
+
+                selected = True
+
             End If
-
-            selected = True
 
         End If
 
@@ -439,29 +456,41 @@ Public Class FormSensAnalysis
 
     Private Sub btnCopyCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyCase.Click
 
-        Dim sacase2 As New SensitivityAnalysisCase
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+                   form.GetTranslatedString1("Ateno"),
+                   MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
-        Dim sacase = form.Collections.OPT_SensAnalysisCollection(Me.lbCases.SelectedIndex)
-        sacase2 = sacase.Clone
-        sacase2.name = sacase.name & "_1"
+            Dim sacase2 As New SensitivityAnalysisCase
 
-        Me.lbCases.Items.Add(sacase2.name)
-        Me.lbCases.SelectedItem = sacase2.name
-        form.Collections.OPT_SensAnalysisCollection.Add(sacase2)
+            Dim sacase = form.Collections.OPT_SensAnalysisCollection(Me.lbCases.SelectedIndex)
+            sacase2 = sacase.Clone
+            sacase2.name = sacase.name & "_1"
+
+            Me.lbCases.Items.Add(sacase2.name)
+            Me.lbCases.SelectedItem = sacase2.name
+            form.Collections.OPT_SensAnalysisCollection.Add(sacase2)
+
+        End If
 
     End Sub
 
     Private Sub btnSaveCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveCase.Click
 
-        Dim prevselected = lbCases.SelectedIndex
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+                           form.GetTranslatedString1("Ateno"),
+                           MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
-        For i As Integer = 0 To lbCases.Items.Count - 1
-            lbCases.SelectedIndex = i
-            Dim sacase = form.Collections.OPT_SensAnalysisCollection(Me.lbCases.SelectedIndex)
-            SaveForm(sacase)
-        Next
+            Dim prevselected = lbCases.SelectedIndex
 
-        lbCases.SelectedIndex = prevselected
+            For i As Integer = 0 To lbCases.Items.Count - 1
+                lbCases.SelectedIndex = i
+                Dim sacase = form.Collections.OPT_SensAnalysisCollection(Me.lbCases.SelectedIndex)
+                SaveForm(sacase)
+            Next
+
+            lbCases.SelectedIndex = prevselected
+
+        End If
 
     End Sub
 
@@ -605,11 +634,17 @@ Public Class FormSensAnalysis
     End Sub
 
     Private Sub btnDeleteCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeleteCase.Click
-        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+                   form.GetTranslatedString1("Ateno"),
+                   MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
             form.Collections.OPT_SensAnalysisCollection.RemoveAt(lbCases.SelectedIndex)
             Me.lbCases.Items.Remove(Me.lbCases.SelectedItem)
             If lbCases.Items.Count > 0 Then Me.lbCases.SelectedIndex = 0
+
         End If
+
     End Sub
 
     Private Sub btnRun_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRun.Click
@@ -840,7 +875,15 @@ Public Class FormSensAnalysis
 
     End Sub
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAbort.Click
-        abortCalc = True
+
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+           form.GetTranslatedString1("Ateno"),
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            abortCalc = True
+
+        End If
+
     End Sub
 
     Private Sub LinkLabel1_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
@@ -896,13 +939,21 @@ Public Class FormSensAnalysis
     End Sub
 
     Private Sub tsbDelVar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbDelVar.Click
-        If Me.dgVariables.SelectedRows.Count > 0 Then
-            For i As Integer = 0 To Me.dgVariables.SelectedRows.Count - 1
-                Me.dgVariables.Rows.Remove(Me.dgVariables.SelectedRows(0))
-            Next
-        ElseIf Me.dgVariables.RowCount = 1 Then
-            Me.dgVariables.Rows.RemoveAt(0)
+
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+           form.GetTranslatedString1("Ateno"),
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            If Me.dgVariables.SelectedRows.Count > 0 Then
+                For i As Integer = 0 To Me.dgVariables.SelectedRows.Count - 1
+                    Me.dgVariables.Rows.Remove(Me.dgVariables.SelectedRows(0))
+                Next
+            ElseIf Me.dgVariables.RowCount = 1 Then
+                Me.dgVariables.Rows.RemoveAt(0)
+            End If
+
         End If
+
     End Sub
 
     Private Sub dgVariables_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgVariables.CellValueChanged
@@ -1032,13 +1083,21 @@ Public Class FormSensAnalysis
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton2.Click
-        If Me.dgDepVariables.SelectedRows.Count > 0 Then
-            For i As Integer = 0 To Me.dgDepVariables.SelectedRows.Count - 1
-                Me.dgDepVariables.Rows.Remove(Me.dgDepVariables.SelectedRows(0))
-            Next
-        ElseIf Me.dgDepVariables.RowCount = 1 Then
-            Me.dgDepVariables.Rows.RemoveAt(0)
+
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+           form.GetTranslatedString1("Ateno"),
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            If Me.dgDepVariables.SelectedRows.Count > 0 Then
+                For i As Integer = 0 To Me.dgDepVariables.SelectedRows.Count - 1
+                    Me.dgDepVariables.Rows.Remove(Me.dgDepVariables.SelectedRows(0))
+                Next
+            ElseIf Me.dgDepVariables.RowCount = 1 Then
+                Me.dgDepVariables.Rows.RemoveAt(0)
+            End If
+
         End If
+
     End Sub
 
     Private Sub tbCaseName_TextChanged(sender As System.Object, e As System.EventArgs) Handles tbCaseName.TextChanged

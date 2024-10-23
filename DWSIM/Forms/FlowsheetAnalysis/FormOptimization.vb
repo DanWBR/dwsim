@@ -56,6 +56,8 @@ Public Class FormOptimization
 
     Private _penval As Double = 0
 
+    Private Loaded As Boolean = False
+
     Private Sub FormOptimization_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
@@ -139,74 +141,115 @@ Public Class FormOptimization
 
         FormMain.TranslateFormFunction?.Invoke(Me)
 
+        Loaded = True
+
     End Sub
 
     Private Sub btnDeleteCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeleteCase.Click
-        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-            form.Collections.OPT_OptimizationCollection.RemoveAt(lbCases.SelectedIndex)
-            Me.lbCases.Items.Remove(Me.lbCases.SelectedItem)
-            If lbCases.Items.Count > 0 Then Me.lbCases.SelectedIndex = 0
+
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+           form.GetTranslatedString1("Ateno"),
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                form.Collections.OPT_OptimizationCollection.RemoveAt(lbCases.SelectedIndex)
+                Me.lbCases.Items.Remove(Me.lbCases.SelectedItem)
+                If lbCases.Items.Count > 0 Then Me.lbCases.SelectedIndex = 0
+            End If
+
         End If
+
     End Sub
 
     Private Sub btnCopyCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyCase.Click
-        Dim optcase2 As New OptimizationCase
-        Dim optcase = form.Collections.OPT_OptimizationCollection(Me.lbCases.SelectedIndex)
-        optcase2 = optcase.Clone
-        optcase2.name = optcase.name & "_1"
 
-        Me.lbCases.Items.Add(optcase2.name)
-        Me.lbCases.SelectedItem = optcase2.name
-        form.Collections.OPT_OptimizationCollection.Add(optcase2)
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+           form.GetTranslatedString1("Ateno"),
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            Dim optcase2 As New OptimizationCase
+            Dim optcase = form.Collections.OPT_OptimizationCollection(Me.lbCases.SelectedIndex)
+            optcase2 = optcase.Clone
+            optcase2.name = optcase.name & "_1"
+
+            Me.lbCases.Items.Add(optcase2.name)
+            Me.lbCases.SelectedItem = optcase2.name
+            form.Collections.OPT_OptimizationCollection.Add(optcase2)
+
+        End If
+
     End Sub
 
     Private Sub btnSaveCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveCase.Click
 
-        Dim prevselected = lbCases.SelectedIndex
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+           form.GetTranslatedString1("Ateno"),
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
-        For i As Integer = 0 To lbCases.Items.Count - 1
-            lbCases.SelectedIndex = i
-            Dim optcase = form.Collections.OPT_OptimizationCollection(Me.lbCases.SelectedIndex)
-            SaveForm(optcase)
-        Next
+            Dim prevselected = lbCases.SelectedIndex
 
-        lbCases.SelectedIndex = prevselected
+            For i As Integer = 0 To lbCases.Items.Count - 1
+                lbCases.SelectedIndex = i
+                Dim optcase = form.Collections.OPT_OptimizationCollection(Me.lbCases.SelectedIndex)
+                SaveForm(optcase)
+            Next
+
+            lbCases.SelectedIndex = prevselected
+
+        End If
 
     End Sub
 
     Private Sub btnNewCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewCase.Click
 
-        Dim optcase As New OptimizationCase
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+           form.GetTranslatedString1("Ateno"),
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
-        optcase.name = "optcase" & form.Collections.OPT_OptimizationCollection.Count
+            Dim optcase As New OptimizationCase
 
-        form.Collections.OPT_OptimizationCollection.Add(optcase)
+            optcase.name = "optcase" & form.Collections.OPT_OptimizationCollection.Count
 
-        Me.lbCases.Items.Add(optcase.name)
-        Me.lbCases.SelectedItem = optcase.name
+            form.Collections.OPT_OptimizationCollection.Add(optcase)
+
+            Me.lbCases.Items.Add(optcase.name)
+            Me.lbCases.SelectedItem = optcase.name
+
+        End If
 
     End Sub
 
     Private Sub lbCases_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbCases.SelectedIndexChanged
 
-        Me.selectedindex0 = Me.lbCases.SelectedIndex
+        If Loaded And selectedindex0 <> lbCases.SelectedIndex And
+            lbCases.SelectedIndex >= 0 Then
 
-        If lbCases.SelectedIndex >= 0 Then
-            Panel1.Enabled = True
-        Else
-            Panel1.Enabled = False
-        End If
+            If MessageBox.Show(form.GetTranslatedString1("Desejasalvarasaltera"),
+               form.GetTranslatedString1("Pergunta"),
+               MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
-        If Not Me.lbCases.SelectedItem Is Nothing Then
-            For Each optcase As OptimizationCase In form.Collections.OPT_OptimizationCollection
-                If optcase.name = Me.lbCases.SelectedItem.ToString Then
-                    Me.selectedoptcase = optcase
-                    Me.PopulateForm(optcase)
+                Me.selectedindex0 = Me.lbCases.SelectedIndex
+
+                If lbCases.SelectedIndex >= 0 Then
+                    Panel1.Enabled = True
+                Else
+                    Panel1.Enabled = False
                 End If
-            Next
-        End If
 
-        selected = True
+                If Not Me.lbCases.SelectedItem Is Nothing Then
+                    For Each optcase As OptimizationCase In form.Collections.OPT_OptimizationCollection
+                        If optcase.name = Me.lbCases.SelectedItem.ToString Then
+                            Me.selectedoptcase = optcase
+                            Me.PopulateForm(optcase)
+                        End If
+                    Next
+                End If
+
+                selected = True
+
+            End If
+
+        End If
 
     End Sub
 
@@ -217,11 +260,19 @@ Public Class FormOptimization
     End Sub
 
     Private Sub tsbDelVar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbDelVar.Click
-        If Me.dgVariables.SelectedRows.Count > 0 Then
-            For i As Integer = 0 To Me.dgVariables.SelectedRows.Count - 1
-                Me.dgVariables.Rows.Remove(Me.dgVariables.SelectedRows(0))
-            Next
+
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+           form.GetTranslatedString1("Ateno"),
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            If Me.dgVariables.SelectedRows.Count > 0 Then
+                For i As Integer = 0 To Me.dgVariables.SelectedRows.Count - 1
+                    Me.dgVariables.Rows.Remove(Me.dgVariables.SelectedRows(0))
+                Next
+            End If
+
         End If
+
     End Sub
 
     Private Sub dgVariables_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgVariables.CellValueChanged
@@ -1650,7 +1701,15 @@ Public Class FormOptimization
     End Sub
 
     Private Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
-        Me.tbExpression.Text = ""
+
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+           form.GetTranslatedString1("Ateno"),
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            Me.tbExpression.Text = ""
+
+        End If
+
     End Sub
 
     Private Sub btnVerify_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVerify.Click
@@ -1674,7 +1733,15 @@ Public Class FormOptimization
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAbort.Click
-        abortCalc = True
+
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+           form.GetTranslatedString1("Ateno"),
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            abortCalc = True
+
+        End If
+
     End Sub
 
     Private Sub NewIterUpdate(ByRef x As Double(), ByVal f As Double, ByRef g As Double(), ByRef abort As Boolean)
@@ -1716,11 +1783,17 @@ Public Class FormOptimization
 
     Private Sub btnRestore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRestore.Click
 
-        Dim var As OPTVariable
-        For Each var In Me.selectedoptcase.variables.Values
-            form.Collections.FlowsheetObjectCollection(var.objectID).SetPropertyValue(var.propID, var.initialvalue)
-        Next
-        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, Settings.SolverMode)
+        If MessageBox.Show(form.GetTranslatedString1("ConfirmOperation"),
+           form.GetTranslatedString1("Ateno"),
+           MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            Dim var As OPTVariable
+            For Each var In Me.selectedoptcase.variables.Values
+                form.Collections.FlowsheetObjectCollection(var.objectID).SetPropertyValue(var.propID, var.initialvalue)
+            Next
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, Settings.SolverMode)
+
+        End If
 
     End Sub
 

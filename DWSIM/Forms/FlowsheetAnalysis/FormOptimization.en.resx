@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnDeleteCase.Location" type="System.Drawing.Point, System.Drawing">
     <value>87, 45</value>
@@ -143,6 +139,7 @@
   <data name="btnNewCase.Text" xml:space="preserve">
     <value>New</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lbCases.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -150,13 +147,13 @@
     <value>6, 74</value>
   </data>
   <data name="lbCases.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 589</value>
+    <value>156, 654</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 3</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 671</value>
+    <value>173, 738</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Case Manager</value>
@@ -169,7 +166,7 @@
     <value>False</value>
   </data>
   <data name="tbCaseDesc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 20</value>
+    <value>411, 20</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>278, 18</value>
@@ -226,7 +223,7 @@
     <value>Units</value>
   </data>
   <data name="dgVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>728, 194</value>
+    <value>753, 244</value>
   </data>
   <data name="tsbAddVar.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 22</value>
@@ -253,13 +250,13 @@
     <value>Update Value</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>728, 25</value>
+    <value>753, 25</value>
   </data>
   <data name="GBvars.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 115</value>
   </data>
   <data name="GBvars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>734, 238</value>
+    <value>759, 288</value>
   </data>
   <data name="GBvars.Text" xml:space="preserve">
     <value>Variables</value>
@@ -343,7 +340,7 @@
     <value>7, 41</value>
   </data>
   <data name="GBconfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>734, 72</value>
+    <value>759, 72</value>
   </data>
   <data name="GBconfig.Text" xml:space="preserve">
     <value>Configuration</value>
@@ -391,7 +388,7 @@
     <value>Expression</value>
   </data>
   <data name="GBexpression.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 358</value>
+    <value>7, 409</value>
   </data>
   <data name="GBexpression.Size" type="System.Drawing.Size, System.Drawing">
     <value>367, 133</value>
@@ -400,7 +397,7 @@
     <value>Expression</value>
   </data>
   <data name="Panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+    <value>Top, Left, Right</value>
   </data>
   <data name="GroupBox8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
@@ -493,7 +490,7 @@
     <value>Restore Simulation</value>
   </data>
   <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 497</value>
+    <value>7, 548</value>
   </data>
   <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
     <value>367, 178</value>
@@ -505,13 +502,13 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="grProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 300</value>
+    <value>383, 300</value>
   </data>
   <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>375, 359</value>
+    <value>375, 410</value>
   </data>
   <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 319</value>
+    <value>389, 319</value>
   </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Optimization Progress</value>
@@ -526,10 +523,10 @@
     <value>185, 3</value>
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>747, 682</value>
+    <value>772, 738</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>952, 686</value>
+    <value>969, 747</value>
   </data>
   <data name="$this.TabText" xml:space="preserve">
     <value />
