@@ -1,0 +1,234 @@
+# OPC UA Node Mapping Template for DWSIM OTS
+# This file defines how DWSIM simulation tags are exposed as OPC UA nodes
+
+version: "1.0"
+namespace:
+  uri: "urn:ots-dwsim:session:{session_id}"
+  index: 2  # Will be assigned dynamically by OPC UA server
+
+# NodeId pattern: ns={index};s=Session:{session_id}:Tag:{tag_path}
+# BrowseName pattern: {object_name}.{property_name}
+
+# Folder structure in OPC UA address space
+folders:
+  - name: "Flowsheet"
+    nodeId: "ns=2;s=Session:{session_id}:Flowsheet"
+    children:
+      - name: "Units"
+        nodeId: "ns=2;s=Session:{session_id}:Flowsheet:Units"
+      - name: "Streams"
+        nodeId: "ns=2;s=Session:{session_id}:Flowsheet:Streams"
+  - name: "Controllers"
+    nodeId: "ns=2;s=Session:{session_id}:Controllers"
+  - name: "System"
+    nodeId: "ns=2;s=Session:{session_id}:System"
+  - name: "Alarms"
+    nodeId: "ns=2;s=Session:{session_id}:Alarms"
+
+# Tag mapping rules
+# Each entry defines a tag category and how to discover/map tags
+tag_categories:
+  # Stream properties
+  - category: "Streams"
+    pattern: "Streams.{stream_name}.{property}"
+    opcua_folder: "Flowsheet/Streams"
+    properties:
+      - name: "Flow"
+        dataType: "Double"
+        writable: true
+        units: "kg/s"
+        engineeringUnits:
+          low: 0.0
+          high: 1000.0
+      - name: "Temperature"
+        dataType: "Double"
+        writable: false
+        units: "K"
+        engineeringUnits:
+          low: 200.0
+          high: 600.0
+      - name: "Pressure"
+        dataType: "Double"
+        writable: false
+        units: "Pa"
+        engineeringUnits:
+          low: 101325.0
+          high: 10000000.0
+      - name: "MolarFlow"
+        dataType: "Double"
+        writable: false
+        units: "kmol/s"
+      - name: "MassFlow"
+        dataType: "Double"
+        writable: false
+        units: "kg/s"
+      - name: "VolumetricFlow"
+        dataType: "Double"
+        writable: false
+        units: "m3/s"
+
+  # Unit operation properties
+  - category: "Units"
+    pattern: "Units.{unit_name}.{property}"
+    opcua_folder: "Flowsheet/Units"
+    properties:
+      - name: "Status"
+        dataType: "String"
+        writable: true
+      - name: "DutyRequired"
+        dataType: "Double"
+        writable: false
+        units: "kW"
+      - name: "Efficiency"
+        dataType: "Double"
+        writable: true
+        units: "%"
+        engineeringUnits:
+          low: 0.0
+          high: 100.0
+
+  # Controller properties
+  - category: "Controllers"
+    pattern: "Controllers.{controller_name}.{property}"
+    opcua_folder: "Controllers"
+    properties:
+      - name: "SP"  # Setpoint
+        dataType: "Double"
+        writable: true
+      - name: "PV"  # Process Variable
+        dataType: "Double"
+        writable: false
+      - name: "MV"  # Manipulated Variable
+        dataType: "Double"
+        writable: false
+      - name: "Mode"
+        dataType: "Int32"
+        writable: true
+        description: "0=Manual, 1=Auto, 2=Cascade"
+      - name: "Kp"
+        dataType: "Double"
+        writable: true
+      - name: "Ki"
+        dataType: "Double"
+        writable: true
+      - name: "Kd"
+        dataType: "Double"
+        writable: true
+
+  # System tags
+  - category: "System"
+    pattern: "System.{property}"
+    opcua_folder: "System"
+    properties:
+      - name: "SimClock"
+        dataType: "DateTime"
+        writable: false
+        description: "Current simulation time"
+      - name: "TimeFactor"
+        dataType: "Double"
+        writable: true
+        description: "Simulation speed multiplier"
+      - name: "Status"
+        dataType: "String"
+        writable: false
+        description: "Session status"
+
+# Example explicit tag mappings (override auto-discovery)
+explicit_mappings:
+  - dwsim_tag: "Streams.Feed.Temperature"
+    opcua_nodeId: "ns=2;s=Session:{session_id}:Tag:Streams.Feed.Temperature"
+    browseName: "Feed.Temperature"
+    displayName: "Feed Stream Temperature"
+    dataType: "Double"
+    writable: false
+    units: "K"
+    description: "Temperature of the feed stream"
+    engineeringUnits:
+      low: 273.15
+      high: 573.15
+
+  - dwsim_tag: "Streams.Feed.Flow"
+    opcua_nodeId: "ns=2;s=Session:{session_id}:Tag:Streams.Feed.Flow"
+    browseName: "Feed.Flow"
+    displayName: "Feed Stream Flow Rate"
+    dataType: "Double"
+    writable: true
+    units: "kg/s"
+    description: "Mass flow rate of the feed stream"
+    engineeringUnits:
+      low: 0.0
+      high: 100.0
+
+  - dwsim_tag: "Units.Column1.RefluxValve.Position"
+    opcua_nodeId: "ns=2;s=Session:{session_id}:Tag:Units.Column1.RefluxValve.Position"
+    browseName: "Column1.RefluxValve.Position"
+    displayName: "Distillation Column Reflux Valve Position"
+    dataType: "Double"
+    writable: true
+    units: "%"
+    description: "Reflux valve opening percentage"
+    engineeringUnits:
+      low: 0.0
+      high: 100.0
+
+  - dwsim_tag: "Controllers.Column1.LevelController.Mode"
+    opcua_nodeId: "ns=2;s=Session:{session_id}:Tag:Controllers.Column1.LevelController.Mode"
+    browseName: "Column1.LevelController.Mode"
+    displayName: "Level Controller Operating Mode"
+    dataType: "Int32"
+    writable: true
+    description: "Controller mode: 0=Manual, 1=Auto, 2=Cascade"
+    enumStrings:
+      - "Manual"
+      - "Auto"
+      - "Cascade"
+
+  - dwsim_tag: "System.SimClock"
+    opcua_nodeId: "ns=2;s=Session:{session_id}:Tag:System.SimClock"
+    browseName: "SimClock"
+    displayName: "Simulation Clock"
+    dataType: "DateTime"
+    writable: false
+    description: "Current simulation time"
+
+# Alarm configuration
+alarms:
+  severity_levels:
+    low: 200
+    medium: 400
+    high: 600
+    critical: 800
+
+  # Example alarm definitions
+  definitions:
+    - name: "HighTemperature"
+      tag: "Streams.{stream_name}.Temperature"
+      condition: "value > limit_high"
+      severity: "high"
+      message: "{stream_name} temperature exceeds high limit"
+
+    - name: "LowFlow"
+      tag: "Streams.{stream_name}.Flow"
+      condition: "value < limit_low"
+      severity: "medium"
+      message: "{stream_name} flow below low limit"
+
+# Metadata properties attached to each node
+node_properties:
+  - "Units"          # Engineering units (EUInformation)
+  - "Description"    # Text description
+  - "EngineeringRange" # Min/Max range (EURange)
+  - "Writable"       # Boolean indicating if writable
+  - "TagPath"        # Original DWSIM tag path
+
+# Update rate configuration
+update_rates:
+  default_ms: 1000        # Default update interval
+  fast_ms: 100            # For critical tags
+  slow_ms: 5000           # For non-critical tags
+
+# Security configuration
+security:
+  mode: "simulation_only"  # simulation_only | hardware_bridge
+  allow_anonymous: true    # For development only
+  require_encryption: false # Set true for production

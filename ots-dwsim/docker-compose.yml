@@ -1,0 +1,127 @@
+version: '3.8'
+
+services:
+  # PostgreSQL database for session metadata
+  postgres:
+    image: postgres:15-alpine
+    container_name: ots-postgres
+    environment:
+      POSTGRES_DB: ots_dwsim
+      POSTGRES_USER: ots_user
+      POSTGRES_PASSWORD: ots_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./src/infra/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ots_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # TimescaleDB for time-series data
+  timescaledb:
+    image: timescale/timescaledb:latest-pg15
+    container_name: ots-timescaledb
+    environment:
+      POSTGRES_DB: ots_timeseries
+      POSTGRES_USER: ots_user
+      POSTGRES_PASSWORD: ots_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ots_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # DWSIM Simulation Host
+  dwsim-host:
+    build:
+      context: .
+      dockerfile: src/dwsim-host/Dockerfile
+    container_name: ots-dwsim-host
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - FlowsheetPath=/app/data/flowsheets
+      - ConnectionStrings__Postgres=Host=postgres;Database=ots_dwsim;Username=ots_user;Password=ots_password
+    volumes:
+      - ./samples/flowsheets:/app/data/flowsheets:ro
+      - ./logs/dwsim-host:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Control Gateway (OPC UA Server)
+  control-gateway:
+    build:
+      context: .
+      dockerfile: src/control-gateway/Dockerfile
+    container_name: ots-control-gateway
+    ports:
+      - "4840:4840"  # OPC UA port
+    environment:
+      - SimulationHost__Url=http://dwsim-host:5000
+      - MappingPath=/app/config/opcua-mapping-template.yaml
+    volumes:
+      - ./src/control-gateway/config:/app/config:ro
+      - ./logs/control-gateway:/app/logs
+    depends_on:
+      - dwsim-host
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "DWSIM.OTS.ControlGateway"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Operator HMI (React app - development server)
+  hmi-operator:
+    build:
+      context: ./src/hmi-operator
+      dockerfile: Dockerfile.dev
+    container_name: ots-hmi-operator
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+      - REACT_APP_OPCUA_URL=opc.tcp://localhost:4840
+    volumes:
+      - ./src/hmi-operator:/app
+      - /app/node_modules
+    depends_on:
+      - dwsim-host
+      - control-gateway
+
+  # Instructor HMI (React app - development server)
+  hmi-instructor:
+    build:
+      context: ./src/hmi-instructor
+      dockerfile: Dockerfile.dev
+    container_name: ots-hmi-instructor
+    ports:
+      - "3001:3001"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+    volumes:
+      - ./src/hmi-instructor:/app
+      - /app/node_modules
+    depends_on:
+      - dwsim-host
+
+volumes:
+  postgres_data:
+  timescale_data:
+
+networks:
+  default:
+    name: ots-network

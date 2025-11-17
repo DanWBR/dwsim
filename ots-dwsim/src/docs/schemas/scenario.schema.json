@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://dwsim.org/schemas/ots/scenario/v1",
+  "title": "OTS Scenario",
+  "description": "JSON Schema for DWSIM Operator Training System scenarios",
+  "type": "object",
+  "required": ["scenario_id", "description", "seed", "initial_state", "events"],
+  "properties": {
+    "scenario_id": {
+      "type": "string",
+      "description": "Unique identifier for the scenario",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable title for the scenario"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the scenario purpose and behavior"
+    },
+    "author": {
+      "type": "string",
+      "description": "Scenario author name or organization"
+    },
+    "seed": {
+      "type": "integer",
+      "description": "Random seed for deterministic scenario execution",
+      "minimum": 0
+    },
+    "initial_state": {
+      "type": "object",
+      "description": "Initial values for tags/variables at scenario start (t=0)",
+      "patternProperties": {
+        "^.*$": {
+          "oneOf": [
+            { "type": "number" },
+            { "type": "string" },
+            { "type": "boolean" },
+            { "type": "object" },
+            { "type": "array" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "events": {
+      "type": "array",
+      "description": "Time-ordered list of events to execute during the scenario",
+      "items": {
+        "type": "object",
+        "required": ["time_s", "type"],
+        "properties": {
+          "time_s": {
+            "type": "number",
+            "description": "Time in simulation seconds when this event should trigger",
+            "minimum": 0
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of event",
+            "enum": ["fault", "set", "controller", "note", "random_fault", "alarm", "operator_prompt"]
+          },
+          "target": {
+            "type": "string",
+            "description": "Tag path or object identifier targeted by this event"
+          },
+          "payload": {
+            "description": "Event-specific data (value to set, fault parameters, message, etc.)",
+            "oneOf": [
+              { "type": "object" },
+              { "type": "number" },
+              { "type": "string" },
+              { "type": "boolean" },
+              { "type": "null" }
+            ]
+          },
+          "repeat": {
+            "type": "object",
+            "description": "Optional repeat configuration for periodic events",
+            "properties": {
+              "interval_s": {
+                "type": "number",
+                "description": "Interval in seconds between repetitions",
+                "minimum": 0.1
+              },
+              "count": {
+                "type": "integer",
+                "description": "Number of times to repeat (omit for infinite)",
+                "minimum": 1
+              }
+            },
+            "required": ["interval_s"],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Optional scenario metadata",
+      "properties": {
+        "recommended_time_factor": {
+          "type": "number",
+          "description": "Recommended simulation speed multiplier",
+          "minimum": 0.1,
+          "maximum": 100
+        },
+        "expected_duration_seconds": {
+          "type": "integer",
+          "description": "Expected scenario duration in simulation seconds",
+          "minimum": 1
+        },
+        "difficulty": {
+          "type": "string",
+          "description": "Difficulty level",
+          "enum": ["beginner", "intermediate", "advanced", "expert"]
+        },
+        "tags": {
+          "type": "array",
+          "description": "Categorization tags",
+          "items": { "type": "string" }
+        },
+        "learning_objectives": {
+          "type": "array",
+          "description": "List of learning objectives",
+          "items": { "type": "string" }
+        },
+        "required_flowsheet": {
+          "type": "string",
+          "description": "Flowsheet filename or path required for this scenario"
+        },
+        "pass_criteria": {
+          "type": "object",
+          "description": "Assessment criteria for successful completion",
+          "properties": {
+            "max_alarms": { "type": "integer", "minimum": 0 },
+            "max_time_s": { "type": "integer", "minimum": 1 },
+            "required_actions": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "target_values": {
+              "type": "object",
+              "description": "Target values for specific tags with tolerances",
+              "patternProperties": {
+                "^.*$": {
+                  "type": "object",
+                  "properties": {
+                    "value": { "type": "number" },
+                    "tolerance": { "type": "number", "minimum": 0 }
+                  },
+                  "required": ["value"]
+                }
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,650 @@
+openapi: 3.0.3
+info:
+  title: DWSIM OTS Simulation Host API
+  description: |
+    REST API for DWSIM Operator Training System - Simulation Host
+
+    This API provides complete control over DWSIM simulation sessions including:
+    - Session lifecycle management (create, start, pause, stop)
+    - Variable read/write operations
+    - Time control (step, timewarp)
+    - Scenario execution
+    - Snapshot and restore functionality
+    - Event logging and replay
+
+    All timestamps are in ISO 8601 format (RFC3339).
+    All responses are JSON.
+  version: 1.0.0
+  contact:
+    name: DWSIM OTS
+    url: https://github.com/DanWBR/dwsim6
+  license:
+    name: GPL-3.0
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+
+servers:
+  - url: http://localhost:5000/api/v1
+    description: Development server
+  - url: http://{host}:{port}/api/v1
+    description: Custom server
+    variables:
+      host:
+        default: localhost
+      port:
+        default: '5000'
+
+tags:
+  - name: Sessions
+    description: Session lifecycle management
+  - name: Time Control
+    description: Simulation time manipulation
+  - name: Tags
+    description: Variable read/write operations
+  - name: Scenarios
+    description: Scenario execution
+  - name: Events
+    description: Event logging and retrieval
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      description: Returns service health status and uptime
+      tags: [Health]
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+  /sessions:
+    get:
+      summary: List all sessions
+      description: Get a list of all simulation sessions
+      tags: [Sessions]
+      responses:
+        '200':
+          description: List of sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SessionInfo'
+
+    post:
+      summary: Create a new session
+      description: Create a new simulation session with the specified flowsheet
+      tags: [Sessions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionRequest'
+      responses:
+        '201':
+          description: Session created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSessionResponse'
+        '400':
+          description: Invalid request or flowsheet not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /sessions/{sessionId}:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+
+    get:
+      summary: Get session information
+      tags: [Sessions]
+      responses:
+        '200':
+          description: Session details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+        '404':
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /sessions/{sessionId}/start:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+
+    post:
+      summary: Start a session
+      description: Start the simulation for the specified session
+      tags: [Sessions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartSessionRequest'
+      responses:
+        '200':
+          description: Session started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSessionResponse'
+        '404':
+          description: Session not found
+
+  /sessions/{sessionId}/pause:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+
+    post:
+      summary: Pause a session
+      description: Pause the running simulation
+      tags: [Sessions]
+      responses:
+        '200':
+          description: Session paused
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+
+  /sessions/{sessionId}/stop:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+
+    post:
+      summary: Stop a session
+      description: Stop and finalize the session
+      tags: [Sessions]
+      responses:
+        '200':
+          description: Session stopped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+
+  /sessions/{sessionId}/snapshot:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+
+    post:
+      summary: Create a snapshot
+      description: Create a named snapshot of the current session state
+      tags: [Sessions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnapshotRequest'
+      responses:
+        '201':
+          description: Snapshot created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotResponse'
+
+  /sessions/{sessionId}/restore:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+
+    post:
+      summary: Restore from snapshot
+      description: Restore session state from a previously created snapshot
+      tags: [Sessions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreSnapshotRequest'
+      responses:
+        '200':
+          description: Snapshot restored
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionInfo'
+
+  /sessions/{sessionId}/time/step:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+
+    post:
+      summary: Step simulation time
+      description: Advance the simulation by a specified number of seconds
+      tags: [Time Control]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeStepRequest'
+      responses:
+        '200':
+          description: Time stepped
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSessionResponse'
+
+  /sessions/{sessionId}/time/set_factor:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+
+    post:
+      summary: Set time factor
+      description: Set the simulation speed multiplier (timewarp)
+      tags: [Time Control]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeFactorRequest'
+      responses:
+        '200':
+          description: Time factor updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeFactorResponse'
+
+  /sessions/{sessionId}/tags/{tagPath}:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+      - name: tagPath
+        in: path
+        required: true
+        description: Tag path in dot notation (e.g., Streams.Feed.Temperature)
+        schema:
+          type: string
+        example: Streams.Feed.Temperature
+
+    get:
+      summary: Read a tag value
+      description: Read the current value of a tag from the simulation
+      tags: [Tags]
+      responses:
+        '200':
+          description: Tag value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagValue'
+        '404':
+          description: Tag or session not found
+
+    post:
+      summary: Write a tag value
+      description: Write a value to a tag in the simulation
+      tags: [Tags]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WriteTagRequest'
+      responses:
+        '200':
+          description: Tag written successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WriteTagResponse'
+
+  /sessions/{sessionId}/scenario/run:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+
+    post:
+      summary: Run a scenario
+      description: Execute a scenario on the session
+      tags: [Scenarios]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunScenarioRequest'
+      responses:
+        '202':
+          description: Scenario scheduled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunScenarioResponse'
+
+  /sessions/{sessionId}/events:
+    parameters:
+      - $ref: '#/components/parameters/SessionId'
+      - name: from
+        in: query
+        description: Start time filter (ISO 8601)
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        in: query
+        description: End time filter (ISO 8601)
+        schema:
+          type: string
+          format: date-time
+
+    get:
+      summary: Get event log
+      description: Retrieve event log entries for the session
+      tags: [Events]
+      responses:
+        '200':
+          description: Event log
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventLogEntry'
+
+components:
+  parameters:
+    SessionId:
+      name: sessionId
+      in: path
+      required: true
+      description: Unique session identifier
+      schema:
+        type: string
+        format: uuid
+      example: "550e8400-e29b-41d4-a716-446655440000"
+
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        uptime:
+          type: integer
+          description: Uptime in seconds
+        sessions_active:
+          type: integer
+          description: Number of active sessions
+
+    CreateSessionRequest:
+      type: object
+      required:
+        - flowsheet
+      properties:
+        flowsheet:
+          type: string
+          description: Flowsheet filename or path
+          example: "distil_basic.dwx"
+        session_name:
+          type: string
+          description: Human-readable session name
+          example: "distill_startup_test"
+        seed:
+          type: integer
+          description: Random seed for deterministic execution
+          default: 12345
+        environment:
+          type: object
+          description: Environment variables
+          additionalProperties: true
+          example:
+            ambient_temp_C: 25
+        max_real_time_sec:
+          type: integer
+          description: Maximum real-time duration in seconds
+          default: 3600
+
+    CreateSessionResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        created_at:
+          type: string
+          format: date-time
+
+    SessionInfo:
+      type: object
+      properties:
+        session_id:
+          type: string
+          format: uuid
+        session_name:
+          type: string
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        created_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+          nullable: true
+        stopped_at:
+          type: string
+          format: date-time
+          nullable: true
+        sim_time:
+          type: string
+          format: date-time
+          description: Current simulation time
+        time_factor:
+          type: number
+          format: double
+          description: Simulation speed multiplier
+        flowsheet_path:
+          type: string
+
+    SessionStatus:
+      type: string
+      enum:
+        - created
+        - running
+        - paused
+        - stopped
+        - error
+
+    StartSessionRequest:
+      type: object
+      properties:
+        start_mode:
+          type: string
+          enum: [run, step]
+          default: run
+        time_step_seconds:
+          type: number
+          format: double
+          default: 0.5
+
+    StartSessionResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/SessionStatus'
+        sim_time:
+          type: string
+          format: date-time
+        time_factor:
+          type: number
+          format: double
+
+    SnapshotRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: "before_fault"
+
+    SnapshotResponse:
+      type: object
+      properties:
+        snapshot_id:
+          type: string
+        saved_at:
+          type: string
+          format: date-time
+
+    RestoreSnapshotRequest:
+      type: object
+      required:
+        - snapshot_id
+      properties:
+        snapshot_id:
+          type: string
+
+    TimeStepRequest:
+      type: object
+      required:
+        - seconds
+      properties:
+        seconds:
+          type: number
+          format: double
+          minimum: 0
+          example: 10
+
+    TimeFactorRequest:
+      type: object
+      required:
+        - factor
+      properties:
+        factor:
+          type: number
+          format: double
+          minimum: 0.1
+          maximum: 100
+          default: 1.0
+          example: 2.0
+
+    TimeFactorResponse:
+      type: object
+      properties:
+        time_factor:
+          type: number
+          format: double
+
+    TagValue:
+      type: object
+      properties:
+        tag:
+          type: string
+          example: "Streams.Feed.Temperature"
+        value:
+          description: Tag value (type depends on tag)
+          oneOf:
+            - type: number
+            - type: string
+            - type: boolean
+            - type: object
+        units:
+          type: string
+          nullable: true
+          example: "K"
+        sim_time:
+          type: string
+          format: date-time
+
+    WriteTagRequest:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          description: Value to write
+          oneOf:
+            - type: number
+            - type: string
+            - type: boolean
+            - type: object
+        user:
+          type: string
+          default: "system"
+          example: "operator1"
+        mode:
+          type: string
+          enum: [manual, auto]
+          default: "manual"
+
+    WriteTagResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "ok"
+        applied_value:
+          description: Value that was actually applied
+
+    RunScenarioRequest:
+      type: object
+      required:
+        - scenario_id
+      properties:
+        scenario_id:
+          type: string
+          example: "samples/distill_startup_fault.json"
+        autostart:
+          type: boolean
+          default: true
+
+    RunScenarioResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "scheduled"
+        scenario_run_id:
+          type: string
+
+    EventLogEntry:
+      type: object
+      properties:
+        type:
+          type: string
+          example: "operator_action"
+        user:
+          type: string
+          nullable: true
+        action:
+          type: string
+          nullable: true
+        target:
+          type: string
+          nullable: true
+        value:
+          nullable: true
+        sim_time:
+          type: string
+          format: date-time
+        real_time:
+          type: string
+          format: date-time
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message

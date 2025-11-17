@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>DWSIM.OTS.ControlGateway</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- OPC UA Stack -->
+    <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua" Version="1.5.374.54" />
+    <PackageReference Include="OPCFoundation.NetStandard.Opc.Ua.Server" Version="1.5.374.54" />
+
+    <!-- Configuration -->
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+
+    <!-- YAML support -->
+    <PackageReference Include="YamlDotNet" Version="13.7.1" />
+
+    <!-- Logging -->
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+
+    <!-- HTTP Client for REST API communication -->
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>

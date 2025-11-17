@@ -1,0 +1,61 @@
+{
+  "scenario_id": "distill_startup_fault_v1",
+  "title": "Distillation column startup with feed composition upset",
+  "description": "Start the column from cold, bring to steady operation, then introduce a feed composition spike and a sensor bias.",
+  "author": "template-author",
+  "seed": 98765,
+  "initial_state": {
+    "Units.Column1.Status": "stopped",
+    "Units.Pumps.FeedPump.Speed": 0.0,
+    "Streams.Feed.Flow": 2.0,
+    "Streams.Feed.Temperature": 298.15,
+    "Streams.Feed.Composition": { "A": 0.5, "B": 0.5 }
+  },
+  "events": [
+    {
+      "time_s": 0,
+      "type": "set",
+      "target": "Units.Column1.Status",
+      "payload": "start"
+    },
+    {
+      "time_s": 30,
+      "type": "set",
+      "target": "Units.Pumps.FeedPump.Speed",
+      "payload": 1.0
+    },
+    {
+      "time_s": 120,
+      "type": "set",
+      "target": "Controllers.Column1.TopTemp.SP",
+      "payload": 355.15
+    },
+    {
+      "time_s": 600,
+      "type": "fault",
+      "target": "Streams.Feed.Composition",
+      "payload": { "A": 0.2, "B": 0.8 }
+    },
+    {
+      "time_s": 620,
+      "type": "fault",
+      "target": "Tags.Sensors.TopTemp.Bias",
+      "payload": 5.0
+    },
+    {
+      "time_s": 900,
+      "type": "note",
+      "payload": "Instructor: observe column response and ask operator to manually adjust reflux."
+    }
+  ],
+  "metadata": {
+    "recommended_time_factor": 1.0,
+    "expected_duration_seconds": 1200,
+    "difficulty": "intermediate",
+    "learning_objectives": [
+      "Column startup procedure",
+      "Response to feed composition changes",
+      "Sensor fault detection and compensation"
+    ]
+  }
+}

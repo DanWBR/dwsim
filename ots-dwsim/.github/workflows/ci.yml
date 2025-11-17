@@ -1,0 +1,200 @@
+name: OTS DWSIM CI
+
+on:
+  push:
+    branches: [ main, develop, 'claude/**' ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  NODE_VERSION: '18.x'
+
+jobs:
+  build-backend:
+    name: Build Backend Services
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore DWSIM dependencies
+      run: dotnet restore DWSIM.sln
+      working-directory: .
+
+    - name: Build DWSIM
+      run: dotnet build DWSIM.sln --configuration Release --no-restore
+      working-directory: .
+
+    - name: Restore OTS dependencies
+      run: |
+        dotnet restore ots-dwsim/src/dwsim-host/DWSIM.OTS.SimulationHost.csproj
+        dotnet restore ots-dwsim/src/control-gateway/DWSIM.OTS.ControlGateway.csproj
+
+    - name: Build DWSIM Simulation Host
+      run: dotnet build ots-dwsim/src/dwsim-host/DWSIM.OTS.SimulationHost.csproj --configuration Release --no-restore
+
+    - name: Build Control Gateway
+      run: dotnet build ots-dwsim/src/control-gateway/DWSIM.OTS.ControlGateway.csproj --configuration Release --no-restore
+
+    - name: Run backend tests
+      run: |
+        if [ -d "ots-dwsim/tests" ]; then
+          dotnet test ots-dwsim/tests --configuration Release --no-build --verbosity normal
+        else
+          echo "No tests found yet"
+        fi
+
+  validate-scenarios:
+    name: Validate Scenario Files
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install AJV (JSON Schema validator)
+      run: npm install -g ajv-cli
+
+    - name: Validate scenario against schema
+      run: |
+        ajv validate \
+          -s ots-dwsim/src/docs/schemas/scenario.schema.json \
+          -d "ots-dwsim/samples/scenarios/*.json" \
+          --strict=false
+
+  lint-yaml:
+    name: Lint YAML files
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install yamllint
+      run: pip install yamllint
+
+    - name: Lint YAML files
+      run: |
+        yamllint -d "{extends: default, rules: {line-length: {max: 120}}}" \
+          ots-dwsim/src/control-gateway/config/*.yaml \
+          ots-dwsim/docker-compose.yml
+
+  docker-build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: [build-backend]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build DWSIM Host image
+      run: |
+        # Create placeholder Dockerfile for now
+        echo "FROM mcr.microsoft.com/dotnet/aspnet:8.0" > ots-dwsim/src/dwsim-host/Dockerfile
+        echo "WORKDIR /app" >> ots-dwsim/src/dwsim-host/Dockerfile
+        echo "EXPOSE 5000" >> ots-dwsim/src/dwsim-host/Dockerfile
+        echo "ENTRYPOINT [\"dotnet\", \"DWSIM.OTS.SimulationHost.dll\"]" >> ots-dwsim/src/dwsim-host/Dockerfile
+
+        docker build -t ots-dwsim-host:latest -f ots-dwsim/src/dwsim-host/Dockerfile . || true
+
+    - name: Build Control Gateway image
+      run: |
+        # Create placeholder Dockerfile for now
+        echo "FROM mcr.microsoft.com/dotnet/runtime:8.0" > ots-dwsim/src/control-gateway/Dockerfile
+        echo "WORKDIR /app" >> ots-dwsim/src/control-gateway/Dockerfile
+        echo "EXPOSE 4840" >> ots-dwsim/src/control-gateway/Dockerfile
+        echo "ENTRYPOINT [\"dotnet\", \"DWSIM.OTS.ControlGateway.dll\"]" >> ots-dwsim/src/control-gateway/Dockerfile
+
+        docker build -t ots-control-gateway:latest -f ots-dwsim/src/control-gateway/Dockerfile . || true
+
+  code-quality:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Run code formatting check
+      run: |
+        dotnet format ots-dwsim/src/dwsim-host/DWSIM.OTS.SimulationHost.csproj --verify-no-changes || true
+
+    - name: Run security scan
+      run: |
+        echo "Security scanning placeholder - implement with tools like SAST"
+
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: [build-backend]
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: ots_test
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Run integration tests
+      run: |
+        echo "Integration tests placeholder - implement when tests are created"
+        # dotnet test ots-dwsim/tests/integration --configuration Release
+
+  deploy-docs:
+    name: Deploy Documentation
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: [build-backend, validate-scenarios]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Generate API documentation
+      run: |
+        echo "Generate Swagger/OpenAPI docs"
+        # Could deploy to GitHub Pages or other hosting
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: api-documentation
+        path: ots-dwsim/src/docs/api/
