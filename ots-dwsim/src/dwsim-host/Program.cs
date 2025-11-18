@@ -41,6 +41,8 @@ builder.Services.AddSingleton<ITimeSeriesLogger, TimeSeriesLogger>();
 builder.Services.AddSingleton<ISessionManager, SessionManager>();
 builder.Services.AddSingleton<IScenarioValidator, ScenarioValidator>();
 builder.Services.AddSingleton<IScenarioExecutor, ScenarioExecutor>();
+builder.Services.AddSingleton<IReplayEngine, ReplayEngine>();
+builder.Services.AddSingleton<IAssessmentEngine, AssessmentEngine>();
 
 // Register background services
 builder.Services.AddHostedService<TimeSeriesLoggerService>();

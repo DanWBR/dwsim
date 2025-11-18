@@ -1,0 +1,153 @@
+{
+  "RuleSetId": "distillation_startup_v1",
+  "Name": "Distillation Column Startup Assessment",
+  "Description": "Assessment rules for evaluating operator performance during distillation column startup procedure",
+  "ScenarioId": "distill_startup_fault_v1",
+  "PassingScore": 70.0,
+  "Rules": [
+    {
+      "RuleId": "kpi_startup_time",
+      "Name": "Startup Time",
+      "Description": "Time to reach stable operation from cold start",
+      "Type": "TimeToSteadyState",
+      "Weight": 2.0,
+      "Thresholds": {
+        "Excellent": 300.0,
+        "Good": 600.0,
+        "Acceptable": 900.0,
+        "Poor": 1200.0,
+        "Max": 1800.0
+      },
+      "TagPaths": [
+        "Units.Column1.Temperature"
+      ],
+      "IsRequired": true
+    },
+    {
+      "RuleId": "kpi_alarm_count",
+      "Name": "Alarm Management",
+      "Description": "Total number of alarms raised during startup",
+      "Type": "AlarmCount",
+      "Weight": 1.5,
+      "Thresholds": {
+        "Excellent": 0.0,
+        "Good": 2.0,
+        "Acceptable": 5.0,
+        "Poor": 10.0,
+        "Max": 15.0
+      },
+      "TagPaths": [],
+      "IsRequired": false
+    },
+    {
+      "RuleId": "kpi_temp_setpoint_deviation",
+      "Name": "Temperature Control Quality",
+      "Description": "Integral of absolute error between setpoint and actual temperature",
+      "Type": "SetpointDeviationIntegral",
+      "Weight": 1.0,
+      "Thresholds": {
+        "Excellent": 500.0,
+        "Good": 1000.0,
+        "Acceptable": 2000.0,
+        "Poor": 5000.0
+      },
+      "TagPaths": [
+        "Units.Column1.TemperatureSetpoint",
+        "Units.Column1.Temperature"
+      ],
+      "IsRequired": false
+    },
+    {
+      "RuleId": "kpi_operator_actions",
+      "Name": "Operator Efficiency",
+      "Description": "Number of manual operator interventions",
+      "Type": "OperatorActionCount",
+      "Weight": 0.5,
+      "Thresholds": {
+        "Excellent": 3.0,
+        "Good": 5.0,
+        "Acceptable": 10.0,
+        "Poor": 20.0,
+        "Max": 30.0
+      },
+      "TagPaths": [],
+      "IsRequired": false
+    },
+    {
+      "RuleId": "kpi_pressure_excursions",
+      "Name": "Pressure Safety",
+      "Description": "Number of times pressure exceeded safe operating limits",
+      "Type": "ProcessVariableExcursions",
+      "Weight": 2.0,
+      "Thresholds": {
+        "Excellent": 0.0,
+        "Good": 0.0,
+        "Acceptable": 1.0,
+        "Poor": 3.0,
+        "Min": 0.0,
+        "Max": 5.0
+      },
+      "TagPaths": [
+        "Units.Column1.Pressure"
+      ],
+      "IsRequired": true
+    },
+    {
+      "RuleId": "kpi_temp_variability",
+      "Name": "Temperature Stability",
+      "Description": "Standard deviation of column temperature during stable operation",
+      "Type": "Variability",
+      "Weight": 1.0,
+      "Thresholds": {
+        "Excellent": 1.0,
+        "Good": 2.0,
+        "Acceptable": 5.0,
+        "Poor": 10.0,
+        "Max": 15.0
+      },
+      "TagPaths": [
+        "Units.Column1.Temperature"
+      ],
+      "IsRequired": false
+    },
+    {
+      "RuleId": "kpi_feed_flow_range",
+      "Name": "Feed Flow Control",
+      "Description": "Percentage of time feed flow was maintained within optimal range",
+      "Type": "TimeInRange",
+      "Weight": 1.0,
+      "Thresholds": {
+        "Excellent": 95.0,
+        "Good": 85.0,
+        "Acceptable": 70.0,
+        "Poor": 50.0,
+        "Min": 4.5,
+        "Max": 5.5
+      },
+      "TagPaths": [
+        "Streams.Feed.Flow"
+      ],
+      "IsRequired": false
+    },
+    {
+      "RuleId": "kpi_avg_product_purity",
+      "Name": "Product Quality",
+      "Description": "Average purity of top product during operation",
+      "Type": "AverageValue",
+      "Weight": 1.5,
+      "Thresholds": {
+        "Target": 0.95,
+        "Excellent": 0.95,
+        "Good": 0.90,
+        "Acceptable": 0.85,
+        "Poor": 0.80,
+        "Min": 0.75
+      },
+      "TagPaths": [
+        "Streams.TopProduct.Purity"
+      ],
+      "IsRequired": false
+    }
+  ],
+  "CreatedAt": "2025-01-15T00:00:00Z"
+}
