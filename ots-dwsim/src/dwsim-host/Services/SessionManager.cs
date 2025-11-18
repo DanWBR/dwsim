@@ -8,12 +8,17 @@ public class SessionManager : ISessionManager
 {
     private readonly ConcurrentDictionary<string, SimulationSession> _sessions = new();
     private readonly IFlowsheetRepository _flowsheetRepository;
+    private readonly ISnapshotManager _snapshotManager;
     private readonly ILogger<SessionManager> _logger;
     private readonly DateTime _startTime = DateTime.UtcNow;
 
-    public SessionManager(IFlowsheetRepository flowsheetRepository, ILogger<SessionManager> logger)
+    public SessionManager(
+        IFlowsheetRepository flowsheetRepository,
+        ISnapshotManager snapshotManager,
+        ILogger<SessionManager> logger)
     {
         _flowsheetRepository = flowsheetRepository;
+        _snapshotManager = snapshotManager;
         _logger = logger;
     }
 
@@ -204,47 +209,63 @@ public class SessionManager : ISessionManager
         return Task.FromResult(session.ToSessionInfo());
     }
 
-    public Task<SnapshotResponse> CreateSnapshotAsync(string sessionId, SnapshotRequest request)
+    public async Task<SnapshotResponse> CreateSnapshotAsync(string sessionId, SnapshotRequest request)
     {
         if (!_sessions.TryGetValue(sessionId, out var session))
         {
             throw new KeyNotFoundException($"Session not found: {sessionId}");
         }
 
-        var snapshotId = $"snap-{Guid.NewGuid().ToString()[..8]}";
-        var savedAt = DateTime.UtcNow;
+        if (session.Flowsheet == null)
+        {
+            throw new InvalidOperationException("Flowsheet not loaded");
+        }
 
-        // TODO: Implement actual snapshot serialization
-        // For now, just log the snapshot request
-        _logger.LogInformation("Created snapshot {SnapshotId} for session {SessionId} with name {Name}",
-            snapshotId, sessionId, request.Name);
+        // Create snapshot using snapshot manager
+        var snapshot = await _snapshotManager.CreateSnapshotAsync(
+            sessionId,
+            request.Name,
+            session.Flowsheet);
 
+        // Log the snapshot creation
         session.EventLog.Add(new EventLogEntry
         {
             Type = "snapshot_created",
             Target = request.Name,
+            Value = snapshot.SnapshotId,
             SimTime = session.SimTime,
             RealTime = DateTime.UtcNow
         });
 
-        return Task.FromResult(new SnapshotResponse
+        _logger.LogInformation("Created snapshot {SnapshotId} for session {SessionId} with name {Name}",
+            snapshot.SnapshotId, sessionId, request.Name);
+
+        return new SnapshotResponse
         {
-            SnapshotId = snapshotId,
-            SavedAt = savedAt
-        });
+            SnapshotId = snapshot.SnapshotId,
+            SavedAt = snapshot.CreatedAt
+        };
     }
 
-    public Task<SessionInfo> RestoreSnapshotAsync(string sessionId, RestoreSnapshotRequest request)
+    public async Task<SessionInfo> RestoreSnapshotAsync(string sessionId, RestoreSnapshotRequest request)
     {
         if (!_sessions.TryGetValue(sessionId, out var session))
         {
             throw new KeyNotFoundException($"Session not found: {sessionId}");
         }
 
-        // TODO: Implement actual snapshot restoration
-        _logger.LogInformation("Restoring snapshot {SnapshotId} for session {SessionId}",
-            request.SnapshotId, sessionId);
+        // Restore flowsheet from snapshot
+        var flowsheet = await _snapshotManager.RestoreSnapshotAsync(request.SnapshotId);
 
+        if (flowsheet == null)
+        {
+            throw new InvalidOperationException($"Failed to restore snapshot {request.SnapshotId}");
+        }
+
+        // Replace the session's flowsheet with the restored one
+        session.Flowsheet = flowsheet;
+
+        // Log the restoration
         session.EventLog.Add(new EventLogEntry
         {
             Type = "snapshot_restored",
@@ -253,7 +274,10 @@ public class SessionManager : ISessionManager
             RealTime = DateTime.UtcNow
         });
 
-        return Task.FromResult(session.ToSessionInfo());
+        _logger.LogInformation("Restored snapshot {SnapshotId} for session {SessionId}",
+            request.SnapshotId, sessionId);
+
+        return session.ToSessionInfo();
     }
 
     public async Task<StartSessionResponse> StepSessionAsync(string sessionId, TimeStepRequest request)

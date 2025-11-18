@@ -35,10 +35,15 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Register application services
-builder.Services.AddSingleton<ISessionManager, SessionManager>();
 builder.Services.AddSingleton<IFlowsheetRepository, FlowsheetRepository>();
+builder.Services.AddSingleton<ISnapshotManager, SnapshotManager>();
+builder.Services.AddSingleton<ITimeSeriesLogger, TimeSeriesLogger>();
+builder.Services.AddSingleton<ISessionManager, SessionManager>();
 builder.Services.AddSingleton<IScenarioValidator, ScenarioValidator>();
 builder.Services.AddSingleton<IScenarioExecutor, ScenarioExecutor>();
+
+// Register background services
+builder.Services.AddHostedService<TimeSeriesLoggerService>();
 
 // CORS for development
 builder.Services.AddCors(options =>
