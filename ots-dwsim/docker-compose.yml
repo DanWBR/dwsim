@@ -1,127 +1,119 @@
 version: '3.8'
 
 services:
-  # PostgreSQL database for session metadata
-  postgres:
-    image: postgres:15-alpine
-    container_name: ots-postgres
-    environment:
-      POSTGRES_DB: ots_dwsim
-      POSTGRES_USER: ots_user
-      POSTGRES_PASSWORD: ots_password
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./src/infra/db/init.sql:/docker-entrypoint-initdb.d/init.sql
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ots_user"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  # TimescaleDB for time-series data
+  # TimescaleDB for time-series data storage
   timescaledb:
     image: timescale/timescaledb:latest-pg15
     container_name: ots-timescaledb
+    restart: unless-stopped
     environment:
       POSTGRES_DB: ots_timeseries
       POSTGRES_USER: ots_user
-      POSTGRES_PASSWORD: ots_password
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ots_password}
+      TIMESCALEDB_TELEMETRY: 'off'
     ports:
       - "5433:5432"
     volumes:
-      - timescale_data:/var/lib/postgresql/data
+      - timescaledb_data:/var/lib/postgresql/data
+      - ./src/infra/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ots_user"]
+      test: ["CMD-SHELL", "pg_isready -U ots_user -d ots_timeseries"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - ots-network
 
-  # DWSIM Simulation Host
+  # DWSIM Simulation Host (Backend API)
   dwsim-host:
     build:
-      context: .
-      dockerfile: src/dwsim-host/Dockerfile
+      context: ./src/dwsim-host
+      dockerfile: Dockerfile
     container_name: ots-dwsim-host
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:5000
+      ConnectionStrings__TimescaleDB: "Host=timescaledb;Port=5432;Database=ots_timeseries;Username=ots_user;Password=${POSTGRES_PASSWORD:-ots_password}"
+      FlowsheetPath: /app/data/flowsheets
+      SnapshotPath: /app/data/snapshots
+      ScenarioPath: /app/data/scenarios
+      RuleSetPath: /app/data/rulesets
+      ScenarioSchemaPath: /app/schemas/scenario.schema.json
+      TimeSeriesLogging__Enabled: "true"
+      TimeSeriesLogging__PollingIntervalMs: "1000"
+      TimeSeriesLogging__BatchSize: "100"
     ports:
       - "5000:5000"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - FlowsheetPath=/app/data/flowsheets
-      - ConnectionStrings__Postgres=Host=postgres;Database=ots_dwsim;Username=ots_user;Password=ots_password
     volumes:
-      - ./samples/flowsheets:/app/data/flowsheets:ro
-      - ./logs/dwsim-host:/app/logs
+      - flowsheet_data:/app/data/flowsheets
+      - snapshot_data:/app/data/snapshots
+      - scenario_data:/app/data/scenarios
+      - ruleset_data:/app/data/rulesets
+      - ./samples/scenarios:/app/samples/scenarios:ro
+      - ./samples/rulesets:/app/samples/rulesets:ro
     depends_on:
-      postgres:
+      timescaledb:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      test: ["CMD-SHELL", "curl -f http://localhost:5000/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 40s
+    networks:
+      - ots-network
 
-  # Control Gateway (OPC UA Server)
-  control-gateway:
+  # Operator HMI (React Frontend)
+  operator-hmi:
     build:
-      context: .
-      dockerfile: src/control-gateway/Dockerfile
-    container_name: ots-control-gateway
+      context: ./src/hmi-operator
+      dockerfile: Dockerfile
+    container_name: ots-operator-hmi
+    restart: unless-stopped
     ports:
-      - "4840:4840"  # OPC UA port
-    environment:
-      - SimulationHost__Url=http://dwsim-host:5000
-      - MappingPath=/app/config/opcua-mapping-template.yaml
-    volumes:
-      - ./src/control-gateway/config:/app/config:ro
-      - ./logs/control-gateway:/app/logs
+      - "3000:80"
     depends_on:
       - dwsim-host
     healthcheck:
-      test: ["CMD", "pgrep", "-f", "DWSIM.OTS.ControlGateway"]
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost/health || exit 1"]
       interval: 30s
-      timeout: 10s
+      timeout: 5s
       retries: 3
+    networks:
+      - ots-network
 
-  # Operator HMI (React app - development server)
-  hmi-operator:
-    build:
-      context: ./src/hmi-operator
-      dockerfile: Dockerfile.dev
-    container_name: ots-hmi-operator
-    ports:
-      - "3000:3000"
-    environment:
-      - REACT_APP_API_URL=http://localhost:5000
-      - REACT_APP_OPCUA_URL=opc.tcp://localhost:4840
-    volumes:
-      - ./src/hmi-operator:/app
-      - /app/node_modules
-    depends_on:
-      - dwsim-host
-      - control-gateway
-
-  # Instructor HMI (React app - development server)
-  hmi-instructor:
+  # Instructor Console (React Frontend)
+  instructor-ui:
     build:
       context: ./src/hmi-instructor
-      dockerfile: Dockerfile.dev
-    container_name: ots-hmi-instructor
+      dockerfile: Dockerfile
+    container_name: ots-instructor-ui
+    restart: unless-stopped
     ports:
-      - "3001:3001"
-    environment:
-      - REACT_APP_API_URL=http://localhost:5000
-    volumes:
-      - ./src/hmi-instructor:/app
-      - /app/node_modules
+      - "3001:80"
     depends_on:
       - dwsim-host
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - ots-network
 
 volumes:
-  postgres_data:
-  timescale_data:
+  timescaledb_data:
+    driver: local
+  flowsheet_data:
+    driver: local
+  snapshot_data:
+    driver: local
+  scenario_data:
+    driver: local
+  ruleset_data:
+    driver: local
 
 networks:
-  default:
-    name: ots-network
+  ots-network:
+    driver: bridge
