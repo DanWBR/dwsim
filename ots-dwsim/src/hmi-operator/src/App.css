@@ -1,0 +1,55 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.process-mimic-container {
+  background-color: #0a0a0a;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.trend-chart-container {
+  height: 100%;
+  width: 100%;
+}
+
+.control-panel {
+  padding: 16px;
+}
+
+.alarm-item {
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.alarm-critical {
+  border-left: 4px solid #d32f2f;
+  background-color: rgba(211, 47, 47, 0.1);
+}
+
+.alarm-high {
+  border-left: 4px solid #f57c00;
+  background-color: rgba(245, 124, 0, 0.1);
+}
+
+.alarm-medium {
+  border-left: 4px solid #ffa726;
+  background-color: rgba(255, 167, 38, 0.1);
+}
+
+.alarm-low {
+  border-left: 4px solid #4caf50;
+  background-color: rgba(76, 175, 80, 0.1);
+}
