@@ -29,7 +29,6 @@ Imports System.Threading.Tasks
 Imports System.Linq
 Imports System.IO
 Imports DWSIM.Thermodynamics.Databases.KDBLink
-Imports DWSIM.Simulate365.Models
 Imports DWSIM.Interfaces
 Imports DWSIM.SharedClassesCSharp.FilePicker
 

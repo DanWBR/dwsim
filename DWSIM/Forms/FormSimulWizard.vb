@@ -122,12 +122,6 @@ Public Class FormSimulWizard
                 Me.DataGridViewPP.Rows.Add(New Object() {pp2.ComponentName, 0, Nothing, pp2.GetDisplayIcon(), pp2.ComponentName, pp2.ComponentDescription})
             Next
 
-#If NOADS = False Then
-            If Not FormMain.IsPro Then
-                ProFeatures.Functions.AddProPPs(DataGridViewPP)
-            End If
-#End If
-
             DataGridViewPP.Sort(DataGridViewPP.Columns(3), System.ComponentModel.ListSortDirection.Ascending)
 
         Else
@@ -287,13 +281,7 @@ Public Class FormSimulWizard
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
 
         If Integer.TryParse(DataGridViewPP.SelectedRows(0).Cells(0).Value, New Integer) Then
-
-            ProFeatures.Functions.CreateTransitionObject(CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(4).Value, "Property Package", "Add", "Simulation Wizard", Nothing)
-
-            ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(4).Value + " Property Package")
-
             Exit Sub
-
         End If
         Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone
@@ -1395,7 +1383,7 @@ Public Class FormSimulWizard
                             row.Cells(2).Value = imgCaution
                             ChangeRowForeColor(row, Color.DarkGray)
                     End Select
-                    If pp.DisplayName.Contains("Strÿjek-Vera") Then
+                    If pp.DisplayName.Contains("Strï¿½jek-Vera") Then
                         row.Cells(1).Value = 1
                         row.Cells(2).Value = imgOK
                         ChangeRowForeColor(row, Color.Blue)

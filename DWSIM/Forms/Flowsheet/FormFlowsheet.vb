@@ -32,7 +32,6 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Threading.Tasks
 Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports DWSIM.SharedClassesCSharp.FilePicker.Windows
-Imports DWSIM.Simulate365.Models
 
 <ComSourceInterfaces(GetType(Interfaces.IFlowsheetNewMessageSentEvent)), ClassInterface(ClassInterfaceType.AutoDual)>
 <System.Serializable()>
@@ -397,22 +396,12 @@ Public Class FormFlowsheet
 
         End If
 
-#If NOADS = False Then
-        If Not FormMain.IsPro Then
-            Dim fg As New ProFeatures.FormGHG With {.CurrentFlowsheet = Me, .AnalyticsProvider = FormMain.AnalyticsProvider}
-            fg.Show(dckPanel)
-            Dim fc As New ProFeatures.FormCosting With {.CurrentFlowsheet = Me, .AnalyticsProvider = FormMain.AnalyticsProvider}
-            fc.Show(dckPanel)
-        End If
-#Else
         tsmiDetailedReport.Visible = False
         ExcelReportsToolStripMenuItem.Visible = False
         ProcessFlowsheetDiagramToolStripMenuItem.Visible = False
         StreamDataImporterTSMI.Visible = False
         tsmiSolidsManager.Visible = False
         tsmiSolidsManager2.Visible = False
-
-#End If
 
         Me.UpdateFormText()
 
@@ -5796,27 +5785,12 @@ Public Class FormFlowsheet
     End Function
 
     Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles StreamDataImporterTSMI.Click
-
-        ProFeatures.Functions.CreateTransitionObject(Me, "Stream Data Importer", "Tool", "", "", Nothing)
-
-        ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, Me, "Stream Data Importer")
-
     End Sub
 
     Private Sub ExcelReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExcelReportsToolStripMenuItem.Click
-
-        ProFeatures.Functions.CreateTransitionObject(Me, "Excel Reports", "Tool", "", "", Nothing)
-
-        ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, Me, "Excel Reports")
-
     End Sub
 
     Private Sub ProcessFlowsheetDiagramToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProcessFlowsheetDiagramToolStripMenuItem.Click
-
-        ProFeatures.Functions.CreateTransitionObject(Me, "Process Flowsheet Diagram", "Tool", "", "", Nothing)
-
-        ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, Me, "Process Flowsheet Diagram")
-
     End Sub
 
     Private Sub CAPEOPENWarningTimer_Tick(sender As Object, e As EventArgs) Handles CAPEOPENWarningTimer.Tick
@@ -6006,19 +5980,9 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub ToolStripButton2_Click_1(sender As Object, e As EventArgs) Handles tsmiSolidsManager.Click, tsmiSolidsManager2.Click
-
-        ProFeatures.Functions.CreateTransitionObject(Me, "Solids Manager", "Tool", "", "", Nothing)
-
-        ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, Me, "Solids Manager")
-
     End Sub
 
     Private Sub tsmiDetailedReport_Click(sender As Object, e As EventArgs) Handles tsmiDetailedReport.Click
-
-        ProFeatures.Functions.CreateTransitionObject(Me, "Detailed Steady-State Simulation Report", "Tool", "", "", Nothing)
-
-        ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, Me, "Detailed Steady-State Simulation Report")
-
     End Sub
 
     Private Sub ConvergenceHelperSettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ConvergenceHelperSettingsToolStripMenuItem.Click

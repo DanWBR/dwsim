@@ -280,18 +280,9 @@ Public Class FormOptions
         End If
 
         For Each cpath In My.Settings.UserCompounds
-            If cpath.StartsWith("//Simulate 365 Dashboard") Then
-                Using fileStream As Stream = Simulate365.Services.FileDownloadService.GetFileBySimulatePath(cpath)
-                    If fileStream IsNot Nothing Then
-                        dgjsonfiles.Rows.Add(New Object() {dgjsonfiles.Rows.Count + 1, cpath, My.Resources.icons8_cancel})
-                        dgjsonfiles.Rows(dgjsonfiles.Rows.Count - 1).Cells(2).ToolTipText = DWSIM.App.GetLocalString("Remove")
-                    End If
-                End Using
-            Else
-                If File.Exists(cpath) Then
-                    dgjsonfiles.Rows.Add(New Object() {dgjsonfiles.Rows.Count + 1, cpath, My.Resources.icons8_cancel})
-                    dgjsonfiles.Rows(dgjsonfiles.Rows.Count - 1).Cells(2).ToolTipText = DWSIM.App.GetLocalString("Remove")
-                End If
+            If File.Exists(cpath) Then
+                dgjsonfiles.Rows.Add(New Object() {dgjsonfiles.Rows.Count + 1, cpath, My.Resources.icons8_cancel})
+                dgjsonfiles.Rows(dgjsonfiles.Rows.Count - 1).Cells(2).ToolTipText = DWSIM.App.GetLocalString("Remove")
             End If
         Next
 

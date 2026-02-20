@@ -7,12 +7,6 @@ Public Class FormHeatMaps
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
 
-        Transitioning = True
-
-        ProFeatures.Functions.CreateTransitionObject(CurrentFlowsheet, "", "Heatmaps", "", "", Nothing)
-
-        ProFeatures.Functions.ProcessTransition(CurrentFlowsheet)
-
         Close()
 
     End Sub

@@ -23,8 +23,6 @@ Imports System.IO
 Imports DWSIM.FlowsheetSolver
 Imports System.Linq
 Imports DWSIM.Thermodynamics.PropertyPackages
-Imports DWSIM.Simulate365.FormFactories
-Imports DWSIM.Simulate365.Models
 Imports DWSIM.Interfaces
 Imports DWSIM.SharedClassesCSharp.FilePicker
 Imports AeroWizard
@@ -189,12 +187,6 @@ Public Class FormSimulSettings
                 End If
                 If addobj Then Me.DataGridViewPP.Rows.Add(New Object() {pp2.ComponentName, pp2.GetDisplayIcon(), pp2.ComponentName, pp2.ComponentDescription})
             Next
-
-#If NOADS = False Then
-            If Not FormMain.IsPro Then
-                ProFeatures.Functions.AddProPPs2(DataGridViewPP)
-            End If
-#End If
 
             DataGridViewPP.Sort(DataGridViewPP.Columns(2), System.ComponentModel.ListSortDirection.Ascending)
 
@@ -1353,15 +1345,7 @@ Public Class FormSimulSettings
 
         CurrentFlowsheet.RegisterSnapshot(SnapshotType.PropertyPackages)
 
-        If DataGridViewPP.SelectedRows(0).Cells(0).Value = "" Then
-
-            ProFeatures.Functions.CreateTransitionObject(CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(2).Value, "Property Package", "Add", "Simulation Settings", Nothing)
-
-            ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, CurrentFlowsheet, DataGridViewPP.SelectedRows(0).Cells(2).Value + " Property Package")
-
-            Exit Sub
-
-        End If
+        If DataGridViewPP.SelectedRows(0).Cells(0).Value = "" Then Exit Sub
 
         Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone()

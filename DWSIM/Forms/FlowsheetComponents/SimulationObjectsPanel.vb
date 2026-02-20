@@ -200,12 +200,6 @@ Public Class SimulationObjectsPanel
             End Select
         Next
 
-#If NOADS = False Then
-        If Not FormMain.IsPro Then
-            ProFeatures.Functions.AddProUnitOps(New FlowLayoutPanel() {PanelMixers, PanelColumns, PanelExchangers, PanelLogical, PanelPressure, PanelUser, PanelReactors})
-        End If
-#End If
-
         'fossee models
         Dim folders = Directory.GetDirectories(Path.Combine(My.Application.Info.DirectoryPath, "FOSSEE"))
         For Each folder In folders

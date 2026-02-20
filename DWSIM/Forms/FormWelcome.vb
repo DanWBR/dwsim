@@ -4,7 +4,6 @@ Imports System.Linq
 Imports System.Threading.Tasks
 Imports System.Text
 Imports DWSIM.SharedClassesCSharp.FilePicker.Windows
-Imports DWSIM.Simulate365.Services
 
 '    Copyright 2008 Daniel Wagner O. de Medeiros
 '
@@ -406,15 +405,7 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel14_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel14.LinkClicked
-        Dim userService As UserService = UserService.GetInstance()
-        Dim isLoggedIn As Boolean = userService._IsLoggedIn()
-        If (isLoggedIn = False) Then
-            Dim loginForm As Simulate365.FormFactories.LoginForm = New Simulate365.FormFactories.LoginForm
-            loginForm.ShowDialog()
-        Else
-            Process.Start("https://dashboard.simulate365.com")
-        End If
-
+        Process.Start("https://dashboard.simulate365.com")
     End Sub
 
     Private Sub LinkLabel15_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)

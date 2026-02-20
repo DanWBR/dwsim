@@ -7,10 +7,6 @@ Public Class FormLiveFlows
 
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
 
-        ProFeatures.Functions.CreateTransitionObject(CurrentFlowsheet, "", "Live Flows", "", "", Nothing)
-
-        ProFeatures.Functions.ProcessTransition(CurrentFlowsheet)
-
         Transitioning = True
 
         Close()

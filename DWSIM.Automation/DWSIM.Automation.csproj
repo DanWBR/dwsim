@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DWSIM.Automation</RootNamespace>
     <AssemblyName>DWSIM.Automation</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
@@ -154,13 +154,7 @@
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
       <Name>DWSIM.SharedClasses</Name>
       <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Simulate365\DWSIM.Simulate365.csproj">
-      <Project>{1cc0851c-f6c2-477c-a725-a2e1c5e96802}</Project>
-      <Name>DWSIM.Simulate365</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS.GERG2008\DWSIM.Thermodynamics.AdvancedEOS.GERG2008.vbproj">
+    </ProjectReference><ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS.GERG2008\DWSIM.Thermodynamics.AdvancedEOS.GERG2008.vbproj">
       <Project>{adc9fe07-d255-4512-8a64-2aebb3f5068c}</Project>
       <Name>DWSIM.Thermodynamics.AdvancedEOS.GERG2008</Name>
       <Private>False</Private>

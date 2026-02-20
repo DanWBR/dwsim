@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GenerateFlowsheet</RootNamespace>
+    <AssemblyName>GenerateFlowsheet</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+    <StartupObject>Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <!-- Output alongside the other DWSIM test executables so all assemblies are co-located -->
+    <OutputPath>..\..\DWSIM\bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CapeOpen">
+      <HintPath>..\..\DWSIM\References\CapeOpen.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Template that builds the flowsheet skeleton -->
+    <Compile Include="build_flowsheet_template.cs" />
+    <!-- Entry point -->
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="integrator_pre_step_feed_profile.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="integrator_post_step_kpi_logger.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DWSIM.Automation\DWSIM.Automation.csproj">
+      <Project>{4BB36089-89F6-4BBF-A39C-1D0A3F232F07}</Project>
+      <Name>DWSIM.Automation</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DWSIM.DynamicsManager\DWSIM.DynamicsManager.vbproj">
+      <Project>{654C0D60-C94B-4A0B-B34D-1D71A6A20420}</Project>
+      <Name>DWSIM.DynamicsManager</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DWSIM.FlowsheetSolver\DWSIM.FlowsheetSolver.vbproj">
+      <Project>{1D223714-D3C8-463A-B4DC-FEFA1323EC87}</Project>
+      <Name>DWSIM.FlowsheetSolver</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
+      <Project>{725C8134-9FE3-43AA-9B33-D9046657FB2A}</Project>
+      <Name>DWSIM.GlobalSettings</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50BFD69A-487E-4B38-86EA-48ACD85A0EB1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DWSIM.Math\DWSIM.MathOps.vbproj">
+      <Project>{FDFB92DE-D189-49DC-91CC-60EE78D1356C}</Project>
+      <Name>DWSIM.MathOps</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30E167D2-5B5A-453A-A92C-18FF3BBB6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
+      <Project>{369BC7AF-836B-4DE1-93E3-B051BC148B23}</Project>
+      <Name>DWSIM.Thermodynamics</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DWSIM.UnitOperations\DWSIM.UnitOperations.vbproj">
+      <Project>{9D7733E4-9B6F-437F-AAEC-CA3106ACA688}</Project>
+      <Name>DWSIM.UnitOperations</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

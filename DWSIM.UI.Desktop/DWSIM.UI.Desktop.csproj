@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DWSIM.UI.Desktop</RootNamespace>
     <AssemblyName>DWSIM.UI.Desktop</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <DoNotCopyLocalIfInGac>true</DoNotCopyLocalIfInGac>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>

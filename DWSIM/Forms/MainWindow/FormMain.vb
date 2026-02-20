@@ -39,11 +39,7 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 Imports DWSIM.Interfaces
 Imports DWSIM.Thermodynamics.AdvancedEOS
 Imports DWSIM.Thermodynamics.Databases
-Imports DWSIM.Simulate365.Models
-Imports DWSIM.Simulate365.Services
-Imports DWSIM.Simulate365.FormFactories
 Imports Microsoft.VisualBasic.ApplicationServices
-Imports DWSIM.ProFeatures
 Imports DWSIM.SharedClassesCSharp.FilePicker.Windows
 
 Public Class FormMain
@@ -276,16 +272,7 @@ Public Class FormMain
 
         Console.WriteLine(String.Format("[{0}] Started loading extensions", Date.Now))
 
-        ' On user details loaded
-        AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
-        AddHandler UserService.GetInstance().AutoLoginInProgressChanged, AddressOf UserService_AutoLoginInProgress
-        AddHandler UserService.GetInstance().BeforeUserLoggedOut, AddressOf UserService_BeforeUserLoggedOut
-        AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
-        AddHandler UserService.GetInstance().ShowLoginForm, AddressOf UserService_ShowLoginForm
-        AddHandler FileManagementService.GetInstance().OnSaveFileToDashboard, AddressOf FileManagementService_SaveFileToDashboard
-        AddHandler FileUploaderService.UploadStarted, AddressOf FileUploaderService_UploadStarted
-        AddHandler FileUploaderService.UploadCompleted, AddressOf FileUploaderService_UploadCompleted
-        AddHandler FileUploaderService.UploadFailed, AddressOf FileUploaderService_UploadFailed
+        ' Simulate365 service handlers removed
 
 #If Not WINE32 Then
 
@@ -413,30 +400,7 @@ Public Class FormMain
 
     End Sub
 
-    Private Sub UserService_BeforeUserLoggedOut(sender As Object, e As BeforeLogoutEventArgs)
-
-        Dim simulate365Flowsheets = Me.MdiChildren.Where(Function(x) TypeOf x Is FormFlowsheet AndAlso TypeOf DirectCast(x, FormFlowsheet).FlowsheetOptions.VirtualFile Is S365File).ToList()
-
-        If simulate365Flowsheets Is Nothing Or simulate365Flowsheets.Count = 0 Then
-            Return
-        End If
-
-        Dim result As DialogResult = MessageBox.Show(
-                    "Are you sure you want to sign out? All flowsheets opened from the Simulate 365 Dashboard will be closed.",
-                    "Sign Out",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question,
-                    MessageBoxDefaultButton.Button2)
-
-        If result = DialogResult.No Then
-            e.Cancel = True
-        Else
-            For Each flowsheet In simulate365Flowsheets
-                DirectCast(flowsheet, FormFlowsheet).m_overrideCloseQuestion = True
-                flowsheet.Close()
-            Next
-        End If
-
+    Private Sub UserService_BeforeUserLoggedOut(sender As Object, e As EventArgs)
     End Sub
 
     Private Sub FileUploaderService_UploadFailed(sender As Object, e As Exception)
@@ -470,49 +434,18 @@ Public Class FormMain
     End Sub
 
     Private Sub FileManagementService_SaveFileToDashboard(sender As Object, e As EventArgs)
-        Me.SaveFile(True, True)
-
     End Sub
 
-    Private Sub UserService_UserDetailsLoaded(sender As Object, user As UserDetailsModel)
-        Me.UIThread(Sub()
-                        Me.LoginButton.Visible = False
-                        Me.LogoutDropdown.Text = user.DisplayName
-                        Me.LogoutDropdown.Visible = True
-                    End Sub)
+    Private Sub UserService_UserDetailsLoaded(sender As Object, user As Object)
     End Sub
 
     Private Sub UserService_AutoLoginInProgress(sender As Object, isInProgress As Boolean)
-
-        If (isInProgress) Then
-            Me.UIThread(Sub()
-                            Me.LoginButton.Visible = False
-                            Me.CheckingCredentialsLabel.Visible = True
-                            Me.LogoutDropdown.Visible = False
-                        End Sub)
-        Else
-            Me.UIThread(Sub()
-                            Me.LoginButton.Visible = True
-                            Me.CheckingCredentialsLabel.Visible = False
-                            Me.LogoutDropdown.Visible = False
-                        End Sub)
-        End If
-
     End Sub
 
     Private Sub UserService_UserLoggedOut(sender As Object, e As EventArgs)
-        Me.UIThread(Sub()
-                        Me.LogoutDropdown.Text = ""
-                        Me.LogoutDropdown.Visible = False
-                        Me.LoginButton.Visible = True
-                    End Sub)
     End Sub
 
     Private Sub UserService_ShowLoginForm(sender As Object, e As EventArgs)
-
-        Dim loginForm = New LoginForm
-        loginForm.ShowDialog()
-
     End Sub
 
 
@@ -3832,7 +3765,7 @@ Public Class FormMain
 
         RaiseEvent FlowsheetSavingToXML(form, New EventArgs())
 
-        Dim isUserLoggedIn As Boolean = UserService.GetInstance()._IsLoggedIn()
+        Dim isUserLoggedIn As Boolean = False
 
         Dim xdoc As New XDocument()
         Dim xel As XElement
@@ -4374,7 +4307,7 @@ Label_00CC:
 
     Sub SaveXMLZIP(handler As IVirtualFile, ByVal form As FormFlowsheet, Optional closingSimulation As Boolean = False, Optional savingToS365 As Boolean = False)
 
-        Dim isUserLoggedIn As Boolean = UserService.GetInstance()._IsLoggedIn()
+        Dim isUserLoggedIn As Boolean = False
 
         Dim xmlfile As String = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), "xml")
 
@@ -4451,13 +4384,7 @@ Label_00CC:
 
     Sub LoadFileDialog(Optional dashboardpicker As Boolean = False)
 
-        Dim filePickerForm As IFilePicker
-
-        If dashboardpicker Then
-            filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
-        Else
-            filePickerForm = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
-        End If
+        Dim filePickerForm As IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
 
         Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(
             New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
@@ -4478,7 +4405,7 @@ Label_00CC:
 
     Sub LoadFile(handler As IVirtualFile, Optional fullpath As String = "")
 
-        Dim isUserLoggedIn As Boolean = UserService.GetInstance()._IsLoggedIn()
+        Dim isUserLoggedIn As Boolean = False
         Me.WelcomePanel.Visible = False
         PainelDeBoasvindasToolStripMenuItem.Checked = False
 
@@ -4667,54 +4594,18 @@ Label_00CC:
 
             Dim filename = form2.Options.FilePath
 
-            Dim isLoggedIn = UserService.GetInstance()._IsLoggedIn()
-
             Dim isSaveAs = shouldOverwriteFile = False
             Dim isSharedForCollaboration = False
             Dim virtualFile = form2.FlowsheetOptions.VirtualFile
 
-            If TypeOf virtualFile Is S365File Then
-                Dim s365file As S365File = DirectCast(virtualFile, S365File)
-                isSharedForCollaboration = s365file.IsSharedForCollaboration
-            End If
-
-            If dashboardpicker And Not isLoggedIn Then
-                shouldOverwriteFile = False
-            End If
-
-            Dim filePickerForm As IFilePicker
-
-            If dashboardpicker Then
-                filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
-                Try
-                    Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
-                    filePickerForm.SuggestedFilename = fname
-                    If isLoggedIn And virtualFile IsNot Nothing And IsSimulateFilePath(virtualFile.FullPath) And disableOverwriteQuestion = False Then
-                        Dim shouldOverwriteExistingFileResult As DialogResult = MessageBox.Show("Do you want to overwrite the existing file?", "Save file", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-
-                        If (shouldOverwriteExistingFileResult = DialogResult.Yes) Then
-                            shouldOverwriteFile = True
-                        End If
-
-
-                        filePickerForm.SuggestedDirectory = virtualFile.ParentUniqueIdentifier
-                    End If
-
-                Catch ex As Exception
-                End Try
-            Else
-                filePickerForm = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
-                Try
-                    Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
-                    Dim fpath = Path.GetDirectoryName(form2.Options.FilePath)
-                    filePickerForm.SuggestedFilename = fname
-                    filePickerForm.SuggestedDirectory = fpath
-                    If TypeOf filePickerForm Is Simulate365.FormFactories.S365FilePickerForm And disableOverwriteQuestion = False Then
-                        filePickerForm.SuggestedDirectory = virtualFile.ParentUniqueIdentifier
-                    End If
-                Catch ex As Exception
-                End Try
-            End If
+            Dim filePickerForm As IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+            Try
+                Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
+                Dim fpath = Path.GetDirectoryName(form2.Options.FilePath)
+                filePickerForm.SuggestedFilename = fname
+                filePickerForm.SuggestedDirectory = fpath
+            Catch ex As Exception
+            End Try
 
             Dim handler As IVirtualFile = Nothing
             If shouldOverwriteFile And IsCorrectVirtualFile(dashboardpicker, virtualFile) Then
@@ -4875,7 +4766,7 @@ Label_00CC:
 
     Private Sub OpenRecent_click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
-        Dim isUserLoggedIn As Boolean = UserService.GetInstance()._IsLoggedIn()
+        Dim isUserLoggedIn As Boolean = False
 
         Dim myLink As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
 
@@ -4993,27 +4884,9 @@ Label_00CC:
 
         Dim filePickerForm As IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
 
-        If TypeOf ActiveMdiChild Is FormFlowsheet Then
-            Dim virtualFile = DirectCast(ActiveMdiChild, FormFlowsheet).FlowsheetOptions.VirtualFile
-            saveToDashboard = saveToDashboard Or TypeOf virtualFile Is S365File
-        End If
-
-        If saveToDashboard Then
-            filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
-        End If
-        Dim isLoggedIn = UserService.GetInstance()._IsLoggedIn()
-
-        'If user is not logged in, show filepicker dialog with message login to access this feature
-        If Not isLoggedIn And saveToDashboard Then
-            Dim tempfilePickerForm As S365FilePickerForm = New S365FilePickerForm()
-            AddHandler tempfilePickerForm.AfterUserLoggedIn, AddressOf TempFormPickerForm_AfterUserLoggedIn
-            tempfilePickerForm.ShowSaveDialog(New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType))
-            Return Nothing
-        End If
-
         Dim filename As String
 
-        saveToDashboard = saveToDashboard Or TypeOf filePickerForm Is S365FilePickerForm
+        saveToDashboard = False
 
         If Not Me.ActiveMdiChild Is Nothing Then
             If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
@@ -5142,9 +5015,6 @@ Label_00CC:
     End Function
 
     Private Sub TempFormPickerForm_AfterUserLoggedIn(sender As Object, e As EventArgs)
-        Dim formPickerForm As S365FilePickerForm = CType(sender, S365FilePickerForm)
-        RemoveHandler formPickerForm.AfterUserLoggedIn, AddressOf TempFormPickerForm_AfterUserLoggedIn
-        formPickerForm.Close()
     End Sub
 
     Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click, SaveAsToolStripMenuItem.Click
@@ -5426,12 +5296,9 @@ Label_00CC:
     End Sub
 
     Private Sub LoginToolStripButton_Click(sender As Object, e As EventArgs) Handles LoginButton.Click
-        Dim loginForm As LoginForm = New LoginForm
-        loginForm.ShowDialog()
     End Sub
 
     Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogoutToolStripMenuItem.Click
-        UserService.GetInstance().Logout()
     End Sub
 
     Private Sub LoggedInS365Button_Click(sender As Object, e As EventArgs)
@@ -5614,44 +5481,6 @@ Label_00CC:
     End Sub
 
     Private Sub onShareFileClick()
-        Dim shareFileForm As New ShareFileForm()
-        Dim openedFile As S365File = Nothing
-        Dim userService As UserService = UserService.GetInstance()
-        If userService._IsLoggedIn() = False Then
-            shareFileForm.ShowFileShareDialog("user_not_logged_in")
-            Return
-        End If
-
-        If Not Me.ActiveMdiChild Is Nothing Then
-            If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
-
-                Dim form2 As FormFlowsheet = Me.ActiveMdiChild
-
-                If form2.Options.VirtualFile Is Nothing Or Not IsCorrectVirtualFile(True, form2.Options.VirtualFile) Then
-                    MessageBox.Show(DWSIM.App.GetLocalString("ShareSimulationNotSaved"), DWSIM.App.GetLocalString("Informao"), MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Return
-                End If
-
-                openedFile = form2.Options.VirtualFile
-                Dim user As UserDetailsModel = UserService.GetInstance().CurrentUser
-
-                If user.Id <> openedFile.OwnerId Then
-                    MessageBox.Show(DWSIM.App.GetLocalString("ShareNotFileOwner"), DWSIM.App.GetLocalString("Informao"), MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Return
-                End If
-            End If
-
-            If openedFile?.FileUniqueIdentifier IsNot Nothing Then
-                shareFileForm.ShowFileShareDialog(openedFile.FileUniqueIdentifier)
-            Else
-                MessageBox.Show(DWSIM.App.GetLocalString("ShareSimulationNotSaved"), DWSIM.App.GetLocalString("Informao"), MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Return
-            End If
-
-        Else
-            MessageBox.Show(DWSIM.App.GetLocalString("ShareSimulationNotOpened"), DWSIM.App.GetLocalString("Informao"), MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
-
     End Sub
 
     Private Sub ShareFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ShareFileToolStripMenuItem.Click
@@ -5672,7 +5501,7 @@ Label_00CC:
     End Sub
 
     Private Sub SaveAsToSimulate365DashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveAsToSimulate365DashboardToolStripMenuItem.Click
-        SaveFileDialog(True, True, False)
+        SaveFileDialog(False, False, False)
     End Sub
 
     Public Shared Sub RaiseActiveSimulationClosed(sender As Object, e As EventArgs)

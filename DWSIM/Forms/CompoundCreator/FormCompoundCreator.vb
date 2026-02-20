@@ -26,7 +26,6 @@ Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Math
 Imports Microsoft.VisualBasic.FileIO
 Imports System.Globalization
-Imports DWSIM.Simulate365.Models
 Imports DWSIM.Interfaces
 Imports DWSIM.SharedClassesCSharp.FilePicker
 

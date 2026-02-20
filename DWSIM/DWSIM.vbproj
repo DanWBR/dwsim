@@ -28,7 +28,7 @@
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -2464,12 +2464,7 @@
     <ProjectReference Include="..\DWSIM.Logging\DWSIM.Logging.csproj">
       <Project>{b176a143-2822-4e7c-9280-cf4a615e1c35}</Project>
       <Name>DWSIM.Logging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.ProFeatures\DWSIM.ProFeatures.csproj">
-      <Project>{68632cb5-e993-0eca-38aa-c59e21e17519}</Project>
-      <Name>DWSIM.ProFeatures</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
+    </ProjectReference><ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
     </ProjectReference>
@@ -2508,12 +2503,7 @@
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
       <Name>DWSIM.SharedClasses</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Simulate365\DWSIM.Simulate365.csproj">
-      <Project>{1cc0851c-f6c2-477c-a725-a2e1c5e96802}</Project>
-      <Name>DWSIM.Simulate365</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.SkiaSharp.Views.Desktop\DWSIM.SkiaSharp.Views.Desktop.csproj">
+    </ProjectReference><ProjectReference Include="..\DWSIM.SkiaSharp.Views.Desktop\DWSIM.SkiaSharp.Views.Desktop.csproj">
       <Project>{f4e6f3e7-532c-4091-a82f-1dd7d191a13b}</Project>
       <Name>DWSIM.SkiaSharp.Views.Desktop</Name>
     </ProjectReference>

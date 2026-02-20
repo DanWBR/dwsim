@@ -304,22 +304,7 @@ Public Class FlowsheetSurfaceControl
 
             If c = SimulationObjectClass.None Then
 
-                If obj.Length = 4 Then
-
-                    Dim name As String = obj(2)
-                    Dim otype = obj(3)
-
-                    ProFeatures.Functions.CreateTransitionObject(FlowsheetObject, name, "Unit Operation", "Add", otype, New Double() {e.X / FlowsheetSurface.Zoom, e.Y / FlowsheetSurface.Zoom})
-
-                    ProFeatures.Functions.DisplayTransitionForm(FormMain.AnalyticsProvider, FlowsheetObject, name & " Unit Operation")
-
-                    Exit Sub
-
-                Else
-
-                    Exit Sub
-
-                End If
+                Exit Sub
 
             End If
 

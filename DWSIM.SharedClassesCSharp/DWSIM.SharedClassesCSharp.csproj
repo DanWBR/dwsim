@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DWSIM.SharedClassesCSharp</RootNamespace>
     <AssemblyName>DWSIM.SharedClassesCSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -86,12 +86,7 @@
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
       <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Simulate365\DWSIM.Simulate365.csproj">
-      <Project>{1CC0851C-F6C2-477C-A725-A2E1C5E96802}</Project>
-      <Name>DWSIM.Simulate365</Name>
-    </ProjectReference>
-  </ItemGroup>
+    </ProjectReference></ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ConnectionsEditor\ConnectionsEditor.resx">
       <DependentUpon>ConnectionsEditor.cs</DependentUpon>
