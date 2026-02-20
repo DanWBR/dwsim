@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using DWSIM.Automation;
 using DWSIM.Interfaces;
 using DWSIM.Interfaces.Enums;
@@ -9,7 +8,9 @@ using DWSIM.Interfaces.Enums.GraphicObjects;
 using DWSIM.DynamicsManager;
 using DWSIM.FlowsheetSolver;
 
-// Acid gas removal dynamic template with amine-ready defaults and KPI monitoring.
+// Template generator for an acid-gas-removal dynamic model.
+// This file is intentionally conservative and creates a connected skeleton
+// that you can finish/calibrate in the DWSIM UI.
 
 public static class AcidGasRemovalDynamicTemplate
 {
@@ -18,30 +19,14 @@ public static class AcidGasRemovalDynamicTemplate
         var automation = new Automation3();
         var sim = automation.CreateFlowsheet();
 
-        // Gas-side compounds + optional heavies.
-        AddCompoundOrThrow(sim, "Methane");
-        AddCompoundOrThrow(sim, "Carbon dioxide");
-        AddCompoundOrThrow(sim, "Hydrogen sulfide");
-        AddCompoundOrThrow(sim, "Water");
-        AddCompoundIfAvailable(sim, "Nitrogen");
-        AddCompoundIfAvailable(sim, "Ethane");
-        AddCompoundIfAvailable(sim, "Propane");
+        // Compounds (example acid gas system, adjust as needed)
+        foreach (var c in new[] { "Methane", "Ethane", "Propane", "Carbon dioxide", "Hydrogen sulfide", "Water" })
+            sim.AddCompound(c);
 
-        // Amine package compounds: pick one amine at minimum (prefer MDEA, then MEA, then DEA).
-        var amineAdded = AddFirstAvailableCompound(sim, new[]
-        {
-            "Methyl diethanolamine",
-            "Monoethanolamine",
-            "Diethanolamine"
-        });
-        if (!amineAdded)
-            throw new Exception("Could not add any amine compound (MDEA/MEA/DEA). Please verify your component database.");
+        // Property package (PR is common for gas/amine pre-calibration workflows)
+        sim.CreateAndAddPropertyPackage("Peng-Robinson (PR)");
 
-        // Thermodynamic package selection for amine systems.
-        var ppName = SelectAminePropertyPackage(sim);
-        sim.CreateAndAddPropertyPackage(ppName);
-
-        // --- Core process blocks ---
+        // --- Core process blocks (names mapped to the supplied diagram) ---
         var feed = sim.AddObject(ObjectType.MaterialStream, 40, 220, "Feed");
         var saturationMixer = sim.AddObject(ObjectType.Mixer, 120, 220, "Saturation mixer");
         var feedSeparator = sim.AddObject(ObjectType.Vessel, 210, 220, "Feed water separator");
@@ -58,10 +43,13 @@ public static class AcidGasRemovalDynamicTemplate
 
         // Key streams
         var saturatedFeed = sim.AddObject(ObjectType.MaterialStream, 170, 220, "Saturated feed");
+        var feedWater = sim.AddObject(ObjectType.MaterialStream, 210, 280, "Feed sep. water");
         var absFeed = sim.AddObject(ObjectType.MaterialStream, 310, 180, "Abs. feed");
         var hotRichGas = sim.AddObject(ObjectType.MaterialStream, 420, 180, "Hot rich gas");
         var coolRichGas = sim.AddObject(ObjectType.MaterialStream, 560, 180, "Cool rich gas");
+        var richGasToSales = sim.AddObject(ObjectType.MaterialStream, 660, 170, "Saturated Sales gas");
         var salesGas = sim.AddObject(ObjectType.MaterialStream, 760, 140, "Sales gas");
+        var salesWater = sim.AddObject(ObjectType.MaterialStream, 760, 200, "Sales sep. water");
 
         var richAmine = sim.AddObject(ObjectType.MaterialStream, 420, 255, "Rich amine");
         var iFlashOut = sim.AddObject(ObjectType.MaterialStream, 560, 255, "I Flash out");
@@ -72,10 +60,11 @@ public static class AcidGasRemovalDynamicTemplate
         var leanAmine = sim.AddObject(ObjectType.MaterialStream, 930, 470, "LEAN AMINE");
         var leanToAbs = sim.AddObject(ObjectType.MaterialStream, 300, 300, "Input lean amine");
 
+        // Position connector geometry before programmatic connect.
         foreach (var o in sim.SimulationObjects.Values)
             ((dynamic)o.GraphicObject).PositionConnectors();
 
-        // Skeleton connectivity.
+        // Skeleton connections (finish/tune in UI as needed).
         sim.ConnectObjects(feed.GraphicObject, saturationMixer.GraphicObject, 0, 0);
         sim.ConnectObjects(saturationMixer.GraphicObject, saturatedFeed.GraphicObject, 0, 0);
         sim.ConnectObjects(saturatedFeed.GraphicObject, feedSeparator.GraphicObject, 0, 0);
@@ -102,12 +91,12 @@ public static class AcidGasRemovalDynamicTemplate
         sim.ConnectObjects(leanSaturator.GraphicObject, leanToAbs.GraphicObject, 0, 0);
         sim.ConnectObjects(leanToAbs.GraphicObject, absorber.GraphicObject, 1, 1);
 
-        // Baseline feed specs (SI). Equivalent of P/T/flow sanity check.
+        // Basic feed initialization (SI units)
         ((dynamic)feed).SetTemperature(313.15);
         ((dynamic)feed).SetPressure(3_500_000.0);
         ((dynamic)feed).SetMassFlow(2.0);
 
-        // Dynamic setup: one integrator + one schedule.
+        // Dynamic setup: one integrator + one schedule
         sim.DynamicMode = true;
 
         var integ = new Integrator
@@ -134,15 +123,11 @@ public static class AcidGasRemovalDynamicTemplate
             ResetContentsOfAllObjects = false
         };
 
-        // Preconfigure monitored variables for requested KPIs.
-        ConfigureKpiMonitors(sim, integ,
-            feed, salesGas, absorber, hotRichGas, richAmine, acidicGas, leanAmine, regenerator3);
-
         sim.DynamicsManager.IntegratorList.Add(integ.ID, integ);
         sim.DynamicsManager.ScheduleList.Add(sch.ID, sch);
         sim.DynamicsManager.CurrentSchedule = sch.ID;
 
-        // Attach script manager scripts (pre-step and post-step).
+        // Optional script placeholders - attach in Script Manager using provided .py files.
         var pre = new Script
         {
             ID = Guid.NewGuid().ToString(),
@@ -154,134 +139,8 @@ public static class AcidGasRemovalDynamicTemplate
             ScriptText = File.ReadAllText("integrator_pre_step_feed_profile.py")
         };
 
-        var post = new Script
-        {
-            ID = Guid.NewGuid().ToString(),
-            Title = "KPI Logger (Post-Step)",
-            Linked = true,
-            LinkedObjectType = DWSIM.Interfaces.Enums.Scripts.ObjectType.Integrator,
-            LinkedEventType = DWSIM.Interfaces.Enums.Scripts.EventType.IntegratorStep,
-            PythonInterpreter = DWSIM.Interfaces.Enums.Scripts.Interpreter.IronPython,
-            ScriptText = File.ReadAllText("integrator_post_step_kpi_logger.py")
-        };
-
         sim.Scripts.Add(pre.ID, pre);
-        sim.Scripts.Add(post.ID, post);
 
         automation.SaveFlowsheet(sim, outputFile, true);
-    }
-
-    private static void ConfigureKpiMonitors(
-        IFlowsheet sim, Integrator integ,
-        dynamic feed, dynamic salesGas, dynamic absorber, dynamic absorberTopGas, dynamic absorberBottomLiquid,
-        dynamic acidGas, dynamic leanAmine, dynamic regenerator)
-    {
-        // Sales gas H2S/CO2
-        AddMonitoredVariable(integ, salesGas, "PROP_MS_106/Hydrogen sulfide", "Sales gas H2S mole fraction");
-        AddMonitoredVariable(integ, salesGas, "PROP_MS_106/Carbon dioxide", "Sales gas CO2 mole fraction");
-
-        // Absorber ΔP (represented by top and bottom pressures for direct difference).
-        AddMonitoredVariable(integ, absorber, "PROP_AC_0", "Absorber top pressure");
-        AddMonitoredVariable(integ, absorber, "PROP_AC_1", "Absorber bottom pressure");
-
-        // Absorber top/bottom compositions.
-        AddMonitoredVariable(integ, absorberTopGas, "PROP_MS_106/Hydrogen sulfide", "Absorber top gas H2S mole fraction");
-        AddMonitoredVariable(integ, absorberTopGas, "PROP_MS_106/Carbon dioxide", "Absorber top gas CO2 mole fraction");
-        AddMonitoredVariable(integ, absorberBottomLiquid, "PROP_MS_102/Hydrogen sulfide", "Absorber bottom liquid H2S mole fraction");
-        AddMonitoredVariable(integ, absorberBottomLiquid, "PROP_MS_102/Carbon dioxide", "Absorber bottom liquid CO2 mole fraction");
-
-        // Regenerator overhead acid gas flow.
-        AddMonitoredVariable(integ, acidGas, "PROP_MS_2", "Regenerator overhead acid gas mass flow");
-
-        // Lean amine loading / temperature.
-        AddMonitoredVariable(integ, leanAmine, "CO2 Loading", "Lean amine CO2 loading");
-        AddMonitoredVariable(integ, leanAmine, "PROP_MS_0", "Lean amine temperature");
-
-        // Reboiler duty (using third regenerator block in this template).
-        AddMonitoredVariable(integ, regenerator, "PROP_DC_6", "Regenerator III reboiler duty");
-
-        // Keep feed flow monitored as operation sanity signal.
-        AddMonitoredVariable(integ, feed, "PROP_MS_2", "Feed mass flow");
-    }
-
-    private static void AddMonitoredVariable(Integrator integ, dynamic obj, string propertyId, string description)
-    {
-        string[] props = obj.GetProperties(PropertyType.ALL);
-        if (!props.Contains(propertyId))
-        {
-            throw new Exception($"Required KPI property '{propertyId}' not available on object '{obj.GraphicObject.Tag}'.");
-        }
-
-        var mv = new MonitoredVariable
-        {
-            ID = Guid.NewGuid().ToString(),
-            Description = description,
-            ObjectID = obj.Name,
-            PropertyID = propertyId,
-            PropertyUnits = obj.GetPropertyUnit(propertyId) ?? ""
-        };
-
-        integ.MonitoredVariables.Add(mv);
-    }
-
-    private static string SelectAminePropertyPackage(IFlowsheet sim)
-    {
-        var pps = sim.GetAvailablePropertyPackages().ToList();
-
-        string Match(params string[] terms)
-        {
-            return pps.FirstOrDefault(pp =>
-            {
-                var l = pp.ToLowerInvariant();
-                return terms.All(t => l.Contains(t));
-            });
-        }
-
-        // Prefer amine-specific package, then electrolyte methods, then fallback.
-        var preferred =
-            Match("amines") ??
-            Match("electrolyte", "nrtl") ??
-            Match("electrolyte") ??
-            Match("peng", "robinson") ??
-            pps.FirstOrDefault();
-
-        if (string.IsNullOrWhiteSpace(preferred))
-            throw new Exception("No property package is available in this DWSIM installation.");
-
-        return preferred;
-    }
-
-    private static void AddCompoundOrThrow(IFlowsheet sim, string name)
-    {
-        try
-        {
-            sim.AddCompound(name);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Required compound '{name}' could not be added.", ex);
-        }
-    }
-
-    private static bool AddCompoundIfAvailable(IFlowsheet sim, string name)
-    {
-        try
-        {
-            sim.AddCompound(name);
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    private static bool AddFirstAvailableCompound(IFlowsheet sim, IEnumerable<string> names)
-    {
-        foreach (var n in names)
-        {
-            if (AddCompoundIfAvailable(sim, n)) return true;
-        }
-        return false;
     }
 }
