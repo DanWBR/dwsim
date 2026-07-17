@@ -22,6 +22,7 @@ Partial Class EditingForm_Pump
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Pump))
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
@@ -38,6 +39,12 @@ Partial Class EditingForm_Pump
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBoxParameters = New System.Windows.Forms.GroupBox()
+        Me.lblOperatingSpeedUnit = New System.Windows.Forms.Label()
+        Me.tbOperatingSpeed = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.lblNPSH = New System.Windows.Forms.Label()
+        Me.tbNPSH = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.cbPressure = New System.Windows.Forms.ComboBox()
         Me.tbOutletPressure = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -72,11 +79,8 @@ Partial Class EditingForm_Pump
         Me.cbOutlet1 = New System.Windows.Forms.ComboBox()
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip()
-        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip()
-        Me.tbNPSH = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.lblNPSH = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -224,6 +228,9 @@ Partial Class EditingForm_Pump
         'GroupBoxParameters
         '
         resources.ApplyResources(Me.GroupBoxParameters, "GroupBoxParameters")
+        Me.GroupBoxParameters.Controls.Add(Me.lblOperatingSpeedUnit)
+        Me.GroupBoxParameters.Controls.Add(Me.tbOperatingSpeed)
+        Me.GroupBoxParameters.Controls.Add(Me.Label16)
         Me.GroupBoxParameters.Controls.Add(Me.lblNPSH)
         Me.GroupBoxParameters.Controls.Add(Me.tbNPSH)
         Me.GroupBoxParameters.Controls.Add(Me.Label10)
@@ -253,6 +260,55 @@ Partial Class EditingForm_Pump
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBoxParameters, resources.GetString("GroupBoxParameters.ToolTip2"))
+        '
+        'lblOperatingSpeedUnit
+        '
+        resources.ApplyResources(Me.lblOperatingSpeedUnit, "lblOperatingSpeedUnit")
+        Me.lblOperatingSpeedUnit.Name = "lblOperatingSpeedUnit"
+        Me.ToolTip1.SetToolTip(Me.lblOperatingSpeedUnit, resources.GetString("lblOperatingSpeedUnit.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblOperatingSpeedUnit, resources.GetString("lblOperatingSpeedUnit.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblOperatingSpeedUnit, resources.GetString("lblOperatingSpeedUnit.ToolTip2"))
+        '
+        'tbOperatingSpeed
+        '
+        resources.ApplyResources(Me.tbOperatingSpeed, "tbOperatingSpeed")
+        Me.tbOperatingSpeed.Name = "tbOperatingSpeed"
+        Me.ToolTipValues.SetToolTip(Me.tbOperatingSpeed, resources.GetString("tbOperatingSpeed.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbOperatingSpeed, resources.GetString("tbOperatingSpeed.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbOperatingSpeed, resources.GetString("tbOperatingSpeed.ToolTip2"))
+        '
+        'Label16
+        '
+        resources.ApplyResources(Me.Label16, "Label16")
+        Me.Label16.Name = "Label16"
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip2"))
+        '
+        'lblNPSH
+        '
+        resources.ApplyResources(Me.lblNPSH, "lblNPSH")
+        Me.lblNPSH.Name = "lblNPSH"
+        Me.ToolTip1.SetToolTip(Me.lblNPSH, resources.GetString("lblNPSH.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblNPSH, resources.GetString("lblNPSH.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblNPSH, resources.GetString("lblNPSH.ToolTip2"))
+        '
+        'tbNPSH
+        '
+        resources.ApplyResources(Me.tbNPSH, "tbNPSH")
+        Me.tbNPSH.Name = "tbNPSH"
+        Me.tbNPSH.ReadOnly = True
+        Me.ToolTipValues.SetToolTip(Me.tbNPSH, resources.GetString("tbNPSH.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbNPSH, resources.GetString("tbNPSH.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbNPSH, resources.GetString("tbNPSH.ToolTip2"))
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip2"))
         '
         'cbPressure
         '
@@ -581,31 +637,6 @@ Partial Class EditingForm_Pump
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
-        'tbNPSH
-        '
-        resources.ApplyResources(Me.tbNPSH, "tbNPSH")
-        Me.tbNPSH.Name = "tbNPSH"
-        Me.tbNPSH.ReadOnly = True
-        Me.ToolTipValues.SetToolTip(Me.tbNPSH, resources.GetString("tbNPSH.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbNPSH, resources.GetString("tbNPSH.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbNPSH, resources.GetString("tbNPSH.ToolTip2"))
-        '
-        'Label10
-        '
-        resources.ApplyResources(Me.Label10, "Label10")
-        Me.Label10.Name = "Label10"
-        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip2"))
-        '
-        'lblNPSH
-        '
-        resources.ApplyResources(Me.lblNPSH, "lblNPSH")
-        Me.lblNPSH.Name = "lblNPSH"
-        Me.ToolTip1.SetToolTip(Me.lblNPSH, resources.GetString("lblNPSH.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.lblNPSH, resources.GetString("lblNPSH.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.lblNPSH, resources.GetString("lblNPSH.ToolTip2"))
-        '
         'EditingForm_Pump
         '
         resources.ApplyResources(Me, "$this")
@@ -616,9 +647,9 @@ Partial Class EditingForm_Pump
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBoxParameters)
         Me.Name = "EditingForm_Pump"
-        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
+        Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
@@ -685,4 +716,7 @@ Partial Class EditingForm_Pump
     Public WithEvents tbNPSH As TextBox
     Public WithEvents Label10 As Label
     Public WithEvents lblNPSH As Label
+    Public WithEvents tbOperatingSpeed As TextBox
+    Public WithEvents Label16 As Label
+    Public WithEvents lblOperatingSpeedUnit As Label
 End Class

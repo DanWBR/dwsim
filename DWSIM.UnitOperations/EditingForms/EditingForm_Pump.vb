@@ -162,6 +162,10 @@ Public Class EditingForm_Pump
             tbNPSH.Text = SimObject.NPSH.GetValueOrDefault().ConvertFromSI(units.distance).ToString(nf)
             lblNPSH.Text = units.distance
 
+            'shows the speed the curves were measured at while the pump has no speed of its own,
+            'which is the speed it then runs at
+            tbOperatingSpeed.Text = SimObject.EffectiveSpeed.ToString(nf)
+
         End With
 
         Loaded = True
@@ -215,6 +219,7 @@ Public Class EditingForm_Pump
                 tbPressureIncr.Enabled = True
                 tbEfficiency.Enabled = True
                 btnCurves.Enabled = False
+                tbOperatingSpeed.Enabled = False
                 SimObject.CalcMode = UnitOperations.Pump.CalculationMode.Delta_P
             Case 1
                 tbHeatingChange.Enabled = False
@@ -222,6 +227,7 @@ Public Class EditingForm_Pump
                 tbPressureIncr.Enabled = False
                 tbEfficiency.Enabled = True
                 btnCurves.Enabled = False
+                tbOperatingSpeed.Enabled = False
                 SimObject.CalcMode = UnitOperations.Pump.CalculationMode.OutletPressure
             Case 2
                 tbHeatingChange.Enabled = True
@@ -229,6 +235,7 @@ Public Class EditingForm_Pump
                 tbPressureIncr.Enabled = False
                 tbEfficiency.Enabled = True
                 btnCurves.Enabled = False
+                tbOperatingSpeed.Enabled = False
                 SimObject.CalcMode = UnitOperations.Pump.CalculationMode.Power
             Case 3
                 tbHeatingChange.Enabled = False
@@ -236,6 +243,7 @@ Public Class EditingForm_Pump
                 tbPressureIncr.Enabled = False
                 tbEfficiency.Enabled = True
                 btnCurves.Enabled = False
+                tbOperatingSpeed.Enabled = False
                 SimObject.CalcMode = UnitOperations.Pump.CalculationMode.EnergyStream
             Case 4
                 tbHeatingChange.Enabled = False
@@ -243,6 +251,7 @@ Public Class EditingForm_Pump
                 tbPressureIncr.Enabled = False
                 tbEfficiency.Enabled = False
                 btnCurves.Enabled = True
+                tbOperatingSpeed.Enabled = True
                 SimObject.CalcMode = UnitOperations.Pump.CalculationMode.Curves
         End Select
     End Sub
@@ -291,6 +300,7 @@ Public Class EditingForm_Pump
         End Select
 
         If sender Is tbEfficiency Then uobj.Eficiencia = Double.Parse(tbEfficiency.Text)
+        If sender Is tbOperatingSpeed Then uobj.OperatingSpeed = tbOperatingSpeed.Text.ParseExpressionToDouble
         If sender Is tbHeatingChange Then uobj.DeltaQ = su.Converter.ConvertToSI(cbHeating.SelectedItem.ToString, tbHeatingChange.Text.ParseExpressionToDouble)
         If sender Is tbOutletPressure Then uobj.Pout = su.Converter.ConvertToSI(cbPressure.SelectedItem.ToString, tbOutletPressure.Text.ParseExpressionToDouble)
         If sender Is tbPressureIncr Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureIncr.Text.ParseExpressionToDouble)
@@ -306,7 +316,8 @@ Public Class EditingForm_Pump
     End Sub
 
     Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbTemperatureChange.TextChanged, tbPressureIncr.TextChanged, tbOutletTemperature.TextChanged,
-                                                                        tbHeatingChange.TextChanged, tbEfficiency.TextChanged, tbOutletPressure.TextChanged
+                                                                        tbHeatingChange.TextChanged, tbEfficiency.TextChanged, tbOutletPressure.TextChanged,
+                                                                        tbOperatingSpeed.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -319,7 +330,8 @@ Public Class EditingForm_Pump
     End Sub
 
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbTemperatureChange.KeyDown, tbPressureIncr.KeyDown, tbOutletTemperature.KeyDown,
-                                                                         tbHeatingChange.KeyDown, tbEfficiency.KeyDown, tbOutletPressure.KeyDown
+                                                                         tbHeatingChange.KeyDown, tbEfficiency.KeyDown, tbOutletPressure.KeyDown,
+                                                                         tbOperatingSpeed.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 

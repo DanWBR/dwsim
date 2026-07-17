@@ -1,4 +1,4 @@
-'    Centrifugal Pump Calculation Routines 
+﻿'    Centrifugal Pump Calculation Routines 
 '    Copyright 2008-2014 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -242,6 +242,19 @@ Namespace UnitOperations
         Property OutletTemperature As Double = 298.15#
 
         Public Property PumpCurveSet As New PumpOps.CurveSet
+
+        'speed the pump runs at (RPM). The performance curves are taken to have been measured at
+        'PumpCurveSet.ImpellerSpeed and are scaled to this one through the affinity laws.
+        'Zero means the pump runs at the speed the curves were measured at, leaving them unscaled.
+        Public Property OperatingSpeed As Double = 0.0
+
+        'speed the pump runs at, falling back to the speed the curves were measured at
+        Public ReadOnly Property EffectiveSpeed As Double
+            Get
+                If OperatingSpeed > 0.0 Then Return OperatingSpeed
+                Return PumpCurveSet.ImpellerSpeed
+            End Get
+        End Property
 
         'proxy properties
 
@@ -535,9 +548,11 @@ Namespace UnitOperations
 
         End Sub
 
-        'interpolates a pump performance curve at the operating volumetric flow rate (m3/s).
-        'x holds the flow rate of each curve point and y the curve value, both in SI units.
-        Private Function InterpolateCurve(x As List(Of Double), y As List(Of Double), qli As Double, curvename As String) As Double
+        'interpolates a pump performance curve at the flow rate the pump is passing (m3/s), scaling the
+        'curve from the speed it was measured at to the speed the pump runs at. x holds the flow rate of
+        'each curve point and y the curve value, both in SI units. sratio is the operating speed over the
+        'speed the curve was measured at. Returns the curve value read at the equivalent flow, unscaled.
+        Private Function InterpolateCurve(x As List(Of Double), y As List(Of Double), qli As Double, curvename As String, sratio As Double) As Double
 
             If x.Count = 0 Then
                 Throw New ArgumentException(String.Format("The pump {0} curve is enabled but has no data points.", curvename))
@@ -549,12 +564,23 @@ Namespace UnitOperations
             Dim xs = order.Select(Function(i) x(i)).ToArray()
             Dim ys = order.Select(Function(i) y(i)).ToArray()
 
-            Dim qmin = xs.First()
-            Dim qmax = xs.Last()
+            'the curve was measured at one speed and the pump may run at another, so the flow rates it
+            'can actually cover are the measured ones scaled by the speed ratio. Report the range in
+            'those terms: the equivalent flow rate on the measured curve is an internal quantity that
+            'appears nowhere in the user's flowsheet.
+            Dim qmin = xs.First() * sratio
+            Dim qmax = xs.Last() * sratio
             Dim tol = (qmax - qmin) * 0.0001
 
             If qli < qmin - tol Or qli > qmax + tol Then
-                Throw New ArgumentException(String.Format("The pump is operating outside the range of its {0} curve (flow rate: {1} m3/s, curve range: {2} to {3} m3/s).", curvename, qli, qmin, qmax))
+                Dim vunit = "m3/s"
+                Dim uom = FlowSheet?.FlowsheetOptions?.SelectedUnitSystem
+                If uom IsNot Nothing AndAlso uom.volumetricFlow <> "" Then vunit = uom.volumetricFlow
+                Dim atspeed = ""
+                If sratio <> 1.0 Then atspeed = String.Format(" at {0} RPM", EffectiveSpeed)
+                Throw New ArgumentException(String.Format("The pump is operating outside the range of its {0} curve{1} (flow rate: {2} {5}, curve range: {3} to {4} {5}).",
+                                                          curvename, atspeed,
+                                                          qli.ConvertFromSI(vunit), qmin.ConvertFromSI(vunit), qmax.ConvertFromSI(vunit), vunit))
             End If
 
             If xs.Length = 1 Then Return ys(0)
@@ -563,7 +589,7 @@ Namespace UnitOperations
 
             ratinterpolation.buildfloaterhormannrationalinterpolant(xs, xs.Length, 1, w)
 
-            Return polinterpolation.barycentricinterpolation(xs, ys, w, xs.Length, qli)
+            Return polinterpolation.barycentricinterpolation(xs, ys, w, xs.Length, qli / sratio)
 
         End Function
 
@@ -755,12 +781,27 @@ Namespace UnitOperations
                     'get operating points
                     Dim head, npshr, eff, power As Double
 
+                    'the curves were measured at PumpCurveSet.ImpellerSpeed. Running at another speed,
+                    'the affinity laws put this operating point at qli/sratio on the measured curves,
+                    'and scale what is read there by sratio^2 for head and NPSHr and sratio^3 for power.
+                    'Efficiency is invariant along the affinity parabola.
+                    Dim sratio As Double = 1.0
+
+                    If OperatingSpeed > 0.0 Then
+                        If PumpCurveSet.ImpellerSpeed <= 0.0 Then
+                            Throw New ArgumentException("The pump has an operating speed but the speed its curves were measured at (Impeller Speed) is not defined, so the curves cannot be scaled.")
+                        End If
+                        sratio = OperatingSpeed / PumpCurveSet.ImpellerSpeed
+                    End If
+
+                    If DebugMode Then AppendDebugLine(String.Format("Speed ratio: {0} ({1} RPM over the {2} RPM the curves were measured at)", sratio, EffectiveSpeed, PumpCurveSet.ImpellerSpeed))
+
                     'head
                     If Not chead.Enabled Then
                         Throw New ArgumentException("The head curve must be enabled to run the pump in Curves mode.")
                     End If
 
-                    head = InterpolateCurve(xhead, yhead, qli, "head")
+                    head = InterpolateCurve(xhead, yhead, qli, "head", sratio) * sratio ^ 2
 
                     If DebugMode Then AppendDebugLine(String.Format("Head: {0} m", head))
 
@@ -769,7 +810,7 @@ Namespace UnitOperations
 
                     'npshr
                     If cnpsh.Enabled Then
-                        npshr = InterpolateCurve(xnpsh, ynpsh, qli, "NPSHr")
+                        npshr = InterpolateCurve(xnpsh, ynpsh, qli, "NPSHr", sratio) * sratio ^ 2
                     Else
                         npshr = 0
                     End If
@@ -780,7 +821,7 @@ Namespace UnitOperations
 
                     'efficiency
                     If ceff.Enabled Then
-                        eff = InterpolateCurve(xeff, yeff, qli, "efficiency")
+                        eff = InterpolateCurve(xeff, yeff, qli, "efficiency", sratio)
                     Else
                         eff = Me.Eficiencia.GetValueOrDefault / 100
                     End If
@@ -808,7 +849,7 @@ Namespace UnitOperations
 
                     'power
                     If cpower.Enabled Then
-                        power = InterpolateCurve(xpower, ypower, qli, "power")
+                        power = InterpolateCurve(xpower, ypower, qli, "power", sratio) * sratio ^ 3
                     Else
                         power = Wi * 9.81 * head / eff / 1000
                     End If
@@ -1179,6 +1220,9 @@ Namespace UnitOperations
                         value = Head.ConvertFromSI(su.distance)
                     Case 7
                         value = NPSH.GetValueOrDefault.ConvertFromSI(su.distance)
+                    Case 8
+                        'PROP_PU_8 (Operating Speed)
+                        value = EffectiveSpeed
                 End Select
 
                 Return value
@@ -1209,13 +1253,15 @@ Namespace UnitOperations
                     If GraphicObject Is Nothing OrElse GraphicObject.InputConnectors.Count < 2 OrElse
                        Not GraphicObject.InputConnectors(1).IsAttached Then writable.Add(3)
                 Case CalculationMode.Curves
-                    'the operating point comes from the curves and from the inlet flow rate, so the
-                    'efficiency only remains a spec while there is no efficiency curve to read it from.
+                    'the operating point comes from the curves, the inlet flow rate and the speed the
+                    'curves get scaled to, so the efficiency only remains a spec while there is no
+                    'efficiency curve to read it from.
                     If Not PumpCurveSet.CurveEfficiency.Enabled Then writable.Add(1)
+                    writable.Add(8)
             End Select
             Select Case proptype
                 Case PropertyType.RO
-                    For i = 0 To 7
+                    For i = 0 To 8
                         If Not writable.Contains(i) Then proplist.Add("PROP_PU_" + CStr(i))
                     Next
                 Case PropertyType.RW, PropertyType.WR
@@ -1223,7 +1269,7 @@ Namespace UnitOperations
                         proplist.Add("PROP_PU_" + CStr(i))
                     Next
                 Case PropertyType.ALL
-                    For i = 0 To 7
+                    For i = 0 To 8
                         proplist.Add("PROP_PU_" + CStr(i))
                     Next
             End Select
@@ -1249,6 +1295,9 @@ Namespace UnitOperations
                     Me.DeltaQ = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
                 Case 5
                     Me.Pout = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                Case 8
+                    'PROP_PU_8 (Operating Speed)
+                    Me.OperatingSpeed = propval
             End Select
             Return 1
         End Function
@@ -1286,6 +1335,8 @@ Namespace UnitOperations
                         value = su.distance
                     Case 7
                         value = su.distance
+                    Case 8
+                        value = "rpm"
                 End Select
 
                 Return value
